@@ -10,7 +10,16 @@ export const Home = () => {
 		<div className="container-flex">
 			<div style={{ height: "450px" }}>
 				<div className="row pic m-auto">
-					<div className="rectangle" />
+					<div className="rectangle">
+						<h2 id="texto">
+							<div id="texto_yellow">We help you find</div>
+							the ideal place for you!
+						</h2>
+						<h2 id="texto">
+							<div id="texto_yellow">A perfect place </div>
+							with suitable companion
+						</h2>
+					</div>
 				</div>
 			</div>
 			<div className="row">
