@@ -8,9 +8,10 @@ export const Home = () => {
 
 	return (
 		<div className="container-flex">
-			<div className="row">
-				<img src={recorte} className="pic m-auto " />
-				rectangle
+			<div style={{ height: "450px" }}>
+				<div className="row pic m-auto">
+					<div className="rectangle" />
+				</div>
 			</div>
 			<div className="row">
 				<div className="col p-3 mb-2 bg-secondary text-white">1 of 2</div>
