@@ -23,9 +23,9 @@ export const Home = () => {
 				</div>
 			</div>
 			<div className="row">
-				<div className="col p-3 mb-2 bg-secondary text-white">1 of 2</div>
+				<div className="col-4 p-3 mb-2 bg-secondary text-white">1 of 2</div>
 
-				<div className="col p-1 mb-2  text-white">
+				<div className="col-8 p-1 mb-2  text-white">
 					<div className="card" style={{ width: "100%" }}>
 						<img className="card-img-top" src={recorte} alt="Card image cap" />
 					</div>
