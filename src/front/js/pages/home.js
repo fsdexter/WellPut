@@ -25,6 +25,23 @@ export const Home = () => {
 			<div className="row">
 				<div className="col-3 p-1 mb-2 bg-secondary text-white filter">
 					<h1 id="texto_yellow">Search a room</h1>
+					<br />
+					<br />
+					<div>
+						<form>
+							<div className="row">
+								<div className="col-3">
+									<h3 className="filterWords ml-4">Price</h3>
+								</div>
+								<div className="col-4">
+									<input type="text" className="form-control" placeholder="Min." />
+								</div>
+								<div className="col-4 mr-2">
+									<input type="text" className="form-control" placeholder="Max." />
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 
 				<div className="col-8 p-1 mb-2  text-white">
