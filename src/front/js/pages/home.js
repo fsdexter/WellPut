@@ -84,9 +84,9 @@ export const Home = () => {
 										included
 									</h3>
 								</div>
-								<div className="form-check form-check-inline">
+								<div className="form-check form-check-inline col-3 m-auto pl-4 ">
 									<input
-										className="form-check-input"
+										className=" form-check-input"
 										type="radio"
 										name="inlineRadioOptions"
 										id="inlineRadio1"
@@ -96,7 +96,7 @@ export const Home = () => {
 										<i className="fas fa-wifi fa-2x" />
 									</label>
 								</div>
-								<div className="form-check form-check-inline">
+								<div className="form-check form-check-inline col-3 m-auto ">
 									<input
 										className="form-check-input"
 										type="radio"
@@ -105,7 +105,7 @@ export const Home = () => {
 										value="option2"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
-										<i className="fas fa-faucet" />
+										<i className="fas fa-shower fa-2x" />
 									</label>
 								</div>
 							</div>
