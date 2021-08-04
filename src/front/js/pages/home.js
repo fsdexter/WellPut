@@ -134,7 +134,9 @@ export const Home = () => {
 							</div>
 						</div>
 						<div className="row">
-							<div className="col">Rating</div>
+							<div className="col">
+								<h3 className="ml-4">Rating</h3>
+							</div>
 							<div className="col d-flex">
 								<Rating />
 							</div>
