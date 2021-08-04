@@ -17,7 +17,7 @@ export const Navbar = () => {
 				<Link to="/login">
 					<span className="navbar-brand mb-0 h1 mr-5">Login</span>
 				</Link>
-				<Link to="/login">
+				<Link to="/">
 					<span className="navbar-brand mb-0 h1 mr-5" onClick={() => actions.logOut()}>
 						Log Out
 					</span>

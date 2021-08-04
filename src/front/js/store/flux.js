@@ -7,6 +7,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: null
 		},
 		actions: {
+			signUp: userValues => {
+				const store = getStore();
+				let newStore;
+				let localStoreUser;
+				const raw = JSON.stringify(userValues);
+
+				const requestOptions = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch(`${API_BASE_URL}/api/sign_up`, requestOptions)
+					.then(response => response.json())
+					.then(data => {
+						newStore = data;
+						setStore({ user: newStore });
+						localStoreUser = localStorage.setItem("user", JSON.stringify(store.user));
+					})
+					.catch(error => console.log("error", error));
+			},
 			login: userValues => {
 				const store = getStore();
 				let newStore;
