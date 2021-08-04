@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import recorte from "../../img/recorte.jpg";
 import maps from "../../img/maps.png";
 import "../../styles/home.scss";
+import { Rating } from "../component/rating";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -130,6 +131,16 @@ export const Home = () => {
 								<label className="form-check-label" htmlFor="inlineRadio4">
 									<i className="far fa-lightbulb fa-2x pb-3" />
 								</label>
+							</div>
+						</div>
+						<div className="row">
+							<div className="col">Rating</div>
+							<div className="col d-flex">
+								<Rating />
+								<Rating />
+								<Rating />
+								<Rating />
+								<Rating />
 							</div>
 						</div>
 					</div>
