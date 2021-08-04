@@ -4,6 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
 import { SignUp } from "./pages/signUp";
+import { Login } from "./pages/login";
 import { EditProfile } from "./pages/editProfile";
 import injectContext from "./store/appContext";
 
@@ -27,6 +28,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/sign_up">
 							<SignUp />
+						</Route>
+						<Route exact path="/login">
+							<Login />
 						</Route>
 						<Route exact path="/edit_profile">
 							<EditProfile />

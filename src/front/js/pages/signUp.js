@@ -39,7 +39,7 @@ export const SignUp = () => {
 				console.log("New user was created: ", result);
 				// to go "Edit Profile" after the sign up
 				history.push("/edit_profile");
-				setFormValue({ ...formValue, [e.target.name]: "" });
+				//setFormValue({ [e.target.name]: "" });
 			})
 			.catch(error => console.log("error", error));
 	};

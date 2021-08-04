@@ -1,46 +1,50 @@
+// Backend URL
+import { API_BASE_URL } from "../constants";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			user: null
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-
-			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
-			},
-			changeColor: (index, color) => {
-				//get the store
+			login: userValues => {
 				const store = getStore();
+				let newStore;
+				let localStoreUser;
+				const raw = JSON.stringify(userValues);
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+				const requestOptions = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: raw,
+					redirect: "follow"
+				};
 
-				//reset the global store
-				setStore({ demo: demo });
+				fetch(`${API_BASE_URL}/api/login`, requestOptions)
+					.then(response => response.json())
+					.then(data => {
+						newStore = data;
+						setStore({ user: newStore });
+						localStoreUser = localStorage.setItem("user", JSON.stringify(store.user));
+					})
+					.catch(error => console.log("error", error));
+			},
+			// to check that the user is login
+			isUserAuthentificted: () => {
+				const store = getStore();
+				return store.user != null;
+			},
+			getUserAuthentificted: () => {
+				let logedUser = JSON.parse(localStorage.getItem("user"));
+				if (logedUser) {
+					// Fill in the store with the information of the localStorage
+					setStore({ user: logedUser });
+				}
+			},
+			logOut: () => {
+				const store = getStore();
+				store.user = null;
+				localStorage.clear();
 			}
 		}
 	};
