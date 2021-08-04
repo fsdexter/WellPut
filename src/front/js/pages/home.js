@@ -93,7 +93,7 @@ export const Home = () => {
 										value="option1"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
-										Wifi
+										<i className="fas fa-wifi fa-2x" />
 									</label>
 								</div>
 								<div className="form-check form-check-inline">
@@ -105,7 +105,7 @@ export const Home = () => {
 										value="option2"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
-										Water
+										<i className="fas fa-faucet" />
 									</label>
 								</div>
 							</div>
