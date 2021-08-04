@@ -17,7 +17,7 @@ export function Rating() {
 						setSwitchColor("unchecked");
 					}
 				}}
-				className={"fa fa-star " + switchColor}
+				className={"fa fa-star fa-2x " + switchColor}
 			/>
 			<div
 				onClick={() => {
@@ -30,7 +30,7 @@ export function Rating() {
 						setSwitchColor2("unchecked");
 					}
 				}}
-				className={"fa fa-star " + switchColor2}
+				className={"fa fa-star fa-2x " + switchColor2}
 			/>
 			<div
 				onClick={() => {
@@ -46,7 +46,7 @@ export function Rating() {
 						setSwitchColor3("unchecked");
 					}
 				}}
-				className={"fa fa-star " + switchColor3}
+				className={"fa fa-star fa-2x " + switchColor3}
 			/>
 			<div
 				onClick={() => {
@@ -65,7 +65,7 @@ export function Rating() {
 						setSwitchColor4("unchecked");
 					}
 				}}
-				className={"fa fa-star " + switchColor4}
+				className={"fa fa-star fa-2x " + switchColor4}
 			/>
 			<div
 				onClick={() => {
@@ -87,7 +87,7 @@ export function Rating() {
 						setSwitchColor5("unchecked");
 					}
 				}}
-				className={"fa fa-star " + switchColor5}
+				className={"fa fa-star fa-2x " + switchColor5}
 			/>
 		</div>
 	);

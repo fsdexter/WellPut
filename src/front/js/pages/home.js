@@ -137,7 +137,7 @@ export const Home = () => {
 							<div className="col">
 								<h3 className="ml-4">Rating</h3>
 							</div>
-							<div className="col d-flex">
+							<div className="pr-5 mr-4 col d-flex">
 								<Rating />
 							</div>
 						</div>
