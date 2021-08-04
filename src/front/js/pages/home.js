@@ -137,10 +137,6 @@ export const Home = () => {
 							<div className="col">Rating</div>
 							<div className="col d-flex">
 								<Rating />
-								<Rating />
-								<Rating />
-								<Rating />
-								<Rating />
 							</div>
 						</div>
 					</div>
