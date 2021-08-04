@@ -23,7 +23,9 @@ export const Home = () => {
 				</div>
 			</div>
 			<div className="row">
-				<div className="col-4 p-3 mb-2 bg-secondary text-white">1 of 2</div>
+				<div className="col-3 p-1 mb-2 bg-secondary text-white filter">
+					<h1 id="texto_yellow">Search a room</h1>
+				</div>
 
 				<div className="col-8 p-1 mb-2  text-white">
 					<div className="card" style={{ width: "100%" }}>
