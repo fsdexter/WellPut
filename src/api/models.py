@@ -1,12 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
-#from eralchemy import render_er
-import os
-import sys
-from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
-from sqlalchemy import create_engine
 from eralchemy import render_er
 
 db = SQLAlchemy()
@@ -176,12 +169,9 @@ class TenantRoomOwner(db.Model):
             "description": self.description
         }  
 
-# try:
-#     result = render_er(Base, 'diagram.png')
-#     print("Success! Check the diagram.png file")
-# except Exception as e:
-#     print("There was a problem genering the diagram")
-#     raise e
-#graph = create_schema_graph(metadata=MetaData('postgresql://gitpod@localhost:5432/example'))
-#graph.write_png('diagram.png')
-render_er(Base, 'diagram.png')
+try:
+    result = render_er(db, 'diagram.png')
+    print("Success! Check the diagram.png file")
+except Exception as e:
+    print("There was a problem genering the diagram")
+    raise e
