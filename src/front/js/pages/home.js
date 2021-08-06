@@ -186,7 +186,6 @@ export const Home = () => {
 							<div className="col">
 								<h3 className="ml-4">Interests</h3>
 							</div>
-
 							<div className="col">
 								<AnimatedMulti /> {/* Instalar paquete para que funcione*/}
 							</div>
