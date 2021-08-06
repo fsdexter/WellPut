@@ -30,49 +30,55 @@ export const SignUp = () => {
 	};
 
 	return (
-		<div className="container row text-center mt-5 d-flex justify-content-center myContainer">
-			<div>
-				<div className="col-6">
+		<div className="row container text-center mt-5 d-flex justify-content-center" id="myContainer">
+			<div className="col-3 no-gutters">
+				<div className="col-8 " id="myTitle">
 					<h4 className="text text-white">SIGN UP IN</h4>
-					<h1 className="text text-warning">WELL PUT</h1>
+					<h1 className="text fs-1 myYellowText">WELL</h1>
+					<h1 className="text fs-1 myYellowText" id="put">
+						PUT
+					</h1>
 				</div>
-				<div>
-					<div className="row bg-warning">
-						<div className="col-6">
+				<div className="col-12" id="imgFlower">
+					<div className="row p-0 pb-1 m-0">
+						<div className="col-6 p-0 d-flex justify-content-end">
 							<img src={room1} />
 						</div>
-						<div className="col-6" />
+						<div className="col-6 p-0 d-flex justify-content-start" />
 					</div>
-					<div className="row bg-danger">
-						<div className="col-6">
+					<div className="row p-0 m-0">
+						<div className="col-6 p-0 pr-1 d-flex justify-content-end">
 							<img src={room2} />
 						</div>
-						<div className="col-6">
+						<div className="col-6 ml-0 p-0 pl-1 d-flex justify-content-start">
 							<img src={room3} />
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div className=" col-2">
-				<h4 className="text text-warning">Is too easy</h4>
+			<div className="col-2 no-gutters d-flex align-items-center" id="tooEasy">
+				<h4 className="text myYellowText" id="tooEasyText">
+					Is too easy
+				</h4>
 			</div>
-			<div className="singUpBox col-4">
-				<form onSubmit={handlerSubmit} className="col-6 p-5 mt-3 myBox text-white">
-					<div className="form-grup row mt-2">
+			<div className="col-5 no-gutters singUpBox">
+				<form onSubmit={handlerSubmit} className="col-12 p-5 text-white">
+					<div className="form-grup row mb-4">
 						<input
-							className="col-6"
+							className="col-12"
 							type="email"
 							name="email"
 							id="email"
 							placeholder="Email"
 							onChange={inputHandelChange}
+							autoFocus
 							required
 						/>
 					</div>
-					<div className="form-grup row mt-2">
+					<div className="form-grup row mt-2 mb-4">
 						<input
-							className="col-6"
+							className="col-12"
 							type="text"
 							name="fullName"
 							id="fullName"
@@ -81,9 +87,9 @@ export const SignUp = () => {
 							required
 						/>
 					</div>
-					<div className="form-grup row mt-2">
+					<div className="form-grup row mt-2 mb-4">
 						<input
-							className="col-6"
+							className="col-12"
 							type="password"
 							name="password"
 							placeholder="Password"
@@ -91,9 +97,9 @@ export const SignUp = () => {
 							required
 						/>
 					</div>
-					<div className="form-grup row mt-2">
+					<div className="form-grup row mt-2 mb-5">
 						<input
-							className="col-6"
+							className="col-12"
 							type="password"
 							name="repeatPassword"
 							placeholder="Repeat Password"
@@ -102,11 +108,14 @@ export const SignUp = () => {
 						/>
 					</div>
 					<div>
-						<button type="submit" className="btn btn-outline-warning btn-lg btn-block  mt-4">
+						<button type="submit" className="btn btnYellow mt-4">
 							CONTINUE
 						</button>
 					</div>
 				</form>
+			</div>
+			<div className="col-1 no-gutters iconClose">
+				<i className="far fa-window-close text-white fa-lg" />
 			</div>
 		</div>
 	);
