@@ -4,6 +4,7 @@ import recorte from "../../img/recorte.jpg";
 import maps from "../../img/maps.png";
 import "../../styles/home.scss";
 import { Rating } from "../component/rating";
+import { Counter } from "../component/counter";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -139,6 +140,15 @@ export const Home = () => {
 							</div>
 							<div className="pr-5 mr-4 col d-flex">
 								<Rating />
+							</div>
+						</div>
+						<br />
+						<div className="row ">
+							<div className="col">
+								<h3 className="ml-4">Roomies</h3>
+							</div>
+							<div className="pr-5 mr-4 col d-flex">
+								<Counter />
 							</div>
 						</div>
 					</div>
