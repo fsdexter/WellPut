@@ -5,6 +5,7 @@ import maps from "../../img/maps.png";
 import "../../styles/home.scss";
 import { Rating } from "../component/rating";
 import { Counter } from "../component/counter";
+import { AnimatedMulti } from "../component/multiSelector";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -185,13 +186,9 @@ export const Home = () => {
 							<div className="col">
 								<h3 className="ml-4">Interests</h3>
 							</div>
+
 							<div className="col">
-								<select className="selectpicker" multiple>
-									<option>Vegan</option>
-									<option>Traveler</option>
-									<option>Animal Lover</option>
-									<option>Reader</option>
-								</select>
+								<AnimatedMulti /> {/* Instalar paquete para que funcione*/}
 							</div>
 						</div>
 					</div>
