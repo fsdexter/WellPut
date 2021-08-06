@@ -36,13 +36,20 @@ export const SignUp = () => {
 					<h4 className="text text-white">SIGN UP IN</h4>
 					<h1 className="text text-warning">WELL PUT</h1>
 				</div>
-				<div className="row">
-					<div className="col-6 d-flex flex-column">
-						<img src={room1} />
-						<img src={room2} />
+				<div>
+					<div className="row bg-warning">
+						<div className="col-6">
+							<img src={room1} />
+						</div>
+						<div className="col-6" />
 					</div>
-					<div className="col-6" id="room3">
-						<img src={room3} id="imgr3" />
+					<div className="row bg-danger">
+						<div className="col-6">
+							<img src={room2} />
+						</div>
+						<div className="col-6">
+							<img src={room3} />
+						</div>
 					</div>
 				</div>
 			</div>
