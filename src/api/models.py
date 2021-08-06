@@ -1,6 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
-from eralchemy import render_er
 # to check the password
 from werkzeug.security import safe_str_cmp
 
@@ -171,15 +170,6 @@ class TenantRoomOwner(db.Model):
             "room_id": self.room_id,
             "description": self.description
         }  
-
-try:
-    result = render_er(db, 'diagram.png')
-    print("Success! Check the diagram.png file")
-except Exception as e:
-    print("There was a problem genering the diagram")
-    raise e
-            "is_active": self.is_active
-        }
         
     # method to check the password and that verify that it is the user password
     def check_password(self, password_param):
