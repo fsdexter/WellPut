@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from eralchemy import render_er
+# to check the password
+from werkzeug.security import safe_str_cmp
 
 db = SQLAlchemy()
 
@@ -20,6 +22,7 @@ class User(db.Model):
     description = db.Column(db.String(120))
     id_photo= db.relationship('Photo', lazy=True)
     id_assesment= db.relationship('Assesment_User', lazy=True)
+
     is_active = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
 
     owner = db.relationship('TenantRoomOwner', backref = 'owner', lazy='joined', foreign_keys ='TenantRoomOwner.id_owner')
@@ -175,3 +178,9 @@ try:
 except Exception as e:
     print("There was a problem genering the diagram")
     raise e
+            "is_active": self.is_active
+        }
+        
+    # method to check the password and that verify that it is the user password
+    def check_password(self, password_param):
+       return safe_str_cmp(self.password.encode('utf-8'), password_param.encode('utf-8'))
