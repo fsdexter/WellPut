@@ -7,10 +7,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: null
 		},
 		actions: {
-			signUp: userValues => {
+			signUp: async userValues => {
 				const store = getStore();
-				let newStore;
-				let localStoreUser;
 				const raw = JSON.stringify(userValues);
 
 				const requestOptions = {
@@ -20,18 +18,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch(`${API_BASE_URL}/api/sign_up`, requestOptions)
-					.then(response => response.json())
-					.then(data => {
-						newStore = data;
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/sign_up`, requestOptions);
+					if (response.status >= 400) {
+						const errorMsg = "Error during the sign up process";
+						throw new Error(errorMsg);
+					} else {
+						const newStore = await response.json();
 						setStore({ user: newStore });
-						localStoreUser = localStorage.setItem("user", JSON.stringify(store.user));
-					})
-					.catch(error => console.log("error", error));
+						localStorage.setItem("user", JSON.stringify(store.user));
+					}
+				} catch (error) {
+					return error.message;
+				}
 			},
-			login: userValues => {
+			login: async userValues => {
 				const store = getStore();
-				let newStore;
 
 				const requestOptions = {
 					method: "POST",
@@ -40,14 +42,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch(`${API_BASE_URL}/api/login`, requestOptions)
-					.then(response => response.json())
-					.then(data => {
-						newStore = data;
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/login`, requestOptions);
+
+					if (response.status === 401) {
+						const errorMsg = await response.json();
+						throw new Error(errorMsg);
+					} else {
+						const newStore = await response.json();
 						setStore({ user: newStore });
 						localStorage.setItem("user", JSON.stringify(store.user));
-					})
-					.catch(error => console.log("error", error));
+					}
+				} catch (error) {
+					return error.message;
+				}
 			},
 			// to check that the user is login
 			isUserAuthentificted: () => {
@@ -62,7 +70,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			logOut: () => {
-				console.log("DESLOGUEARSE");
 				setStore({ user: null });
 				localStorage.clear();
 			}

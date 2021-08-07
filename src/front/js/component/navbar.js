@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -22,19 +22,19 @@ export const Navbar = () => {
 				{store.user !== null ? (
 					<div className="col-12 d-flex justify-content-between" id="yellow">
 						<Link to="/profile">
-							<span className="navbar-brand mb-0 mr-2 btn">Profile</span>
+							<span className="navbar-brand mb-0 mr-2 btn btn-navb">Profile</span>
 						</Link>
 						<Link to="/announcements">
-							<span className="navbar-brand mb-0 mr-2 btn">Announcements</span>
+							<span className="navbar-brand mb-0 mr-2 btn btn-navb">Announcements</span>
 						</Link>
 						<Link to="/favorites">
-							<span className="navbar-brand mb-0 mr-2 btn">Favorites</span>
+							<span className="navbar-brand mb-0 mr-2 btn btn-navb">Favorites</span>
 						</Link>
 						<Link to="/">
-							<span className="navbar-brand mb-0 mr-2 btn">Search</span>
+							<span className="navbar-brand mb-0 mr-2 btn btn-navb">Search</span>
 						</Link>
 						<Link to="/">
-							<span className="navbar-brand mb-0 mr-2 btn" onClick={() => actions.logOut()}>
+							<span className="navbar-brand mb-0 mr-2 btn btn-navb" onClick={() => actions.logOut()}>
 								Log Out
 							</span>
 						</Link>
@@ -43,14 +43,14 @@ export const Navbar = () => {
 					<div className="col-12 d-flex justify-content-end" id="yellow">
 						<button
 							type="button"
-							className="navbar-brand mb-0 mr-2 btn"
+							className="navbar-brand mb-0 mr-2 btn btn-navb"
 							data-toggle="modal"
 							data-target="#signUpModal">
 							Sign Up
 						</button>
 						<button
 							type="button"
-							className="navbar-brand mb-0 mr-2 btn"
+							className="navbar-brand mb-0 mr-2 btn btn-navb"
 							data-toggle="modal"
 							data-target="#loginModal">
 							Login

@@ -4,28 +4,29 @@
 
 #myContainer{
     background-color: #184F5F;
-    margin-left: 11rem;
-    padding: 3rem 0;
+    padding-top: 1.5rem;
     position: relative;
     width: 72vw;
-    height: 100vh;
+    height: 95vh;
 }
 
-h1{
+
+
+
+.textSignUp{
+    text-align: start;
+}
+
+.well, .put{
     font-family: 'Red Hat Display', sans-serif;
     font-weight: 700;
-    margin-left: -1rem;
-}
-
-#put{
-    margin-left: -2.5rem;
 }
 
 .myYellowText{
     color: #FFDE59;
 }
 
-img{
+.signUpRoom{
     width: 220px;
     height: 220px;
 }
