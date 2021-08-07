@@ -4,7 +4,7 @@ import bedsofa from "../../img/bedsofa.png";
 
 export const FilterBed = () => {
 	return (
-		<div className="row ">
+		<div className="row">
 			<div className="col-4">
 				<h3 className="ml-4">Type of bed</h3>
 			</div>

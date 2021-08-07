@@ -55,69 +55,81 @@ export const Home = () => {
 					<br />
 					<div>
 						<form>
-							<div className="row">
-								<div className="col-4">
-									<h3 className="filterWords ml-4">Price</h3>
+							<div className="border border-warning pt-2">
+								<div className="row">
+									<div className="col-4 ">
+										<h3 className="filterWords ml-4">Price</h3>
+									</div>
+									<div className="col-3">
+										<input type="text" className="form-control" placeholder="Min." />
+									</div>
+									<div className="col-3 mr-2">
+										<input type="text" className="form-control" placeholder="Max." />
+									</div>
 								</div>
-								<div className="col-3">
-									<input type="text" className="form-control" placeholder="Min." />
-								</div>
-								<div className="col-3 mr-2">
-									<input type="text" className="form-control" placeholder="Max." />
-								</div>
-							</div>
-							<br />
-							<div className="row">
-								<div className="col-4">
-									<h3 className="filterWords ml-4">Deposit</h3>
-								</div>
-								<div className="col-3">
-									<input type="text" className="form-control" placeholder="Min." />
-								</div>
-								<div className="col-3 mr-2">
-									<input type="text" className="form-control" placeholder="Max." />
+								<br />
+								<div className="row">
+									<div className="col-4 ">
+										<h3 className="filterWords ml-4">Deposit</h3>
+									</div>
+									<div className="col-3">
+										<input type="text" className="form-control" placeholder="Min." />
+									</div>
+									<div className="col-3 mr-2 mb-2">
+										<input type="text" className="form-control" placeholder="Max." />
+									</div>
 								</div>
 							</div>
 						</form>
 						<br />
-						<div>
+						<div className="border border-warning pt-2">
 							<FilterExp />
 						</div>
-						<div className="row">
-							<div className="col">
-								<h3 className="ml-4">Rating</h3>
-							</div>
-							<div className="pr-5 mr-4 col d-flex">
-								<Rating />
+						<br />
+						<div className="border border-warning pt-5">
+							<div className="row">
+								<div className="col">
+									<h3 className="ml-4">Rating</h3>
+								</div>
+								<div className="pr-5 mr-4 col-6 mb-5 d-flex">
+									<Rating />
+								</div>
 							</div>
 						</div>
 						<br />
-						<div className="row ">
-							<div className="col">
-								<h3 className="ml-4">Roomies</h3>
-							</div>
-							<div className="pr-5 mr-4 col d-flex">
-								<Counter />
+						<div className="border border-warning pt-5">
+							<div className="row">
+								<div className="col">
+									<h3 className="ml-4">Roomies</h3>
+								</div>
+								<div className=" mr-4 col-3 mb-5">
+									<Counter />
+								</div>
 							</div>
 						</div>
 						<br />
-						<div>
+						<div className="border border-warning pt-5">
 							<FilterOcc />
 						</div>
-						<div className="row">
-							<div className="col">
-								<h3 className="ml-4">Interests</h3>
-							</div>
-							<div className="col">
-								<AnimatedMulti /> {/* Instalar paquete para que funcione*/}
+						<br />
+						<div className="border border-warning pt-5">
+							<div className="row ">
+								<div className="col-4 mb-5 ">
+									<h3 className="ml-4">Interests</h3>
+								</div>
+								<div className="col-8">
+									<AnimatedMulti /> {/* Instalar paquete para que funcione*/}
+								</div>
 							</div>
 						</div>
 						<br />
-						<div>
+						<div className="border border-warning pt-5">
 							<FilterFea />
 						</div>
 						<br />
-						<FilterBed />
+						<div className="border border-warning pt-5">
+							<FilterBed />
+						</div>
 					</div>
 				</div>
 

@@ -10,7 +10,7 @@ export const FilterExp = () => {
 					included
 				</h3>
 			</div>
-			<div className="form-check form-check-inline col-3 mb-5 pl-4 ">
+			<div className="form-check form-check-inline col-3 mb-3 pl-5 ">
 				<input
 					className=" form-check-input"
 					type="radio"
@@ -22,7 +22,7 @@ export const FilterExp = () => {
 					<i className="fas fa-wifi fa-2x" />
 				</label>
 			</div>
-			<div className="form-check form-check-inline col-3  mb-5 ">
+			<div className="form-check form-check-inline col-3 mb-3 pl-5 ">
 				<input
 					className="form-check-input"
 					type="radio"
@@ -35,7 +35,7 @@ export const FilterExp = () => {
 				</label>
 			</div>
 			<div className="col-4" />
-			<div className="form-check form-check-inline col-3  mb-5 pl-4">
+			<div className="form-check form-check-inline col-3  pb-3 pl-5">
 				<input
 					className=" form-check-input"
 					type="radio"
@@ -44,10 +44,10 @@ export const FilterExp = () => {
 					value="option3"
 				/>
 				<label className="form-check-label " htmlFor="inlineRadio3">
-					<i className="fas fa-burn fa-2x pb-3 " />
+					<i className="fas fa-burn fa-2x  " />
 				</label>
 			</div>
-			<div className="form-check form-check-inline col-3  mb-5 ">
+			<div className="form-check form-check-inline col-3 pb-3 pl-5 ">
 				<input
 					className="form-check-input"
 					type="radio"
@@ -56,7 +56,7 @@ export const FilterExp = () => {
 					value="option4"
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio4">
-					<i className="far fa-lightbulb fa-2x pb-3" />
+					<i className="far fa-lightbulb fa-2x " />
 				</label>
 			</div>
 		</div>
