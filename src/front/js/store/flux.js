@@ -24,7 +24,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(data => {
 						newStore = data;
-						console.log("USARIO REGISTRADO : ", newStore);
 						setStore({ user: newStore });
 						localStoreUser = localStorage.setItem("user", JSON.stringify(store.user));
 					})
@@ -33,7 +32,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			login: userValues => {
 				const store = getStore();
 				let newStore;
-				let localStoreUser;
 
 				const requestOptions = {
 					method: "POST",
@@ -47,8 +45,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						newStore = data;
 						setStore({ user: newStore });
-						console.log("USARIO LOGUEADO : ", newStore);
-						localStoreUser = localStorage.setItem("user", JSON.stringify(store.user));
+						localStorage.setItem("user", JSON.stringify(store.user));
 					})
 					.catch(error => console.log("error", error));
 			},
@@ -65,8 +62,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			logOut: () => {
-				const store = getStore();
-				store.user = null;
+				console.log("DESLOGUEARSE");
+				setStore({ user: null });
 				localStorage.clear();
 			}
 		}

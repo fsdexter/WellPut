@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -22,24 +22,16 @@ export const Navbar = () => {
 				{store.user !== null ? (
 					<div className="col-12 d-flex justify-content-between" id="yellow">
 						<Link to="/profile">
-							<span className="navbar-brand mb-0 mr-2 btn" onClick={() => actions.logOut()}>
-								Profile
-							</span>
+							<span className="navbar-brand mb-0 mr-2 btn">Profile</span>
 						</Link>
 						<Link to="/announcements">
-							<span className="navbar-brand mb-0 mr-2 btn" onClick={() => actions.logOut()}>
-								Announcements
-							</span>
+							<span className="navbar-brand mb-0 mr-2 btn">Announcements</span>
 						</Link>
 						<Link to="/favorites">
-							<span className="navbar-brand mb-0 mr-2 btn" onClick={() => actions.logOut()}>
-								Favorites
-							</span>
+							<span className="navbar-brand mb-0 mr-2 btn">Favorites</span>
 						</Link>
 						<Link to="/">
-							<span className="navbar-brand mb-0 mr-2 btn" onClick={() => actions.logOut()}>
-								Search
-							</span>
+							<span className="navbar-brand mb-0 mr-2 btn">Search</span>
 						</Link>
 						<Link to="/">
 							<span className="navbar-brand mb-0 mr-2 btn" onClick={() => actions.logOut()}>
