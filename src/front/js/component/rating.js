@@ -13,8 +13,21 @@ export function Rating() {
 				onClick={() => {
 					if (switchColor === "unchecked") {
 						setSwitchColor("checked");
-					} else if (switchColor === "checked") {
+					}
+					if (switchColor === "checked") {
 						setSwitchColor("unchecked");
+					}
+					if (switchColor === "checked") {
+						setSwitchColor2("unchecked");
+					}
+					if (switchColor === "checked") {
+						setSwitchColor3("unchecked");
+					}
+					if (switchColor === "checked") {
+						setSwitchColor4("unchecked");
+					}
+					if (switchColor === "checked") {
+						setSwitchColor5("unchecked");
 					}
 				}}
 				className={"fa fa-star fa-2x " + switchColor}
@@ -26,8 +39,18 @@ export function Rating() {
 					}
 					if (switchColor2 === "unchecked") {
 						setSwitchColor2("checked");
-					} else if (switchColor2 === "checked") {
+					}
+					if (switchColor2 === "checked") {
 						setSwitchColor2("unchecked");
+					}
+					if (switchColor2 === "checked") {
+						setSwitchColor3("unchecked");
+					}
+					if (switchColor2 === "checked") {
+						setSwitchColor4("unchecked");
+					}
+					if (switchColor2 === "checked") {
+						setSwitchColor5("unchecked");
 					}
 				}}
 				className={"fa fa-star fa-2x " + switchColor2}
@@ -42,8 +65,15 @@ export function Rating() {
 					}
 					if (switchColor3 === "unchecked") {
 						setSwitchColor3("checked");
-					} else if (switchColor3 === "checked") {
+					}
+					if (switchColor3 === "checked") {
 						setSwitchColor3("unchecked");
+					}
+					if (switchColor3 === "checked") {
+						setSwitchColor4("unchecked");
+					}
+					if (switchColor3 === "checked") {
+						setSwitchColor5("unchecked");
 					}
 				}}
 				className={"fa fa-star fa-2x " + switchColor3}
@@ -61,8 +91,12 @@ export function Rating() {
 					}
 					if (switchColor4 === "unchecked") {
 						setSwitchColor4("checked");
-					} else if (switchColor4 === "checked") {
+					}
+					if (switchColor4 === "checked") {
 						setSwitchColor4("unchecked");
+					}
+					if (switchColor4 === "checked") {
+						setSwitchColor5("unchecked");
 					}
 				}}
 				className={"fa fa-star fa-2x " + switchColor4}
@@ -83,7 +117,8 @@ export function Rating() {
 					}
 					if (switchColor5 === "unchecked") {
 						setSwitchColor5("checked");
-					} else if (switchColor5 === "checked") {
+					}
+					if (switchColor5 === "checked") {
 						setSwitchColor5("unchecked");
 					}
 				}}

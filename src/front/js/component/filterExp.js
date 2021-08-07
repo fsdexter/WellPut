@@ -4,7 +4,7 @@ export const FilterExp = () => {
 	return (
 		<div className="row">
 			<div className="col-4">
-				<h3 className="ml-4 pt-5">
+				<h3 className="ml-4 pt-3">
 					Expenses
 					<br />
 					included

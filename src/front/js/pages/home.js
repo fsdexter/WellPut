@@ -91,7 +91,7 @@ export const Home = () => {
 								<div className="col">
 									<h3 className="ml-4">Rating</h3>
 								</div>
-								<div className="pr-5 mr-4 col-6 mb-3 d-flex">
+								<div className="mr-3 col-6 mb-3 d-flex">
 									<Rating />
 								</div>
 							</div>
@@ -102,7 +102,7 @@ export const Home = () => {
 								<div className="col">
 									<h3 className="ml-4">Roomies</h3>
 								</div>
-								<div className=" mr-4 col-3 mb-3">
+								<div className="col-6 mb-3 pl-5">
 									<Counter />
 								</div>
 							</div>
