@@ -30,11 +30,15 @@ export const SignUp = () => {
 	};
 
 	return (
-		<div className="row container text-center mt-5 d-flex justify-content-center" id="myContainer">
+		<div className="row container text-center d-flex justify-content-center" id="myContainer">
 			<div className="col-3 no-gutters">
-				<div className="col-8 " id="myTitle">
-					<h4 className="text text-white">SIGN UP IN</h4>
-					<h1 className="text fs-1 myYellowText">WELL</h1>
+				<div className="col-8">
+					<h4 className="text text-white" id="myTitle">
+						SIGN UP IN
+					</h4>
+					<h1 className="text fs-1 myYellowText" id="well">
+						WELL
+					</h1>
 					<h1 className="text fs-1 myYellowText" id="put">
 						PUT
 					</h1>
@@ -114,7 +118,7 @@ export const SignUp = () => {
 					</div>
 				</form>
 			</div>
-			<div className="col-1 no-gutters iconClose">
+			<div className="col-1 no-gutters iconClose mt-2 m-0 p-0 d-flex justify-content-end">
 				<i className="far fa-window-close text-white fa-lg" />
 			</div>
 		</div>
