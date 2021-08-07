@@ -72,6 +72,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logOut: () => {
 				setStore({ user: null });
 				localStorage.clear();
+			},
+			recoverPassword: userValues => {
+				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
 			}
 		}
 	};

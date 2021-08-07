@@ -1,17 +1,17 @@
 import React, { useState, useContext, useRef } from "react";
 import { Context } from "../store/appContext";
 
-import { RecoverPassword } from "./recoverPassword";
+import "../../styles/recoverPassword.scss";
 
-import "../../styles/login.scss";
-
-export const Login = () => {
+export const RecoverPassword = () => {
 	const { actions } = useContext(Context);
 	const closeBtn = useRef(null);
 
 	const [formValue, setFormValue] = useState({
 		email: "",
-		password: ""
+		code: "",
+		newPassword: "",
+		repeatNewPassword: ""
 	});
 
 	const [errorMsg, setErrorMsg] = useState(null);
@@ -20,34 +20,29 @@ export const Login = () => {
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
 	};
 
-	const closeModalLogin = () => {
+	const closeModalRecoverPass = () => {
 		closeBtn.current.click();
 	};
 
 	const handlerSubmit = async e => {
 		e.preventDefault();
 		// login function
-		let loginError = await actions.login(formValue);
+		let recoverPassError = await actions.recoverPassword(formValue);
 
-		if (loginError) {
-			setErrorMsg(loginError);
+		if (recoverPassError) {
+			setErrorMsg(recoverPassError);
 		} else {
-			closeModalLogin();
+			closeModalRecoverPass();
 		}
 	};
 
 	return (
 		<div className="row container text-center d-flex justify-content-around" id="loginContainer">
-			<div className="col-4" id="loginImg">
+			<div className="col-4" id="recoverPassImg">
 				<div className="onLoginRoom pl-3 pt-5">
 					<h1 className="text fs-1 myYellowText ml-2 well">WELL</h1>
 					<h1 className="text fs-1 myYellowText ml-2 put custom-ml">PUT</h1>
-					<h4 className="text text-white mt-5">
-						<span className="myYellowText">We help you</span> find the ideal place for you!
-					</h4>
-					<h4 className="text text-white mt-3">
-						<span className="myYellowText">A perfect space</span> with suitable companions ...
-					</h4>
+					<h2 className="text myYellowText mt-5">I forgot my password</h2>
 				</div>
 			</div>
 			<div className="col-6 mt-2">
@@ -83,47 +78,72 @@ export const Login = () => {
 							required
 						/>
 					</div>
-					<div className="form-grup row mt-4">
+					<button className="btn btnYellow2 mt-3 mb-2">Password Recovery</button>
+					<div className="form-grup row mt-2">
 						<input
 							className="col-12"
-							type="password"
-							name="password"
-							placeholder="Password"
+							type="text"
+							name="code"
+							id="code"
+							placeholder="Code"
 							onChange={inputHandelChange}
 							required
 						/>
 					</div>
-
-					<div type="button" data-toggle="modal" data-target="#RecoverPasswordModal" id="recovPass">
-						<p className="recoverPass">Recover password</p>
-					</div>
+					{formValue.code !== "" ? (
+						<>
+							<div className="form-grup row mt-4">
+								<input
+									className="col-12"
+									type="password"
+									name="newPassword"
+									placeholder="New password"
+									onChange={inputHandelChange}
+									required
+								/>
+							</div>
+							<div className="form-grup row mt-4">
+								<input
+									className="col-12"
+									type="password"
+									name="repeatNewPassword"
+									placeholder="Repeat New Password"
+									onChange={inputHandelChange}
+									required
+								/>
+							</div>
+						</>
+					) : (
+						<>
+							<div className="form-grup row mt-4">
+								<input
+									className="col-12"
+									type="password"
+									name="newPassword"
+									placeholder="New password"
+									onChange={inputHandelChange}
+									required
+									disabled
+								/>
+							</div>
+							<div className="form-grup row mt-4">
+								<input
+									className="col-12"
+									type="password"
+									name="repeatNewPassword"
+									placeholder="Repeat New Password"
+									onChange={inputHandelChange}
+									required
+									disabled
+								/>
+							</div>
+						</>
+					)}
 
 					<button type="submit" className="btn btnYellow mt-4">
-						LOGIN
+						CONTINUE
 					</button>
 				</form>
-				<div className="signUpButton pb-5">
-					<div className="d-flex flex-column create-acount">
-						<span>Don’t have an account?</span>
-						<span>create one here</span>
-					</div>
-					<button
-						className="btn btnYellow"
-						data-dismiss="modal"
-						data-toggle="modal"
-						data-target="#signUpModal">
-						SIGN UP
-					</button>
-				</div>
-			</div>
-
-			{/*<!-- Recover Password Modal -->*/}
-			<div id="RecoverPasswordModal" className="modal fade" role="dialog">
-				<div className="modal-dialog modal-lg">
-					<div className="modal-content">
-						<RecoverPassword />
-					</div>
-				</div>
 			</div>
 		</div>
 	);
