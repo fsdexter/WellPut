@@ -47,6 +47,10 @@ class User(db.Model):
             "id_photo": self.id_photo,
             "id_assesment": self.id_assesment
         }
+        
+    # method to check the password and that verify that it is the user password
+    def check_password(self, password_param):
+       return safe_str_cmp(self.password.encode('utf-8'), password_param.encode('utf-8'))
 
 class Photo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -171,6 +175,4 @@ class TenantRoomOwner(db.Model):
             "description": self.description
         }  
         
-    # method to check the password and that verify that it is the user password
-    def check_password(self, password_param):
-       return safe_str_cmp(self.password.encode('utf-8'), password_param.encode('utf-8'))
+    
