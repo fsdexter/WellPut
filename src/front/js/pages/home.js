@@ -10,6 +10,7 @@ import { FilterExp } from "../component/filterExp";
 import { FilterOcc } from "../component/filterOcc";
 import { FilterFea } from "../component/filterFea";
 import { FilterBed } from "../component/filterBed";
+import { PriceInput } from "../component/priceInput";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -36,14 +37,13 @@ export const Home = () => {
 						Search a room
 					</h1>
 					<br />
-					<br />
 
 					<div className="row">
 						<div className="col-3">
-							<h3 className="filterWords  ml-4">City</h3>
+							<h3 className="ml-4">City</h3>
 						</div>
 						<form>
-							<div className="col ml-3">
+							<div className=" ml-3  pt-3">
 								<input type="text" className="form-control roundShape" placeholder="write a city..." />
 							</div>
 						</form>
@@ -54,33 +54,7 @@ export const Home = () => {
 					</div>
 					<br />
 					<div>
-						<form>
-							<div className="border border-warning pt-2">
-								<div className="row">
-									<div className="col-4 ">
-										<h3 className="filterWords ml-4">Price</h3>
-									</div>
-									<div className="col-3">
-										<input type="text" className="form-control" placeholder="Min." />
-									</div>
-									<div className="col-3 mr-2">
-										<input type="text" className="form-control" placeholder="Max." />
-									</div>
-								</div>
-								<br />
-								<div className="row">
-									<div className="col-4 ">
-										<h3 className="filterWords ml-4">Deposit</h3>
-									</div>
-									<div className="col-3">
-										<input type="text" className="form-control" placeholder="Min." />
-									</div>
-									<div className="col-3 mr-2 mb-2">
-										<input type="text" className="form-control" placeholder="Max." />
-									</div>
-								</div>
-							</div>
-						</form>
+						<PriceInput />
 						<br />
 						<div className="border border-warning">
 							<FilterExp />
