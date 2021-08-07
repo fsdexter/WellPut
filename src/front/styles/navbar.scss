@@ -12,8 +12,12 @@
     background-color:#FFDE59;
 }
 
-.btn:hover{
+.btn-navb:hover{
     color: white!important;
-    font-weight: bold!important;
+    text-decoration: overline;
     border-color:none!important;
+}
+
+.btn-navb:focus {
+    box-shadow: none;
 }
