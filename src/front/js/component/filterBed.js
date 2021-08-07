@@ -36,7 +36,7 @@ export const FilterBed = () => {
 				</label>
 			</div>
 			<div className="col-4" />
-			<div className="form-check form-check-inline col-3  mb-5 pl-4">
+			<div className="form-check form-check-inline col-3  pb-2 pl-4">
 				<input
 					className=" form-check-input"
 					type="radio"
@@ -50,7 +50,7 @@ export const FilterBed = () => {
 					No Bed
 				</label>
 			</div>
-			<div className="form-check form-check-inline col-3  mb-5 ">
+			<div className="form-check form-check-inline col-3  pb-2 ">
 				<input
 					className="form-check-input"
 					type="radio"

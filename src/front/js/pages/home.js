@@ -82,7 +82,7 @@ export const Home = () => {
 							</div>
 						</form>
 						<br />
-						<div className="border border-warning pt-2">
+						<div className="border border-warning">
 							<FilterExp />
 						</div>
 						<br />
@@ -123,11 +123,11 @@ export const Home = () => {
 							</div>
 						</div>
 						<br />
-						<div className="border border-warning pt-5">
+						<div className="border border-warning pt-2">
 							<FilterFea />
 						</div>
 						<br />
-						<div className="border border-warning pt-5">
+						<div className="border border-warning pt-2">
 							<FilterBed />
 						</div>
 					</div>
