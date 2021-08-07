@@ -31,6 +31,7 @@ export const Home = () => {
 					</div>
 				</div>
 			</div>
+
 			<div className="row">
 				<div className="col-3 p-1 mb-2 bg-secondary text-white filter">
 					<h1 id="texto_yellow" className="mt-3">

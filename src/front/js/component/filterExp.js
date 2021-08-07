@@ -13,7 +13,7 @@ export const FilterExp = () => {
 			<div className="form-check form-check-inline col-3 mb-3 pl-5 ">
 				<input
 					className=" form-check-input"
-					type="radio"
+					type="checkbox"
 					name="inlineRadioOptions"
 					id="inlineRadio1"
 					value="option1"
@@ -25,7 +25,7 @@ export const FilterExp = () => {
 			<div className="form-check form-check-inline col-3 mb-3 pl-5 ">
 				<input
 					className="form-check-input"
-					type="radio"
+					type="checkbox"
 					name="inlineRadioOptions"
 					id="inlineRadio2"
 					value="option2"
@@ -38,7 +38,7 @@ export const FilterExp = () => {
 			<div className="form-check form-check-inline col-3  pb-3 pl-5">
 				<input
 					className=" form-check-input"
-					type="radio"
+					type="checkbox"
 					name="inlineRadioOptions"
 					id="inlineRadio3"
 					value="option3"
@@ -50,7 +50,7 @@ export const FilterExp = () => {
 			<div className="form-check form-check-inline col-3 pb-3 pl-5 ">
 				<input
 					className="form-check-input"
-					type="radio"
+					type="checkbox"
 					name="inlineRadioOptions"
 					id="inlineRadio4"
 					value="option4"
