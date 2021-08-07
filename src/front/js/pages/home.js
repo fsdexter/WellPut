@@ -17,7 +17,7 @@ export const Home = () => {
 
 	return (
 		<div className="container-fluid">
-			<div style={{ height: "450px" }}>
+			<div style={{ height: "550px" }}>
 				<div className="row pic m-auto">
 					<div className="rectangle">
 						<h2 id="texto">
