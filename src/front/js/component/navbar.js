@@ -18,8 +18,8 @@ export const Navbar = () => {
 					<img src={logo} id="logo" />
 				</Link>
 			</div>
-			<div className="col-10" id="marron">
-				<div className="col-12" id="amarillo">
+			<div className="col-10" id="brown">
+				<div className="col-12" id="yellow">
 					<div className="buttons d-flex justify-content-end">
 						<button type="button" className="btn" data-toggle="modal" data-target="#signUpModal">
 							Sign Up
@@ -39,7 +39,6 @@ export const Navbar = () => {
 			{/*<!-- SignUp Modal -->*/}
 			<div id="signUpModal" className="modal fade" role="dialog">
 				<div className="modal-dialog modal-lg">
-					{/*<!-- Modal Content -->*/}
 					<div className="modal-content">
 						<SignUp />
 					</div>
@@ -49,7 +48,6 @@ export const Navbar = () => {
 			{/*<!-- Login Modal -->*/}
 			<div id="loginModal" className="modal fade" role="dialog">
 				<div className="modal-dialog modal-lg">
-					{/*<!-- Modal Content -->*/}
 					<div className="modal-content">
 						<Login />
 					</div>

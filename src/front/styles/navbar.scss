@@ -4,15 +4,16 @@
     height: 50%;
     margin-left: 2rem;
 }
-#marron{
+#brown{
     background-color:#4C4535;
     padding: 0.7rem;
 }
-#amarillo{ 
+#yellow{ 
     background-color:#FFDE59;
 }
 
 .btn:hover{
     color: white!important;
-    font-weight: bold;
+    font-weight: bold!important;
+    border-color:none!important;
 }
