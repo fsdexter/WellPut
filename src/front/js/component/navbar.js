@@ -62,11 +62,6 @@ export const Navbar = () => {
 			{/*<!-- SignUp Modal -->*/}
 			<div id="signUpModal" className="modal fade" role="dialog">
 				<div className="modal-dialog modal-lg">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">
-							<i className="far fa-window-close text-white fa-lg" />
-						</button>
-					</div>
 					<div className="modal-content">
 						<SignUp />
 					</div>

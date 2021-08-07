@@ -112,13 +112,15 @@ export const SignUp = () => {
 						/>
 					</div>
 					<div>
-						<button type="submit" className="btn btnYellow mt-4">
+						<button type="submit" className="btn btnYellow mt-4 ">
 							CONTINUE
 						</button>
 					</div>
 				</form>
 			</div>
-			<div className="col-1 no-gutters iconClose mt-2 m-0 p-0 d-flex justify-content-end">
+			<div
+				className="col-1 no-gutters iconClose mt-2 m-0 p-0 d-flex justify-content-end close"
+				data-dismiss="modal">
 				<i className="far fa-window-close text-white fa-lg" />
 			</div>
 		</div>
