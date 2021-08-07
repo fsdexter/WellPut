@@ -49,7 +49,7 @@ export const Home = () => {
 						</form>
 					</div>
 					<br />
-					<div className="card mx-auto" style={{ width: "70%" }}>
+					<div className="card mx-auto mb-3" style={{ width: "70%" }}>
 						<img className="card-img-top roundShape " src={maps} alt="Card image cap" />
 					</div>
 					<br />
@@ -86,23 +86,23 @@ export const Home = () => {
 							<FilterExp />
 						</div>
 						<br />
-						<div className="border border-warning pt-5">
+						<div className="border border-warning pt-3">
 							<div className="row">
 								<div className="col">
 									<h3 className="ml-4">Rating</h3>
 								</div>
-								<div className="pr-5 mr-4 col-6 mb-5 d-flex">
+								<div className="pr-5 mr-4 col-6 mb-3 d-flex">
 									<Rating />
 								</div>
 							</div>
 						</div>
 						<br />
-						<div className="border border-warning pt-5">
+						<div className="border border-warning pt-3">
 							<div className="row">
 								<div className="col">
 									<h3 className="ml-4">Roomies</h3>
 								</div>
-								<div className=" mr-4 col-3 mb-5">
+								<div className=" mr-4 col-3 mb-3">
 									<Counter />
 								</div>
 							</div>
