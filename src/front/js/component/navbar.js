@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-import { SignUp } from "../pages/signUp";
-import { Login } from "../pages/login";
+import { SignUp } from "./signUp";
+import { Login } from "./login";
 
 import logo from "../../img/logo.png";
 import "../../styles/navbar.scss";
 
 export const Navbar = () => {
-	const { actions } = useContext(Context);
+	const { store, actions } = useContext(Context);
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-white no-gutters">
@@ -19,21 +19,44 @@ export const Navbar = () => {
 				</Link>
 			</div>
 			<div className="col-10" id="brown">
-				<div className="col-12" id="yellow">
-					<div className="buttons d-flex justify-content-end">
-						<button type="button" className="btn" data-toggle="modal" data-target="#signUpModal">
-							Sign Up
-						</button>
-						<button type="button" className="btn" data-toggle="modal" data-target="#loginModal">
-							Login
-						</button>
+				{store.user !== null ? (
+					<div className="col-12 d-flex justify-content-between" id="yellow">
+						<Link to="/profile">
+							<span className="navbar-brand mb-0 mr-2 btn">Profile</span>
+						</Link>
+						<Link to="/announcements">
+							<span className="navbar-brand mb-0 mr-2 btn">Announcements</span>
+						</Link>
+						<Link to="/favorites">
+							<span className="navbar-brand mb-0 mr-2 btn">Favorites</span>
+						</Link>
+						<Link to="/">
+							<span className="navbar-brand mb-0 mr-2 btn">Search</span>
+						</Link>
 						<Link to="/">
 							<span className="navbar-brand mb-0 mr-2 btn" onClick={() => actions.logOut()}>
 								Log Out
 							</span>
 						</Link>
 					</div>
-				</div>
+				) : (
+					<div className="col-12 d-flex justify-content-end" id="yellow">
+						<button
+							type="button"
+							className="navbar-brand mb-0 mr-2 btn"
+							data-toggle="modal"
+							data-target="#signUpModal">
+							Sign Up
+						</button>
+						<button
+							type="button"
+							className="navbar-brand mb-0 mr-2 btn"
+							data-toggle="modal"
+							data-target="#loginModal">
+							Login
+						</button>
+					</div>
+				)}
 			</div>
 
 			{/*<!-- SignUp Modal -->*/}

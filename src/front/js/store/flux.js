@@ -32,13 +32,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			login: userValues => {
 				const store = getStore();
 				let newStore;
-				let localStoreUser;
-				const raw = JSON.stringify(userValues);
 
 				const requestOptions = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					body: raw,
+					body: JSON.stringify(userValues),
 					redirect: "follow"
 				};
 
@@ -47,7 +45,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						newStore = data;
 						setStore({ user: newStore });
-						localStoreUser = localStorage.setItem("user", JSON.stringify(store.user));
+						localStorage.setItem("user", JSON.stringify(store.user));
 					})
 					.catch(error => console.log("error", error));
 			},
@@ -64,8 +62,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			logOut: () => {
-				const store = getStore();
-				store.user = null;
+				console.log("DESLOGUEARSE");
+				setStore({ user: null });
 				localStorage.clear();
 			}
 		}

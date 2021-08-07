@@ -14,7 +14,7 @@ export const SignUp = () => {
 		fullName: "",
 		email: "",
 		password: "",
-		repearPassword: ""
+		repeatPassword: ""
 	});
 
 	const inputHandelChange = e => {
