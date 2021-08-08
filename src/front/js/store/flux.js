@@ -1,47 +1,84 @@
+// Backend URL
+import { API_BASE_URL } from "../constants";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
-			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY"
+
+			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY",
+
+			user: null
+
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
+			signUp: async userValues => {
+				const store = getStore();
+				const raw = JSON.stringify(userValues);
 
-			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
+				const requestOptions = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: raw,
+					redirect: "follow"
+				};
+
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/sign_up`, requestOptions);
+					if (response.status >= 400) {
+						const errorMsg = "Error during the sign up process";
+						throw new Error(errorMsg);
+					} else {
+						const newStore = await response.json();
+						setStore({ user: newStore });
+						localStorage.setItem("user", JSON.stringify(store.user));
+					}
+				} catch (error) {
+					return error.message;
+				}
 			},
-			changeColor: (index, color) => {
-				//get the store
+			login: async userValues => {
 				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+				const requestOptions = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(userValues),
+					redirect: "follow"
+				};
 
-				//reset the global store
-				setStore({ demo: demo });
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/login`, requestOptions);
+
+					if (response.status === 401) {
+						const errorMsg = await response.json();
+						throw new Error(errorMsg);
+					} else {
+						const newStore = await response.json();
+						setStore({ user: newStore });
+						localStorage.setItem("user", JSON.stringify(store.user));
+					}
+				} catch (error) {
+					return error.message;
+				}
+			},
+			// to check that the user is login
+			isUserAuthentificted: () => {
+				const store = getStore();
+				return store.user != null;
+			},
+			getUserAuthentificted: () => {
+				let logedUser = JSON.parse(localStorage.getItem("user"));
+				if (logedUser) {
+					// Fill in the store with the information of the localStorage
+					setStore({ user: logedUser });
+				}
+			},
+			logOut: () => {
+				setStore({ user: null });
+				localStorage.clear();
+			},
+			recoverPassword: userValues => {
+				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
 			}
 		}
 	};

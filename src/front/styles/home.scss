@@ -1,0 +1,73 @@
+.pic{
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 100%;
+    background-image: url("../img/recorte.jpg");
+    
+}
+.rectangle{
+    width: 1200px; 
+    margin: auto;
+    height: 300px; 
+    background:rgba(0, 0, 0, 0.5);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#texto{
+    color: white;
+    text-align: center;
+    opacity: 1;
+    padding: 30px;
+}
+#texto_yellow{
+    color: yellow;
+    text-align: center;
+    opacity: 1;
+}
+.filter{
+    width: 300px;
+    height: 100%;
+    background: lightgray;
+    margin-left: 85px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+.roundShape{
+ border-radius: 10px;
+}
+
+.checked{
+    color:yellow
+}
+.unchecked{
+    color:white
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+    background: white;
+}
+
+.fontColor{
+color: black;
+}
+
+.export{
+     background: white;
+}
+#doubleBed{
+    width: 50%;
+    height: 50%;
+}
+#sofaBed{
+    width: 50%;
+    height:50%;
+}
+#lightBorder{
+    color:black;
+}

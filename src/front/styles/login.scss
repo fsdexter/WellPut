@@ -1,0 +1,46 @@
+#loginContainer{
+    background-color: #184F5F;
+    position: relative;
+    width: 70vw;
+    height: 90vh;
+}
+
+#loginImg{
+    background: url("../img/login-room.png") border-box no-repeat;
+    background-size:cover;
+    width: 100%;
+    height: 100%;
+}
+
+.onLoginRoom{
+    width: 100%;
+    height: 100%;
+    background:rgba(0, 0, 0, 0.5);
+    text-align: start;
+}
+
+
+.custom-ml{
+    margin-left: 1.6rem;
+}
+
+#loginForm{
+    background:rgba(0, 0, 0, 0.5);
+}
+
+.recoverPass{
+    text-align: end;
+    color: rgba(255, 255, 255, 0.568);
+}
+
+.create-acount{
+    color: rgba(255, 255, 255, 0.568);
+}
+
+.signUpButton{
+    background:rgba(0, 0, 0, 0.5);
+}
+
+#recovPass{
+    cursor: pointer;
+}

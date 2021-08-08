@@ -1,0 +1,23 @@
+
+#logo{
+    width: 65%;
+    height: 50%;
+    margin-left: 2rem;
+}
+#brown{
+    background-color:#4C4535;
+    padding: 0.7rem;
+}
+#yellow{ 
+    background-color:#FFDE59;
+}
+
+.btn-navb:hover{
+    color: white!important;
+    text-decoration: overline;
+    border-color:none!important;
+}
+
+.btn-navb:focus {
+    box-shadow: none;
+}
