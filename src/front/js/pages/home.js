@@ -11,6 +11,7 @@ import { FilterOcc } from "../component/filterOcc";
 import { FilterFea } from "../component/filterFea";
 import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -109,9 +110,11 @@ export const Home = () => {
 				</div>
 
 				<div className="col-8 p-1 mb-2  text-white">
-					<div className="card" style={{ width: "100%" }}>
-						<img className="card-img-top" src={recorte} alt="Card image cap" />
-					</div>
+					<Link to="/detailedView">
+						<div className="card" style={{ width: "100%" }}>
+							<img className="card-img-top" src={recorte} alt="Card image cap" />
+						</div>
+					</Link>
 					<div className="card" style={{ width: "100%" }}>
 						<img className="card-img-top" src={recorte} alt="Card image cap" />
 					</div>
