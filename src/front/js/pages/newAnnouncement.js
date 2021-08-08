@@ -10,50 +10,50 @@ export const NewAnnouncement = () => {
 			<ul className="nav nav-tabs" id="myTab" role="tablist">
 				<li className="nav-item">
 					<a
-						className="nav-link active"
+						className="nav-link active noLink"
 						id="locationTab-tab"
 						data-toggle="tab"
 						href="#locationTab"
 						role="tab"
 						aria-controls="locationTab"
 						aria-selected="true">
-						locationTab
+						Location
 					</a>
 				</li>
 				<li className="nav-item">
 					<a
-						className="nav-link"
+						className="nav-link noLink"
 						id="descriptionTab-tab"
 						data-toggle="tab"
 						href="#descriptionTab"
 						role="tab"
 						aria-controls="descriptionTab"
 						aria-selected="false">
-						descriptionTab
+						Description
 					</a>
 				</li>
-				<li className="nav-item">
+				<li className="nav-item ">
 					<a
-						className="nav-link"
+						className="nav-link noLink"
 						id="picsTab-tab"
 						data-toggle="tab"
 						href="#picsTab"
 						role="tab"
 						aria-controls="picsTab"
 						aria-selected="false">
-						picsTab
+						Pictures
 					</a>
 				</li>
 				<li className="nav-item">
 					<a
-						className="nav-link"
+						className="nav-link noLink"
 						id="previewTab-tab"
 						data-toggle="tab"
 						href="#previewTab"
 						role="tab"
 						aria-controls="previewTab"
 						aria-selected="false">
-						previewTab
+						Preview
 					</a>
 				</li>
 			</ul>
@@ -63,7 +63,10 @@ export const NewAnnouncement = () => {
 					id="locationTab"
 					role="tabpanel"
 					aria-labelledby="locationTab-tab">
-					1
+					<div className="row">
+						<div className="col">City</div>
+						<div className="col">Map</div>
+					</div>
 				</div>
 				<div className="tab-pane fade" id="descriptionTab" role="tabpanel" aria-labelledby="descriptionTab-tab">
 					2

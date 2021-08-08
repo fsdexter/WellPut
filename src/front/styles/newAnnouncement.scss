@@ -1,3 +1,12 @@
-.pest1{
-    background: blue;
+#locationTab, #descriptionTab, #picsTab, #previewTab{
+   
+    height: 500px;
+    
+}
+.noLink{
+    text-decoration: none !important; 
+    color:black!important;
+}
+.active{
+    background:#C4C4C4 !important;
 }
