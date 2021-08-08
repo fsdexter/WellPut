@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/newAnnouncement.scss";
+import maps from "../../img/maps.png";
 
 export const NewAnnouncement = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="container">
-			<ul className="nav nav-tabs" id="myTab" role="tablist">
+			<ul className="nav nav-tabs " id="myTab" role="tablist">
 				<li className="nav-item">
 					<a
 						className="nav-link active noLink"
@@ -17,7 +18,7 @@ export const NewAnnouncement = () => {
 						role="tab"
 						aria-controls="locationTab"
 						aria-selected="true">
-						Location
+						<h5>Location</h5>
 					</a>
 				</li>
 				<li className="nav-item">
@@ -64,11 +65,27 @@ export const NewAnnouncement = () => {
 					role="tabpanel"
 					aria-labelledby="locationTab-tab">
 					<div className="row">
-						<div className="col">City</div>
-						<div className="col">
-							<input type="text" className="form-control roundShape" placeholder="write a city..." />
+						<div className="col-2 pt-3 fontInput">
+							<p className="pl-4">City </p>
+							<p className="pl-4">Street</p>
+							<p className="pl-4">Number</p>
 						</div>
-						<div className="col-6">Map</div>
+						<div className="col pt-3">
+							<input type="text" className="form-control roundShape" placeholder="" />
+							<input type="text" className="form-control roundShape mt-3" placeholder="" />
+							<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />
+						</div>
+						<div className="col-2 pt-3 fontInput">
+							<p className="pl-4">Floor</p>
+							<p className="pl-4">P.Code</p>
+						</div>
+						<div className="col-3">
+							<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />
+							<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />
+						</div>
+					</div>
+					<div className="row">
+						<img className="m-auto mapsPic" src={maps} />
 					</div>
 				</div>
 				<div className="tab-pane fade" id="descriptionTab" role="tabpanel" aria-labelledby="descriptionTab-tab">
