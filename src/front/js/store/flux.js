@@ -4,7 +4,8 @@ import { API_BASE_URL } from "../constants";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			user: null
+			user: null,
+			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY"
 		},
 		actions: {
 			signUp: async userValues => {

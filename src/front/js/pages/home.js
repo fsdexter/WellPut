@@ -12,6 +12,7 @@ import { FilterFea } from "../component/filterFea";
 import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
 import { Link } from "react-router-dom";
+import MyMap from "../component/mapEngine";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -52,7 +53,7 @@ export const Home = () => {
 					</div>
 					<br />
 					<div className="card mx-auto mb-3" style={{ width: "70%" }}>
-						<img className="card-img-top roundShape " src={maps} alt="Card image cap" />
+						<MyMap lat={40.416775} lng={-3.70379} />
 					</div>
 					<br />
 					<div>
