@@ -20,9 +20,6 @@ export const Home = () => {
 					Read documentation
 				</a>
 			</p>
-			<div>Test</div>
-			<MyFancyComponent />
-			<div>Test</div>
 		</div>
 	);
 };
