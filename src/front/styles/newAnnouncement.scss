@@ -1,6 +1,6 @@
 #locationTab, #descriptionTab, #picsTab, #previewTab{
    
-    height: 500px;
+    height: 530px;
     
 }
 .noLink{
@@ -14,9 +14,15 @@
 .fontInput{
     font-size: x-large;
 }
+.fontInputSm{
+    font-size: large;
+}
 .inputNumber{
     width: 30%;
 }
 .mapsPic{
     height:315px;
+}
+.descriptionBack{
+    background: #ced4da;
 }
