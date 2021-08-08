@@ -65,7 +65,10 @@ export const NewAnnouncement = () => {
 					aria-labelledby="locationTab-tab">
 					<div className="row">
 						<div className="col">City</div>
-						<div className="col">Map</div>
+						<div className="col">
+							<input type="text" className="form-control roundShape" placeholder="write a city..." />
+						</div>
+						<div className="col-6">Map</div>
 					</div>
 				</div>
 				<div className="tab-pane fade" id="descriptionTab" role="tabpanel" aria-labelledby="descriptionTab-tab">
