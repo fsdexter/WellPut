@@ -23,7 +23,7 @@ export const Home = () => {
 					<div className="rectangle">
 						<h2 id="texto">
 							<div id="texto_yellow">We help you find</div>
-							the ideal place for you! branch test
+							the ideal place for you! branch test ANUNCIOOOOOOOOOO AAAAGGHHH
 						</h2>
 						<h2 id="texto">
 							<div id="texto_yellow">A perfect place </div>
