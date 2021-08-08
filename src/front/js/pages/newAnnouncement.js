@@ -120,27 +120,31 @@ export const NewAnnouncement = () => {
 						<div className="col-1" />
 					</div>
 					<div className="row  mt-2 ">
-						<div className="col-4 ">
-							<p className="fontInput pl-5">Price </p>{" "}
+						<div className="col-6">
+							<div className="row ">
+								<div className="col-4">
+									<p className="fontInput pl-2">Price</p>{" "}
+								</div>
+								<div className="col-3">
+									<input type="text" className="form-control" placeholder="Min." />
+								</div>
+								<div className="col-3 mb-2">
+									<input type="text" className="form-control" placeholder="Max." />
+								</div>
+							</div>
+							<div className="row ">
+								<div className="col-4">
+									<p className="fontInput pl-2">Deposit </p>{" "}
+								</div>
+								<div className="col-3">
+									<input type="text" className="form-control" placeholder="Min." />
+								</div>
+								<div className="col-3 mb-2">
+									<input type="text" className="form-control" placeholder="Max." />
+								</div>
+							</div>
 						</div>
-						<div className="col-3">
-							<input type="text" className="form-control" placeholder="Min." />
-						</div>
-						<div className="col-3 mr-2">
-							<input type="text" className="form-control" placeholder="Max." />
-						</div>
-					</div>
-					<br />
-					<div className="row ">
-						<div className="col-4">
-							<p className="fontInput pl-5">Deposit </p>{" "}
-						</div>
-						<div className="col-3">
-							<input type="text" className="form-control" placeholder="Min." />
-						</div>
-						<div className="col-3 mr-2 mb-2">
-							<input type="text" className="form-control" placeholder="Max." />
-						</div>
+						<div className="col-6" />
 					</div>
 				</div>
 				<div className="tab-pane fade" id="picsTab" role="tabpanel" aria-labelledby="picsTab-tab">
