@@ -13,6 +13,7 @@ import { Favorites } from "./pages/favorites";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { DetailedView } from "./pages/detailedView";
 
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -33,6 +34,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/login">
 							<Login />
+						</Route>
+						<Route exact path="/detailedView">
+							<DetailedView />
 						</Route>
 						<Route exact path="/edit_profile">
 							<EditProfile />
