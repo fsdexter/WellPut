@@ -5,16 +5,19 @@ import hombre from "../../img/iconohombre.png";
 import mujer from "../../img/iconomujer.png";
 import trabajador from "../../img/ocup1.png";
 import estudiante from "../../img/ocup2.png";
+import perfil from "../../img/fotodeperfil.png";
 import "../../styles/perfiledit.scss";
-
+import { Home } from "./home";
 export const EditProfile = () => {
 	const { store, actions } = useContext(Context);
-
+	function handleSubmit(e) {
+		e.preventDefault();
+		alert("Excellent ... Profile Updated!");
+	}
 	return (
 		<div>
-			<div className="row pic m-auto up d-flex ">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<div className="detalle" style={{ width: "50rem" }}>
+			<div className="row pic m-auto justify-content-center d-flex ">
+				<div className="detalle" style={{ width: "50rem", height: "110rem" }}>
 					<form>
 						<div className="form-groupedit d-flex">
 							<label className="ml-3" id="texto">
@@ -102,37 +105,20 @@ export const EditProfile = () => {
 								/>
 							</div>
 						</div>
-						<button type="submit" className="btn btn-primary">
-							CONTINUAR
-						</button>
 					</form>
 				</div>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<div className="detalle" style={{ width: "20rem" }}>
-					<img src="..." className="card-img-top" alt="..." />
-					<div className="card-body">
-						<h5 className="card-title">Card title</h5>
-						<p className="card-text">
-							Some quick example text to build on the card title and make up the bulk of the cards
-							content.
-						</p>
+				<div className="detalle justify-content-center" style={{ width: "30rem", height: "40rem" }}>
+					<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
+					<div className="card-body ">
+						<button type="submit" className="btn btn-primary" onClick={handleSubmit}>
+							CONTINUE
+						</button>
 					</div>
 				</div>
-			</div>
-			<div className="row pic m-auto up d-flex ">
-				<br /> <br />
-				<br />
-				<br />
-				<br />
-				<div className=" detalle" style={{ width: "100rem" }}>
-					<img src="..." className="card-img-top" alt="..." />
-					<div className="card-body">
-						<h5 className="card-title">Card title</h5>
-						<p className="card-text">
-							Some quick example text to build on the card title and make up the bulk of the cards
-							content.
-						</p>
-					</div>
+
+				<div className=" detalle" style={{ width: "80rem", height: "28rem" }}>
+					<label id="texto">Tell us about you :</label>
+					<input type="tell" className="imputTell" style={{ width: "60rem", height: "15rem" }} />
 				</div>
 			</div>
 		</div>
