@@ -18,12 +18,12 @@ export const Home = () => {
 
 	return (
 		<div className="container-fluid">
-			<div style={{ height: "550px" }}>
+			<div style={{ height: "400px" }}>
 				<div className="row pic m-auto">
 					<div className="rectangle">
 						<h2 id="texto">
 							<div id="texto_yellow">We help you find</div>
-							the ideal place for you! branch test ANUNCIOOOOOOOOOO AAAAGGHHH
+							the ideal place for you!
 						</h2>
 						<h2 id="texto">
 							<div id="texto_yellow">A perfect place </div>
