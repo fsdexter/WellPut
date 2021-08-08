@@ -16,42 +16,44 @@ export const EditProfile = () => {
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<div className="detalle" style={{ width: "50rem" }}>
 					<form>
-						<div className="form-group d-flex">
-							<label className="ml-3">Name * :</label>
+						<div className="form-groupedit d-flex">
+							<label className="ml-3" id="texto">
+								Name * :
+							</label>
 							<input type="name" className="form-inputs" id="name" />
 						</div>
-						<div className="form-group d-flex">
-							<label>City * :</label>
+						<div className="form-groupedit d-flex">
+							<label id="texto">City * :</label>
 							<input type="city" className="form-inputs" id="city" />
 						</div>
-						<div className="form-group d-flex">
-							<label>Email * :</label>
+						<div className="form-groupedit d-flex">
+							<label id="texto">Email * :</label>
 							<input type="email" className="form-inputs" id="email" />
 						</div>
-						<div className="form-group d-flex">
-							<label>Interests * :</label>
+						<div className="form-groupedit d-flex">
+							<label id="texto">Interests * :</label>
 							<input type="interests" className="form-inputs" id="interests" />
 						</div>
-						<div className="form-group d-flex">
-							<label>Languages :</label>
+						<div className="form-groupedit d-flex">
+							<label id="texto">Languages :</label>
 							<input type="languages" className="form-inputs" id="languages" />
 						</div>
-						<div className="form-group d-flex">
-							<label>Phone :</label>
+						<div className="form-groupedit d-flex">
+							<label id="texto">Phone :</label>
 							<input type="phone" className="form-inputs" id="phone" />
 						</div>
-						<div className="form-group d-flex">
-							<label>Nationality :</label>
+						<div className="form-groupedit d-flex">
+							<label id="texto">Nationality :</label>
 							<input type="nationality" className="form-inputs" id="nationality" />
 						</div>
-						<div className="form-group d-flex">
-							<label>Age :</label>
+						<div className="form-groupedit d-flex">
+							<label id="texto">Age :</label>
 							<input type="age" className="form-inputs" id="age" />
 						</div>
-						<div className="form-group d-flex">
-							<label>Sex :</label>
+						<div className="form-groupedit d-flex">
+							<label id="texto">Sex :</label>
 							<div className="form-check form-check-inline">
-								<label className="form-check-label">
+								<label className="form-check-label" id="texto">
 									<img className="card-img-top roundShape " src={mujer} alt="Card image cap" />
 								</label>
 								<input
@@ -62,7 +64,7 @@ export const EditProfile = () => {
 								/>
 							</div>
 							<div className="form-check form-check-inline">
-								<label className="form-check-label">
+								<label className="form-check-label" id="texto">
 									<img className="card-img-top roundShape " src={hombre} alt="Card image cap" />
 								</label>
 								<input
@@ -74,8 +76,8 @@ export const EditProfile = () => {
 								/>
 							</div>
 						</div>
-						<div className="form-group d-flex">
-							<label>Occupation : :</label>
+						<div className="form-groupedit d-flex">
+							<label id="texto">Occupation : :</label>
 							<div className="form-check form-check-inline">
 								<label className="form-check-label">
 									<img className="card-img-top roundShape " src={trabajador} alt="Card image cap" />
@@ -117,7 +119,7 @@ export const EditProfile = () => {
 					</div>
 				</div>
 			</div>
-			<div className="down">
+			<div className="row pic m-auto up d-flex ">
 				<br /> <br />
 				<br />
 				<br />
