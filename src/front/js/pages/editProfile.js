@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import cama from "../../img/cama.png";
 import hombre from "../../img/iconohombre.png";
@@ -9,10 +10,12 @@ import perfil from "../../img/fotodeperfil.png";
 import "../../styles/perfiledit.scss";
 import { Home } from "./home";
 export const EditProfile = () => {
+	const history = useHistory();
 	const { store, actions } = useContext(Context);
 	function handleSubmit(e) {
 		e.preventDefault();
 		alert("Excellent ... Profile Updated!");
+		history.push("/profile");
 	}
 	return (
 		<div>
@@ -110,8 +113,9 @@ export const EditProfile = () => {
 				<div className="detalle justify-content-center" style={{ width: "30rem", height: "40rem" }}>
 					<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
 					<div className="card-body ">
+						{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
 						<button type="submit" className="btn btn-primary" onClick={handleSubmit}>
-							CONTINUE
+							GUARDAR
 						</button>
 					</div>
 				</div>

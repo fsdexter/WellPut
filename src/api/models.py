@@ -14,8 +14,8 @@ class User(db.Model):
     phone = db.Column(db.String(120))
     sex = db.Column(db.String(120))
     
-    id_photo= db.relationship('Photo', lazy=True)
-    id_assesment= db.relationship('Assesment_User', lazy=True)
+    userArchive= db.relationship('UserArchives', lazy=True)
+    characteristicUser= db.relationship('Assesment_User', lazy=True)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
 
     owner = db.relationship('TenantRoomOwner', backref = 'owner', lazy='joined', foreign_keys ='TenantRoomOwner.id_owner')
