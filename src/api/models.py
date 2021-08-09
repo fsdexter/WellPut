@@ -10,18 +10,12 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     full_name = db.Column(db.String(120)) #Creo que es mejor añadir el nombre completo en vez de dividirlo por partes
     password = db.Column(db.String(80), nullable=False)
-    city = db.Column(db.String(120))
-    interests = db.Column(db.String(120))
-    languages = db.Column(db.String(120))
+    birth_day = db.Column(db.date(120))
     phone = db.Column(db.String(120))
-    nationality = db.Column(db.String(120))
-    age = db.Column(db.Integer)
     sex = db.Column(db.String(120))
-    occupation = db.Column(db.String(120))
-    description = db.Column(db.String(120))
+    
     id_photo= db.relationship('Photo', lazy=True)
     id_assesment= db.relationship('Assesment_User', lazy=True)
-
     is_active = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
 
     owner = db.relationship('TenantRoomOwner', backref = 'owner', lazy='joined', foreign_keys ='TenantRoomOwner.id_owner')
@@ -34,16 +28,11 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "full_name": self.full_name,
-            "city": self.city,
-            "interests": self.interests,
-            "languages": self.languages,
             "phone": self.phone,
-            "nationality": self.nationality,
-            "age": self.age,
             "sex": self.sex,
-            "occupation": self.occupation,
-            "description": self.description,
-            "is_active": self.is_active,
+            "password":self.password,
+            "birth_day": self.birth_day,
+            
             "id_photo": self.id_photo,
             "id_assesment": self.id_assesment
         }
@@ -51,56 +40,49 @@ class User(db.Model):
     # method to check the password and that verify that it is the user password
     def check_password(self, password_param):
        return safe_str_cmp(self.password.encode('utf-8'), password_param.encode('utf-8'))
-
-class Photo(db.Model):
+#----------------------------------------------------------------------------------------------------------------------------
+class UserArchives(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    description = db.Column(db.String(20))
+    url = db.Column(db.String(500))
 
     def __repr__(self):
-        return '<Photo %r>' % self.id
+        return '<UserArchives %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "description": self.description
+            "url": self.url
         }   
-
-class Assesment_User(db.Model):
+#------------------------------------------------------------------------------------------------------------------------------
+class RoomArchive(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    description = db.Column(db.String(20))
+    url = db.Column(db.String(250))
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
+    kind= db.Column(db.String(10))
 
     def __repr__(self):
-        return '<Assesment_User %r>' % self.id
+        return '<RoomArchive %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "description": self.description
-        }  
-
+            "url": self.url,
+            "room_id": self.room_id,
+            "kind": self.kind
+        }   
+#------------------------------------------------------------------------------------------------------------------------------
 class Room (db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    descripction = db.Column(db.String(280))
+    address= db.Column(db.String(220))
     city = db.Column(db.String(120))
-    street= db.Column(db.String(80))
-    number= db.Column(db.Integer)
-    floor= db.Column(db.Integer)
-    door= db.Column(db.String(80))
-    bell= db.Column(db.String(80))
-    neighbourhood= db.Column(db.String(120))
+    country = db.Column(db.String(120))
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     price= db.Column(db.Integer)
     deposit= db.Column(db.Integer)
-    inclddedService=db.Column(db.String(120))
-    condition=db.Column(db.String(120))
-    title = db.Column(db.String(120))
-    descripction = db.Column(db.String(280))
-    bed=db.Column(db.String(80))
-    room=db.Column(db.String(80))
-    feature=db.Column(db.String(80))
-    id_assesment_room= db.relationship('Assesment_Room', lazy=True)
+  
     id_photo_room= db.relationship('Photo_Room', lazy=True)
     relation= db.relationship('TenantRoomOwner', lazy=True)
     def __repr__(self):
@@ -109,70 +91,114 @@ class Room (db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "city": self.city,
-            "street": self.street,
-            "number": self.number,
-            "floor": self.floor,
-            "door": self.door,
-            "bell": self.bell,
-            "neighbourhood": self.neighbourhood,
-            "price": self.price,
-            "deposit": self.deposit,
-            "inclddedService": self.inclddedService,
-            "condition": self.condition,
-            "title": self.title,
             "descripction": self.descripction,
-            "bed": self.bed,
-            "room": self.room,
-            "feature": self.feature,
-            "id_assesment_room": self.id_assesment_room,
-            "id_photo_room": self.id_photo_room
+            "address": self.address,
+            "city": self.city,
+            "country": self.country,
+            "owner_id": self.owner_id,
+            "price": self.price,
+            "deposit": self.deposit
         }
-
-class Photo_Room(db.Model):
+#------------------------------------------------------------------------------------------------------------------------------        
+class Review_Owner(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-    description = db.Column(db.String(20))
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    tenant_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    review = db.Column(db.String(220))
+    rating = db.Column(db.String(5))
+
+    def __repr__(self):
+        return '<Review_Owner %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "owner_id": self.owner_id,
+            "tenant_id": self.tenant_id,
+            "review": self.review,
+            "rating": self.rating
+        }  
+#------------------------------------------------------------------------------------------------------------------------------ 
+class Review_Room(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    room_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    review = db.Column(db.String(220))
+    rating = db.Column(db.String(5))
+
+    def __repr__(self):
+        return '<Review_Owner %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "room_id": self.room_id,
+            "review": self.review,
+            "rating": self.rating
+        }  
+#------------------------------------------------------------------------------------------------------------------------------ 
+class SpokenLanguages(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    languages_id = db.Column(db.String(20), db.ForeignKey('Languages.id'))
     
     def __repr__(self):
-        return '<Photo_Room %r>' % self.id
+        return '<SpokenLanguages %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
-            "room_id": self.room_id,
-            "description": self.description
+            "user_id": self.user_id,
+            "languages_id": self.languages_id
         }  
-
-class Assesment_Room(db.Model):
+#------------------------------------------------------------------------------------------------------------------------------ 
+class Languages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-    description = db.Column(db.String(20))
-     
-    def __repr__(self):
-        return '<Assesment_Room %r>' % self.id
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "room_id": self.room_id,
-            "description": self.description
-        }  
-
-class TenantRoomOwner(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    id_owner = db.Column(db.Integer, db.ForeignKey('user.id'))
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-    id_tenant = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return '<TenantRoomOwner %r>' % self.id
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "room_id": self.room_id,
-            "description": self.description
-        }  
-        
+    name = db.Column(db.String(20))
+    locale = db.Column(db.String(20))
     
+    def __repr__(self):
+        return '<Languages %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "locale": self.locale
+        }  
+#------------------------------------------------------------------------------------------------------------------------------ 
+class CharacteristicUser(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+    descripction = db.Column(db.String(220))
+    Characteristic_id = db.Column(db.Integer, db.ForeignKey('characteristic.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    def __repr__(self):
+        return '<CharacteristicUser %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "descripction": self.descripction,
+            "Characteristic_id": self.Characteristic_id,
+            "user_id": self.user_id
+
+        }  
+#------------------------------------------------------------------------------------------------------------------------------   
+class Characteristic(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+    descripction = db.Column(db.String(220))
+
+    def __repr__(self):
+        return '<Characteristic %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "descripction": self.descripction
+        }  
+#------------------------------------------------------------------------------------------------------------------------------   
