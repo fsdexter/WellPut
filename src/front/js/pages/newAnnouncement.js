@@ -68,21 +68,21 @@ export const NewAnnouncement = () => {
 					<div className="row">
 						<div className="col-2 pt-3 fontInput">
 							<p className="pl-4">City </p>
-							<p className="pl-4">Street</p>
-							<p className="pl-4">Number</p>
+							<p className="pl-4">Address</p>
+							{/*<p className="pl-4">Number</p>*/}
 						</div>
 						<div className="col pt-3">
 							<input type="text" className="form-control roundShape" placeholder="" />
 							<input type="text" className="form-control roundShape mt-3" placeholder="" />
-							<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />
+							{/*<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />*/}
 						</div>
 						<div className="col-2 pt-3 fontInput">
-							<p className="pl-4">Floor</p>
-							<p className="pl-4">P.Code</p>
+							{/*	<p className="pl-4">Floor</p>*/}
+							{/*	<p className="pl-4">P.Code</p>*/}
 						</div>
 						<div className="col-3">
-							<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />
-							<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />
+							{/*	<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />*/}
+							{/*	<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />*/}
 						</div>
 					</div>
 					<div className="row">
