@@ -26,7 +26,7 @@ export const RecoverPassword = () => {
 
 	const handlerSubmit = async e => {
 		e.preventDefault();
-		// login function
+
 		let recoverPassError = await actions.recoverPassword(formValue);
 
 		if (recoverPassError) {
@@ -38,16 +38,16 @@ export const RecoverPassword = () => {
 
 	return (
 		<div className="row container text-center d-flex justify-content-around" id="loginContainer">
-			<div className="col-4" id="recoverPassImg">
+			<div className="col-5" id="recoverPassImg">
 				<div className="onLoginRoom pl-3 pt-5">
 					<h1 className="text fs-1 myYellowText ml-2 well">WELL</h1>
 					<h1 className="text fs-1 myYellowText ml-2 put custom-ml">PUT</h1>
 					<h2 className="text myYellowText mt-5">I forgot my password</h2>
 				</div>
 			</div>
-			<div className="col-6 mt-2">
+			<div className="col-5 mt-2">
 				<div
-					className="iconClose mt-2 m-0 p-0 d-flex justify-content-end close"
+					className="iconClose mt-4 m-0 p-0 d-flex justify-content-end close"
 					data-dismiss="modal"
 					ref={closeBtn}>
 					<i className="far fa-window-close text-white fa-lg" />
@@ -66,10 +66,10 @@ export const RecoverPassword = () => {
 					</div>
 				) : null}
 
-				<form onSubmit={handlerSubmit} className="col-12 p-5 mt-5 myBox text-white" id="loginForm">
+				<form onSubmit={handlerSubmit} className="col-12 p-5 myBox text-white" id="recoPassForm">
 					<div className="form-grup row mt-2">
 						<input
-							className="col-12"
+							className="col-12 inputSinLog"
 							type="email"
 							name="email"
 							id="email"
@@ -78,10 +78,10 @@ export const RecoverPassword = () => {
 							required
 						/>
 					</div>
-					<button className="btn btnYellow2 mt-3 mb-2">Password Recovery</button>
-					<div className="form-grup row mt-2">
+					<button className="btn btnYellow2 mt-4 mb-4">Password Recovery</button>
+					<div className="form-grup row mt-4">
 						<input
-							className="col-12"
+							className="col-12 inputSinLog"
 							type="text"
 							name="code"
 							id="code"
@@ -92,9 +92,9 @@ export const RecoverPassword = () => {
 					</div>
 					{formValue.code !== "" ? (
 						<>
-							<div className="form-grup row mt-4">
+							<div className="form-grup row mt-5">
 								<input
-									className="col-12"
+									className="col-12 inputSinLog"
 									type="password"
 									name="newPassword"
 									placeholder="New password"
@@ -104,7 +104,7 @@ export const RecoverPassword = () => {
 							</div>
 							<div className="form-grup row mt-4">
 								<input
-									className="col-12"
+									className="col-12 inputSinLog"
 									type="password"
 									name="repeatNewPassword"
 									placeholder="Repeat New Password"
@@ -117,7 +117,7 @@ export const RecoverPassword = () => {
 						<>
 							<div className="form-grup row mt-4">
 								<input
-									className="col-12"
+									className="col-12 inputSinLog"
 									type="password"
 									name="newPassword"
 									placeholder="New password"
@@ -128,7 +128,7 @@ export const RecoverPassword = () => {
 							</div>
 							<div className="form-grup row mt-4">
 								<input
-									className="col-12"
+									className="col-12 inputSinLog"
 									type="password"
 									name="repeatNewPassword"
 									placeholder="Repeat New Password"
@@ -140,7 +140,7 @@ export const RecoverPassword = () => {
 						</>
 					)}
 
-					<button type="submit" className="btn btnYellow mt-4">
+					<button type="submit" className="btn btnYellow mt-5">
 						CONTINUE
 					</button>
 				</form>

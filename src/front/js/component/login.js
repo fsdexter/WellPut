@@ -38,7 +38,7 @@ export const Login = () => {
 
 	return (
 		<div className="row container text-center d-flex justify-content-around" id="loginContainer">
-			<div className="col-4" id="loginImg">
+			<div className="col-5" id="loginImg">
 				<div className="onLoginRoom pl-3 pt-5">
 					<h1 className="text fs-1 myYellowText ml-2 well">WELL</h1>
 					<h1 className="text fs-1 myYellowText ml-2 put custom-ml">PUT</h1>
@@ -50,9 +50,9 @@ export const Login = () => {
 					</h4>
 				</div>
 			</div>
-			<div className="col-6 mt-2">
+			<div className="col-5 mt-2">
 				<div
-					className="iconClose mt-2 m-0 p-0 d-flex justify-content-end close"
+					className="iconClose mt-3  m-0 p-0 d-flex justify-content-end close"
 					data-dismiss="modal"
 					ref={closeBtn}>
 					<i className="far fa-window-close text-white fa-lg" />
@@ -71,10 +71,10 @@ export const Login = () => {
 					</div>
 				) : null}
 
-				<form onSubmit={handlerSubmit} className="col-12 p-5 mt-5 myBox text-white" id="loginForm">
+				<form onSubmit={handlerSubmit} className="col-12 p-5 myBox text-white" id="loginForm">
 					<div className="form-grup row mt-2">
 						<input
-							className="col-12"
+							className="col-12 inputSinLog"
 							type="email"
 							name="email"
 							id="email"
@@ -85,7 +85,7 @@ export const Login = () => {
 					</div>
 					<div className="form-grup row mt-4">
 						<input
-							className="col-12"
+							className="col-12 inputSinLog"
 							type="password"
 							name="password"
 							placeholder="Password"
