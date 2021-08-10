@@ -19,7 +19,7 @@ export const EditProfile = () => {
 	}
 	return (
 		<div>
-			<div className="row pic m-auto justify-content-center d-flex ">
+			<div className="row pictureediperfile m-auto justify-content-center d-flex ">
 				<div className="detalle" style={{ width: "50rem", height: "110rem" }}>
 					<form>
 						<div className="form-groupedit d-flex">
