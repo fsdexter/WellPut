@@ -1,8 +1,11 @@
+.tableeditusu{
+    margin: 5%;
+}
 .detalle{
     background-color:rgba(0, 0, 0, 0.295);
-    margin: 1%;
+    margin: 3%;
 }
-.form-group{margin: 1%;
+.form-group{margin: 3%;
 }
 .form-groupedit{
     margin: 8%;
@@ -13,12 +16,16 @@
     width: 420px;
     padding: 15px;
     height: 5%;
+}.pictureediperfile{
+    background: no-repeat;
+    -ms-flex-item-align: center;
+    background-color: rgba(206, 163, 163, 0.781);
+    align-content: center;
+     background-image: url("../img/cama.png"); 
+    background-size: cover; 
+    background-position: right bottom; 
 }
-.pic{
-    background-repeat: repeat;
-    background-image: url("../img/cama.png");
-}
-#texto{
+.textoeditusu{
     color: white;
      text-align: left;
     opacity: 5;
@@ -26,8 +33,8 @@
     font-size: 30px;
 }
 .imgperfil{
-    width: 550px;
-    height: 590px;
+    width: 100%;
+    height:  80%;
     padding: 9%;
 }
 .imputTell{

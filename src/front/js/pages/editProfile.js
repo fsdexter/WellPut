@@ -7,6 +7,7 @@ import mujer from "../../img/iconomujer.png";
 import trabajador from "../../img/ocup1.png";
 import estudiante from "../../img/ocup2.png";
 import perfil from "../../img/fotodeperfil.png";
+import { AnimatedMulti } from "../component/multiSelector";
 import "../../styles/perfiledit.scss";
 import { Home } from "./home";
 export const EditProfile = () => {
@@ -19,12 +20,131 @@ export const EditProfile = () => {
 	}
 	return (
 		<div>
-			<div className="row pic m-auto justify-content-center d-flex ">
-				<div className="detalle" style={{ width: "50rem", height: "110rem" }}>
+			<div className="row pictureediperfile m-auto justify-content-center d-flex ">
+				<div className="detalle" style={{ width: "50rem", height: "45rem" }}>
 					<form>
-						<div className="form-groupedit d-flex">
+						<table className="tableeditusu">
+							<tr>
+								<th scope="col" className="textoeditusu">
+									Name * :
+								</th>
+								<th scope="col">
+									<input type="name" className="form-inputs" id="name" />
+								</th>
+							</tr>
+							<tr>
+								<td className="textoeditusu">Email * :</td>
+								<td>
+									<input type="email" className="form-inputs" id="email" />
+								</td>
+							</tr>
+							<tr>
+								<td className="textoeditusu">Interests * :</td>
+								<td>
+									<AnimatedMulti />
+								</td>
+							</tr>
+							<tr>
+								<td className="textoeditusu">Languages :</td>
+								<td>
+									<input type="languages" className="form-inputs" id="languages" />
+								</td>
+							</tr>
+							<tr>
+								<td className="textoeditusu">Phone :</td>
+								<td>
+									<input type="phone" className="form-inputs" id="phone" />
+								</td>
+							</tr>
+							<tr>
+								<td className="textoeditusu">Nationality :</td>
+								<td>
+									<input type="nationality" className="form-inputs" id="nationality" />
+								</td>
+							</tr>
+							<tr>
+								<td className="textoeditusu">Age :</td>
+								<td>
+									<input type="age" className="form-inputs" id="age" />
+								</td>
+							</tr>
+							<tr>
+								<td className="textoeditusu">Sex :</td>
+								<td>
+									<div className="form-check form-check-inline">
+										<label className="form-check-label" id="texto">
+											<img
+												className="card-img-top roundShape "
+												src={mujer}
+												alt="Card image cap"
+											/>
+										</label>
+										<input
+											className="form-check-input"
+											type="checkbox"
+											id="inlineCheckbox2"
+											value="option2"
+										/>
+									</div>
+									<div className="form-check form-check-inline">
+										<label className="form-check-label" id="texto">
+											<img
+												className="card-img-top roundShape "
+												src={hombre}
+												alt="Card image cap"
+											/>
+										</label>
+										<input
+											className="form-check-input"
+											type="checkbox"
+											id="inlineCheckbox3"
+											value="option3"
+											disabled
+										/>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td className="textoeditusu">Occupation :</td>
+								<td>
+									<div className="form-check form-check-inline">
+										<label className="form-check-label">
+											<img
+												className="card-img-top roundShape "
+												src={trabajador}
+												alt="Card image cap"
+											/>
+										</label>
+										<input
+											className="form-check-input"
+											type="checkbox"
+											id="inlineCheckbox2"
+											value="option2"
+										/>
+									</div>
+									<div className="form-check form-check-inline">
+										<label className="form-check-label">
+											<img
+												className="card-img-top roundShape "
+												src={estudiante}
+												alt="Card image cap"
+											/>
+										</label>
+										<input
+											className="form-check-input"
+											type="checkbox"
+											id="inlineCheckbox3"
+											value="option3"
+											disabled
+										/>
+									</div>
+								</td>
+							</tr>
+						</table>
+						¨
+						{/* 						<div className="form-groupedit d-flex">
 							<label className="ml-3" id="texto">
-								Name * :
+								
 							</label>
 							<input type="name" className="form-inputs" id="name" />
 						</div>
@@ -107,10 +227,10 @@ export const EditProfile = () => {
 									disabled
 								/>
 							</div>
-						</div>
+						</div>*/}
 					</form>
 				</div>
-				<div className="detalle justify-content-center" style={{ width: "30rem", height: "40rem" }}>
+				<div className="detalle justify-content-center" style={{ width: "25rem", height: "45rem" }}>
 					<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
 					<div className="card-body ">
 						{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
@@ -121,7 +241,7 @@ export const EditProfile = () => {
 				</div>
 
 				<div className=" detalle" style={{ width: "80rem", height: "28rem" }}>
-					<label id="texto">Tell us about you :</label>
+					<label className="textoeditusu">Tell us about you :</label>
 					<input type="tell" className="imputTell" style={{ width: "60rem", height: "15rem" }} />
 				</div>
 			</div>
