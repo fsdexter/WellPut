@@ -7,19 +7,19 @@ export default function MyMap(props) {
 	const { store, actions } = useContext(Context);
 
 	function Map() {
-		return <GoogleMap defaultZoom={16} defaultCenter={{ lat: props.lat, lng: props.lng }} />;
+		return <GoogleMap defaultZoom={16} defaultCenter={props.center} />;
 	}
 
 	const MapWrapped = withScriptjs(withGoogleMap(Map));
 
 	return (
-		<div style={{ width: "270px", height: "150px" }}>
+		<div style={props.style}>
 			<MapWrapped
 				googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
 					store.key
 				}`}
 				loadingElement={<div style={{ height: `100%` }} />}
-				containerElement={<div style={{ height: `150px`, width: `270px` }} />}
+				containerElement={<div style={props.style} />}
 				mapElement={<div style={{ height: `100%` }} />}
 			/>
 		</div>
@@ -27,6 +27,6 @@ export default function MyMap(props) {
 }
 
 MyMap.propTypes = {
-	lat: PropTypes.number,
-	lng: PropTypes.number
+	center: PropTypes.object,
+	style: PropTypes.object.isRequired
 };

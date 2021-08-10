@@ -53,7 +53,7 @@ export const Home = () => {
 					</div>
 					<br />
 					<div className="card mx-auto mb-3" style={{ width: "70%" }}>
-						<MyMap lat={40.416775} lng={-3.70379} />
+						<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "270px", height: "150px" }} />
 					</div>
 					<br />
 					<div>
@@ -122,6 +122,7 @@ export const Home = () => {
 					<div className="card" style={{ width: "100%" }}>
 						<img className="card-img-top" src={recorte} alt="Card image cap" />
 					</div>
+					<h1 />
 					<div className="card" style={{ width: "100%" }}>
 						<img className="card-img-top" src={recorte} alt="Card image cap" />
 					</div>
