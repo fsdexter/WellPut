@@ -19,8 +19,8 @@ export const Footer = () => (
 					</h6>
 				</tr>
 			</div>
-			<div className="row m-auto justify-content-center d-flex ">
-				<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "335px", height: "125px" }} />
+			<div>
+				<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "330px", height: "120px" }} />
 			</div>
 		</div>
 	</footer>
