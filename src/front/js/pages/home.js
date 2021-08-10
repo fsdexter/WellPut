@@ -22,12 +22,12 @@ export const Home = () => {
 			<div style={{ height: "400px" }}>
 				<div className="row pic m-auto">
 					<div className="rectangle">
-						<h2 id="texto">
-							<div id="texto_yellow">We help you find</div>
+						<h2 className="textoH2">
+							<div className="texto_yellow">We help you find</div>
 							the ideal place for you!
 						</h2>
-						<h2 id="texto">
-							<div id="texto_yellow">A perfect place </div>
+						<h2 className="textoH2">
+							<div className="texto_yellow">A perfect place </div>
 							with suitable companion
 						</h2>
 					</div>
@@ -36,9 +36,7 @@ export const Home = () => {
 
 			<div className="row">
 				<div className="col-3 p-1 mb-2 bg-secondary text-white filter">
-					<h1 id="texto_yellow" className="mt-3">
-						Search a room
-					</h1>
+					<h1 className="mt-3 texto_yellow">Search a room</h1>
 					<br />
 
 					<div className="row">
