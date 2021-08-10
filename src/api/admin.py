@@ -1,7 +1,7 @@
   
 import os
 from flask_admin import Admin
-from .models import db, User, Photo,Assesment_User,Room,Photo_Room,Assesment_Room,TenantRoomOwner
+from .models import db, User, ReviewOwner, CharacteristicUser, Characteristic, UserArchives, SpokenLanguages, Languages, Room, ReviewRoom, RoomArchive, ExpensesIncluded, OtherFeature
 from flask_admin.contrib.sqla import ModelView
 
 def setup_admin(app):
@@ -12,11 +12,14 @@ def setup_admin(app):
     
     # Add your models here, for example this is how we add a the User model to the admin
     admin.add_view(ModelView(User, db.session))
-    admin.add_view(ModelView(Photo, db.session))
-    admin.add_view(ModelView(Assesment_User, db.session))
-    admin.add_view(ModelView(Room, db.session))
-    admin.add_view(ModelView(Photo_Room, db.session))
-    admin.add_view(ModelView(Assesment_Room, db.session))
-    admin.add_view(ModelView(TenantRoomOwner, db.session))   
-    # You can duplicate that line to add mew models
-    # admin.add_view(ModelView(YourModelName, db.session))
+    admin.add_view(ModelView(ReviewOwner, db.session))
+    admin.add_view(ModelView(CharacteristicUser, db.session))
+    admin.add_view(ModelView(Characteristic, db.session))
+    admin.add_view(ModelView(UserArchives, db.session))
+    admin.add_view(ModelView(SpokenLanguages, db.session))
+    admin.add_view(ModelView(Languages, db.session))
+    admin.add_view(ModelView(Room, db.session))  
+    admin.add_view(ModelView(ReviewRoom, db.session))   
+    admin.add_view(ModelView(RoomArchive, db.session))  
+    admin.add_view(ModelView(ExpensesIncluded, db.session))  
+    admin.add_view(ModelView(OtherFeature, db.session))
