@@ -7,7 +7,7 @@ export const Announcements = () => {
 
 	return (
 		<div className="text-center mt-5">
-			<h1>Announcements page</h1>
+			<h1>Announcements page test branccchhhhhhhhhhhhh</h1>
 		</div>
 	);
 };
