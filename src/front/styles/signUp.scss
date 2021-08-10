@@ -24,13 +24,13 @@
 }
 
 .signUpRoom{
-    width: 220px;
-    height: 200px;
+    width: 320px;
+    height: 300px;
 }
 
 #imgFlower{
     z-index: 100;
-    margin-left: 7rem;
+    margin-left: 10rem;
 }
 
 #tooEasy{
@@ -51,11 +51,11 @@
     width: 90vw;
 }
 
-form{
-    margin-top: -1rem;
+.formSignUp{
+    margin-top: 1rem;
 }
 
-input{
+.inputSinLog{
     background-color: #D9D9D7!important;
     border: none;
     padding: .5rem;
@@ -63,7 +63,7 @@ input{
     color: #332c1d;
 }
 
-input:focus {
+.inputSinLog:focus {
     outline: none !important;
     border:1px solid rgb(255, 217, 0);
     box-shadow: 0 0 10px rgb(233, 235, 136)inset;

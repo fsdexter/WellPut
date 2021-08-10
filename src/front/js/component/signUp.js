@@ -65,10 +65,10 @@ export const SignUp = () => {
 				</h4>
 			</div>
 			<div className="col-5 no-gutters singUpBox">
-				<form onSubmit={handlerSubmit} className="col-12 p-5 text-white">
+				<form onSubmit={handlerSubmit} className="col-12 p-5 text-white formSignUp">
 					<div className="form-grup row mb-4">
 						<input
-							className="col-12"
+							className="col-12 inputSinLog"
 							type="email"
 							name="email"
 							id="email"
@@ -80,7 +80,7 @@ export const SignUp = () => {
 					</div>
 					<div className="form-grup row mt-2 mb-4">
 						<input
-							className="col-12"
+							className="col-12 inputSinLog"
 							type="text"
 							name="fullName"
 							id="fullName"
@@ -91,7 +91,7 @@ export const SignUp = () => {
 					</div>
 					<div className="form-grup row mt-2 mb-4">
 						<input
-							className="col-12"
+							className="col-12 inputSinLog"
 							type="password"
 							name="password"
 							placeholder="Password"
@@ -101,7 +101,7 @@ export const SignUp = () => {
 					</div>
 					<div className="form-grup row mt-2 mb-5">
 						<input
-							className="col-12"
+							className="col-12 inputSinLog"
 							type="password"
 							name="repeatPassword"
 							placeholder="Repeat Password"
