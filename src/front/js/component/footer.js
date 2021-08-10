@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import faceb from "../../img/facebook.png";
-import mapafooter from "../../img/mapafooter.png";
+import MyMap from "./mapEngine";
 import instagram from "../../img/instagram.png";
+
 export const Footer = () => (
 	<footer className="footer mt-auto py-3 text-center">
 		<div className="row m-auto justify-content-center d-flex divfooter">
@@ -19,11 +20,7 @@ export const Footer = () => (
 				</tr>
 			</div>
 			<div className="row m-auto justify-content-center d-flex ">
-				<img
-					className="card-img-top roundShape justify-content-center d-flex "
-					src={mapafooter}
-					alt="Card image cap"
-				/>
+				<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "335px", height: "125px" }} />
 			</div>
 		</div>
 	</footer>
