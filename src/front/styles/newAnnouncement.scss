@@ -1,0 +1,40 @@
+#locationTab, #previewTab{
+   
+    height: 570px;
+    
+}
+#descriptionTab{
+    height: 650px;
+}
+#picsTab{
+    height: 430px;
+}
+.noLink{
+    text-decoration: none !important; 
+    color:black!important;
+}
+.active{
+    background:#C4C4C4 !important;
+}
+
+.fontInput{
+    font-size: x-large;
+}
+.fontInputSm{
+    font-size: large;
+}
+.inputNumber{
+    width: 30%;
+}
+.mapsPic{
+    height:315px;
+}
+.descriptionBack{
+    background: #ced4da;
+}
+.addPic{
+   background-image: url("../img/addPic.png");
+   background-repeat: no-repeat;
+   background-size: 50px;
+   background-position: center;
+}

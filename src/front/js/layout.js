@@ -10,7 +10,7 @@ import { EditProfile } from "./pages/editProfile";
 import { Profile } from "./pages/profile";
 import { Announcements } from "./pages/announcements";
 import { Favorites } from "./pages/favorites";
-
+import { NewAnnouncement } from "./pages/newAnnouncement";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { DetailedView } from "./pages/detailedView";
@@ -46,6 +46,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/announcements">
 							<Announcements />
+						</Route>
+						<Route exact path="/newAnnouncement">
+							<NewAnnouncement />
 						</Route>
 						<Route exact path="/favorites">
 							<Favorites />
