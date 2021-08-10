@@ -1,10 +1,13 @@
-#locationTab, #picsTab, #previewTab{
+#locationTab, #previewTab{
    
-    height: 530px;
+    height: 570px;
     
 }
 #descriptionTab{
-    height: 600px;
+    height: 650px;
+}
+#picsTab{
+    height: 430px;
 }
 .noLink{
     text-decoration: none !important; 
@@ -28,4 +31,10 @@
 }
 .descriptionBack{
     background: #ced4da;
+}
+.addPic{
+   background-image: url("../img/addPic.png");
+   background-repeat: no-repeat;
+   background-size: 50px;
+   background-position: center;
 }

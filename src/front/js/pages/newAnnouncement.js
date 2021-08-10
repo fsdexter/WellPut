@@ -3,8 +3,9 @@ import { Context } from "../store/appContext";
 import "../../styles/newAnnouncement.scss";
 import maps from "../../img/maps.png";
 import { FilterExp } from "../component/filterExp";
-import double from "../../img/double.png";
-import bedsofa from "../../img/bedsofa.png";
+import doubleBlack from "../../img/doubleBlack.png";
+import bedsofaBlack from "../../img/bedsofaBlack.png";
+import addPic from "../../img/addPic.png";
 
 export const NewAnnouncement = () => {
 	const { store, actions } = useContext(Context);
@@ -87,13 +88,13 @@ export const NewAnnouncement = () => {
 							{/*	<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />*/}
 						</div>
 					</div>
-					<div className="row">
+					<div className="row mb-5 mt-3">
 						<img className="m-auto mapsPic" src={maps} />
 					</div>
 					<div className="row">
-						<div className="col-9" />
+						<div className="col-10" />
 						<div className="col-2">
-							<button type="button" className="btn btn-warning mb-5 ml-5">
+							<button type="button" className="btn btn-warning ml-5">
 								Continue
 							</button>
 						</div>
@@ -274,7 +275,7 @@ export const NewAnnouncement = () => {
 							</div>
 						</div>
 						<div className="col">
-							<div className="row">
+							<div className="row mt-1">
 								<div className="col-4">
 									<p className="fontInput">Type of bed</p>
 								</div>
@@ -301,13 +302,13 @@ export const NewAnnouncement = () => {
 										value="option2"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
-										<img id="doubleBed" src={double} />
+										<img id="doubleBed" src={doubleBlack} />
 										<br />
 										Double Bed
 									</label>
 								</div>
 								<div className="col-4" />
-								<div className="form-check form-check-inline col-3 pb-5">
+								<div className="form-check form-check-inline col-3">
 									<input
 										className=" form-check-input"
 										type="radio"
@@ -321,7 +322,7 @@ export const NewAnnouncement = () => {
 										No Bed
 									</label>
 								</div>
-								<div className="form-check form-check-inline col-3 pb-5 ">
+								<div className="form-check form-check-inline col-3 ">
 									<input
 										className="form-check-input"
 										type="radio"
@@ -330,7 +331,7 @@ export const NewAnnouncement = () => {
 										value="option4"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
-										<img id="sofaBed" src={bedsofa} />
+										<img id="sofaBed" src={bedsofaBlack} />
 										<br />
 										Sofa Bed
 									</label>
@@ -338,9 +339,72 @@ export const NewAnnouncement = () => {
 							</div>
 						</div>
 					</div>
+					<div className="row">
+						<div className="col-10" />
+						<div className="col-2">
+							<button type="button" className="btn btn-warning mb-5 ml-5">
+								Continue
+							</button>
+						</div>
+					</div>
 				</div>
+
 				<div className="tab-pane fade" id="picsTab" role="tabpanel" aria-labelledby="picsTab-tab">
-					3
+					<div className="row">
+						<div className="col-3 text-center">
+							{" "}
+							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
+								<img className="card-img-top" src="..." alt="" />
+							</div>
+							<div className="card-body">
+								<a href="#" className="btn btn-primary">
+									Upload image
+								</a>
+							</div>
+						</div>
+						<div className="col-3 text-center">
+							{" "}
+							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
+								<img className="card-img-top" src="..." alt="" />
+							</div>
+							<div className="card-body">
+								<a href="#" className="btn btn-primary">
+									Upload image
+								</a>
+							</div>
+						</div>
+						<div className="col-3 text-center">
+							{" "}
+							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
+								<img className="card-img-top" src="..." alt="" />
+							</div>
+							<div className="card-body">
+								<a href="#" className="btn btn-primary">
+									Upload image
+								</a>
+							</div>
+						</div>
+						<div className="col-3 text-center">
+							{" "}
+							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
+								<img className="card-img-top" src="..." alt="" />
+							</div>
+							<div className="card-body">
+								<a href="#" className="btn btn-primary">
+									Upload image
+								</a>
+							</div>
+						</div>
+					</div>
+					<br />
+					<div className="row">
+						<div className="col-10" />
+						<div className="col-2">
+							<button type="button" className="btn btn-warning mb-5 ml-5">
+								Continue
+							</button>
+						</div>
+					</div>
 				</div>
 				<div className="tab-pane fade" id="previewTab" role="tabpanel" aria-labelledby="previewTab-tab">
 					4
