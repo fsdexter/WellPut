@@ -13,10 +13,14 @@
     width: 420px;
     padding: 15px;
     height: 5%;
-}
-.pic{
-    background-repeat: repeat;
-    background-image: url("../img/cama.png");
+}.pictureediperfile{
+    background: no-repeat;
+    -ms-flex-item-align: center;
+    background-color: rgba(206, 163, 163, 0.781);
+    align-content: center;
+     background-image: url("../img/cama.png"); 
+    background-size: cover; 
+    background-position: right bottom; 
 }
 #texto{
     color: white;
