@@ -3,6 +3,8 @@ import { Context } from "../store/appContext";
 import "../../styles/newAnnouncement.scss";
 import maps from "../../img/maps.png";
 import { FilterExp } from "../component/filterExp";
+import double from "../../img/double.png";
+import bedsofa from "../../img/bedsofa.png";
 
 export const NewAnnouncement = () => {
 	const { store, actions } = useContext(Context);
@@ -107,7 +109,7 @@ export const NewAnnouncement = () => {
 						</div>
 						<div className="col-2" />
 					</div>
-					<div className="row mt-1">
+					<div className="row mt-1  mb-3">
 						<div className="col-2 mt-4">
 							<p className="fontInputSm pl-2">Description </p>{" "}
 						</div>
@@ -271,7 +273,70 @@ export const NewAnnouncement = () => {
 								</div>
 							</div>
 						</div>
-						<div className="col">col</div>
+						<div className="col">
+							<div className="row">
+								<div className="col-4">
+									<p className="fontInput">Type of bed</p>
+								</div>
+								<div className="form-check form-check-inline col-3 pb-5">
+									<input
+										className=" form-check-input"
+										type="radio"
+										name="inlineRadioOptions"
+										id="inlineRadio1"
+										value="option1"
+									/>
+									<label className="form-check-label" htmlFor="inlineRadio1">
+										<i className="fas fa-bed fa-2x" />
+										<br />
+										Single Bed
+									</label>
+								</div>
+								<div className="form-check form-check-inline col-3 pb-5 ">
+									<input
+										className="form-check-input"
+										type="radio"
+										name="inlineRadioOptions"
+										id="inlineRadio2"
+										value="option2"
+									/>
+									<label className="form-check-label" htmlFor="inlineRadio2">
+										<img id="doubleBed" src={double} />
+										<br />
+										Double Bed
+									</label>
+								</div>
+								<div className="col-4" />
+								<div className="form-check form-check-inline col-3 pb-5">
+									<input
+										className=" form-check-input"
+										type="radio"
+										name="inlineRadioOptions"
+										id="inlineRadio3"
+										value="option3"
+									/>
+									<label className="form-check-label " htmlFor="inlineRadio3">
+										<i className="fas fa-times fa-2x" />
+										<br />
+										No Bed
+									</label>
+								</div>
+								<div className="form-check form-check-inline col-3 pb-5 ">
+									<input
+										className="form-check-input"
+										type="radio"
+										name="inlineRadioOptions"
+										id="inlineRadio4"
+										value="option4"
+									/>
+									<label className="form-check-label" htmlFor="inlineRadio4">
+										<img id="sofaBed" src={bedsofa} />
+										<br />
+										Sofa Bed
+									</label>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div className="tab-pane fade" id="picsTab" role="tabpanel" aria-labelledby="picsTab-tab">
