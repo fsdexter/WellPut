@@ -206,6 +206,73 @@ export const NewAnnouncement = () => {
 							</div>
 						</div>
 					</div>
+					<div className="row ">
+						<div className="col">
+							<div className="row ">
+								<div className="col-4">
+									<p className="fontInput pl-2">Features</p>
+								</div>
+								<div className="form-check form-check-inline col-3 pb-5  ">
+									<input
+										className=" form-check-input"
+										type="checkbox"
+										name="inlineRadioOptions"
+										id="inlineRadio1"
+										value="option1"
+									/>
+									<label className="form-check-label" htmlFor="inlineRadio1">
+										<i className="fas fa-building fa-2x" />
+										<br />
+										Facing the street
+									</label>
+								</div>
+								<div className="form-check form-check-inline col-3 pb-5 ">
+									<input
+										className="form-check-input"
+										type="checkbox"
+										name="inlineRadioOptions"
+										id="inlineRadio2"
+										value="option2"
+									/>
+									<label className="form-check-label" htmlFor="inlineRadio2">
+										<i className="fas fa-couch fa-2x" />
+										<br />
+										Furnished room
+									</label>
+								</div>
+								<div className="col-4" />
+								<div className="form-check form-check-inline col-3 pb-5">
+									<input
+										className=" form-check-input"
+										type="checkbox"
+										name="inlineRadioOptions"
+										id="inlineRadio3"
+										value="option3"
+									/>
+									<label className="form-check-label " htmlFor="inlineRadio3">
+										<i className="fas fa-bath fa-2x" />
+										<br />
+										Suite Room
+									</label>
+								</div>
+								<div className="form-check form-check-inline col-3 pb-5">
+									<input
+										className="form-check-input"
+										type="checkbox"
+										name="inlineRadioOptions"
+										id="inlineRadio4"
+										value="option4"
+									/>
+									<label className="form-check-label" htmlFor="inlineRadio4">
+										<i className="fab fa-slideshare fa-2x" />
+										<br />
+										Shared Room
+									</label>
+								</div>
+							</div>
+						</div>
+						<div className="col">col</div>
+					</div>
 				</div>
 				<div className="tab-pane fade" id="picsTab" role="tabpanel" aria-labelledby="picsTab-tab">
 					3

@@ -1,7 +1,10 @@
-#locationTab, #descriptionTab, #picsTab, #previewTab{
+#locationTab, #picsTab, #previewTab{
    
     height: 530px;
     
+}
+#descriptionTab{
+    height: 600px;
 }
 .noLink{
     text-decoration: none !important; 
