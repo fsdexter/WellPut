@@ -28,7 +28,7 @@ export const Home = () => {
 						</h2>
 						<h2 className="textoH2">
 							<div className="texto_yellow">A perfect place </div>
-							with suitable companion
+							with suitable companion BRANCH HOME_FIX
 						</h2>
 					</div>
 				</div>
