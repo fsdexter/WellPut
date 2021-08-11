@@ -26,15 +26,15 @@ export const Announcements = () => {
 				</div>
 			</div>
 			<div id="annSquare">
-				<ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
+				<ul className="nav nav-tabs mt-3" id="myTab" role="tablist">
 					<li className="nav-item" id="tabModi2">
 						<a
 							className="nav-link active noLink2"
-							id="home-tab"
+							id="activeR-tab"
 							data-toggle="tab"
-							href="#home"
+							href="#activeR"
 							role="tab"
-							aria-controls="home"
+							aria-controls="activeR"
 							aria-selected="true">
 							<h5>Active Rooms</h5>
 						</a>
@@ -42,11 +42,11 @@ export const Announcements = () => {
 					<li className="nav-item" id="tabModi2">
 						<a
 							className="nav-link noLink2"
-							id="profile-tab"
+							id="inactiveR-tab"
 							data-toggle="tab"
-							href="#profile"
+							href="#inactiveR"
 							role="tab"
-							aria-controls="profile"
+							aria-controls="inactiveR"
 							aria-selected="false">
 							<h5>Inactive Rooms</h5>
 						</a>
@@ -54,31 +54,59 @@ export const Announcements = () => {
 					<li className="nav-item" id="tabModi2">
 						<a
 							className="nav-link noLink2"
-							id="contact-tab"
+							id="occupiedR-tab"
 							data-toggle="tab"
-							href="#contact"
+							href="#occupiedR"
 							role="tab"
-							aria-controls="contact"
+							aria-controls="occupiedR"
 							aria-selected="false">
 							<h5>Occupied Rooms</h5>
 						</a>
 					</li>
 				</ul>
 				<div className="tab-content" id="myTabContent">
-					<div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-						Exterior room with double bed and private bathroom in the Salamanca district, very bright, fully
-						equipped and with all the comforts. Young and calm environment, NO SMOKING, NO COUPLES.
-						Unbeatable location near the metro, bus and other local shops.
+					<div
+						className="tab-pane fade show active"
+						id="activeR"
+						role="tabpanel"
+						aria-labelledby="activeR-tab">
+						<div className="row">
+							<div className="third_part mx-auto mt-3 mb-2">1111111111</div>
+						</div>
+						<div className="row">
+							<div className="third_part mx-auto mt-3 mb-2">222222222</div>
+							<div />
+						</div>
+						<div className="row">
+							<div className="third_part mx-auto mt-3 mb-2">3333333333</div>
+							<div />
+						</div>
 					</div>
-					<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-						Exterior room with double bed and private bathroom in the Salamanca district, very bright, fully
-						equipped and with all the comforts. Young and calm environment, NO SMOKING, NO COUPLES.
-						Unbeatable location near the metro, bus and other local shops.
+					<div className="tab-pane fade" id="inactiveR" role="tabpanel" aria-labelledby="inactiveR-tab">
+						<div className="row">
+							<div className="third_part mx-auto mt-3 mb-2">1111111111</div>
+						</div>
+						<div className="row">
+							<div className="third_part mx-auto mt-3 mb-2">222222222</div>
+							<div />
+						</div>
+						<div className="row">
+							<div className="third_part mx-auto mt-3 mb-2">3333333333</div>
+							<div />
+						</div>
 					</div>
-					<div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-						Exterior room with double bed and private bathroom in the Salamanca district, very bright, fully
-						equipped and with all the comforts. Young and calm environment, NO SMOKING, NO COUPLES.
-						Unbeatable location near the metro, bus and other local shops.
+					<div className="tab-pane fade" id="occupiedR" role="tabpanel" aria-labelledby="occupiedR-tab">
+						<div className="row">
+							<div className="third_part mx-auto mt-3 mb-2">1111111111</div>
+						</div>
+						<div className="row">
+							<div className="third_part mx-auto mt-3 mb-2">222222222</div>
+							<div />
+						</div>
+						<div className="row">
+							<div className="third_part mx-auto mt-3 mb-2">3333333333</div>
+							<div />
+						</div>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,7 @@
 .announcements{
     background: #184F5F;
     width: 80%;
+    height:max-content ;
 }
 #my_rooms_title{
     padding-top:35px;
@@ -34,6 +35,17 @@
     text-decoration: none !important; 
     color:white!important;}
 
-#tabModi2{
-    margin:auto;
+
+.active{
+    background:#BCC7C1 !important;
+}
+
+#active-tab, #inactive-tab, #occupied-tab{
+    width:250px;
+}
+
+.third_part{
+    background-color: white;
+    width: 95%;
+    height: 200px;    
 }
