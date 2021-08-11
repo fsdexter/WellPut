@@ -18,9 +18,9 @@ export const MyRoomsItemActive = () => {
 				<div className="row">
 					<div className="col-6">
 						<h5 className="ml-2 mt-2">
-							<ins>{exampleTitle}</ins>
+							<ins className="fontRoom">{exampleTitle}</ins>
 						</h5>
-						<p className="ml-2">{exampleDescription}</p>
+						<p className="ml-2 fontRoom">{exampleDescription}</p>
 					</div>
 					<div className="col-4 roomItemBar">
 						<a href="#">
@@ -53,10 +53,10 @@ export const MyRoomsItemInactive = () => {
 			<div className="third_part mx-auto mt-3 mb-2">
 				<div className="row">
 					<div className="col-6">
-						<h5 className="ml-2 mt-2">
-							<ins>{exampleTitle}</ins>
+						<h5 className="ml-2 mt-2 ">
+							<ins className="fontRoom">{exampleTitle}</ins>
 						</h5>
-						<p className="ml-2">{exampleDescription}</p>
+						<p className="ml-2 fontRoom">{exampleDescription}</p>
 					</div>
 					<div className="col-4 roomItemBar">
 						<a href="#">
@@ -90,8 +90,8 @@ export const MyRoomsItemOccupied = () => {
 				<div className="row">
 					<div className="col-6">
 						<div className="row">
-							<h5 className="mx-auto mt-2">
-								<ins>{exampleTitle}</ins>
+							<h5 className="mx-auto mt-2 ">
+								<ins className="fontRoom">{exampleTitle}</ins>
 							</h5>
 						</div>
 						<div className="row">
@@ -105,11 +105,11 @@ export const MyRoomsItemOccupied = () => {
 					</div>
 					<div className="col-4 roomItemBar2">
 						<div className="row">
-							<h5 className="mx-auto">Occupied by:</h5>
+							<h5 className="mx-auto fontRoom">Occupied by:</h5>
 						</div>
 						<a href="#">
 							{" "}
-							<img className="roomItemPicRounded rounded-circle" src={Becker} href="#" />{" "}
+							<img className="roomItemPicRounded rounded-circle " src={Becker} href="#" />{" "}
 						</a>
 						<div className="mx-auto">
 							<h5 id="nameInRooms">{roomieExample}</h5>
