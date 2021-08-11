@@ -10,6 +10,7 @@ import perfil from "../../img/fotodeperfil.png";
 import { AnimatedMulti } from "../component/multiSelector";
 import "../../styles/perfiledit.scss";
 import { Home } from "./home";
+import { Language } from "../component/language";
 export const EditProfile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
@@ -33,44 +34,39 @@ export const EditProfile = () => {
 								</th>
 							</tr>
 							<tr>
-								<td className="textoeditusu">Email * :</td>
-								<td>
+								<th scope="col" className="textoeditusu">Email * :</th>
+								<th scope="col">
 									<input type="email" className="form-inputs" id="email" />
-								</td>
+								</th>
 							</tr>
 							<tr>
-								<td className="textoeditusu">Interests * :</td>
-								<td>
+								<th scope="col" className="textoeditusu">Interests * :</th>
+								<th scope="col" className="checklist  pull-right">
 									<AnimatedMulti />
-								</td>
+								</th>
 							</tr>
 							<tr>
-								<td className="textoeditusu">Languages :</td>
-								<td>
-									<input type="languages" className="form-inputs" id="languages" />
-								</td>
+								<th scope="col" className="textoeditusu">Languages :</th>
+								<th scope="col" className="checklist">
+									<Language />
+								</th>
 							</tr>
 							<tr>
-								<td className="textoeditusu">Phone :</td>
-								<td>
+								<th scope="col" className="textoeditusu">Phone :</th>
+								<th scope="col">
 									<input type="phone" className="form-inputs" id="phone" />
-								</td>
+								</th>
 							</tr>
+
 							<tr>
-								<td className="textoeditusu">Nationality :</td>
-								<td>
-									<input type="nationality" className="form-inputs" id="nationality" />
-								</td>
-							</tr>
-							<tr>
-								<td className="textoeditusu">Age :</td>
-								<td>
+								<th scope="col" className="textoeditusu">Birthday :</th>
+								<th scope="col">
 									<input type="age" className="form-inputs" id="age" />
-								</td>
+								</th>
 							</tr>
 							<tr>
-								<td className="textoeditusu">Sex :</td>
-								<td>
+								<th scope="col" className="textoeditusu">Sex :</th>
+								<th scope="col">
 									<div className="form-check form-check-inline">
 										<label className="form-check-label" id="texto">
 											<img
@@ -102,11 +98,11 @@ export const EditProfile = () => {
 											disabled
 										/>
 									</div>
-								</td>
+								</th>
 							</tr>
 							<tr>
-								<td className="textoeditusu">Occupation :</td>
-								<td>
+								<th scope="col" className="textoeditusu">Occupation :</th>
+								<th scope="col">
 									<div className="form-check form-check-inline">
 										<label className="form-check-label">
 											<img
@@ -138,7 +134,7 @@ export const EditProfile = () => {
 											disabled
 										/>
 									</div>
-								</td>
+								</th>
 							</tr>
 						</table>
 						¨
