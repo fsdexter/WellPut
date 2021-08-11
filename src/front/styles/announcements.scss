@@ -1,0 +1,109 @@
+.announcements{
+    background: #184F5F;
+    width: 80%;
+    height:max-content ;
+}
+#my_rooms_title{
+    padding-top:35px;
+    color: white;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#new_ann_button{
+    margin-left: 150px !important;
+    margin-top: 30px !important;
+    width: 300px;
+    height: 50px; ;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: x-large;
+}
+
+#my_room_pic{
+    margin-top: 10px;
+    margin-left:50px;
+    padding-top: 27px;
+    margin-left:30px;
+}
+#my_room_pic2{
+    width: 60%; 
+}
+#annSquare{
+    width: 70%;
+    margin:auto;
+}
+.noLink2{
+    text-decoration: none !important; 
+    color:white!important;}
+
+
+.active{
+    background:#BCC7C1 !important;
+}
+
+#active-tab, #inactive-tab, #occupied-tab{
+    width:250px;
+}
+
+.third_part{
+    background-color: white;
+    width: 95%;
+    height: 200px;    
+}
+.third_part2{
+    background-color: white;
+    width: 95%;
+    height: 300px;    
+}
+.roomItemBar{
+    background:#BCC7C1 !important;
+    height: 200px;
+}
+.roomItemBar2{
+    background:#BCC7C1 !important;
+    height: 300px;
+}
+.roomItemsButton{
+margin-left: 38px;
+margin-top: 30px;
+}
+.roomsButtons:hover{
+    border-color: #FFDE59;
+    background: white;
+}
+.closedEye{
+ width:28px ;
+ background: white;
+}
+.roomsButtons{
+    border-color: blanchedalmond;
+}
+.roomItemPic{
+    max-width: 500px;
+    max-height: 200px;
+}
+
+
+.firstRect{
+    background: #BCC7C1;
+    width:100%;
+    margin-left: 20px;
+    height: 200px;
+}
+.roomItemPicRounded{
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+    object-position: center center;
+    margin-left:75px;
+}
+#nameInRooms{
+    text-align: center;
+}
+.deleteRoomieButton{
+background: whitesmoke;
+color:black;
+margin-left:75px;
+}
+.fontRoom{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
