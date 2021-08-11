@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/announcements.scss";
 import my_rooms from "../../img/my_rooms.png";
-import { MyRoomsItem } from "../component/myRoomsItem";
+import { MyRoomsItemActive, MyRoomsItemInactive, MyRoomsItemOccupied } from "../component/myRoomsItem";
 
 export const Announcements = () => {
 	const { store, actions } = useContext(Context);
@@ -71,16 +71,19 @@ export const Announcements = () => {
 						id="activeR"
 						role="tabpanel"
 						aria-labelledby="activeR-tab">
-						<MyRoomsItem />
+						<MyRoomsItemActive />
+						<MyRoomsItemActive />
+						<MyRoomsItemActive />
 					</div>
 					<div className="tab-pane fade" id="inactiveR" role="tabpanel" aria-labelledby="inactiveR-tab">
-						<MyRoomsItem />
-						<MyRoomsItem />
-						<MyRoomsItem />
+						<MyRoomsItemInactive />
+						<MyRoomsItemInactive />
+						<MyRoomsItemInactive />
 					</div>
 					<div className="tab-pane fade" id="occupiedR" role="tabpanel" aria-labelledby="occupiedR-tab">
-						<MyRoomsItem />
-						<MyRoomsItem />
+						<MyRoomsItemOccupied />
+						<MyRoomsItemOccupied />
+						<MyRoomsItemOccupied />
 					</div>
 				</div>
 			</div>
