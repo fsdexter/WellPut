@@ -67,7 +67,7 @@ export const Announcements = () => {
 				</ul>
 				<div className="tab-content" id="myTabContent">
 					<div
-						className="tab-pane fade show active"
+						className="tab-pane fade mb-5 show active"
 						id="activeR"
 						role="tabpanel"
 						aria-labelledby="activeR-tab">
@@ -75,14 +75,11 @@ export const Announcements = () => {
 						<MyRoomsItemActive />
 						<MyRoomsItemActive />
 					</div>
-					<div className="tab-pane fade" id="inactiveR" role="tabpanel" aria-labelledby="inactiveR-tab">
-						<MyRoomsItemInactive />
+					<div className="tab-pane fade mb-5" id="inactiveR" role="tabpanel" aria-labelledby="inactiveR-tab">
 						<MyRoomsItemInactive />
 						<MyRoomsItemInactive />
 					</div>
-					<div className="tab-pane fade" id="occupiedR" role="tabpanel" aria-labelledby="occupiedR-tab">
-						<MyRoomsItemOccupied />
-						<MyRoomsItemOccupied />
+					<div className="tab-pane fade mb-5" id="occupiedR" role="tabpanel" aria-labelledby="occupiedR-tab">
 						<MyRoomsItemOccupied />
 					</div>
 				</div>
