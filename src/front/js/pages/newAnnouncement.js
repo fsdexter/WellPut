@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/newAnnouncement.scss";
-import maps from "../../img/maps.png";
+import MyMap from "../component/mapEngine";
 import { FilterExp } from "../component/filterExp";
 import doubleBlack from "../../img/doubleBlack.png";
 import bedsofaBlack from "../../img/bedsofaBlack.png";
@@ -88,9 +88,9 @@ export const NewAnnouncement = () => {
 							{/*	<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />*/}
 						</div>
 					</div>
-					<div className="row mb-5 mt-3">
-						<img className="m-auto mapsPic" src={maps} />
-					</div>
+					<center>
+						<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "500px", height: "350px" }} />
+					</center>
 					<div className="row">
 						<div className="col-10" />
 						<div className="col-2">
