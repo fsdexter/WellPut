@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/announcements.scss";
 import my_rooms from "../../img/my_rooms.png";
 import { MyRoomsItemActive, MyRoomsItemInactive, MyRoomsItemOccupied } from "../component/myRoomsItem";
+import { Link } from "react-router-dom";
 
 export const Announcements = () => {
 	const { store, actions } = useContext(Context);
@@ -21,9 +22,11 @@ export const Announcements = () => {
 
 				<div className="col-4" />
 				<div className="col-4">
-					<button type="button" id="new_ann_button" className="btn btn-warning ml-5">
-						New Announcement
-					</button>
+					<Link to="/newAnnouncement">
+						<button type="button" id="new_ann_button" className="btn btn-warning ml-5">
+							New Announcement
+						</button>
+					</Link>
 				</div>
 			</div>
 			<div id="annSquare">
