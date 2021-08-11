@@ -53,7 +53,15 @@
     background:#BCC7C1 !important;
     height: 200px;
 }
-.eyeButton{
+.roomItemsButton{
 margin-left: 38px;
 margin-top: 30px;
+}
+.roomsButtons:hover{
+    border-color: #FFDE59;
+    background: white;
+}
+.closedEye{
+ width:28px ;
+ background: white;
 }

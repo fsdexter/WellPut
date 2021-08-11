@@ -1,18 +1,27 @@
 import React from "react";
 import "../../styles/announcements.scss";
 import openEye from "../../img/openEye.png";
+import closeEye from "../../img/closeEye.png";
+import deleteRoom from "../../img/deleteRoom.png";
 
 export const MyRoomsItemActive = () => {
 	return (
 		<div className="row">
 			<div className="third_part mx-auto mt-3 mb-2">
 				<div className="row">
-					<div className="col-6">9 aaaaaaa</div>
-					<div className="col-4 roomItemBar">2 aaaaaaa</div>
+					<div className="col-6">Room description here</div>
+					<div className="col-4 roomItemBar">Room picture here</div>
 					<div className="col-2">
-						<div className="eyeButton">
-							<button type="button" className="btn btn-outline-dark">
-								<img src={openEye} />
+						<div className="roomItemsButton">
+							<button
+								type="button"
+								className="btn btn-outline-dark roomsButtons"
+								alt="click to set room inactive">
+								<img src={closeEye} className="closedEye" />
+							</button>
+
+							<button type="button" className="btn btn-outline-dark mt-5 roomsButtons">
+								<img src={deleteRoom} />
 							</button>
 						</div>
 					</div>
@@ -26,9 +35,22 @@ export const MyRoomsItemInactive = () => {
 		<div className="row">
 			<div className="third_part mx-auto mt-3 mb-2">
 				<div className="row">
-					<div className="col-9">9 iiiiiiiiiii</div>
-					<div className="col-2 roomItemBar">2 iiiiiii</div>
-					<div className="col-1">1 iiii</div>
+					<div className="col-6">Room description here</div>
+					<div className="col-4 roomItemBar">Room picture here</div>
+					<div className="col-2">
+						<div className="roomItemsButton">
+							<button
+								type="button"
+								className="btn btn-outline-dark roomsButtons"
+								alt="click to set room active">
+								<img src={openEye} />
+							</button>
+
+							<button type="button" className="btn btn-outline-dark mt-5 roomsButtons">
+								<img src={deleteRoom} />
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
