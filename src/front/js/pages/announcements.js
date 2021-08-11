@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/announcements.scss";
 import my_rooms from "../../img/my_rooms.png";
+import { MyRoomsItem } from "../component/myRoomsItem";
 
 export const Announcements = () => {
 	const { store, actions } = useContext(Context);
@@ -70,43 +71,16 @@ export const Announcements = () => {
 						id="activeR"
 						role="tabpanel"
 						aria-labelledby="activeR-tab">
-						<div className="row">
-							<div className="third_part mx-auto mt-3 mb-2">1111111111</div>
-						</div>
-						<div className="row">
-							<div className="third_part mx-auto mt-3 mb-2">222222222</div>
-							<div />
-						</div>
-						<div className="row">
-							<div className="third_part mx-auto mt-3 mb-2">3333333333</div>
-							<div />
-						</div>
+						<MyRoomsItem />
 					</div>
 					<div className="tab-pane fade" id="inactiveR" role="tabpanel" aria-labelledby="inactiveR-tab">
-						<div className="row">
-							<div className="third_part mx-auto mt-3 mb-2">1111111111</div>
-						</div>
-						<div className="row">
-							<div className="third_part mx-auto mt-3 mb-2">222222222</div>
-							<div />
-						</div>
-						<div className="row">
-							<div className="third_part mx-auto mt-3 mb-2">3333333333</div>
-							<div />
-						</div>
+						<MyRoomsItem />
+						<MyRoomsItem />
+						<MyRoomsItem />
 					</div>
 					<div className="tab-pane fade" id="occupiedR" role="tabpanel" aria-labelledby="occupiedR-tab">
-						<div className="row">
-							<div className="third_part mx-auto mt-3 mb-2">1111111111</div>
-						</div>
-						<div className="row">
-							<div className="third_part mx-auto mt-3 mb-2">222222222</div>
-							<div />
-						</div>
-						<div className="row">
-							<div className="third_part mx-auto mt-3 mb-2">3333333333</div>
-							<div />
-						</div>
+						<MyRoomsItem />
+						<MyRoomsItem />
 					</div>
 				</div>
 			</div>
