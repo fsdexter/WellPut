@@ -49,9 +49,18 @@
     width: 95%;
     height: 200px;    
 }
+.third_part2{
+    background-color: white;
+    width: 95%;
+    height: 300px;    
+}
 .roomItemBar{
     background:#BCC7C1 !important;
     height: 200px;
+}
+.roomItemBar2{
+    background:#BCC7C1 !important;
+    height: 300px;
 }
 .roomItemsButton{
 margin-left: 38px;
@@ -71,4 +80,27 @@ margin-top: 30px;
 .roomItemPic{
     max-width: 500px;
     max-height: 200px;
+}
+
+
+.firstRect{
+    background: #BCC7C1;
+    width:100%;
+    margin-left: 20px;
+    height: 200px;
+}
+.roomItemPicRounded{
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+    object-position: center center;
+    margin-left:75px;
+}
+#nameInRooms{
+    text-align: center;
+}
+.deleteRoomieButton{
+background: whitesmoke;
+color:black;
+margin-left:75px;
 }
