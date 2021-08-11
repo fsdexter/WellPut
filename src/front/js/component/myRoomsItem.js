@@ -94,6 +94,14 @@ export const MyRoomsItemOccupied = () => {
 								<ins>{exampleTitle}</ins>
 							</h5>
 						</div>
+						<div className="row">
+							<div className="mx-auto mt-4">
+								<a href="#">
+									{" "}
+									<img className="roomItemPic" src={room} href="#" />{" "}
+								</a>
+							</div>
+						</div>
 					</div>
 					<div className="col-4 roomItemBar2">
 						<div className="row">
@@ -118,7 +126,7 @@ export const MyRoomsItemOccupied = () => {
 						<div className="roomItemsButton">
 							<button
 								type="button"
-								className="btn btn-outline-warning roomsButtons mb-2"
+								className="btn btn-outline-warning roomsButtons mb-5"
 								alt="click to set room active">
 								<img src={openEye} />
 							</button>
@@ -129,7 +137,7 @@ export const MyRoomsItemOccupied = () => {
 								alt="click to set room inactive">
 								<img src={closeEye} className="closedEye" />
 							</button>
-							<button type="button" className="btn btn-outline-warning roomsButtons mt-2">
+							<button type="button" className="btn btn-outline-warning roomsButtons mt-5">
 								<img src={deleteRoom} />
 							</button>
 						</div>
