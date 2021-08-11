@@ -34,106 +34,170 @@ export const EditProfile = () => {
 								</th>
 							</tr>
 							<tr>
-								<th scope="col" className="textoeditusu">Email * :</th>
+								<th scope="col" className="textoeditusu">
+									Email * :
+								</th>
 								<th scope="col">
 									<input type="email" className="form-inputs" id="email" />
 								</th>
 							</tr>
 							<tr>
-								<th scope="col" className="textoeditusu">Interests * :</th>
-								<th scope="col" className="checklist  pull-right">
+								<th scope="col" className="textoeditusu">
+									Interests * :
+								</th>
+								<th scope="col" className="checklist  ">
 									<AnimatedMulti />
 								</th>
 							</tr>
 							<tr>
-								<th scope="col" className="textoeditusu">Languages :</th>
+								<th scope="col" className="textoeditusu">
+									Languages :
+								</th>
 								<th scope="col" className="checklist">
 									<Language />
 								</th>
 							</tr>
 							<tr>
-								<th scope="col" className="textoeditusu">Phone :</th>
+								<th scope="col" className="textoeditusu">
+									Phone :
+								</th>
 								<th scope="col">
 									<input type="phone" className="form-inputs" id="phone" />
 								</th>
 							</tr>
 
 							<tr>
-								<th scope="col" className="textoeditusu">Birthday :</th>
+								<th scope="col" className="textoeditusu">
+									Birthday :
+								</th>
 								<th scope="col">
 									<input type="age" className="form-inputs" id="age" />
 								</th>
 							</tr>
 							<tr>
-								<th scope="col" className="textoeditusu">Sex :</th>
+								<th scope="col" className="textoeditusu">
+									Sex :
+								</th>
 								<th scope="col">
-									<div className="form-check form-check-inline">
-										<label className="form-check-label" id="texto">
-											<img
-												className="card-img-top roundShape "
-												src={mujer}
-												alt="Card image cap"
-											/>
-										</label>
-										<input
-											className="form-check-input"
-											type="checkbox"
-											id="inlineCheckbox2"
-											value="option2"
-										/>
-									</div>
-									<div className="form-check form-check-inline">
-										<label className="form-check-label" id="texto">
-											<img
-												className="card-img-top roundShape "
-												src={hombre}
-												alt="Card image cap"
-											/>
-										</label>
-										<input
-											className="form-check-input"
-											type="checkbox"
-											id="inlineCheckbox3"
-											value="option3"
-											disabled
-										/>
-									</div>
+									<table>
+										<tr>
+											<th scope="col centrarimg">
+												<img
+													className="card-img-top roundShape "
+													src={mujer}
+													alt="Card image cap"
+													width="60"
+													height="60"
+												/>
+												<input
+													className="form-check-input "
+													type="checkbox"
+													id="inlineCheckbox2"
+													value="option2"
+												/>
+											</th>
+											<th scope="col centrarimg">
+												<img
+													className="card-img-top roundShape "
+													src={hombre}
+													alt="Card image cap"
+													width="60"
+													height="60"
+												/>
+
+												<input
+													className="form-check-input "
+													type="checkbox"
+													id="inlineCheckbox3"
+													value="option3"
+													disabled
+												/>
+											</th>
+										</tr>
+									</table>
 								</th>
 							</tr>
 							<tr>
-								<th scope="col" className="textoeditusu">Occupation :</th>
+								<th scope="col" className="textoeditusu">
+									Occupation :
+								</th>
 								<th scope="col">
-									<div className="form-check form-check-inline">
-										<label className="form-check-label">
-											<img
-												className="card-img-top roundShape "
-												src={trabajador}
-												alt="Card image cap"
-											/>
-										</label>
-										<input
-											className="form-check-input"
-											type="checkbox"
-											id="inlineCheckbox2"
-											value="option2"
-										/>
-									</div>
-									<div className="form-check form-check-inline">
-										<label className="form-check-label">
-											<img
-												className="card-img-top roundShape "
-												src={estudiante}
-												alt="Card image cap"
-											/>
-										</label>
-										<input
-											className="form-check-input"
-											type="checkbox"
-											id="inlineCheckbox3"
-											value="option3"
-											disabled
-										/>
-									</div>
+									{/*<table>
+										<tr>
+											<th scope="col" className="textoeditusu">
+												<img
+													className="card-img-top roundShape "
+													src={trabajador}
+													alt="Card image cap"
+													width="60"
+													height="60"
+													disabled
+												/>
+
+												<input
+													className="form-check-input"
+													type="checkbox"
+													id="inlineCheckbox2"
+													value="option2"
+												/>
+											</th>
+										</tr>
+										<tr>
+											<th scope="col" className="textoeditusu">
+												<img
+													className="card-img-top roundShape "
+													src={estudiante}
+													alt="Card image cap"
+													width="60"
+													height="60"
+												/>
+
+												<input
+													className="form-check-input"
+													type="checkbox"
+													id="inlineCheckbox3"
+													value="option3"
+													disabled
+												/>
+											</th>
+										</tr>
+									</table>*/}
+									<table>
+										<tr>
+											<th scope="col" className="textoeditusu">
+												<img
+													className="card-img-top roundShape "
+													src={trabajador}
+													alt="Card image cap"
+													width="50"
+													height="50"
+												/>
+												<input
+													className="form-check-input"
+													type="checkbox"
+													id="inlineCheckbox2"
+													value="option2"
+												/>
+											</th>
+											<th scope="col" className="textoeditusu">
+												<img
+													className="card-img-top roundShape "
+													src={estudiante}
+													alt="Card image cap"
+													width="50"
+													height="50"
+												/>
+
+												<input
+													className="form-check-input"
+													type="checkbox"
+													id="inlineCheckbox3"
+													value="option3"
+													disabled
+												/>
+											</th>
+										</tr>
+									</table>
 								</th>
 							</tr>
 						</table>
