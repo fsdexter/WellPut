@@ -20,7 +20,7 @@ export const EditProfile = () => {
 	return (
 		<div>
 			<div className="row pictureediperfile m-auto justify-content-center d-flex ">
-				<div className="detalle" style={{ width: "36rem", height: "29rem" }}>
+				<div className="detalle" style={{ width: "37rem", height: "29rem" }}>
 					<form>
 						<table className="tableeditusu">
 							<tr>
@@ -63,7 +63,6 @@ export const EditProfile = () => {
 									<input type="phone" className="form-inputs" id="phone" />
 								</th>
 							</tr>
-
 							<tr>
 								<th scope="col" className="textoeditusu">
 									Birthday :
@@ -77,37 +76,28 @@ export const EditProfile = () => {
 									Sex :
 								</th>
 								<th scope="col">
-									<table>
+									<table className="table">
 										<tr>
-											<th scope="col centrarimg">
-												<img
-													className="card-img-top roundShape "
-													src={mujer}
-													alt="Card image cap"
-													width="60"
-													height="60"
-												/>
+											<th scope="col">
+												<i className="fa fa-male fa-4x" aria-hidden="true" />
+											</th>
+											<th scope="col">
 												<input
 													className="form-check-input "
 													type="checkbox"
 													id="inlineCheckbox2"
-													value="option2"
+													value="man"
 												/>
 											</th>
-											<th scope="col centrarimg">
-												<img
-													className="card-img-top roundShape "
-													src={hombre}
-													alt="Card image cap"
-													width="60"
-													height="60"
-												/>
-
+											<th scope="col">
+												<i className="fas fa-female fa-4x " />
+											</th>
+											<th scope="col">
 												<input
 													className="form-check-input "
 													type="checkbox"
 													id="inlineCheckbox3"
-													value="option3"
+													value="woman"
 												/>
 											</th>
 										</tr>
@@ -119,131 +109,68 @@ export const EditProfile = () => {
 									Occupation :
 								</th>
 								<th scope="col">
-									<table>
+									<table className="table">
 										<tr>
-											<th scope="col" className="textoeditusu">
-												<img
-													className="card-img-top roundShape "
-													src={trabajador}
-													alt="Card image cap"
-													width="60"
-													height="60"
-												/>
+											<th scope="col">
+												<i className="fas fa-briefcase fa-2x" />
+											</th>
+											<th scope="col">
 												<input
-													className="form-check-input"
+													className="form-check-input "
 													type="checkbox"
 													id="inlineCheckbox2"
-													value="option1"
+													value="man"
 												/>
 											</th>
-
-											<th scope="col" className="textoeditusu">
-												<img
-													className="card-img-top roundShape "
-													src={estudiante}
-													alt="Card image cap"
-													width="60"
-													height="60"
-												/>
+											<th scope="col">
+												<i className="fas fa-user-graduate fa-2x" />
+											</th>
+											<th scope="col">
 												<input
-													className="form-check-input"
+													className="form-check-input "
 													type="checkbox"
 													id="inlineCheckbox3"
-													value="option2"
+													value="woman"
 												/>
 											</th>
 										</tr>
 									</table>
 								</th>
 							</tr>
+							{/*							<tr>
+								<th scope="col" className="textoeditusu">
+									
+								</th>
+								<th scope="col">
+									<table>
+										<tr>
+											<td scope="col">
+												<i className="fas fa-briefcase fa-2x" />
+											</td>
+
+											<td>
+												<input
+													className="form-check-input"
+													type="checkbox"
+													id="inlineCheckbox1"
+													value="option1"
+												/>
+											</td>
+											<td>
+																								</td>
+											<td>
+												<input
+													className="form-check-input"
+													type="checkbox"
+													id="inlineCheckbox3"
+													value="option2"
+												/>
+											</td>
+										</tr>
+}									</table>
+								</th>
+</tr>*/}
 						</table>
-						¨
-						{/* 						<div className="form-groupedit d-flex">
-							<label className="ml-3" id="texto">
-								
-							</label>
-							<input type="name" className="form-inputs" id="name" />
-						</div>
-						<div className="form-groupedit d-flex">
-							<label id="texto">City * :</label>
-							<input type="city" className="form-inputs" id="city" />
-						</div>
-						<div className="form-groupedit d-flex">
-							<label id="texto">Email * :</label>
-							<input type="email" className="form-inputs" id="email" />
-						</div>
-						<div className="form-groupedit d-flex">
-							<label id="texto">Interests * :</label>
-							<input type="interests" className="form-inputs" id="interests" />
-						</div>
-						<div className="form-groupedit d-flex">
-							<label id="texto">Languages :</label>
-							<input type="languages" className="form-inputs" id="languages" />
-						</div>
-						<div className="form-groupedit d-flex">
-							<label id="texto">Phone :</label>
-							<input type="phone" className="form-inputs" id="phone" />
-						</div>
-						<div className="form-groupedit d-flex">
-							<label id="texto">Nationality :</label>
-							<input type="nationality" className="form-inputs" id="nationality" />
-						</div>
-						<div className="form-groupedit d-flex">
-							<label id="texto">Age :</label>
-							<input type="age" className="form-inputs" id="age" />
-						</div>
-						<div className="form-groupedit d-flex">
-							<label id="texto">Sex :</label>
-							<div className="form-check form-check-inline">
-								<label className="form-check-label" id="texto">
-									<img className="card-img-top roundShape " src={mujer} alt="Card image cap" />
-								</label>
-								<input
-									className="form-check-input"
-									type="checkbox"
-									id="inlineCheckbox2"
-									value="option2"
-								/>
-							</div>
-							<div className="form-check form-check-inline">
-								<label className="form-check-label" id="texto">
-									<img className="card-img-top roundShape " src={hombre} alt="Card image cap" />
-								</label>
-								<input
-									className="form-check-input"
-									type="checkbox"
-									id="inlineCheckbox3"
-									value="option3"
-									disabled
-								/>
-							</div>
-						</div>
-						<div className="form-groupedit d-flex">
-							<label id="texto">Occupation : :</label>
-							<div className="form-check form-check-inline">
-								<label className="form-check-label">
-									<img className="card-img-top roundShape " src={trabajador} alt="Card image cap" />
-								</label>
-								<input
-									className="form-check-input"
-									type="checkbox"
-									id="inlineCheckbox2"
-									value="option2"
-								/>
-							</div>
-							<div className="form-check form-check-inline">
-								<label className="form-check-label">
-									<img className="card-img-top roundShape " src={estudiante} alt="Card image cap" />
-								</label>
-								<input
-									className="form-check-input"
-									type="checkbox"
-									id="inlineCheckbox3"
-									value="option3"
-									disabled
-								/>
-							</div>
-						</div>*/}
 					</form>
 				</div>
 				<div className="detalle justify-content-center" style={{ width: "15rem", height: "29rem" }}>
