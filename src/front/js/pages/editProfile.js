@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
-
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
-import cama from "../../img/cama.png";
 import hombre from "../../img/iconohombre.png";
 import mujer from "../../img/iconomujer.png";
 import trabajador from "../../img/ocup1.png";
@@ -10,9 +8,7 @@ import estudiante from "../../img/ocup2.png";
 import perfil from "../../img/fotodeperfil.png";
 import { AnimatedMulti } from "../component/multiSelector";
 import "../../styles/perfiledit.scss";
-import { Home } from "./home";
 import { Language } from "../component/language";
-import { FilterOcc } from "../component/filterOcc";
 export const EditProfile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
@@ -250,17 +246,21 @@ export const EditProfile = () => {
 						</div>*/}
 					</form>
 				</div>
-				<div className="detalle justify-content-center" style={{ width: "15rem", height: "20rem" }}>
-					<CloudinaryContext cloudName="dj0zap46q">
-						<div>
-							<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
-						</div>
-					</CloudinaryContext>
+				<div className="detalle justify-content-center" style={{ width: "15rem", height: "29rem" }}>
+					<div className="detalle justify-content-center">
+						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
 
-					<div className="card-body ">
+						<form>
+							<input type="file" />
+							<button type="submit" className="btn btn-warning">
+								Upload
+							</button>
+						</form>
+					</div>
+					<div className="card-body detalle justify-content-center">
 						{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
-						<button type="submit" className="btn btn-primary" onClick={handleSubmit}>
-							GUARDAR
+						<button type="submit" className="btn btn-warning" onClick={handleSubmit}>
+							SAVE
 						</button>
 					</div>
 				</div>
