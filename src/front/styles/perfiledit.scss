@@ -3,7 +3,8 @@
 }
 .detalle{
     background-color:rgba(0, 0, 0, 0.295);
-    margin: 3%;
+    margin: 1%;
+    padding: 1%;
 }
 .form-group{margin: 3%;
 }
@@ -12,11 +13,11 @@
     
 }
 .form-inputs{
-    margin-left: 15%;
     width: 420px;
     padding: 15px;
     height: 5%;
-}.pictureediperfile{
+}
+.pictureediperfile{
     background: no-repeat;
     -ms-flex-item-align: center;
     background-color: rgba(206, 163, 163, 0.781);
@@ -34,16 +35,13 @@
 }
 .imgperfil{
     width: 100%;
-    height:  80%;
-    padding: 9%;
+    height:  70%;
+    padding: 11%;
 }
 .imputTell{
-    margin: 5%;
+    margin: 2%;
 }
 .divfooter{
     background-color: rgb(104, 102, 102);
     color: white;
-}
-.centrarimg{
-    text-align: center; 
 }

@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import cama from "../../img/cama.png";
@@ -11,6 +12,7 @@ import { AnimatedMulti } from "../component/multiSelector";
 import "../../styles/perfiledit.scss";
 import { Home } from "./home";
 import { Language } from "../component/language";
+import { FilterOcc } from "../component/filterOcc";
 export const EditProfile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
@@ -22,7 +24,7 @@ export const EditProfile = () => {
 	return (
 		<div>
 			<div className="row pictureediperfile m-auto justify-content-center d-flex ">
-				<div className="detalle" style={{ width: "50rem", height: "45rem" }}>
+				<div className="detalle" style={{ width: "36rem", height: "29rem" }}>
 					<form>
 						<table className="tableeditusu">
 							<tr>
@@ -45,7 +47,7 @@ export const EditProfile = () => {
 								<th scope="col" className="textoeditusu">
 									Interests * :
 								</th>
-								<th scope="col" className="checklist  ">
+								<th scope="col " className="checklist">
 									<AnimatedMulti />
 								</th>
 							</tr>
@@ -110,7 +112,6 @@ export const EditProfile = () => {
 													type="checkbox"
 													id="inlineCheckbox3"
 													value="option3"
-													disabled
 												/>
 											</th>
 										</tr>
@@ -122,46 +123,6 @@ export const EditProfile = () => {
 									Occupation :
 								</th>
 								<th scope="col">
-									{/*<table>
-										<tr>
-											<th scope="col" className="textoeditusu">
-												<img
-													className="card-img-top roundShape "
-													src={trabajador}
-													alt="Card image cap"
-													width="60"
-													height="60"
-													disabled
-												/>
-
-												<input
-													className="form-check-input"
-													type="checkbox"
-													id="inlineCheckbox2"
-													value="option2"
-												/>
-											</th>
-										</tr>
-										<tr>
-											<th scope="col" className="textoeditusu">
-												<img
-													className="card-img-top roundShape "
-													src={estudiante}
-													alt="Card image cap"
-													width="60"
-													height="60"
-												/>
-
-												<input
-													className="form-check-input"
-													type="checkbox"
-													id="inlineCheckbox3"
-													value="option3"
-													disabled
-												/>
-											</th>
-										</tr>
-									</table>*/}
 									<table>
 										<tr>
 											<th scope="col" className="textoeditusu">
@@ -169,31 +130,30 @@ export const EditProfile = () => {
 													className="card-img-top roundShape "
 													src={trabajador}
 													alt="Card image cap"
-													width="50"
-													height="50"
+													width="60"
+													height="60"
 												/>
 												<input
 													className="form-check-input"
 													type="checkbox"
 													id="inlineCheckbox2"
-													value="option2"
+													value="option1"
 												/>
 											</th>
+
 											<th scope="col" className="textoeditusu">
 												<img
 													className="card-img-top roundShape "
 													src={estudiante}
 													alt="Card image cap"
-													width="50"
-													height="50"
+													width="60"
+													height="60"
 												/>
-
 												<input
 													className="form-check-input"
 													type="checkbox"
 													id="inlineCheckbox3"
-													value="option3"
-													disabled
+													value="option2"
 												/>
 											</th>
 										</tr>
@@ -290,8 +250,13 @@ export const EditProfile = () => {
 						</div>*/}
 					</form>
 				</div>
-				<div className="detalle justify-content-center" style={{ width: "25rem", height: "45rem" }}>
-					<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
+				<div className="detalle justify-content-center" style={{ width: "15rem", height: "20rem" }}>
+					<CloudinaryContext cloudName="dj0zap46q">
+						<div>
+							<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
+						</div>
+					</CloudinaryContext>
+
 					<div className="card-body ">
 						{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
 						<button type="submit" className="btn btn-primary" onClick={handleSubmit}>
@@ -300,9 +265,9 @@ export const EditProfile = () => {
 					</div>
 				</div>
 
-				<div className=" detalle" style={{ width: "80rem", height: "28rem" }}>
+				<div className=" detalle" style={{ width: "53rem", height: "16rem" }}>
 					<label className="textoeditusu">Tell us about you :</label>
-					<input type="tell" className="imputTell" style={{ width: "60rem", height: "15rem" }} />
+					<input type="tell" className="imputTell" style={{ width: "47rem", height: "8rem" }} />
 				</div>
 			</div>
 		</div>
