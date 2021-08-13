@@ -35,16 +35,15 @@ export const Home = () => {
 			</div>
 
 			<div className="row">
-				<div className="col-3 p-1 mb-2 bg-secondary text-white filter">
+				<div className="col-md-4 pl-5 pr-5 mb-2 bg-secondary text-white filter">
 					<h1 className="mt-3 texto_yellow">Search a room</h1>
 					<br />
-
 					<div className="row">
 						<div className="col-3">
-							<h3 className="ml-4">City</h3>
+							<h3 className="ml-5 pt-3">City</h3>
 						</div>
 						<form>
-							<div className=" ml-3  pt-3">
+							<div className=" ml-3 pt-3">
 								<input type="text" className="form-control roundShape" placeholder="write a city..." />
 							</div>
 						</form>
@@ -107,8 +106,7 @@ export const Home = () => {
 						</div>
 					</div>
 				</div>
-
-				<div className="col-8 p-1 mb-2  text-white">
+				<div className="col-6 p-1 mb-2 ml-4 text-white">
 					<Link to="/detailedView">
 						<div className="card" style={{ width: "100%" }}>
 							<img className="card-img-top" src={recorte} alt="Card image cap" />
