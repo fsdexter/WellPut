@@ -5,17 +5,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			user: null,
-			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY"
+			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY",
+			roomList: [],
+			favorites: []
 		},
 		actions: {
 			signUp: async userValues => {
 				const store = getStore();
-				const raw = JSON.stringify(userValues);
 
 				const requestOptions = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					body: raw,
+					body: JSON.stringify(userValues),
 					redirect: "follow"
 				};
 

@@ -1,0 +1,17 @@
+.carouselContainer1{
+    width: 80vw;
+    margin-left: 17.6%;
+}
+
+
+.hcarousel{
+    --slider-height-percentage: 43% !important;
+    
+}
+
+.carouselimgRoom{
+    object-fit: cover !important;
+    height: fit-content !important;
+    width: fit-content !important; 
+    position: sticky !important; 
+}
