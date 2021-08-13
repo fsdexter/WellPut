@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ratingValue = 2;
+const ratingValue = 3;
 
 export const RatingStatic = () => {
 	if (ratingValue === 0)
