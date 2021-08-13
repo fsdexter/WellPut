@@ -13,6 +13,7 @@ import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
 import { Link } from "react-router-dom";
 import MyMap from "../component/mapEngine";
+import { CarouselRoomImg } from "../component/carouselRoomImg";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -35,7 +36,7 @@ export const Home = () => {
 			</div>
 
 			<div className="row">
-				<div className="col-md-4 pl-5 pr-5 mb-2 bg-secondary text-white filter">
+				<div className="col-md-4 pl-5 mt-3 pr-5 mb-2 bg-secondary text-white filter">
 					<h1 className="mt-3 texto_yellow">Search a room</h1>
 					<br />
 					<div className="row">
@@ -106,21 +107,12 @@ export const Home = () => {
 						</div>
 					</div>
 				</div>
-				<div className="col-6 p-1 mb-2 ml-4 text-white">
-					<Link to="/detailedView">
-						<div className="card" style={{ width: "100%" }}>
-							<img className="card-img-top" src={recorte} alt="Card image cap" />
-						</div>
-					</Link>
-					<div className="card" style={{ width: "100%" }}>
-						<img className="card-img-top" src={recorte} alt="Card image cap" />
-					</div>
-					<div className="card" style={{ width: "100%" }}>
-						<img className="card-img-top" src={recorte} alt="Card image cap" />
-					</div>
-					<h1 />
-					<div className="card" style={{ width: "100%" }}>
-						<img className="card-img-top" src={recorte} alt="Card image cap" />
+				<div className="col-6 ml-4 mt-3">
+					<div>
+						<CarouselRoomImg />
+						<CarouselRoomImg />
+						<CarouselRoomImg />
+						<CarouselRoomImg />
 					</div>
 				</div>
 			</div>
