@@ -4,13 +4,17 @@ import "../../styles/favorites.scss";
 import room from "../../img/room.jpg";
 import deleteRoom from "../../img/deleteRoom.png";
 
+const FavPriceExample = 450;
+
 export const FavoritesItem = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="row mt-2 pb-2 border-bottom border-dark">
 			<div className="col-6">Info</div>
-			<div className="col-2">Price</div>
+			<div className="col-2">
+				<h1 className="favPrice">€{FavPriceExample}</h1>
+			</div>
 			<div className="col-3">
 				<div>
 					<img className="favoritesPic" src={room} href="#" />{" "}
