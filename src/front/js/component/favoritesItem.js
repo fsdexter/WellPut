@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/favorites.scss";
 import room from "../../img/room.jpg";
 import deleteRoom from "../../img/deleteRoom.png";
+import { RatingStatic } from "./ratingStatic";
 
 const FavPriceExample = 450;
 const FavTitleExample = "Habitación luminosa frente a Sagrada Familia";
@@ -14,9 +15,11 @@ export const FavoritesItem = () => {
 		<div className="row mt-2 pb-2 border-bottom border-dark">
 			<div className="col-6">
 				<div className="row">
-					<h5 className="ml-2 mt-2 favTitle pl-3">{FavTitleExample}</h5>
+					<h4 className="ml-2 mt-2 favTitle pl-3">{FavTitleExample}</h4>
 				</div>
-				<div className="row">2</div>
+				<div className="row pl-4 pt-3">
+					<RatingStatic />
+				</div>
 				<div className="row">3</div>
 			</div>
 			<div className="col-2">
