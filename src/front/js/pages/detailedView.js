@@ -11,10 +11,17 @@ export const DetailedView = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
-			<CarouselRoomImg />
-			<OwnerResume />
-			<ReviewsResume />
+		<div className="container">
+			<div className="row d-flex justify-content-center bg-primary">
+				<div className="col-10 ">
+					<CarouselRoomImg />
+				</div>
+			</div>
+
+			<div className="row bg-danger">
+				<OwnerResume />
+				<ReviewsResume />
+			</div>
 		</div>
 	);
 };
