@@ -18,6 +18,7 @@ export const FilterBed = () => {
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio1">
 					<i className="fas fa-bed fa-2x" />
+					<br />
 					Single Bed
 				</label>
 			</div>
