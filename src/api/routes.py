@@ -8,6 +8,7 @@ from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+from werkzeug.security import generate_password_hash
 
 
 
@@ -26,7 +27,7 @@ def sign_up_user():
     new_user = User(
         email = email_request, 
         full_name = full_name_request, 
-        password = password_request
+        password = generate_password_hash(password_request, "sha256")
         )
     
     print('new_user', new_user)

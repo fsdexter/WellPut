@@ -11,7 +11,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     full_name = db.Column(db.String(120))
-    password = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(250), nullable=False)
     birth_day = db.Column(db.DateTime)
     phone = db.Column(db.String(120))
     sex = db.Column(db.String(120))
