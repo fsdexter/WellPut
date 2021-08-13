@@ -13,11 +13,11 @@ import "../../styles/detailedView.scss";
 export const CarouselRoomImg = () => {
 	const { store, actions } = useContext(Context);
 	const slider = (
-		<div>
-			<AwesomeSlider className="teys">
+		<div className="row d-flex justify-content-center carouselContainer1">
+			<AwesomeSlider className="col-11 hcarousel">
 				{/* Hacer cuando tengamos datos de habitaciones en el flux*/}
 				{/* {store.roomList.map( room => {
-				<div key={room.id} data-src={room.photo_url} />
+				<div key={room.id} data-src={room.photo_url} className="carouselimgRoom"/>
 			})} */}
 
 				<div data-src={roomDetails1} className="carouselimgRoom" />
