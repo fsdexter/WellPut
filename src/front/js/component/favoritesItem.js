@@ -4,6 +4,7 @@ import "../../styles/favorites.scss";
 import room from "../../img/room.jpg";
 import deleteRoom from "../../img/deleteRoom.png";
 import { RatingStatic } from "./ratingStatic";
+import { RoomiesItem } from "./roomiesItem";
 
 const FavPriceExample = 450;
 const FavTitleExample = "Habitación luminosa frente a Sagrada Familia";
@@ -20,7 +21,9 @@ export const FavoritesItem = () => {
 				<div className="row pl-4 pt-3">
 					<RatingStatic />
 				</div>
-				<div className="row">3</div>
+				<div className="row pt-4 pl-3">
+					<RoomiesItem />
+				</div>
 			</div>
 			<div className="col-2">
 				<h1 className="favPrice">€{FavPriceExample}</h1>
