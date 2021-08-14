@@ -52,7 +52,7 @@ export const DetailedView = () => {
 						</div>
 					</div>
 					<div className="col-2 bg-warning">ENLACE PERFIL DE INQUILINOS</div>
-					<div className="col-5 bg-info">
+					<div className="col-6 ownRes">
 						<ReviewsResume />
 					</div>
 				</div>

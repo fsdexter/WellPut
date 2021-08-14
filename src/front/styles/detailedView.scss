@@ -1,15 +1,39 @@
 #owneReContainer{
     border:1px solid white ;
-    margin: .6rem .6rem -1.2rem .6rem;
+    margin: .6rem .6rem;
 }
 
 
-#ownRes{
+.ownRes{
     background-color:#5E554C;
 }
 
-#btnYeOwnR{
+.btnYeOwnR{
     font-weight: 700;
     font-size: 1rem;
     padding: .2rem 1rem;
+}
+
+.btnYeOwnR2{
+    font-weight: 700;
+    font-size: 1rem;
+    padding: .2rem 1rem;
+    width: 20rem;
+}
+
+.reviResContainer{
+    height: 10rem;
+}
+
+.rewImgRe{
+    height: 3rem;
+    
+}
+
+#reviwsRC{
+    height: 18rem;
+}
+
+#titleRewsRes{
+    background-color: rgba(0, 0, 0, 0.514);
 }
