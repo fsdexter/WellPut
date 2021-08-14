@@ -1,0 +1,64 @@
+#containerAddRoomie{
+    height: 80vh;
+}
+
+.onIMNewRoomie{
+    width: 95%;
+    height: 100%;
+    background:rgba(0, 0, 0, 0.582);
+    text-align: center;
+    margin: 0 1rem;
+}
+
+.btnGreen{
+    background-color: #24A030;
+    color: #4C4535;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: .3rem 5rem;
+}
+
+.btnRed{
+    background-color: #A8443E;
+    color: #4C4535;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: .3rem 5rem;
+
+}
+
+.btnGreen:hover{
+    background-color: #ffde5900;
+    color: white;
+    border-color: #24A030;
+}
+
+.btnRed:hover{
+    background-color: #ffde5900;
+    color: white;
+    border-color: #A8443E;
+}
+
+#addOrNot{
+    margin-top: 10rem!important;
+}
+
+.iconToSelectRoom{
+    align-self: flex-start;
+    margin-left: 1rem;
+    margin-top: .5rem;
+}
+
+.iconToSelectRoom:hover{
+    color: #FFDE59;
+    cursor: pointer;
+}
+
+.btnYelloRoom{
+    font-weight: 700;
+    font-size: 1rem;
+    padding: .2rem 1rem;
+    margin-top: 8rem;
+}
