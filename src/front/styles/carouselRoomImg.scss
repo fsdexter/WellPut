@@ -1,7 +1,6 @@
 .carousel-caption{
-    height: 70px; 
-    background:rgba(0, 0, 0, 0.5);
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+height: 100%;
+font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
 }
 .caroShape{
@@ -19,6 +18,36 @@
 }
 
 .heartButton{
+    margin-top: 210px;
+    background:rgba(0, 0, 0, 0.3);
+    height: 60px;
+    padding-top: 15px;
+    padding-left: 210px;
+}
+.heartButtonFix{
     background: none;
     border: none;
+    padding-bottom: 5px;
+    color: white;
+}
+.maybeWorks{
+    background:rgba(0, 0, 0, 0.3);
+    height: 65px;
+    text-align: auto;
+    padding-top: 20px;
+}
+.starCaro{
+    margin-top: 210px;
+    background:rgba(0, 0, 0, 0.3);
+    height: 60px;
+    padding-top: 15px;
+    padding-left: 150px;
+    }
+
+.caroPrice{
+    background:rgba(0, 0, 0, 0.3);
+    margin-top: 210px;
+ padding-top: 12px;
+ padding-left: 10px;
+   
 }
