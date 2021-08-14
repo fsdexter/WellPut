@@ -8,7 +8,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY",
 			roomList: [],
 			favorites: [],
-			reviews: []
+			reviews: [],
+			roomies: []
 		},
 		actions: {
 			signUp: async userValues => {
@@ -81,6 +82,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addReview: () => {
 				console.log("SE AGREGÓ UN NUEVO COMENTARIO A LA HABITACIÓN");
+			},
+			addRoomie: () => {
+				console.log("SE AGREGÓ UN NUEVO COMPAÑERO DE PISO");
+			},
+			deleteRoomie: () => {
+				console.log("SE ELIMINÓ A UN COMPAÑERO DE PISO");
 			}
 		}
 	};
