@@ -37,13 +37,13 @@ export const AddReview = () => {
 							<textarea className="form-control commentReview" placeholder="Write here..." />
 						</div>
 					</div>
-					<div className="col-5" id="roomIMReview">
-						<div className="onIMReview pt-5">
-							<h3 className="text myYellowText ml-2 mb-4 text-white well">
+					<div className="col-6" id="roomIMReview">
+						<div className="onIMReview pt-5 ml-2">
+							<h3 className="text myYellowText ml-4 mb-4 text-white well">
 								Tell us your experience living in this room :
 							</h3>
 
-							<textarea className="form-control commentReview" placeholder="Write here..." />
+							<textarea className="form-control commentReview ml-3" placeholder="Write here..." />
 						</div>
 					</div>
 				</div>
