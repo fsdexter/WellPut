@@ -13,11 +13,13 @@ export const OwnerResume = () => {
 				<img src={ownerImg} className="col-10" />
 			</div>
 			<div className="row d-flex justify-content-end">
-				<div className="col-10 d-flex flex-column p-4 mt-2" id="ownRes">
-					<p className="text-white p-3">Cheerful, sociable and animal-loving girl</p>
-					<button className="btn btnYellow mt-4" id="btnYeOwnR">
-						Know more about Mía
-					</button>
+				<div className="col-10 d-flex flex-column p-1 mt-2" id="ownRes">
+					<div className="text-center" id="owneReContainer">
+						<p className="text-white p-3">Cheerful, sociable and animal-loving girl</p>
+						<button className="btn btnYellow mt-4 mb-5" id="btnYeOwnR">
+							Know more about Mía
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
