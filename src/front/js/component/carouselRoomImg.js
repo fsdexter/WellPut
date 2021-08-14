@@ -12,6 +12,9 @@ import roomDetails3 from "../../img/login-room.png";
 
 import "../../styles/detailedView.scss";
 
+const titleExple = "Habitación luminosa en Sagrada Familia";
+const priceExple = 450;
+
 export const CarouselRoomImg = () => {
 	const { store, actions } = useContext(Context);
 	const slider = (
@@ -20,18 +23,25 @@ export const CarouselRoomImg = () => {
 				<div className="carousel-inner caroShape d-flex">
 					<div className="carousel-item  active ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails1} alt="First slide" />
-
 						<div className="carousel-caption ">
-							<RatingStatic />
+							<h3>{titleExple} </h3>
+							{/*<button className="heartButton">
+								{" "}
+								<i className="far fa-heart fa-2x" />
+							</button>*/}
 						</div>
 					</div>
 					<div className="carousel-item  ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails2} alt="Second slide" />
-						<div className="carousel-caption ">sdfsdfsdfsdf</div>
+						<div className="carousel-caption ">
+							<RatingStatic />
+						</div>
 					</div>
 					<div className="carousel-item ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails3} alt="Third slide" />
-						<div className="carousel-caption">sdfsdfsdfsdf</div>
+						<div className="carousel-caption">
+							<h2>€{priceExple}</h2>
+						</div>
 					</div>
 				</div>
 				<a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

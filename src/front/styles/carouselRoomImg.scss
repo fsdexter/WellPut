@@ -1,5 +1,4 @@
 .carousel-caption{
-    width: 80%px; 
     height: 70px; 
     background:rgba(0, 0, 0, 0.5);
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -17,4 +16,9 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.heartButton{
+    background: none;
+    border: none;
 }
