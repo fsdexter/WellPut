@@ -3,13 +3,24 @@
     -ms-flex-item-align: center;
     background-color: rgba(206, 163, 163, 0.781);
     align-content: center;
-    background-image: url("../img/cama.png"); 
+    background-image: url("../img/camafondeperfil.png"); 
     background-size: cover; 
     width: 100%;
-    height: 100%}
+    height: 100%;
+margin: 5%;}
 
 .pictureprofile1{
     -ms-flex-item-align: center;
     align-content: center;
-    width: 20%;
-    height: 20%}
+    width: 10%;
+    height: 9%;
+padding: 1%;
+    display: inline;}
+
+.detallefondblack{
+    background-color:rgba(0, 0, 0, 0.295);
+    margin: 1%;
+    width: 100%;
+    height: 100%;
+padding: 5%;
+}
