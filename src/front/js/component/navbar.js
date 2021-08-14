@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { useHistory } from "react-router-dom";
 
 import { SignUp } from "./signUp";
 import { Login } from "./login";
@@ -10,6 +11,12 @@ import "../../styles/navbar.scss";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
+	const history = useHistory();
+
+	const goodbye = () => {
+		actions.logOut();
+		history.push("/");
+	};
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-white no-gutters">
@@ -34,7 +41,7 @@ export const Navbar = () => {
 							<span className="navbar-brand mb-0 mr-2 btn btn-navb">Search</span>
 						</Link>
 						<Link to="/">
-							<span className="navbar-brand mb-0 mr-2 btn btn-navb" onClick={() => actions.logOut()}>
+							<span className="navbar-brand mb-0 mr-2 btn btn-navb" onClick={() => goodbye()}>
 								Log Out
 							</span>
 						</Link>
