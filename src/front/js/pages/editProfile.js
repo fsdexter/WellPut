@@ -137,39 +137,6 @@ export const EditProfile = () => {
 									</table>
 								</th>
 							</tr>
-							{/*							<tr>
-								<th scope="col" className="textoeditusu">
-									
-								</th>
-								<th scope="col">
-									<table>
-										<tr>
-											<td scope="col">
-												<i className="fas fa-briefcase fa-2x" />
-											</td>
-
-											<td>
-												<input
-													className="form-check-input"
-													type="checkbox"
-													id="inlineCheckbox1"
-													value="option1"
-												/>
-											</td>
-											<td>
-																								</td>
-											<td>
-												<input
-													className="form-check-input"
-													type="checkbox"
-													id="inlineCheckbox3"
-													value="option2"
-												/>
-											</td>
-										</tr>
-}									</table>
-								</th>
-</tr>*/}
 						</table>
 					</form>
 				</div>
@@ -178,7 +145,8 @@ export const EditProfile = () => {
 						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
 
 						<form>
-							<input type="file" />
+							{/*<input type="file" />*/}
+
 							<button type="submit" className="btn btn-warning">
 								Upload
 							</button>
@@ -191,7 +159,8 @@ export const EditProfile = () => {
 						</button>
 					</div>
 				</div>
-
+				<br />
+				<br />
 				<div className=" detalle" style={{ width: "53rem", height: "16rem" }}>
 					<label className="textoeditusu">Tell us about you :</label>
 					<input type="tell" className="imputTell" style={{ width: "47rem", height: "8rem" }} />
