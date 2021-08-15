@@ -20,8 +20,8 @@ export const DetailedView = () => {
 				<CarouselRoomImg isDetailRoom={true} />
 			</div>
 
-			<div className="col-9 d-flex justify-content-center" id="descriptionRoomDetail">
-				<div className="d-flex flex-column">
+			<div className="row d-flex flex-column mb-3">
+				<div className="col-9" id="idescriptionRoomDetail">
 					<h5 className="font-weight-bolder"> Description</h5>
 					<p>
 						Exterior room with double bed and private bathroom in the Salamanca district, very bright, fully
@@ -31,8 +31,8 @@ export const DetailedView = () => {
 				</div>
 			</div>
 
-			<div className="row">
-				<div className="col-2 mb-3" id="oRBox">
+			<div className="row" id="containerDetailDetail">
+				<div className="col-2" id="oRBox">
 					<OwnerResume />
 				</div>
 
@@ -57,7 +57,10 @@ export const DetailedView = () => {
 						</div>
 					</div>
 					<div className="col-2">
-						<div className="roomiesLink d-flex align-items-center justify-content-around">
+						<div className="roomiesLink d-flex align-items-center flex-column">
+							<div className="row mt-1 mb-1 pt-2 text-center" id="titleRewsRes">
+								<h5 className="col-12 text-white">Current roomies</h5>
+							</div>
 							<Link to="/profile">
 								<img src={rommie1} className="imgCorrentRom" />
 							</Link>

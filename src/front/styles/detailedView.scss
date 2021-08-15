@@ -1,17 +1,30 @@
 #owneReContainer{
     border:1px solid white ;
     margin: .6rem .6rem;
+    height: 20rem ;
 }
 
 
 .ownRes{
     background-color:#5E554C;
+    height: 22rem !important;
+    margin-bottom: 1rem;
 }
 
 .btnYeOwnR{
+    background-color: #FFDE59;
+    color: #4C4535;
+    font-family: 'Red Hat Display', sans-serif;
     font-weight: 700;
     font-size: 1rem;
     padding: .2rem 1rem;
+    margin-top: 10rem;
+}
+
+.btnYeOwnR:hover{
+    background-color: #ffde5900;
+    color: white;
+    border-color: #FFDE59;
 }
 
 .btnYeOwnR2{
@@ -27,11 +40,13 @@
 
 .rewImgRe{
     height: 3rem;
+    object-fit: cover;
+    object-position: center center;
     
 }
 
 #reviwsRC{
-    height: 18.5rem;
+    height: 18.2rem;
 }
 
 #titleRewsRes{
@@ -40,20 +55,23 @@
 
 #oRBox{
     z-index: 100;
-    top: -50%;
+    top: -87%;
     left: 2%;
 }
 
 #detailsDetails{
-    height: 37vh!important;
+    height: 37vh !important;
+    margin-left: 2rem;
 }
 
 .roomiesLink{
     background-color: rgba(0, 0, 0, 0.5);
-    width: 16rem;
-    height: 10rem;
+    width: 13rem;
+    height: 20rem;
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.329) 1.95px 1.95px 2.6px;
+    object-fit: cover;
+    object-position: center center;
 }
 
 #ownerIMG{
@@ -62,12 +80,17 @@
     width: 15rem;
     background-size:cover;
     box-shadow: rgba(0, 0, 0, 0.329) 1px 1px 2px;
+    object-fit: cover;
+    object-position: center center;
 }
 
 .imgCorrentRom{
     width: 3.5rem;
     height: 4rem;
     border-radius: 100%;
+    object-fit: cover;
+    object-position: center center;
+    margin: 1rem;
 }
 
 .imgCorrentRom:hover{
@@ -75,6 +98,9 @@
 }
 
 #idescriptionRoomDetail {
+    margin-left: 25rem !important;
+}
 
-    margin-left: 20rem !important;
+#containerDetailDetail{
+    height: 30vh !important;
 }
