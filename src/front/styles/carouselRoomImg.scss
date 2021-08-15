@@ -1,0 +1,53 @@
+.carousel-caption{
+height: 100%;
+font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+.caroShape{
+
+    width: auto;
+    height: 350px;
+    max-height: 350px;
+    object-fit: cover;
+    //object-position: center center;
+}
+.caro_pic_fix{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.heartButton{
+    margin-top: 210px;
+    background:rgba(0, 0, 0, 0.3);
+    height: 60px;
+    padding-top: 15px;
+    padding-left: 210px;
+}
+.heartButtonFix{
+    background: none;
+    border: none;
+    padding-bottom: 5px;
+    color: white;
+}
+.maybeWorks{
+    background:rgba(0, 0, 0, 0.3);
+    height: 60px;
+    text-align: auto;
+    padding-top: 20px;
+}
+.starCaro{
+    margin-top: 210px;
+    background:rgba(0, 0, 0, 0.3);
+    height: 60px;
+    padding-top: 15px;
+    padding-left: 150px;
+    }
+
+.caroPrice{
+    background:rgba(0, 0, 0, 0.3);
+    margin-top: 210px;
+ padding-top: 12px;
+ padding-left: 10px;
+   
+}
