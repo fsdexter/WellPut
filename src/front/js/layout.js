@@ -12,7 +12,6 @@ import { Announcements } from "./pages/announcements";
 import { Favorites } from "./pages/favorites";
 import { NewAnnouncement } from "./pages/newAnnouncement";
 import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
 import { DetailedView } from "./pages/detailedView";
 
 const Layout = () => {
@@ -57,7 +56,6 @@ const Layout = () => {
 							<h1>Not found!</h1>
 						</Route>
 					</Switch>
-					<Footer />
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>

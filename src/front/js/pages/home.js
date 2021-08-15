@@ -20,7 +20,7 @@ import {
 	CarouselRoomImg4,
 	CarouselRoomImg5
 } from "../component/carouselRoomImg";
-import Footer from "../component/footer";
+import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -123,6 +123,7 @@ export const Home = () => {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 };
