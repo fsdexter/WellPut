@@ -7,7 +7,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: null,
 			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY",
 			roomList: [],
-			favorites: []
+			favorites: [],
+			reviews: [],
+			roomies: []
 		},
 		actions: {
 			signUp: async userValues => {
@@ -77,6 +79,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			recoverPassword: userValues => {
 				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
+			},
+			addReview: () => {
+				console.log("SE AGREGÓ UN NUEVO COMENTARIO A LA HABITACIÓN");
+			},
+			addRoomie: () => {
+				console.log("SE AGREGÓ UN NUEVO COMPAÑERO DE PISO");
+			},
+			deleteRoomie: () => {
+				console.log("SE ELIMINÓ A UN COMPAÑERO DE PISO");
 			}
 		}
 	};
