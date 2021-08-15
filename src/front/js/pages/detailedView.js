@@ -6,7 +6,6 @@ import { OwnerResume } from "../component/ownerResume";
 import { ReviewsResume } from "../component/reviewsResumen";
 import { CarouselRoomImg } from "../component/carouselRoomImg";
 
-import roomDetails1 from "../../img/roomDetails.png";
 import rommie1 from "../../img/Becker.jpg";
 import rommie2 from "../../img/adriana.jpg";
 
@@ -16,21 +15,20 @@ export const DetailedView = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="row d-flex justify-content-around">
-			<div className="col-10 mb-3">
-				<div className="row d-flex justify-content-center mb-2">
-					<CarouselRoomImg />
+		<div className="d-flex flex-column">
+			<div id="imgsCarouselDetailRoom">
+				<CarouselRoomImg isDetailRoom={true} />
+			</div>
+
+			<div className="col-9 d-flex justify-content-center" id="descriptionRoomDetail">
+				<div className="d-flex flex-column">
+					<h5 className="font-weight-bolder"> Description</h5>
+					<p>
+						Exterior room with double bed and private bathroom in the Salamanca district, very bright, fully
+						equipped and with all the comforts. Young and calm environment, NO SMOKING, NO COUPLES.
+						Unbeatable location near the metro, bus and other local shops.
+					</p>
 				</div>
-				<di className="row d-flex justify-content-center mb-3 mt-3">
-					<div className="col-9 d-flex flex-column">
-						<h5 className="font-weight-bolder"> Description</h5>
-						<p>
-							Exterior room with double bed and private bathroom in the Salamanca district, very bright,
-							fully equipped and with all the comforts. Young and calm environment, NO SMOKING, NO
-							COUPLES. Unbeatable location near the metro, bus and other local shops.
-						</p>
-					</div>
-				</di>
 			</div>
 
 			<div className="row">
