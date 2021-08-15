@@ -7,7 +7,7 @@ import "../../styles/carouselRoomImg.scss";
 import { RatingStatic } from "./ratingStatic";
 
 import roomDetails1 from "../../img/roomDetails.png";
-import bathroom from "../../img/bathroom.jpg";
+import roomDetails2 from "../../img/bathroom.jpg";
 import roomDetails3 from "../../img/login-room.png";
 
 import "../../styles/detailedView.scss";
@@ -397,7 +397,6 @@ export const CarouselRoomImg5 = () => {
 				</a>
 			</div>
 		</div>
-	
 	);
 
 	return slider;

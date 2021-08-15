@@ -19,7 +19,7 @@ export const DetailedView = () => {
 		<div className="row d-flex justify-content-around">
 			<div className="col-10 mb-3">
 				<div className="row d-flex justify-content-center mb-2">
-					<img src={roomDetails1} className="col-12" />
+					<CarouselRoomImg />
 				</div>
 				<di className="row d-flex justify-content-center mb-3 mt-3">
 					<div className="col-9 d-flex flex-column">
