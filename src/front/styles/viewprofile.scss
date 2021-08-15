@@ -7,14 +7,14 @@
     background-size: cover; 
     width: 100%;
     height: 100%;
-margin: 5%;}
+}
 
 .pictureprofile1{
     -ms-flex-item-align: center;
     align-content: center;
-    width: 10%;
-    height: 9%;
-padding: 1%;
+    width: 10px;
+    height: 9px;
+    padding: 1%;
     display: inline;}
 
 .detallefondblack{
@@ -23,4 +23,17 @@ padding: 1%;
     width: 100%;
     height: 100%;
 padding: 5%;
+}
+.dicprofile{
+    width: 10px;
+    height: 9px;
+    padding: 1%;
+}
+.start{
+    color: yellow;
+    width: 20px;
+    height: 20px;
+}
+.block{
+    display: block;
 }
