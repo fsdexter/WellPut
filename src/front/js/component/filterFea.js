@@ -16,6 +16,7 @@ export const FilterFea = () => {
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio1">
 					<i className="fas fa-building fa-2x" />
+					<br />
 					Facing the street
 				</label>
 			</div>
@@ -29,6 +30,7 @@ export const FilterFea = () => {
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio2">
 					<i className="fas fa-couch fa-2x" />
+					<br />
 					Furnished room
 				</label>
 			</div>

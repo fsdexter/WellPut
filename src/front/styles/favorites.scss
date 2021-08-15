@@ -1,0 +1,28 @@
+.favoritesBg{
+    background: #184F5F;
+    width: 60%;
+    height:max-content ;
+}
+.favoritesPic{
+    max-width: 450px;
+    max-height: 200px;
+}
+.favButton{
+    border: black;
+}
+.favButton:hover{
+    border-color: #FFDE59;
+    background: #FFDE59;
+}
+.favPrice{
+    font-family: 'Red Hat Display', sans-serif;
+    font-size: xx-large;
+    color:white;
+    padding-top: 50%;
+    padding-left: 50%;
+}
+.favTitle{
+    font-family: 'Red Hat Display', sans-serif;
+    font-size: x-larlargege;
+    color:white;
+}

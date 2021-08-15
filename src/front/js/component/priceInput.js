@@ -6,7 +6,7 @@ export const PriceInput = () => {
 			<div className="border border-warning pt-2">
 				<div className="row">
 					<div className="col-4 ">
-						<h3 className="filterWords ml-4">Price</h3>
+						<h3 className="ml-4">Price</h3>
 					</div>
 					<div className="col-3">
 						<input type="text" className="form-control" placeholder="Min." />
@@ -18,7 +18,7 @@ export const PriceInput = () => {
 				<br />
 				<div className="row">
 					<div className="col-4 ">
-						<h3 className="filterWords ml-4">Deposit</h3>
+						<h3 className="ml-4">Deposit</h3>
 					</div>
 					<div className="col-3">
 						<input type="text" className="form-control" placeholder="Min." />

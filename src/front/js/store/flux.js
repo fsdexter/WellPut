@@ -4,17 +4,21 @@ import { API_BASE_URL } from "../constants";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			user: null
+			user: null,
+			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY",
+			roomList: [],
+			favorites: [],
+			reviews: [],
+			roomies: []
 		},
 		actions: {
 			signUp: async userValues => {
 				const store = getStore();
-				const raw = JSON.stringify(userValues);
 
 				const requestOptions = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					body: raw,
+					body: JSON.stringify(userValues),
 					redirect: "follow"
 				};
 
@@ -75,6 +79,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			recoverPassword: userValues => {
 				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
+			},
+			addReview: () => {
+				console.log("SE AGREGÓ UN NUEVO COMENTARIO A LA HABITACIÓN");
+			},
+			addRoomie: () => {
+				console.log("SE AGREGÓ UN NUEVO COMPAÑERO DE PISO");
+			},
+			deleteRoomie: () => {
+				console.log("SE ELIMINÓ A UN COMPAÑERO DE PISO");
 			}
 		}
 	};

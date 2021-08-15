@@ -21,6 +21,7 @@ export const EditProfile = () => {
 		<div>
 			<div className="row pictureediperfile m-auto justify-content-center d-flex ">
 				<div className="detalle" style={{ width: "37rem", height: "29rem" }}>
+
 					<form>
 						<table className="tableeditusu">
 							<tr>
