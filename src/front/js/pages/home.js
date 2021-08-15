@@ -13,7 +13,13 @@ import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
 import { Link } from "react-router-dom";
 import MyMap from "../component/mapEngine";
-import { CarouselRoomImg } from "../component/carouselRoomImg";
+import {
+	CarouselRoomImg,
+	CarouselRoomImg2,
+	CarouselRoomImg3,
+	CarouselRoomImg4,
+	CarouselRoomImg5
+} from "../component/carouselRoomImg";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -110,9 +116,9 @@ export const Home = () => {
 				<div className="col-6 ml-4 mt-3">
 					<div>
 						<CarouselRoomImg />
-						<CarouselRoomImg />
-						<CarouselRoomImg />
-						<CarouselRoomImg />
+						<CarouselRoomImg2 />
+						<CarouselRoomImg3 />
+						<CarouselRoomImg4 />
 					</div>
 				</div>
 			</div>
