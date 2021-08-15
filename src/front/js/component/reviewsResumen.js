@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 import review1 from "../../img/review1.png";
 import review2 from "../../img/review2.png";
@@ -38,7 +39,9 @@ export const ReviewsResume = () => {
 				</div>
 				<div className="row text-center">
 					<div className="col-12">
-						<button className="btn btnYellow mt-1 mb-3 btnYeOwnR2">Read more</button>
+						<Link to="/reviews">
+							<button className="btn btnYellow mt-1 mb-3 btnYeOwnR2">Read more</button>
+						</Link>
 					</div>
 				</div>
 			</div>

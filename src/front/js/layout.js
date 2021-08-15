@@ -4,16 +4,14 @@ import ScrollToTop from "./component/scrollToTop";
 import injectContext from "./store/appContext";
 
 import { Home } from "./pages/home";
-import { SignUp } from "./component/signUp";
-import { Login } from "./component/login";
 import { EditProfile } from "./pages/editProfile";
 import { Profile } from "./pages/profile";
 import { Announcements } from "./pages/announcements";
 import { Favorites } from "./pages/favorites";
 import { NewAnnouncement } from "./pages/newAnnouncement";
 import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
 import { DetailedView } from "./pages/detailedView";
+import { Reviews } from "./pages/reviewsVi";
 
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -46,6 +44,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/favorites">
 							<Favorites />
+						</Route>
+						<Route exact path="/reviews">
+							<Reviews />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
