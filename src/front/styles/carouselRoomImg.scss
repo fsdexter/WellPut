@@ -4,7 +4,6 @@ font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans 
 
 }
 .caroShape{
-
     width: auto;
     height: 350px;
     max-height: 350px;
@@ -30,6 +29,10 @@ font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans 
     padding-bottom: 5px;
     color: white;
 }
+
+.heartButtonFix:hover{
+    color: rgb(245, 11, 11);
+}
 .maybeWorks{
     background:rgba(0, 0, 0, 0.3);
     height: 60px;
@@ -47,7 +50,48 @@ font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans 
 .caroPrice{
     background:rgba(0, 0, 0, 0.3);
     margin-top: 210px;
- padding-top: 12px;
- padding-left: 10px;
+    padding-top: 12px;
+    padding-left: 10px;
    
+}
+
+
+//-------------------------- Para el diseño del carousel del detalle de la habitación -----------------------------------------------------
+
+.caroShapeCustom{
+    width: auto;
+    height: 60vh;
+    object-fit: cover;
+    //object-position: center center;
+} 
+
+.rowCustom{
+    margin-top: 15rem !important;
+   
+}
+
+.caroPriceCustom{
+    background:rgba(0, 0, 0, 0.3);
+    margin-top: 210px;
+    padding-top: 12px;
+    padding-left: 10px;
+    width: 20rem;
+}
+
+.starCaroCustom{
+    margin-top: 210px;
+    background:rgba(0, 0, 0, 0.3);
+    height: 60px;
+    padding-top: 15px;
+    padding-left: 30px;
+    width: 30rem;
+}
+
+.heartButtonCustom{
+    margin-top: 210px;
+    background:rgba(0, 0, 0, 0.3);
+    height: 60px;
+    padding-top: 15px;
+    padding-left: 210px;
+    width: 30rem;
 }
