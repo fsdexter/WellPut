@@ -44,11 +44,45 @@ export const CarouselRoomImg = () => {
 					</div>
 					<div className="carousel-item  ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails2} alt="Second slide" />
-						<div className="carousel-caption " />
+						<div className="carousel-caption ">
+							<h4 className="maybeWorks">{titleExple} </h4>
+							{/**/}
+							<div className=" row">
+								<div className="caroPrice">
+									<h2>€{priceExple}</h2>
+								</div>
+								<div className="starCaro">
+									<RatingStatic />
+								</div>
+								<div className="heartButton">
+									<button className="heartButtonFix">
+										{" "}
+										<i className="far fa-heart fa-2x" />
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div className="carousel-item ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails3} alt="Third slide" />
-						<div className="carousel-caption" />
+						<div className="carousel-caption ">
+							<h4 className="maybeWorks">{titleExple} </h4>
+							{/**/}
+							<div className=" row">
+								<div className="caroPrice">
+									<h2>€{priceExple}</h2>
+								</div>
+								<div className="starCaro">
+									<RatingStatic />
+								</div>
+								<div className="heartButton">
+									<button className="heartButtonFix">
+										{" "}
+										<i className="far fa-heart fa-2x" />
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<a className="carousel-control-prev" href="#carouselOne" role="button" data-slide="prev">
@@ -94,11 +128,45 @@ export const CarouselRoomImg2 = () => {
 					</div>
 					<div className="carousel-item  ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails2} alt="Second slide" />
-						<div className="carousel-caption " />
+						<div className="carousel-caption ">
+							<h4 className="maybeWorks">{titleExple} </h4>
+							{/**/}
+							<div className=" row">
+								<div className="caroPrice">
+									<h2>€{priceExple}</h2>
+								</div>
+								<div className="starCaro">
+									<RatingStatic />
+								</div>
+								<div className="heartButton">
+									<button className="heartButtonFix">
+										{" "}
+										<i className="far fa-heart fa-2x" />
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div className="carousel-item ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails3} alt="Third slide" />
-						<div className="carousel-caption" />
+						<div className="carousel-caption ">
+							<h4 className="maybeWorks">{titleExple} </h4>
+							{/**/}
+							<div className=" row">
+								<div className="caroPrice">
+									<h2>€{priceExple}</h2>
+								</div>
+								<div className="starCaro">
+									<RatingStatic />
+								</div>
+								<div className="heartButton">
+									<button className="heartButtonFix">
+										{" "}
+										<i className="far fa-heart fa-2x" />
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<a className="carousel-control-prev" href="#carouselTwo" role="button" data-slide="prev">
@@ -144,11 +212,45 @@ export const CarouselRoomImg3 = () => {
 					</div>
 					<div className="carousel-item  ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails2} alt="Second slide" />
-						<div className="carousel-caption " />
+						<div className="carousel-caption ">
+							<h4 className="maybeWorks">{titleExple} </h4>
+							{/**/}
+							<div className=" row">
+								<div className="caroPrice">
+									<h2>€{priceExple}</h2>
+								</div>
+								<div className="starCaro">
+									<RatingStatic />
+								</div>
+								<div className="heartButton">
+									<button className="heartButtonFix">
+										{" "}
+										<i className="far fa-heart fa-2x" />
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div className="carousel-item ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails3} alt="Third slide" />
-						<div className="carousel-caption" />
+						<div className="carousel-caption ">
+							<h4 className="maybeWorks">{titleExple} </h4>
+							{/**/}
+							<div className=" row">
+								<div className="caroPrice">
+									<h2>€{priceExple}</h2>
+								</div>
+								<div className="starCaro">
+									<RatingStatic />
+								</div>
+								<div className="heartButton">
+									<button className="heartButtonFix">
+										{" "}
+										<i className="far fa-heart fa-2x" />
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<a className="carousel-control-prev" href="#carouselThree" role="button" data-slide="prev">
@@ -194,11 +296,45 @@ export const CarouselRoomImg4 = () => {
 					</div>
 					<div className="carousel-item  ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails2} alt="Second slide" />
-						<div className="carousel-caption " />
+						<div className="carousel-caption ">
+							<h4 className="maybeWorks">{titleExple} </h4>
+							{/**/}
+							<div className=" row">
+								<div className="caroPrice">
+									<h2>€{priceExple}</h2>
+								</div>
+								<div className="starCaro">
+									<RatingStatic />
+								</div>
+								<div className="heartButton">
+									<button className="heartButtonFix">
+										{" "}
+										<i className="far fa-heart fa-2x" />
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div className="carousel-item ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails3} alt="Third slide" />
-						<div className="carousel-caption" />
+						<div className="carousel-caption ">
+							<h4 className="maybeWorks">{titleExple} </h4>
+							{/**/}
+							<div className=" row">
+								<div className="caroPrice">
+									<h2>€{priceExple}</h2>
+								</div>
+								<div className="starCaro">
+									<RatingStatic />
+								</div>
+								<div className="heartButton">
+									<button className="heartButtonFix">
+										{" "}
+										<i className="far fa-heart fa-2x" />
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<a className="carousel-control-prev" href="#carouselFour" role="button" data-slide="prev">
