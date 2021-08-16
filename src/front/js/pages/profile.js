@@ -57,7 +57,7 @@ export const Profile = () => {
 						</div>
 						<div className="row">
 							<div className="col-12" style={{ width: "148px", height: "108px" }} />
-							<div className="col-12 detallefondblack " style={{ width: "148px", height: "308px" }}>
+							<div className="col-12 detallefondblack " style={{ width: "48rem", height: "20rem" }}>
 								<img
 									className="card-img-top roundShape"
 									src={map}
@@ -97,27 +97,28 @@ export const Profile = () => {
 			</div>
 			<div className="col-1 ">
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
+					<i className="fa fa-bars fa-lg" style={{ color: "white" }} />
 					<i className="far fa-user-edit" />
 					<p className="textbuttons">Edit Profile</p>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fas fa-heart" />
+					<i className="fas fa-heart" style={{ color: "white" }} />
 					<p className="textbuttons">My Favorites</p>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fas fa-euro-sign" />
+					<i className="fas fa-euro-sign" style={{ color: "white" }} />
 					<p className="textbuttons">My Rents</p>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fad fa-books" />
+					<i className="fad fa-books" style={{ color: "white" }} />
 					<p className="textbuttons">My Rooms</p>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fas fa-books-medical" />
+					<i className="fas fa-books-medical" style={{ color: "white" }} />
 					<p className="textbuttons">Add Romie</p>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fas fa-backspace" />
+					<i className="fas fa-backspace" style={{ color: "white" }} />
 					<p className="textbuttons">Delete Romie</p>
 				</div>
 			</div>
