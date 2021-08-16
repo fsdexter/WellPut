@@ -153,14 +153,10 @@ export const EditProfile = () => {
 				</div>
 
 				<br />
-				<div className=" detalletell  align-items-center" style={{ height: "16rem" }}>
-					<label className="textoeditusu  align-items-center ">Tell us about you :</label>
+				<div className=" detalle" style={{ height: "16rem" }}>
+					<label className="textoeditusu   ">Tell us about you :</label>
 					<br />
-					<input
-						type="tell"
-						className="imputTell  align-items-center"
-						style={{ width: "50rem", height: "8rem" }}
-					/>
+					<textarea className="form-control" id="exampleFormControlTextarea1" rows="3" />
 				</div>
 			</div>
 		</div>
