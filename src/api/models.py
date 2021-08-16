@@ -286,7 +286,7 @@ class SeedDataUser:
     password = generate_password_hash("seed00000", "sha256"),
     birth_day ="01/01/1984",
     phone ="666362969",
-    sex ="yesplz",
+    sex ="male",
     personal_descripction ="loren seed",
     avatar_url ="https://i.ytimg.com/vi/ZePL6bo2nTA/maxresdefault.jpg"
     )
@@ -301,5 +301,23 @@ class SeedDataUser:
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-#  Fake
+# Comments:
+'''
+1. Create 5 fake users  
+    1.1 One owner.
+    1.2 Three roomates.
+    1.3 One searching.
+2. Create 4 fake rooms.
+    2.1 Three roomates(1.2) are living here.
+
+3. Creation order
+    3.1 Create users.
+    3.2 Create Rooms.
+    3.3 Create associations between em.
+    
+    '''
+
+
+
+
 #------------------------------------------------------------------------------------------------------------------------------
