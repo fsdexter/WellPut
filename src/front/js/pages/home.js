@@ -13,6 +13,14 @@ import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
 import { Link } from "react-router-dom";
 import MyMap from "../component/mapEngine";
+import {
+	CarouselRoomImg,
+	CarouselRoomImg2,
+	CarouselRoomImg3,
+	CarouselRoomImg4,
+	CarouselRoomImg5
+} from "../component/carouselRoomImg";
+import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -35,16 +43,15 @@ export const Home = () => {
 			</div>
 
 			<div className="row">
-				<div className="col-3 p-1 mb-2 bg-secondary text-white filter">
+				<div className="col-md-4 pl-5 mt-3 pr-5 mb-2 bg-secondary text-white filter">
 					<h1 className="mt-3 texto_yellow">Search a room</h1>
 					<br />
-
 					<div className="row">
 						<div className="col-3">
-							<h3 className="ml-4">City</h3>
+							<h3 className="ml-5 pt-3">City</h3>
 						</div>
 						<form>
-							<div className=" ml-3  pt-3">
+							<div className=" ml-3 pt-3">
 								<input type="text" className="form-control roundShape" placeholder="write a city..." />
 							</div>
 						</form>
@@ -107,25 +114,16 @@ export const Home = () => {
 						</div>
 					</div>
 				</div>
-
-				<div className="col-8 p-1 mb-2  text-white">
-					<Link to="/detailedView">
-						<div className="card" style={{ width: "100%" }}>
-							<img className="card-img-top" src={recorte} alt="Card image cap" />
-						</div>
-					</Link>
-					<div className="card" style={{ width: "100%" }}>
-						<img className="card-img-top" src={recorte} alt="Card image cap" />
-					</div>
-					<div className="card" style={{ width: "100%" }}>
-						<img className="card-img-top" src={recorte} alt="Card image cap" />
-					</div>
-					<h1 />
-					<div className="card" style={{ width: "100%" }}>
-						<img className="card-img-top" src={recorte} alt="Card image cap" />
+				<div className="col-6 ml-4 mt-3">
+					<div>
+						<CarouselRoomImg />
+						<CarouselRoomImg2 />
+						<CarouselRoomImg3 />
+						<CarouselRoomImg4 />
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 };

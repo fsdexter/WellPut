@@ -1,0 +1,106 @@
+#owneReContainer{
+    border:1px solid white ;
+    margin: .6rem .6rem;
+    height: 20rem ;
+}
+
+
+.ownRes{
+    background-color:#5E554C;
+    height: 22rem !important;
+    margin-bottom: 1rem;
+}
+
+.btnYeOwnR{
+    background-color: #FFDE59;
+    color: #4C4535;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: .2rem 1rem;
+    margin-top: 10rem;
+}
+
+.btnYeOwnR:hover{
+    background-color: #ffde5900;
+    color: white;
+    border-color: #FFDE59;
+}
+
+.btnYeOwnR2{
+    font-weight: 700;
+    font-size: 1rem;
+    padding: .2rem 1rem;
+    width: 20rem;
+}
+
+.reviResContainer{
+    height: 12rem;
+}
+
+.rewImgRe{
+    height: 3rem;
+    object-fit: cover;
+    object-position: center center;
+    
+}
+
+#reviwsRC{
+    height: 18.2rem;
+}
+
+#titleRewsRes{
+    background-color: rgba(0, 0, 0, 0.514);
+}
+
+#oRBox{
+    z-index: 100;
+    top: -87%;
+    left: 2%;
+}
+
+#detailsDetails{
+    height: 37vh !important;
+    margin-left: 2rem;
+}
+
+.roomiesLink{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 13rem;
+    height: 20rem;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.329) 1.95px 1.95px 2.6px;
+    object-fit: cover;
+    object-position: center center;
+}
+
+#ownerIMG{
+    border-radius: 100%;
+    height: 15rem;
+    width: 15rem;
+    background-size:cover;
+    box-shadow: rgba(0, 0, 0, 0.329) 1px 1px 2px;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.imgCorrentRom{
+    width: 3.5rem;
+    height: 4rem;
+    border-radius: 100%;
+    object-fit: cover;
+    object-position: center center;
+    margin: 1rem;
+}
+
+.imgCorrentRom:hover{
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+#idescriptionRoomDetail {
+    margin-left: 25rem !important;
+}
+
+#containerDetailDetail{
+    height: 30vh !important;
+}

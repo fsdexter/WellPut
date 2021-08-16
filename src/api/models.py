@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey, DateTime
 # to check the password
 from werkzeug.security import safe_str_cmp
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 #------------------------------------------------------------------------------------------------------------------------------
@@ -11,7 +12,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     full_name = db.Column(db.String(120))
-    password = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(250), nullable=False)
     birth_day = db.Column(db.DateTime)
     phone = db.Column(db.String(120))
     sex = db.Column(db.String(120))
@@ -172,6 +173,8 @@ class Room (db.Model):
     title =db.Column(db.String(120))
     type_bed = db.Column(db.String(50))
     type_room = db.Column(db.String(50))
+    lat = db.Column(db.Float(7))
+    lng = db.Column(db.Float(7))
 
     room_archive = db.relationship('RoomArchive', lazy=True)
     review_Room = db.relationship('ReviewRoom', lazy=True)
@@ -265,3 +268,38 @@ class OtherFeature(db.Model):
             "room_id": self.room_id,
             "descripction": self.descripction,
         }  
+
+
+#------------------------------------------------------------------------------------------------------------------------------
+#  SEED
+#------------------------------------------------------------------------------------------------------------------------------
+class SeedDataUser:
+
+  def __init__(self):
+    self.first_user = None
+
+  def create_seed_user(self):
+    self.first_user = User( 
+    id ="0",
+    email ="seed_user@gmail.com",
+    full_name ="Monopoly Scruguer",
+    password = generate_password_hash("seed00000", "sha256"),
+    birth_day ="01/01/1984",
+    phone ="666362969",
+    sex ="yesplz",
+    personal_descripction ="loren seed",
+    avatar_url ="https://i.ytimg.com/vi/ZePL6bo2nTA/maxresdefault.jpg"
+    )
+    
+
+    db.session.add(self.first_user)
+    db.session.commit()
+
+  def create_seed_data(self):
+    self.create_seed_user()
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------
+#  Fake
+#------------------------------------------------------------------------------------------------------------------------------
