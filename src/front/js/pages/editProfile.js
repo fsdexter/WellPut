@@ -19,10 +19,9 @@ export const EditProfile = () => {
 	}
 	return (
 		<div>
-			<div className="row pictureediperfile m-auto justify-content-center d-flex ">
-				<div className="detalle" style={{ width: "37rem", height: "29rem" }}>
-
-					<form>
+			<div className=" pictureediperfile m-auto justify-content-center d-flex flex-column ">
+				<div className="detalle row d-flex justify-content-around " style={{ height: "40rem" }}>
+					<form className="col-6">
 						<table className="tableeditusu">
 							<tr>
 								<th scope="col" className="textoeditusu">
@@ -140,9 +139,7 @@ export const EditProfile = () => {
 							</tr>
 						</table>
 					</form>
-				</div>
-				<div className="detalle justify-content-center" style={{ width: "15rem", height: "29rem" }}>
-					<div className="detalle justify-content-center">
+					<div className=" col-3  detalle justify-content-center" style={{ width: "15rem", height: "29rem" }}>
 						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
 
 						<form>
@@ -152,17 +149,19 @@ export const EditProfile = () => {
 								Upload
 							</button>
 						</form>
-					</div>
-					<div className="card-body detalle justify-content-center">
-						{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
-						<button type="submit" className="btn btn-warning" onClick={handleSubmit}>
-							SAVE
-						</button>
+
+						<div className="card-body detalle justify-content-center">
+							{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
+							<button type="submit" className="btn btn-warning" onClick={handleSubmit}>
+								SAVE
+							</button>
+						</div>
 					</div>
 				</div>
+
 				<br />
 				<br />
-				<div className=" detalle" style={{ width: "53rem", height: "16rem" }}>
+				<div className=" detalle" style={{ height: "16rem" }}>
 					<label className="textoeditusu">Tell us about you :</label>
 					<input type="tell" className="imputTell" style={{ width: "47rem", height: "8rem" }} />
 				</div>
