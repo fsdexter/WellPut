@@ -1,10 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
-import hombre from "../../img/iconohombre.png";
-import mujer from "../../img/iconomujer.png";
-import trabajador from "../../img/ocup1.png";
-import estudiante from "../../img/ocup2.png";
 import perfil from "../../img/fotodeperfil.png";
 import { AnimatedMulti } from "../component/multiSelector";
 import "../../styles/perfiledit.scss";
@@ -139,9 +135,8 @@ export const EditProfile = () => {
 							</tr>
 						</table>
 					</form>
-					<div className=" col-3  detalle justify-content-center" style={{ width: "15rem", height: "29rem" }}>
+					<div className=" col-3  detalle justify-content-center" style={{ width: "10rem", height: "29rem" }}>
 						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
-
 						<form>
 							{/*<input type="file" />*/}
 
@@ -149,21 +144,23 @@ export const EditProfile = () => {
 								Upload
 							</button>
 						</form>
-
-						<div className="card-body detalle justify-content-center">
-							{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
-							<button type="submit" className="btn btn-warning" onClick={handleSubmit}>
-								SAVE
-							</button>
-						</div>
+						<br />
+						{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
+						<button type="submit" className="btn btn-warning" onClick={handleSubmit}>
+							SAVE
+						</button>
 					</div>
 				</div>
 
 				<br />
-				<br />
-				<div className=" detalle" style={{ height: "16rem" }}>
-					<label className="textoeditusu">Tell us about you :</label>
-					<input type="tell" className="imputTell" style={{ width: "47rem", height: "8rem" }} />
+				<div className=" detalletell  align-items-center" style={{ height: "16rem" }}>
+					<label className="textoeditusu  align-items-center ">Tell us about you :</label>
+					<br />
+					<input
+						type="tell"
+						className="imputTell  align-items-center"
+						style={{ width: "50rem", height: "8rem" }}
+					/>
 				</div>
 			</div>
 		</div>
