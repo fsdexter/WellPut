@@ -10,8 +10,42 @@ export const Reviews = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mb-1" id="reviwsRC">
-			FUTURA PVISTA DE LOS COMENTARIOS!!!
-		</div>
+		<>
+			<div className="container">
+				<div className="row">top row</div>
+				<div className="row d-flex">
+					<div className="col-6">
+						<h4>proprietari reviw</h4>
+						<div className="d-flex">
+							<div className="imgbox">imagi box</div>
+							<div>text box</div>
+						</div>
+						<div className="d-flex">
+							<div className="imgbox">imagi box</div>
+							<div>text box</div>
+						</div>
+						<div className="d-flex">
+							<div className="imgbox">imagi box</div>
+							<div>text box</div>
+						</div>
+					</div>
+					<div className="col-6">
+						<h4>oner reviw</h4>
+						<div className="d-flex">
+							<div className="imgbox">imagi box</div>
+							<div>text box</div>
+						</div>
+						<div className="d-flex">
+							<div className="imgbox">imagi box</div>
+							<div>text box</div>
+						</div>
+						<div className="d-flex">
+							<div className="imgbox">imagi box</div>
+							<div>text box</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
 	);
 };
