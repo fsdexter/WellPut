@@ -148,6 +148,7 @@ export const Profile = () => {
 							</div>
 						</div>
 					</div>
+
 					{/*<!-- notification Modal -->*/}
 					<div id="notificationModal" className="modal fade" role="dialog">
 						<div className="modal-dialog modal-lg">

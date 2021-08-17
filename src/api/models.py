@@ -277,39 +277,157 @@ class SeedDataUser:
 
   def __init__(self):
     self.first_user = None
+    self.second_user = None
+    self.third_user = None
+    self.fourth_user = None
+    self.fifth_user = None
 
   def create_seed_user(self):
     self.first_user = User( 
-    email ="seed_user@gmail.com",
-    full_name ="Monopoly Scruguer",
-    password = generate_password_hash("seed00000", "sha256"),
-    birth_day ="01/01/1984",
+    email ="adan_user@gmail.com",
+    full_name ="Adan Genesis",
+    password = "1111",
+    birthday ="01/01/1980",
     phone ="666362969",
     sex ="male",
-    personal_descripction ="loren seed",
-    avatar_url ="https://i.ytimg.com/vi/ZePL6bo2nTA/maxresdefault.jpg"
+    personal_description ="ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+    avatar_url ="",
+    city="Madrid",
+    interests="sporty, dancer",
+    languages="english",
+    occupation="student"
     )
-    '''
-    self.first_user = User( 
-    email ="seed_user@gmail.com",
-    full_name ="Monopoly Scruguer",
-    password = generate_password_hash("seed00000", "sha256"),
-    birth_day ="01/01/1984",
-    phone ="666362969",
-    sex ="male",
-    personal_descripction ="loren seed",
-    avatar_url ="https://i.ytimg.com/vi/ZePL6bo2nTA/maxresdefault.jpg"
-    )
-    '''
-    
 
+    self.second_user = User( 
+    email ="eva_user@gmail.com",
+    full_name ="Eva Gelion",
+    password = "1111",
+    birthday ="01/01/1982",
+    phone ="666362970",
+    sex ="female",
+    personal_description ="Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    avatar_url ="",
+    city="Madrid",
+    interests="vegan, sociable",
+    languages="english",
+    occupation="student"
+    )
+
+    self.third_user = User( 
+    email ="sara_user@gmail.com",
+    full_name ="Sara Genesis",
+    password = "1111",
+    birthday ="01/01/1985",
+    phone ="666362978",
+    sex ="female",
+    personal_description ="At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
+    avatar_url ="",
+    city="Barcelona",
+    interests="musician, reader",
+    languages="english",
+    occupation="student"
+    )
+
+    self.fourth_user = User( 
+    email ="abraham_user@gmail.com",
+    full_name ="Abraham Genesis",
+    password = "1111",
+    birthday ="01/01/1990",
+    phone ="666362980",
+    sex ="male",
+    personal_description ="Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio.",
+    avatar_url ="",
+    city="Granada",
+    interests="musician, reader",
+    languages="spanish",
+    occupation="worker"
+    )
+
+    self.fifth_user = User( 
+    email ="noe_user@gmail.com",
+    full_name ="Noé Genesis",
+    password = "1111",
+    birthday ="01/01/1992",
+    phone ="666362986",
+    sex ="male",
+    personal_description ="Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates.",
+    avatar_url ="",
+    city="Sevilla",
+    interests="vegetarian, animal lover",
+    languages="spanish",
+    occupation="worker"
+    )
+  
     db.session.add(self.first_user)
-    '''db.session.add(self.first_user)'''
+    db.session.add(self.second_user)
+    db.session.add(self.third_user)
+    db.session.add(self.fourth_user)
+    db.session.add(self.fifth_user)
+    db.session.commit()
+
+  def create_seed_room(self):
+    self.first_room = Room( 
+    city= "Madrid"
+    address= "Bastero, 6"
+    title="Habitacion en casa moderna."
+    description="Cras ac fermentum neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+    price= 450
+    deposit=450
+    features="facing, furnished"
+    expenses="wifi, electricity"
+    bed="single"
+    employee_id= '''self.first_user.id'''
+    )
+
+    self.second_room = Room( 
+    city= "Madrid"
+    address= "Bastero, 6"
+    title="Habitacion pequeña y luminosa."
+    description="Vestibulum auctor purus in leo laoreet, ac aliquam sem tincidunt. Vivamus eleifend magna a leo pulvinar."
+    price= 400
+    deposit=400
+    features="furnished"
+    expenses="wifi, electricity"
+    bed="single"
+    employee_id= '''self.second_user.id'''
+    )
+
+    self.third_room = Room( 
+    city= "Madrid"
+    address= "Bastero, 6"
+    title="Habitacion suite con cama grande."
+    description="Aliquam sit amet interdum lacus. Proin finibus vehicula sagittis."
+    price= 500
+    deposit= 500
+    features="furnished, suite"
+    expenses="wifi, electricity"
+    bed="double"
+    employee_id= '''self.third_user.id'''
+    )
+
+    self.fourth_room = Room( 
+    city= "Madrid"
+    address= "Bastero, 6"
+    title="Hermosa habitación amueblada."
+    description="Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero."
+    price= 500
+    deposit= 500
+    features="furnished"
+    expenses="wifi, electricity"
+    bed="double"
+    employee_id= None
+    )
+
+     db.session.add(self.first_room)
+    db.session.add(self.second_room)
+    db.session.add(self.third_room)
+    db.session.add(self.fourth_room)
     db.session.commit()
 
   def create_seed_data(self):
     self.create_seed_user()
-    '''self.create_seed_user() --but with other items, iña'''
+    self.create_seed_room()
+    
 
 
 
