@@ -1,23 +1,30 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/viewprofile.scss";
 import firtsimgprofile from "../../img/photoprofile.png";
 import argentina from "../../img/argentina.png";
 import map from "../../img/outline.png";
-
+import { Language } from "../component/language";
 import { AddReview } from "../component/addReview";
 import { NotificationRoomie } from "../component/notificationRoomie";
 
 export const Profile = () => {
+	const history = useHistory();
 	const { store, actions } = useContext(Context);
-
+	function handleSubmit() {
+		history.push("/edit_profile");
+	}
+	function favorites() {
+		history.push("/favorites");
+	}
 	return (
 		<div className="picturefond col-lg-12 d-inline-flex">
 			<div className="container col-lg-10 detallefondblack">
 				<div className="row">
 					<img className="card-img-top roundShape col-lg-4" src={firtsimgprofile} alt="Card image cap" />
-					<div className="block">
-						<div className="col-12">
+					<div className="col-8">
+						<div className="col-8">
 							<div className="row">
 								<img
 									className="card-img-top roundShape"
@@ -60,8 +67,8 @@ export const Profile = () => {
 							</div>
 						</div>
 						<div className="row">
-							<div className="col-12" style={{ width: "148px", height: "108px" }} />
-							<div className="col-12 detallefondblack " style={{ width: "48rem", height: "20rem" }}>
+							<div className="col-9" style={{ width: "148px", height: "108px" }} />
+							<div className="col-9 detallefondblack " style={{ width: "48rem", height: "20rem" }}>
 								<img
 									className="card-img-top roundShape"
 									src={map}
@@ -100,12 +107,11 @@ export const Profile = () => {
 				</div>
 			</div>
 			<div className="col-1 ">
-				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fa fa-bars fa-lg" style={{ color: "white" }} />
-					<i className="far fa-user-edit" />
+				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }} onClick={handleSubmit}>
+					<i className="fa fa-bars" aria-hidden="true" style={{ color: "white" }} />
 					<p className="textbuttons">Edit Profile</p>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
+				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }} onClick={favorites}>
 					<i className="fas fa-heart" style={{ color: "white" }} />
 					<p className="textbuttons">My Favorites</p>
 				</div>
@@ -114,18 +120,18 @@ export const Profile = () => {
 					<p className="textbuttons">My Rents</p>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fad fa-books" style={{ color: "white" }} />
+					<i className="fa fa-bed" aria-hidden="true" style={{ color: "white" }} />
 					<p className="textbuttons">My Rooms</p>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fas fa-books-medical" style={{ color: "white" }} />
+					<i className="fa fa-user-plus" aria-hidden="true" style={{ color: "white" }} />
 					<p className="textbuttons">Add Romie</p>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
 					<i className="fas fa-backspace" style={{ color: "white" }} />
 					<p className="textbuttons">Delete Romie</p>
 				</div>
-				<div className="text-center mt-5">
+				{/*	<div className="text-center mt-5">
 					<h1>Profile page</h1>
 					<div className="d-flex justify-content-around">
 						<button
@@ -144,7 +150,7 @@ export const Profile = () => {
 						</button>
 					</div>
 
-					{/*<!-- add ReviewModal Modal -->*/}
+					<!-- add ReviewModal Modal -->
 					<div id="addReviewModal" className="modal fade" role="dialog">
 						<div className="modal-dialog modal-lg">
 							<div className="modal-content">
@@ -153,15 +159,16 @@ export const Profile = () => {
 						</div>
 					</div>
 
-					{/*<!-- notification Modal -->*/}
+					{/*<!-- notification Modal -->
 					<div id="notificationModal" className="modal fade" role="dialog">
 						<div className="modal-dialog modal-lg">
 							<div className="modal-content">
 								<NotificationRoomie />
 							</div>
 						</div>
+						
 					</div>
-				</div>
+				</div>*/}
 			</div>
 		</div>
 	);
