@@ -1,4 +1,8 @@
 
+
+*{
+    border: dashed 1px red;
+}
 .top{
     background-color: gray;
     opacity: 80%;
@@ -19,7 +23,8 @@
     z-index: 9;
 }
 .review{
-    border: dashed 1px red;
     margin: 5px 0px;
-
+}
+.out{
+    background-image: url("cama.png");
 }
