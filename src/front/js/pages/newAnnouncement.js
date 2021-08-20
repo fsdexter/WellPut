@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/newAnnouncement.scss";
 import MyMap from "../component/mapEngine";
@@ -9,13 +9,15 @@ import addPic from "../../img/addPic.png";
 
 export const NewAnnouncement = () => {
 	const { store, actions } = useContext(Context);
+	const [move, setMove] = useState("location");
 
 	return (
 		<div className="container">
 			<ul className="nav nav-tabs " id="myTab" role="tablist">
 				<li className="nav-item">
 					<a
-						className="nav-link active noLink"
+						className={move == "location" ? "nav-link active noLink" : "nav-link noLink"}
+						onClick={() => setMove("location")}
 						id="locationTab-tab"
 						data-toggle="tab"
 						href="#locationTab"
@@ -27,7 +29,8 @@ export const NewAnnouncement = () => {
 				</li>
 				<li className="nav-item">
 					<a
-						className="nav-link noLink"
+						className={move == "description" ? "nav-link active noLink" : "nav-link noLink"}
+						onClick={() => setMove("description")}
 						id="descriptionTab-tab"
 						data-toggle="tab"
 						href="#descriptionTab"
@@ -39,7 +42,8 @@ export const NewAnnouncement = () => {
 				</li>
 				<li className="nav-item ">
 					<a
-						className="nav-link noLink"
+						className={move == "pictures" ? "nav-link active noLink" : "nav-link noLink"}
+						onClick={() => setMove("pictures")}
 						id="picsTab-tab"
 						data-toggle="tab"
 						href="#picsTab"
@@ -51,7 +55,8 @@ export const NewAnnouncement = () => {
 				</li>
 				<li className="nav-item">
 					<a
-						className="nav-link noLink"
+						className={move == "preview" ? "nav-link active noLink" : "nav-link noLink"}
+						onClick={() => setMove("preview")}
 						id="previewTab-tab"
 						data-toggle="tab"
 						href="#previewTab"
@@ -94,7 +99,12 @@ export const NewAnnouncement = () => {
 					<div className="row">
 						<div className="col-10" />
 						<div className="col-2">
-							<button type="button" className="btn btn-warning ml-5">
+							<button
+								type="button"
+								className="btn btn-warning ml-5"
+								data-toggle="tab"
+								href="#descriptionTab"
+								onClick={() => setMove("description")}>
 								Continue
 							</button>
 						</div>
@@ -342,7 +352,12 @@ export const NewAnnouncement = () => {
 					<div className="row">
 						<div className="col-10" />
 						<div className="col-2">
-							<button type="button" className="btn btn-warning mb-5 ml-5">
+							<button
+								type="button"
+								className="btn btn-warning mb-5 ml-5"
+								data-toggle="tab"
+								href="#picsTab"
+								onClick={() => setMove("pictures")}>
 								Continue
 							</button>
 						</div>
@@ -400,7 +415,12 @@ export const NewAnnouncement = () => {
 					<div className="row">
 						<div className="col-10" />
 						<div className="col-2">
-							<button type="button" className="btn btn-warning mb-5 ml-5">
+							<button
+								type="button"
+								className="btn btn-warning mb-5 ml-5"
+								data-toggle="tab"
+								href="#previewTab"
+								onClick={() => setMove("preview")}>
 								Continue
 							</button>
 						</div>

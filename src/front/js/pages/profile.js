@@ -4,13 +4,10 @@ import "../../styles/viewprofile.scss";
 import firtsimgprofile from "../../img/photoprofile.png";
 import argentina from "../../img/argentina.png";
 import map from "../../img/outline.png";
-
 import { AddReview } from "../component/addReview";
 import { NotificationRoomie } from "../component/notificationRoomie";
-
 export const Profile = () => {
 	const { store, actions } = useContext(Context);
-
 	return (
 		<div className="picturefond col-lg-12 d-inline-flex">
 			<div className="container col-lg-10 detallefondblack">
@@ -143,7 +140,6 @@ export const Profile = () => {
 							Notification New Rommie
 						</button>
 					</div>
-
 					{/*<!-- add ReviewModal Modal -->*/}
 					<div id="addReviewModal" className="modal fade" role="dialog">
 						<div className="modal-dialog modal-lg">
