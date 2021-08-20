@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { AddReview } from "../component/addReview";
 import { NotificationRoomie } from "../component/notificationRoomie";
@@ -7,19 +7,16 @@ import "../../styles/viewprofile.scss";
 import firtsimgprofile from "../../img/photoprofile.png";
 import argentina from "../../img/argentina.png";
 import map from "../../img/outline.png";
-import { Link } from "react-router-dom";
 
 export const Profile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
-
 	function handleSubmit() {
 		history.push("/edit_profile");
 	}
 	function favorites() {
 		history.push("/favorites");
 	}
-  
 	return (
 		<div className="picturefond col-lg-12 d-inline-flex">
 			<div className="container col-lg-10 detallefondblack">
@@ -89,7 +86,7 @@ export const Profile = () => {
 					</div>
 				</div>
 				<div className="row ">
-					<div className="col contentfondblack" style={{ width: "100px", height: "600px" }}>
+					<div className="col contentfondblack" style={{ width: "120px", height: "600px" }}>
 						<h2 className="textwhhite">CONTACT</h2>
 						<p className="textwhhite">jason_29@yahoo.es</p>
 						<h2 className="textwhhite">SPOKEN LANGUAGES</h2>
@@ -97,7 +94,7 @@ export const Profile = () => {
 						<p className="textwhhite">*Spanish</p>
 						<p className="textwhhite">*French</p>
 					</div>
-					<div className="col contentfondblack" style={{ width: "100px", height: "600px" }}>
+					<div className="col contentfondblack" style={{ width: "120px", height: "600px" }}>
 						<h2 className="textwhhite">INTEREST</h2>
 						<p className="textwhhite">*Musician</p>
 						<p className="textwhhite">*Traveler</p>
@@ -109,27 +106,38 @@ export const Profile = () => {
 				</div>
 			</div>
 			<div className="col-1 ">
-				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }} onClick={handleSubmit}>
-					<i className="fa fa-bars" aria-hidden="true" style={{ color: "white" }} />
-					<p className="textbuttons">Edit Profile</p>
+				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
+					<button
+						type="button"
+						className="navbar-brand mb-0 mr-2 btn btn-navb"
+						onClick={() => handleSubmit()}>
+						<i className="fa fa-bars" aria-hidden="true" style={{ color: "white" }} />
+						<p className="textbuttons">Edit Profile</p>
+					</button>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }} onClick={favorites}>
-					<i className="fas fa-heart" style={{ color: "white" }} />
-					<p className="textbuttons">My Favorites</p>
+				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
+					<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb" onClick={() => favorites()}>
+						<i className="fas fa-heart" style={{ color: "white" }} />
+						<p className="textbuttons">My Favorites</p>
+					</button>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
+				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
 					<Link to="/detailedView">
-						<i className="fas fa-euro-sign" style={{ color: "white" }} />
+						<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb">
+							<i className="fas fa-euro-sign" style={{ color: "white" }} />
+							<p className="textbuttons">My Rents</p>
+						</button>
 					</Link>
-					<p className="textbuttons">My Rents</p>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
+				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
 					<Link to="/announcements">
-						<i className="fa fa-bed" aria-hidden="true" style={{ color: "white" }} />
+						<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb">
+							<i className="fa fa-bed" aria-hidden="true" style={{ color: "white" }} />
+							<p className="textbuttons">My Rooms</p>
+						</button>
 					</Link>
-					<p className="textbuttons">My Rooms</p>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
+				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
 					<button
 						type="button"
 						className="navbar-brand mb-0 mr-2 btn btn-navb"
@@ -139,18 +147,20 @@ export const Profile = () => {
 						<p className="textbuttons">Add Romie</p>
 					</button>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fas fa-backspace" style={{ color: "white" }} />
-					<p className="textbuttons">Delete Romie</p>
+				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
+					<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb" data-target="#addReviewModal">
+						<i className="fas fa-backspace" aria-hidden="true" style={{ color: "white" }} />
+						<p className="textbuttons">Delete Romie</p>
+					</button>
 				</div>
-
-				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
+				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
 					<button
 						type="button"
 						className="navbar-brand mb-0 mr-2 btn btn-navb"
 						data-toggle="modal"
 						data-target="#addReviewModal">
-						Add review
+						<i className="fa fa-user-plus" aria-hidden="true" style={{ color: "white" }} />
+						<p className="textbuttons">Add review</p>
 					</button>
 				</div>
 				{/*<!-- add ReviewModal Modal -->*/}
@@ -158,7 +168,6 @@ export const Profile = () => {
 					<div className="modal-dialog modal-lg">
 						<div className="modal-content">
 							<AddReview />
-
 						</div>
 					</div>
 				</div>
