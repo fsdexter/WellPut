@@ -23,7 +23,7 @@ class User(db.Model):
     #relaciones de usuario (1 a muchos)
     user_archive= db.relationship('UserArchives', lazy=True)
     characteristic_user = db.relationship('CharacteristicUser', lazy=True)
-    spoken_spoken_languages = db.relationship('Spokenspoken_languages', lazy=True)
+    spokenLanguages = db.relationship('SpokenLanguages', lazy=True)
     #forma para relacionar una misma tabla con dos columnas de otra tabla a la vez
     owner = db.relationship('ReviewOwner', backref='owner', lazy='joined', foreign_keys ='ReviewOwner.owner_id')
     tenant = db.relationship('ReviewOwner', backref='tenant', lazy='joined', foreign_keys ='ReviewOwner.tenant_id')
@@ -127,31 +127,31 @@ class UserArchives(db.Model):
         }  
 
 
-class Spokenspoken_languages(db.Model):
+class SpokenLanguages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    spoken_languages_id = db.Column(db.Integer, db.ForeignKey('spoken_languages.id'))
+    languages_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
     
     def __repr__(self):
-        return '<Spokenspoken_languages %r>' % self.id
+        return '<SpokenLanguages %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "spoken_languages_id": self.spoken_languages_id
+            "languages_id": self.languages_id
         }  
  
-class spoken_languages(db.Model):
+class Languages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     locale = db.Column(db.String(50))
 
-    Spoken_spoken_languages = db.relationship('Spokenspoken_languages', lazy=True)
+    languages = db.relationship('Languages', lazy=True)
     
 
     def __repr__(self):
-        return '<spoken_languages %r>' % self.id
+        return '<Languages %r>' % self.id
 
     def serialize(self):
         return {
