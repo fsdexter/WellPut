@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { AddReview } from "../component/addReview";
+import { NotificationRoomie } from "../component/notificationRoomie";
 import "../../styles/viewprofile.scss";
 import firtsimgprofile from "../../img/photoprofile.png";
 import argentina from "../../img/argentina.png";
 import map from "../../img/outline.png";
-import { Language } from "../component/language";
-import { AddReview } from "../component/addReview";
-import { NotificationRoomie } from "../component/notificationRoomie";
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
 	const history = useHistory();
@@ -116,59 +116,57 @@ export const Profile = () => {
 					<p className="textbuttons">My Favorites</p>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fas fa-euro-sign" style={{ color: "white" }} />
+					<Link to="/detailedView">
+						<i className="fas fa-euro-sign" style={{ color: "white" }} />
+					</Link>
 					<p className="textbuttons">My Rents</p>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fa fa-bed" aria-hidden="true" style={{ color: "white" }} />
+					<Link to="/announcements">
+						<i className="fa fa-bed" aria-hidden="true" style={{ color: "white" }} />
+					</Link>
 					<p className="textbuttons">My Rooms</p>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
-					<i className="fa fa-user-plus" aria-hidden="true" style={{ color: "white" }} />
-					<p className="textbuttons">Add Romie</p>
+					<button
+						type="button"
+						className="navbar-brand mb-0 mr-2 btn btn-navb"
+						data-toggle="modal"
+						data-target="#notificationModal">
+						<i className="fa fa-user-plus" aria-hidden="true" style={{ color: "white" }} />
+						<p className="textbuttons">Add Romie</p>
+					</button>
 				</div>
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
 					<i className="fas fa-backspace" style={{ color: "white" }} />
 					<p className="textbuttons">Delete Romie</p>
 				</div>
-				{/*	<div className="text-center mt-5">
-					<h1>Profile page</h1>
-					<div className="d-flex justify-content-around">
-						<button
-							type="button"
-							className="navbar-brand mb-0 mr-2 btn btn-navb"
-							data-toggle="modal"
-							data-target="#addReviewModal">
-							Add review
-						</button>
-						<button
-							type="button"
-							className="navbar-brand mb-0 mr-2 btn btn-navb"
-							data-toggle="modal"
-							data-target="#notificationModal">
-							Notification New Rommie
-						</button>
-					</div>
-
-					<!-- add ReviewModal Modal -->
-					<div id="addReviewModal" className="modal fade" role="dialog">
-						<div className="modal-dialog modal-lg">
-							<div className="modal-content">
-								<AddReview />
-							</div>
+				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
+					<button
+						type="button"
+						className="navbar-brand mb-0 mr-2 btn btn-navb"
+						data-toggle="modal"
+						data-target="#addReviewModal">
+						Add review
+					</button>
+				</div>
+				{/*<!-- add ReviewModal Modal -->*/}
+				<div id="addReviewModal" className="modal fade" role="dialog">
+					<div className="modal-dialog modal-lg">
+						<div className="modal-content">
+							<AddReview />
 						</div>
 					</div>
+				</div>
 
-					{/*<!-- notification Modal -->
-					<div id="notificationModal" className="modal fade" role="dialog">
-						<div className="modal-dialog modal-lg">
-							<div className="modal-content">
-								<NotificationRoomie />
-							</div>
+				{/*<!-- notification Modal -->*/}
+				<div id="notificationModal" className="modal fade" role="dialog">
+					<div className="modal-dialog modal-lg">
+						<div className="modal-content">
+							<NotificationRoomie />
 						</div>
-						
 					</div>
-				</div>*/}
+				</div>
 			</div>
 		</div>
 	);
