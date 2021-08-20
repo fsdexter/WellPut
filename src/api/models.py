@@ -173,6 +173,8 @@ class Room (db.Model):
     title =db.Column(db.String(120))
     type_bed = db.Column(db.String(50))
     type_room = db.Column(db.String(50))
+    lat = db.Column(db.Float(7))
+    lng = db.Column(db.Float(7))
 
     room_archive = db.relationship('RoomArchive', lazy=True)
     review_Room = db.relationship('ReviewRoom', lazy=True)

@@ -1,0 +1,54 @@
+.picturefond{
+    background: no-repeat;
+    -ms-flex-item-align: center;
+    background-color: rgba(206, 163, 163, 0.781);
+    align-content: center;
+    background-image: url("../img/camafondeperfil.png"); 
+    background-size: cover; 
+   
+}
+
+.pictureprofile1{
+    -ms-flex-item-align: center;
+    align-content: center;
+    width: 10px;
+    height: 9px;
+    padding: 1%;
+    display: inline;}
+
+.detallefondblack{
+    background-color:rgba(0, 0, 0, 0.295);
+    margin: 1%;
+    
+padding: 5%;
+}
+.dicprofile{
+    width: 10px;
+    height: 9px;
+    padding: 1%;
+}
+.start{
+    color: yellow;
+    width: 20px;
+    height: 20px;
+}
+.block{
+    display: block;
+}
+.buttonfondblack{
+    background-color:rgba(0, 0, 0, 0.295);
+    margin: 14%;
+    padding: 5%;
+}
+.contentfondblack{
+    background-color:rgba(0, 0, 0, 0.295);
+    margin: 4%;
+    padding: 5%;
+}
+.textbuttons{
+    font-size: small;
+    color: white;
+}
+.textwhhite{
+    color: white;
+}
