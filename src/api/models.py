@@ -147,7 +147,7 @@ class Languages(db.Model):
     name = db.Column(db.String(80))
     locale = db.Column(db.String(50))
 
-    languages = db.relationship('Languages', lazy=True)
+    Spoken_languages = db.relationship('SpokenLanguages', lazy=True)
     
 
     def __repr__(self):
@@ -158,7 +158,7 @@ class Languages(db.Model):
             "id": self.id,
             "name": self.name,
             "locale": self.locale
-        }   
+        }    
 #------------------------------------------------------------------------------------------------------------------------------
 #  ROOM
 #------------------------------------------------------------------------------------------------------------------------------
