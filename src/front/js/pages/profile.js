@@ -12,12 +12,14 @@ import { Link } from "react-router-dom";
 export const Profile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
+
 	function handleSubmit() {
 		history.push("/edit_profile");
 	}
 	function favorites() {
 		history.push("/favorites");
 	}
+  
 	return (
 		<div className="picturefond col-lg-12 d-inline-flex">
 			<div className="container col-lg-10 detallefondblack">
@@ -141,6 +143,7 @@ export const Profile = () => {
 					<i className="fas fa-backspace" style={{ color: "white" }} />
 					<p className="textbuttons">Delete Romie</p>
 				</div>
+
 				<div className="col buttonfondblack" style={{ width: "100px", height: "100px" }}>
 					<button
 						type="button"
@@ -155,6 +158,7 @@ export const Profile = () => {
 					<div className="modal-dialog modal-lg">
 						<div className="modal-content">
 							<AddReview />
+
 						</div>
 					</div>
 				</div>

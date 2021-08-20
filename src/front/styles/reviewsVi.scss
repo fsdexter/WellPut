@@ -1,0 +1,28 @@
+
+.top{
+    background-color: gray;
+    opacity: 80%;
+    z-index: 6;
+    border-radius: 30px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.secondary{
+    background-color: gray;
+    opacity: 80%;
+    z-index: 6;
+    border-radius: 30px;
+    text-align: center;
+}
+.review-box{
+    background-color:rgba(128, 128, 128, 0.5);
+    opacity: 90%;
+    z-index: 9;
+}
+.review{
+    margin: 5px 0px;
+}
+.out{
+    background-image: url("../img/roomDetails.png");
+}

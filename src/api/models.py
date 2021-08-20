@@ -13,16 +13,17 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     full_name = db.Column(db.String(120))
     password = db.Column(db.String(250), nullable=False)
-    birth_day = db.Column(db.DateTime)
+    birthday = db.Column(db.DateTime)
     phone = db.Column(db.String(120))
     sex = db.Column(db.String(120))
-    personal_descripction = db.Column(db.String(220))
+    personal_description = db.Column(db.String(220))
     avatar_url = db.Column(db.String(220), unique=False, nullable=True)
+    city = db.Column(db.String(120)) 
 
     #relaciones de usuario (1 a muchos)
     user_archive= db.relationship('UserArchives', lazy=True)
     characteristic_user = db.relationship('CharacteristicUser', lazy=True)
-    spoken_languages = db.relationship('SpokenLanguages', lazy=True)
+    spokenLanguages = db.relationship('SpokenLanguages', lazy=True)
     #forma para relacionar una misma tabla con dos columnas de otra tabla a la vez
     owner = db.relationship('ReviewOwner', backref='owner', lazy='joined', foreign_keys ='ReviewOwner.owner_id')
     tenant = db.relationship('ReviewOwner', backref='tenant', lazy='joined', foreign_keys ='ReviewOwner.tenant_id')
@@ -42,9 +43,10 @@ class User(db.Model):
             "phone": self.phone,
             "sex": self.sex,
             "password":self.password,
-            "birth_day": self.birth_day,
+            "birthday": self.birthday,
             "avatar_url": self.avatar_url,
-            "personal_descripction": self.personal_descripction,
+            "personal_description": self.personal_description,
+            "city": self.city,
         }
         
     # method to check the password and that verify that it is the user password
@@ -156,7 +158,7 @@ class Languages(db.Model):
             "id": self.id,
             "name": self.name,
             "locale": self.locale
-        }   
+        }    
 #------------------------------------------------------------------------------------------------------------------------------
 #  ROOM
 #------------------------------------------------------------------------------------------------------------------------------
@@ -164,7 +166,7 @@ class Room (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     photo_url = db.Column(db.String(255), unique=False, nullable=True)
-    descripction = db.Column(db.String(280))
+    description = db.Column(db.String(280))
     address = db.Column(db.String(220))
     city = db.Column(db.String(120))
     country = db.Column(db.String(120))
@@ -172,7 +174,6 @@ class Room (db.Model):
     deposit = db.Column(db.Integer)
     title =db.Column(db.String(120))
     type_bed = db.Column(db.String(50))
-    type_room = db.Column(db.String(50))
     lat = db.Column(db.Float(7))
     lng = db.Column(db.Float(7))
 
@@ -189,15 +190,14 @@ class Room (db.Model):
             "id": self.id,
             "owner_id": self.owner_id,
             "photo_url": self.photo_url,
-            "descripction": self.descripction,
+            "description": self.description,
             "address": self.address,
             "city": self.city,
             "country": self.country,
             "price": self.price,
             "deposit": self.deposit,
             "title": self.title, 
-            "type_bed": self.type_bed, 
-            "type_room": self.type_room
+            "type_bed": self.type_bed,
         }
 
 
@@ -242,7 +242,7 @@ class ReviewRoom(db.Model):
 class ExpensesIncluded(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-    descripction = db.Column(db.String(20))
+    description = db.Column(db.String(20))
 
     def __repr__(self):
         return '<ExpensesIncluded %r>' % self.id
@@ -251,13 +251,13 @@ class ExpensesIncluded(db.Model):
         return {
             "id": self.id,
             "room_id": self.id,
-            "descripction": self.descripction
+            "description": self.description
         }  
          
 class OtherFeature(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-    descripction = db.Column(db.String(20))
+    description = db.Column(db.String(20))
 
     def __repr__(self):
         return '<OtherFeature %r>' % self.id
@@ -266,7 +266,7 @@ class OtherFeature(db.Model):
         return {
             "id": self.id,
             "room_id": self.room_id,
-            "descripction": self.descripction,
+            "description": self.description,
         }  
 
 
@@ -277,29 +277,168 @@ class SeedDataUser:
 
   def __init__(self):
     self.first_user = None
+    self.second_user = None
+    self.third_user = None
+    self.fourth_user = None
+    self.fifth_user = None
 
   def create_seed_user(self):
     self.first_user = User( 
-    id ="0",
-    email ="seed_user@gmail.com",
-    full_name ="Monopoly Scruguer",
-    password = generate_password_hash("seed00000", "sha256"),
-    birth_day ="01/01/1984",
-    phone ="666362969",
-    sex ="yesplz",
-    personal_descripction ="loren seed",
-    avatar_url ="https://i.ytimg.com/vi/ZePL6bo2nTA/maxresdefault.jpg"
+        id=1,
+        email ="adan_user@gmail.com",
+        full_name ="Adan Genesis",
+        password = "1111",
+        birthday ="01/01/1980",
+        phone ="666362969",
+        sex ="male",
+        personal_description ="ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+        avatar_url ="",
+        city="Madrid"
     )
-    
 
+    self.second_user = User( 
+        id=2,
+        email ="eva_user@gmail.com",
+        full_name ="Eva Gelion",
+        password = "1111",
+        birthday ="01/01/1982",
+        phone ="666362970",
+        sex ="female",
+        personal_description ="Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+        avatar_url ="",
+        city="Madrid"
+    )
+
+    self.third_user = User( 
+        id=3,
+        email ="sara_user@gmail.com",
+        full_name ="Sara Genesis",
+        password = "1111",
+        birthday ="01/01/1985",
+        phone ="666362978",
+        sex ="female",
+        personal_description ="At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
+        avatar_url ="",
+        city="Barcelona"
+    )
+
+    self.fourth_user = User( 
+        id=4,
+        email ="abraham_user@gmail.com",
+        full_name ="Abraham Genesis",
+        password = "1111",
+        birth_day ="01/01/1990",
+        phone ="666362980",
+        sex ="male",
+        personal_description ="Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio.",
+        avatar_url ="",
+        city="Granada"
+    )
+
+    self.fifth_user = User( 
+        id=5,
+        email ="noe_user@gmail.com",
+        full_name ="Noé Genesis",
+        password = "1111",
+        birth_day ="01/01/1992",
+        phone ="666362986",
+        sex ="male",
+        personal_description ="Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates.",
+        avatar_url ="",
+        city="Sevilla"
+    )
+  
     db.session.add(self.first_user)
+    db.session.add(self.second_user)
+    db.session.add(self.third_user)
+    db.session.add(self.fourth_user)
+    db.session.add(self.fifth_user)
+    db.session.commit()
+
+  def create_seed_room(self):
+    self.first_room = Room( 
+        id=1,
+        owner_id=1,
+        city= "Madrid",
+        address= "Bastero 6",
+        title="Habitacion en casa moderna.",
+        description="Cras ac fermentum neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        price= 450,
+        deposit=450,
+        type_bed="single",
+        tenant_id= self.first_user.id
+    )
+
+    self.second_room = Room( 
+        id=2,
+        owner_id=1,
+        city= "Madrid",
+        address= "Bastero 6",
+        title="Habitacion pequeña y luminosa.",
+        description="Vestibulum auctor purus in leo laoreet, ac aliquam sem tincidunt. Vivamus eleifend magna a leo pulvinar.",
+        price= 400,
+        deposit=400,
+        type_bed="single",
+        tenant_id= self.second_user.id
+    )
+
+    self.third_room = Room( 
+        id=3,
+        owner_id=1,
+        city= "Madrid",
+        address= "Bastero 6",
+        title="Habitacion suite con cama grande.",
+        description="Aliquam sit amet interdum lacus. Proin finibus vehicula sagittis.",
+        price= 500,
+        deposit= 500,
+        type_bed="double",
+        tenant_id= self.third_user.id
+    )
+
+    self.fourth_room = Room( 
+        id=4,
+        owner_id=1,
+        city= "Madrid",
+        address= "Bastero 6",
+        title="Hermosa habitación amueblada.",
+        description="Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
+        price= 500,
+        deposit= 500,
+        type_bed="double",
+        tenant_id= None
+    )
+
+    db.session.add(self.first_room)
+    db.session.add(self.second_room)
+    db.session.add(self.third_room)
+    db.session.add(self.fourth_room)
     db.session.commit()
 
   def create_seed_data(self):
     self.create_seed_user()
+    self.create_seed_room()
+    
 
 
 
 #------------------------------------------------------------------------------------------------------------------------------
-#  Fake
+# Comments:
+'''
+1. Create 5 fake users  
+    1.1 One owner.
+    1.2 Three roomates.
+    1.3 One searching.
+2. Create 4 fake rooms.
+    2.1 Three roomates(1.2) are living here.
+
+3. Creation order
+    3.1 Create users.
+    3.2 Create Rooms.
+    3.3 Create associations between em.
+    
+    '''
+
+
+
+
 #------------------------------------------------------------------------------------------------------------------------------

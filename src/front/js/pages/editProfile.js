@@ -15,6 +15,10 @@ export const EditProfile = () => {
 	}
 	return (
 		<div>
+			{/*Añadido por Felipe*/}
+			{/*	<div className="row pictureediperfile m-auto justify-content-center d-flex ">
+				<div className="detalle" style={{ width: "37rem", height: "29rem" }}>
+					<form>*/}
 			<div className=" pictureediperfile m-auto justify-content-center d-flex flex-column ">
 				<div className="detalle row d-flex justify-content-around " style={{ height: "40rem" }}>
 					<form className="col-6">
