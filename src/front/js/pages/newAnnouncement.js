@@ -20,8 +20,39 @@ export const NewAnnouncement = () => {
 	function functionTest() {
 		if (document.getElementById("checkWifi").checked) {
 			console.log("Wifi");
-		} else {
-			console.log("Not Wifi");
+		}
+		if (document.getElementById("checkShower").checked) {
+			console.log("Water");
+		}
+		if (document.getElementById("checkBurn").checked) {
+			console.log("Gas");
+		}
+		if (document.getElementById("checkBulb").checked) {
+			console.log("Electricity");
+		}
+		if (document.getElementById("checkFacing").checked) {
+			console.log("Facing the street");
+		}
+		if (document.getElementById("checkFurnished").checked) {
+			console.log("Furnished");
+		}
+		if (document.getElementById("checkSuite").checked) {
+			console.log("Suite Room");
+		}
+		if (document.getElementById("checkedShared").checked) {
+			console.log("Shared Room");
+		}
+		if (document.getElementById("checkSingle").checked) {
+			console.log("Single Bed");
+		}
+		if (document.getElementById("checkDouble").checked) {
+			console.log("Double Bed");
+		}
+		if (document.getElementById("checkNope").checked) {
+			console.log("No Bed");
+		}
+		if (document.getElementById("checkSofa").checked) {
+			console.log("Sofa Bed");
 		}
 	}
 
@@ -226,7 +257,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio2"
+										id="checkShower"
 										value="option2"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
@@ -239,7 +270,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio3"
+										id="checkBurn"
 										value="option3"
 									/>
 									<label className="form-check-label " htmlFor="inlineRadio3">
@@ -251,7 +282,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio4"
+										id="checkBulb"
 										value="option4"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
@@ -272,7 +303,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio1"
+										id="checkFacing"
 										value="option1"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
@@ -286,7 +317,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio2"
+										id="checkFurnished"
 										value="option2"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
@@ -301,7 +332,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio3"
+										id="checkSuite"
 										value="option3"
 									/>
 									<label className="form-check-label " htmlFor="inlineRadio3">
@@ -315,7 +346,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio4"
+										id="checkedShared"
 										value="option4"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
@@ -336,7 +367,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="radio"
 										name="inlineRadioOptions"
-										id="inlineRadio1"
+										id="checkSingle"
 										value="option1"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
@@ -350,7 +381,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="radio"
 										name="inlineRadioOptions"
-										id="inlineRadio2"
+										id="checkDouble"
 										value="option2"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
@@ -365,7 +396,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="radio"
 										name="inlineRadioOptions"
-										id="inlineRadio3"
+										id="checkNope"
 										value="option3"
 									/>
 									<label className="form-check-label " htmlFor="inlineRadio3">
@@ -379,7 +410,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="radio"
 										name="inlineRadioOptions"
-										id="inlineRadio4"
+										id="checkSofa"
 										value="option4"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
