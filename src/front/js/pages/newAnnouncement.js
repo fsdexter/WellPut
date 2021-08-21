@@ -14,8 +14,16 @@ export const NewAnnouncement = () => {
 	const [address, setAddress] = useState("");
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
-	const [price, setPrice] = useState("0");
-	const [deposit, setDeposit] = useState("0");
+	const [price, setPrice] = useState("");
+	const [deposit, setDeposit] = useState("");
+
+	function functionTest() {
+		if (document.getElementById("checkWifi").checked) {
+			console.log("Wifi");
+		} else {
+			console.log("Not Wifi");
+		}
+	}
 
 	return (
 		<div className="container">
@@ -206,7 +214,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio1"
+										id="checkWifi"
 										value="option1"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
@@ -454,7 +462,9 @@ export const NewAnnouncement = () => {
 								className="btn btn-warning mb-5 ml-5"
 								data-toggle="tab"
 								href="#previewTab"
-								onClick={() => console.log(city, address, title, description, price, deposit)}>
+								onClick={() =>
+									console.log(city, address, title, description, price, deposit, functionTest())
+								}>
 								Upload
 							</button>
 						</div>
