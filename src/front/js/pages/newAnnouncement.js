@@ -10,6 +10,12 @@ import addPic from "../../img/addPic.png";
 export const NewAnnouncement = () => {
 	const { store, actions } = useContext(Context);
 	const [move, setMove] = useState("location");
+	const [city, setCity] = useState("");
+	const [address, setAddress] = useState("");
+	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const [price, setPrice] = useState("0");
+	const [deposit, setDeposit] = useState("0");
 
 	return (
 		<div className="container">
@@ -53,6 +59,7 @@ export const NewAnnouncement = () => {
 						<h5>Pictures</h5>
 					</a>
 				</li>
+				{/*
 				<li className="nav-item">
 					<a
 						className={move == "preview" ? "nav-link active noLink" : "nav-link noLink"}
@@ -66,6 +73,7 @@ export const NewAnnouncement = () => {
 						<h5>Preview</h5>
 					</a>
 				</li>
+				*/}
 			</ul>
 			<div className="tab-content" id="myTabContent">
 				<div
@@ -80,18 +88,23 @@ export const NewAnnouncement = () => {
 							{/*<p className="pl-4">Number</p>*/}
 						</div>
 						<div className="col pt-3">
-							<input type="text" className="form-control roundShape" placeholder="" />
-							<input type="text" className="form-control roundShape mt-3" placeholder="" />
-							{/*<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />*/}
+							<input
+								type="text"
+								className="form-control roundShape"
+								onChange={event => {
+									setCity(event.target.value);
+								}}
+							/>
+							<input
+								type="text"
+								className="form-control roundShape mt-3"
+								onChange={event => {
+									setAddress(event.target.value);
+								}}
+							/>
 						</div>
-						<div className="col-2 pt-3 fontInput">
-							{/*	<p className="pl-4">Floor</p>*/}
-							{/*	<p className="pl-4">P.Code</p>*/}
-						</div>
-						<div className="col-3">
-							{/*	<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />*/}
-							{/*	<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />*/}
-						</div>
+						<div className="col-2 pt-3 fontInput" />
+						<div className="col-3" />
 					</div>
 					<center>
 						<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "500px", height: "350px" }} />
@@ -116,7 +129,13 @@ export const NewAnnouncement = () => {
 							<p className="fontInput pl-5">Title </p>{" "}
 						</div>
 						<div className="col ">
-							<input type="text" className="form-control roundShape" placeholder="" />
+							<input
+								type="text"
+								className="form-control roundShape"
+								onChange={event => {
+									setTitle(event.target.value);
+								}}
+							/>
 						</div>
 						<div className="col-2" />
 					</div>
@@ -129,6 +148,9 @@ export const NewAnnouncement = () => {
 								className="form-control descriptionBack roundShape"
 								id="exampleFormControlTextarea1 "
 								rows="3"
+								onChange={event => {
+									setDescription(event.target.value);
+								}}
 							/>
 						</div>
 						<div className="col-1" />
@@ -139,23 +161,35 @@ export const NewAnnouncement = () => {
 								<div className="col-4">
 									<p className="fontInput pl-2">Price</p>{" "}
 								</div>
-								<div className="col-3">
-									<input type="text" className="form-control" placeholder="Min." />
+								<div className="col-5">
+									<input
+										type="text"
+										className="form-control"
+										onChange={event => {
+											setPrice(event.target.value);
+										}}
+									/>
 								</div>
-								<div className="col-3 mb-2">
+								{/*	<div className="col-3 mb-2">
 									<input type="text" className="form-control" placeholder="Max." />
-								</div>
+								</div>*/}
 							</div>
 							<div className="row ">
 								<div className="col-4">
 									<p className="fontInput pl-2">Deposit </p>{" "}
 								</div>
-								<div className="col-3">
-									<input type="text" className="form-control" placeholder="Min." />
+								<div className="col-5">
+									<input
+										type="text"
+										className="form-control"
+										onChange={event => {
+											setDeposit(event.target.value);
+										}}
+									/>
 								</div>
-								<div className="col-3 mb-2">
+								{/*<div className="col-3 mb-2">
 									<input type="text" className="form-control" placeholder="Max." />
-								</div>
+							</div>*/}
 							</div>
 						</div>
 						<div className="col">
@@ -420,15 +454,15 @@ export const NewAnnouncement = () => {
 								className="btn btn-warning mb-5 ml-5"
 								data-toggle="tab"
 								href="#previewTab"
-								onClick={() => setMove("preview")}>
-								Continue
+								onClick={() => console.log(city, address, title, description, price, deposit)}>
+								Upload
 							</button>
 						</div>
 					</div>
 				</div>
-				<div className="tab-pane fade" id="previewTab" role="tabpanel" aria-labelledby="previewTab-tab">
+				{/*<div className="tab-pane fade" id="previewTab" role="tabpanel" aria-labelledby="previewTab-tab">
 					4
-				</div>
+				</div>*/}
 			</div>
 		</div>
 	);
