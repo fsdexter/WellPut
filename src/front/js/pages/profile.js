@@ -39,42 +39,18 @@ export const Profile = () => {
 
 							<div className="col-8 text-white">
 								<div className="row">
-									<h3 className="textwhhite ml-5">
-										<h1>
-											{JSON.parse(localStorage.getItem("user")).user.full_name ||
-												store.user.full_name}
-										</h1>
-									</h3>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<p>
-										<p>
-											<i className="fa fa-star start" aria-hidden="true" />
-										</p>
-									</p>
-									&nbsp;&nbsp;
-									<p>
-										<p>
-											<i className="fa fa-star start" aria-hidden="true" />
-										</p>
-									</p>
-									&nbsp;&nbsp;
-									<p>
-										<p>
-											<i className="fa fa-star start" aria-hidden="true" />
-										</p>
-									</p>
-									&nbsp;&nbsp;
-									<p>
-										<p>
-											<i className="fa fa-star start" aria-hidden="true" />
-										</p>
-									</p>
-									&nbsp;&nbsp;
-									<p>
-										<p>
-											<i className="fa fa-star start" aria-hidden="true" />
-										</p>
-									</p>
+									<h1 className="textwhhite ml-5">
+										{JSON.parse(localStorage.getItem("user")).user.full_name ||
+											store.user.full_name}
+									</h1>
+									<div className="d-flex align-items-center ml-3">
+										{/** LAS ESTRELLAS PROCEDDEN DE LAS REVIEWS */}
+										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
+										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
+										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
+										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
+										<i className="fa fa-star start fa-lg" aria-hidden="true" />
+									</div>
 								</div>
 
 								<div className="col-12 detallefondblack" id="presentationUser">
