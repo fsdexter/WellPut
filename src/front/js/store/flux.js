@@ -6,11 +6,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			user: null,
 			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY",
-			roomList: [],
+			users: [],
+			rooms: [],
 			favorites: [],
 			reviews: [],
-			roomies: [],
-			users: []
+			roomies: []
 		},
 		actions: {
 			signUp: async userValues => {
@@ -74,6 +74,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ user: logedUser });
 				}
 			},
+			logOut: () => {
+				setStore({ user: null });
+				localStorage.clear();
+			},
 			editProfile: async userValues => {
 				console.log("SE LLAMÓ A LA FUNCIÓN DE EDITAR PERFIL");
 
@@ -87,7 +91,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const response = await fetch(`${API_BASE_URL}/api/edit_profile/${user_id}`, requestOptions);
+					//const response = await fetch(`${API_BASE_URL}/api/edit_profile/${user_id}`, requestOptions);
+					const response = await fetch(`${API_BASE_URL}/api/edit_profile/2`, requestOptions);
 
 					if (response.status >= 400) {
 						const errorMsg = "Error during the edition process";
@@ -103,13 +108,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return error.message;
 				}
 			},
-			logOut: () => {
-				setStore({ user: null });
-				localStorage.clear();
-			},
 			getUsers: async () => {
-				const store = getStore();
-
 				const requestOptions = {
 					method: "GET",
 					headers: { "Content-Type": "application/json" }
@@ -124,17 +123,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 					} else {
 						const usersList = await response.json();
 						setStore({ users: usersList });
-						localStorage.setItem("users", JSON.stringify(store.users));
+					}
+				} catch (error) {
+					return error.message;
+				}
+			},
+			getRooms: async () => {
+				const store = getStore();
 
-						console.log("LISTA DE USUARIOS ?? ", usersList);
+				const requestOptions = {
+					method: "GET",
+					headers: { "Content-Type": "application/json" }
+				};
+
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/`, requestOptions);
+
+					if (response.status >= 400) {
+						const errorMsg = "Error during the get users process";
+						throw new Error(errorMsg);
+					} else {
+						const roomsList = await response.json();
+						setStore({ rooms: roomsList });
+						localStorage.setItem("rooms", JSON.stringify(store.rooms));
 					}
 				} catch (error) {
 					return error.message;
 				}
 			},
 			getUser: async () => {
-				const store = getStore();
-
 				const requestOptions = {
 					method: "GET",
 					headers: { "Content-Type": "application/json" }
@@ -150,9 +167,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					} else {
 						const user = await response.json();
 						setStore({ user: user });
-						localStorage.setItem("user", JSON.stringify(store.user));
-
-						console.log(" USUARIO  ?? ", user);
+						localStorage.setItem(JSON.stringify(user));
 					}
 				} catch (error) {
 					return error.message;

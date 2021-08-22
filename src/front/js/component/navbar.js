@@ -26,7 +26,7 @@ export const Navbar = () => {
 				</Link>
 			</div>
 			<div className="col-10" id="brown">
-				{store.user !== null ? (
+				{localStorage.getItem("user") || store.user !== null ? (
 					<div className="col-12 d-flex justify-content-between" id="yellow">
 						<Link to="/profile">
 							<span className="navbar-brand mb-0 mr-2 btn btn-navb">Profile</span>
