@@ -4,8 +4,7 @@
     background-color: rgba(206, 163, 163, 0.781);
     align-content: center;
     background-image: url("../img/camafondeperfil.png"); 
-    background-size: cover; 
-   
+    background-size: cover;  
 }
 
 .pictureprofile1{
@@ -17,10 +16,13 @@
     display: inline;}
 
 .detallefondblack{
-    background-color:rgba(0, 0, 0, 0.295);
+    background-color:rgba(0, 0, 0, 0.541);
     margin: 1%;
-    
-padding: 5%;
+    padding: 5%;
+}
+
+#presentationUser{
+    height: 22rem;
 }
 .dicprofile{
     width: 10px;
@@ -36,19 +38,21 @@ padding: 5%;
     display: block;
 }
 .buttonfondblack{
-    background-color:rgba(0, 0, 0, 0.295);
+    background-color:rgba(0, 0, 0, 0.541);
     margin: 14%;
     padding: 5%;
+    width: 100%;
 }
 .contentfondblack{
     background-color:rgba(0, 0, 0, 0.295);
     margin: 4%;
-    padding: 5%;
+    padding: 2% 5% 2% 5%;
 }
 .textbuttons{
     font-size: small;
     color: white;
 }
-.textwhhite{
-    color: white;
+
+#containerOptionsProfile{
+    height: 100vh;
 }

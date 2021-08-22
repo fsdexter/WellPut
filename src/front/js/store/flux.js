@@ -6,7 +6,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			user: null,
 			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY",
-			users: [],
 			rooms: [],
 			favorites: [],
 			reviews: [],
@@ -78,6 +77,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ user: null });
 				localStorage.clear();
 			},
+			getRooms: async () => {
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/`);
+					const roomsList = await response.json();
+					setStore({ rooms: roomsList });
+					localStorage.setItem("rooms", JSON.stringify(roomsList));
+				} catch (error) {
+					return error.message;
+				}
+			},
+			getUser: async user_id => {
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/profile/${user_id}`);
+					const user = await response.json();
+					setStore({ user: user });
+					localStorage.setItem(JSON.stringify(user));
+				} catch (error) {
+					return error.message;
+				}
+			},
 			editProfile: async userValues => {
 				console.log("SE LLAMÓ A LA FUNCIÓN DE EDITAR PERFIL");
 
@@ -103,71 +122,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("user", JSON.stringify(store.user));
 
 						console.log("USUARIO EDITADO");
-					}
-				} catch (error) {
-					return error.message;
-				}
-			},
-			getUsers: async () => {
-				const requestOptions = {
-					method: "GET",
-					headers: { "Content-Type": "application/json" }
-				};
-
-				try {
-					const response = await fetch(`${API_BASE_URL}/api/users`, requestOptions);
-
-					if (response.status >= 400) {
-						const errorMsg = "Error during the get users process";
-						throw new Error(errorMsg);
-					} else {
-						const usersList = await response.json();
-						setStore({ users: usersList });
-					}
-				} catch (error) {
-					return error.message;
-				}
-			},
-			getRooms: async () => {
-				const store = getStore();
-
-				const requestOptions = {
-					method: "GET",
-					headers: { "Content-Type": "application/json" }
-				};
-
-				try {
-					const response = await fetch(`${API_BASE_URL}/api/`, requestOptions);
-
-					if (response.status >= 400) {
-						const errorMsg = "Error during the get users process";
-						throw new Error(errorMsg);
-					} else {
-						const roomsList = await response.json();
-						setStore({ rooms: roomsList });
-						localStorage.setItem("rooms", JSON.stringify(store.rooms));
-					}
-				} catch (error) {
-					return error.message;
-				}
-			},
-			getUser: async () => {
-				const requestOptions = {
-					method: "GET",
-					headers: { "Content-Type": "application/json" }
-				};
-
-				try {
-					//const response = await fetch(`${API_BASE_URL}/api/users/${user_id}`, requestOptions);
-					const response = await fetch(`${API_BASE_URL}/api/users/1000`, requestOptions);
-
-					if (response.status >= 400) {
-						const errorMsg = "Error during the get user process";
-						throw new Error(errorMsg);
-					} else {
-						const user = await response.json();
-						setStore({ user: user });
-						localStorage.setItem(JSON.stringify(user));
 					}
 				} catch (error) {
 					return error.message;

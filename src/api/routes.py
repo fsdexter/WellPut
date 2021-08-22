@@ -82,7 +82,7 @@ def get_users():
     
     return jsonify(list_users), 200
 
-@api.route('/users/<int:user_id>', methods=['GET'])
+@api.route('/profile/<int:user_id>', methods=['GET']) # EN POSTMAN FUNCIONA
 def get_single_user(user_id):
     body = request.get_json()
     user_selected = User.query.get(user_id)
@@ -97,6 +97,12 @@ def get_rooms():
         rooms_list.append(room.serialize())
     
     return jsonify(rooms_list), 200
+
+@api.route('/detailedView/<int:room_id>', methods=['GET']) # EN POSTMAN FUNCIONA
+def get_single_room(room_id):
+    body = request.get_json()
+    room_selected = Room.query.get(room_id)
+    return jsonify(room_selected.serialize()), 200
 
 
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # NO FUNCIONA !!!!
