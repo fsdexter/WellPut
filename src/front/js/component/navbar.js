@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
@@ -11,6 +11,7 @@ import "../../styles/navbar.scss";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
+	const [isActive, setIsActive] = useState(null);
 	const history = useHistory();
 
 	const goodbye = () => {
@@ -18,9 +19,17 @@ export const Navbar = () => {
 		history.push("/");
 	};
 
+	const changeElementNavbarActive = element => {
+		if (element) {
+			setIsActive(element);
+		}
+	};
+
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-white no-gutters">
-			<div className="col-2">
+			<div
+				className={isActive === "home" ? "col-2 my-active" : "col-2"}
+				onClick={() => changeElementNavbarActive("home")}>
 				<Link to="/">
 					<img src={logo} id="logo" />
 				</Link>
@@ -29,16 +38,48 @@ export const Navbar = () => {
 				{localStorage.getItem("user") || store.user !== null ? (
 					<div className="col-12 d-flex justify-content-between" id="yellow">
 						<Link to="/profile">
-							<span className="navbar-brand mb-0 mr-2 btn btn-navb">Profile</span>
+							<span
+								className={
+									isActive === "profile"
+										? "navbar-brand mb-0 mr-2 btn btn-navb my-active"
+										: "navbar-brand mb-0 mr-2 btn btn-navb"
+								}
+								onClick={() => changeElementNavbarActive("profile")}>
+								Profile
+							</span>
 						</Link>
 						<Link to="/announcements">
-							<span className="navbar-brand mb-0 mr-2 btn btn-navb">Announcements</span>
+							<span
+								className={
+									isActive === "announcements"
+										? "navbar-brand mb-0 mr-2 btn btn-navb my-active"
+										: "navbar-brand mb-0 mr-2 btn btn-navb"
+								}
+								onClick={() => changeElementNavbarActive("announcements")}>
+								Announcements
+							</span>
 						</Link>
 						<Link to="/favorites">
-							<span className="navbar-brand mb-0 mr-2 btn btn-navb">Favorites</span>
+							<span
+								className={
+									isActive === "favorites"
+										? "navbar-brand mb-0 mr-2 btn btn-navb my-active"
+										: "navbar-brand mb-0 mr-2 btn btn-navb"
+								}
+								onClick={() => changeElementNavbarActive("favorites")}>
+								Favorites
+							</span>
 						</Link>
 						<Link to="/">
-							<span className="navbar-brand mb-0 mr-2 btn btn-navb">Search</span>
+							<span
+								className={
+									isActive === "Search"
+										? "navbar-brand mb-0 mr-2 btn btn-navb my-active"
+										: "navbar-brand mb-0 mr-2 btn btn-navb"
+								}
+								onClick={() => changeElementNavbarActive("Search")}>
+								Search
+							</span>
 						</Link>
 						<Link to="/">
 							<span className="navbar-brand mb-0 mr-2 btn btn-navb" onClick={() => goodbye()}>
