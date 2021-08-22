@@ -6,9 +6,6 @@ import { useParams } from "react-router-dom";
 import { AddReview } from "../component/addReview";
 import { NotificationRoomie } from "../component/notificationRoomie";
 import "../../styles/viewprofile.scss";
-import firtsimgprofile from "../../img/photoprofile.png";
-import argentina from "../../img/argentina.png";
-import map from "../../img/outline.png";
 
 export const Profile = () => {
 	const history = useHistory();
@@ -17,7 +14,7 @@ export const Profile = () => {
 
 	useEffect(() => {
 		//actions.getUser(user_id);
-		actions.getUser();
+		actions.getUser(1000);
 	}, []);
 
 	function handleSubmit() {
@@ -28,161 +25,153 @@ export const Profile = () => {
 		history.push("/favorites");
 	}
 
-	console.log("USUARIO --- ", store.user.user, typeof store.user.user);
 	return (
-		<div className="picturefond col-lg-12 d-inline-flex">
-			<div className="container col-lg-10 detallefondblack">
-				{store.user.user
-					? Object.entries(store.user.user).forEach(user => {
-							return (
-								<div className="row" key={store.user.user.id}>
-									<img
-										className="card-img-top roundShape col-lg-4"
-										src={store.user.user.avatar_url}
-										alt="Card image cap"
-									/>
-									<div className="col-8">
-										<div className="col-8">
-											<div className="row">
-												<img
-													className="card-img-top roundShape"
-													src={argentina}
-													alt="Card image cap"
-													style={{ width: "48px", height: "78px" }}
-												/>
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<h3 className="textwhhite">{store.user.user.full_name}</h3>
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<p>
-													<p>
-														<i className="fa fa-star start" aria-hidden="true" />
-													</p>
-												</p>
-												&nbsp;&nbsp;
-												<p>
-													<p>
-														<i className="fa fa-star start" aria-hidden="true" />
-													</p>
-												</p>
-												&nbsp;&nbsp;
-												<p>
-													<p>
-														<i className="fa fa-star start" aria-hidden="true" />
-													</p>
-												</p>
-												&nbsp;&nbsp;
-												<p>
-													<p>
-														<i className="fa fa-star start" aria-hidden="true" />
-													</p>
-												</p>
-												&nbsp;&nbsp;
-												<p>
-													<p>
-														<i className="fa fa-star start" aria-hidden="true" />
-													</p>
-												</p>
-											</div>
-										</div>
-										<div className="row">
-											<div className="col-9" style={{ width: "148px", height: "108px" }} />
-											<div
-												className="col-9 detallefondblack "
-												style={{ width: "48rem", height: "20rem" }}>
-												<img
-													className="card-img-top roundShape"
-													src={map}
-													alt="Card image cap"
-													style={{ width: "38px", height: "58px" }}
-												/>
-												<h3>{store.user.user.city} </h3>
-												<p />
-												<h3 />
-												<h5>{store.user.user.personal_description}</h5>
-											</div>
-										</div>
-									</div>
-								</div>
-							);
-					  })
-					: null}
+		<div className="picturefond col-12 d-flex justify-content-center text-white">
+			<div className="container col-10 detallefondblack">
+				{store.user || localStorage.getItem("user") ? (
+					<>
+						<div className="row" key={JSON.parse(localStorage.getItem("user")).user.id || store.user.id}>
+							<img
+								className="card-img-top roundShape col-4"
+								src={JSON.parse(localStorage.getItem("user")).user.avatar_url || store.user.avatar_url}
+								alt="Card image cap"
+							/>
 
-				<div className="row ">
-					<div className="col contentfondblack" style={{ width: "120px", height: "600px" }}>
-						<h2 className="textwhhite">CONTACT</h2>
-						<p className="textwhhite">jason_29@yahoo.es</p>
-						<h2 className="textwhhite">SPOKEN LANGUAGES</h2>
-						<p className="textwhhite">*English</p>
-						<p className="textwhhite">*Spanish</p>
-						<p className="textwhhite">*French</p>
-					</div>
-					<div className="col contentfondblack" style={{ width: "120px", height: "600px" }}>
-						<h2 className="textwhhite">INTEREST</h2>
-						<p className="textwhhite">*Musician</p>
-						<p className="textwhhite">*Traveler</p>
-						<p className="textwhhite">*Movies</p>
-						<p className="textwhhite">*Dancer</p>
-						<p className="textwhhite">*Vegan</p>
-						<p className="textwhhite">*Animal Lover</p>
-					</div>
-				</div>
+							<div className="col-8 text-white">
+								<div className="row">
+									<h3 className="textwhhite ml-5">
+										<h1>
+											{JSON.parse(localStorage.getItem("user")).user.full_name ||
+												store.user.full_name}
+										</h1>
+									</h3>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<p>
+										<p>
+											<i className="fa fa-star start" aria-hidden="true" />
+										</p>
+									</p>
+									&nbsp;&nbsp;
+									<p>
+										<p>
+											<i className="fa fa-star start" aria-hidden="true" />
+										</p>
+									</p>
+									&nbsp;&nbsp;
+									<p>
+										<p>
+											<i className="fa fa-star start" aria-hidden="true" />
+										</p>
+									</p>
+									&nbsp;&nbsp;
+									<p>
+										<p>
+											<i className="fa fa-star start" aria-hidden="true" />
+										</p>
+									</p>
+									&nbsp;&nbsp;
+									<p>
+										<p>
+											<i className="fa fa-star start" aria-hidden="true" />
+										</p>
+									</p>
+								</div>
+
+								<div className="col-12 detallefondblack" id="presentationUser">
+									<div className="d-flex mb-5">
+										<i className="fas fa-map-marker-alt fa-2x text-white mr-4"></i>
+										<h2>{JSON.parse(localStorage.getItem("user")).user.city || store.user.city}</h2>
+									</div>
+
+									<h3>
+										{JSON.parse(localStorage.getItem("user")).user.personal_description ||
+											store.user.personal_description}
+									</h3>
+								</div>
+							</div>
+						</div>
+						<div className="row d-flex justify-content-around">
+							<div className="col-4 contentfondblack">
+								<div className="mb-3">
+									<h3>CONTACT</h3>
+									<h5>{JSON.parse(localStorage.getItem("user")).user.email || store.user.email}</h5>
+								</div>
+								<div className="mt-4">
+									<h3>SPOKEN LANGUAGES</h3>
+									<h5>*English</h5>
+									<h5>*Spanish</h5>
+									<h5>*French</h5>
+								</div>
+							</div>
+							<div className="col-4 contentfondblack">
+								<h3 className="mb-3">INTEREST</h3>
+								<h5>*Musician</h5>
+								<h5>*Traveler</h5>
+								<h5>*Movies</h5>
+								<h5>*Dancer</h5>
+								<h5>*Vegan</h5>
+								<h5>*Animal Lover</h5>
+							</div>
+						</div>
+					</>
+				) : null}
 			</div>
-			<div className="col-1 ">
-				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
+			<div className="col-1" id="containerOptionsProfile">
+				<div className="col buttonfondblack  d-flex justify-content-center">
 					<button
 						type="button"
-						className="navbar-brand mb-0 mr-2 btn btn-navb"
+						className="navbar-brand mb-0 mr-2 btn btn-navb "
 						onClick={() => handleSubmit()}>
-						<i className="fa fa-bars" aria-hidden="true" style={{ color: "white" }} />
-						<p className="textbuttons">Edit Profile</p>
+						<i className="fas fa-user-edit fa-2x text-white"></i>
+						<h5 className="textbuttons">Edit Profile</h5>
 					</button>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
+				<div className="col buttonfondblack  d-flex justify-content-center">
 					<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb" onClick={() => favorites()}>
-						<i className="fas fa-heart" style={{ color: "white" }} />
-						<p className="textbuttons">My Favorites</p>
+						<i className="fas fa-heart fa-2x text-white" />
+						<h5 className="textbuttons">My Favorites</h5>
 					</button>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
+				<div className="col buttonfondblack  d-flex justify-content-center">
 					<Link to="/detailedView">
 						<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb">
-							<i className="fas fa-euro-sign" style={{ color: "white" }} />
-							<p className="textbuttons">My Rents</p>
+							<i className="fas fa-euro-sign fa-2x text-white" />
+							<h5 className="textbuttons">My Rents</h5>
 						</button>
 					</Link>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
+				<div className="col buttonfondblack  d-flex justify-content-center">
 					<Link to="/announcements">
 						<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb">
-							<i className="fa fa-bed" aria-hidden="true" style={{ color: "white" }} />
-							<p className="textbuttons">My Rooms</p>
+							<i className="fa fa-bed fa-2x text-white" aria-hidden="true" />
+							<h5 className="textbuttons">My Rooms</h5>
 						</button>
 					</Link>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
+				<div className="col buttonfondblack d-flex justify-content-center">
 					<button
 						type="button"
 						className="navbar-brand mb-0 mr-2 btn btn-navb"
 						data-toggle="modal"
 						data-target="#notificationModal">
-						<i className="fa fa-user-plus" aria-hidden="true" style={{ color: "white" }} />
-						<p className="textbuttons">Add Romie</p>
+						<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" />
+						<h5 className="textbuttons">Add Romie</h5>
 					</button>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
+				<div className="col buttonfondblack d-flex justify-content-center">
 					<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb" data-target="#addReviewModal">
-						<i className="fas fa-backspace" aria-hidden="true" style={{ color: "white" }} />
-						<p className="textbuttons">Delete Romie</p>
+						<i className="fas fa-user-times fa-2x text-white"></i>
+						<h5 className="textbuttons">Delete Romie</h5>
 					</button>
 				</div>
-				<div className="col buttonfondblack" style={{ width: "190px", height: "120px" }}>
+				<div className="col buttonfondblack d-flex justify-content-center">
 					<button
 						type="button"
 						className="navbar-brand mb-0 mr-2 btn btn-navb"
 						data-toggle="modal"
 						data-target="#addReviewModal">
-						<i className="fa fa-user-plus" aria-hidden="true" style={{ color: "white" }} />
-						<p className="textbuttons">Add review</p>
+						<i className="far fa-comment-dots fa-2x text-white"></i>
+						<h5 className="textbuttons">Add review</h5>
 					</button>
 				</div>
 				{/*<!-- add ReviewModal Modal -->*/}

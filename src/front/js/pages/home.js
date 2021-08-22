@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import recorte from "../../img/recorte.jpg";
-import maps from "../../img/maps.png";
+
 import "../../styles/home.scss";
 import { Rating } from "../component/rating";
 import { Counter } from "../component/counter";
@@ -13,13 +12,7 @@ import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
 import { Link } from "react-router-dom";
 import MyMap from "../component/mapEngine";
-import {
-	CarouselRoomImg,
-	CarouselRoomImg2,
-	CarouselRoomImg3,
-	CarouselRoomImg4,
-	CarouselRoomImg5
-} from "../component/carouselRoomImg";
+import { CarouselRoomImg, CarouselRoomImg2, CarouselRoomImg3, CarouselRoomImg4 } from "../component/carouselRoomImg";
 import { Footer } from "../component/footer";
 
 export const Home = () => {

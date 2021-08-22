@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedDataUser
+from api.models import db, User, SeedDataUser, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
 from flask_jwt_extended import create_access_token
@@ -82,11 +82,27 @@ def get_users():
     
     return jsonify(list_users), 200
 
-@api.route('/users/<int:user_id>', methods=['GET'])
+@api.route('/profile/<int:user_id>', methods=['GET']) # EN POSTMAN FUNCIONA
 def get_single_user(user_id):
     body = request.get_json()
     user_selected = User.query.get(user_id)
     return jsonify(user_selected.serialize()), 200
+
+@api.route('/', methods=['GET'])
+def get_rooms():
+    rooms_list = []
+    rooms_list_in_DB = Room.query.all()
+    
+    for room in rooms_list_in_DB:
+        rooms_list.append(room.serialize())
+    
+    return jsonify(rooms_list), 200
+
+@api.route('/detailedView/<int:room_id>', methods=['GET']) # EN POSTMAN FUNCIONA
+def get_single_room(room_id):
+    body = request.get_json()
+    room_selected = Room.query.get(room_id)
+    return jsonify(room_selected.serialize()), 200
 
 
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # NO FUNCIONA !!!!
