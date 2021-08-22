@@ -317,7 +317,7 @@ class SeedDataUser:
 
   def create_seed_user(self):
     self.first_user = User( 
-        id = 1,
+        id = 1000,
         email = "adan_user@gmail.com",
         full_name = "Adan Genesis",
         password = "1111",
@@ -330,7 +330,7 @@ class SeedDataUser:
     ) 
 
     self.second_user = User( 
-        id = 2,
+        id = 2000,
         email = "eva_user@gmail.com",
         full_name = "Eva Gelion",
         password = "1111",
@@ -343,7 +343,7 @@ class SeedDataUser:
     )
 
     self.third_user = User( 
-        id = 3,
+        id = 3000,
         email = "sara_user@gmail.com",
         full_name = "Sara Genesis",
         password = "1111",
@@ -356,7 +356,7 @@ class SeedDataUser:
     )
 
     self.fourth_user = User( 
-        id = 4,
+        id = 4000,
         email = "abraham_user@gmail.com",
         full_name = "Abraham Genesis",
         password = "1111",
@@ -369,7 +369,7 @@ class SeedDataUser:
     )
 
     self.fifth_user = User( 
-        id = 5,
+        id = 5000,
         email = "noe_user@gmail.com",
         full_name = "Noé Genesis",
         password = "1111",
@@ -390,7 +390,7 @@ class SeedDataUser:
 
   def create_seed_room(self):
     self.first_room = Room( 
-        id = 1,
+        id = 1000,
         owner_id = self.first_user.id,
         description = "Cras ac fermentum neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
         address = "Bastero 6",
@@ -405,7 +405,7 @@ class SeedDataUser:
     )
 
     self.second_room = Room( 
-        id = 2,
+        id = 2000,
         owner_id = self.first_user.id,
         description = "Vestibulum auctor purus in leo laoreet, ac aliquam sem tincidunt. Vivamus eleifend magna a leo pulvinar.",
         address = "Bastero 6",
@@ -420,7 +420,7 @@ class SeedDataUser:
     )
 
     self.third_room = Room( 
-        id = 3,
+        id = 3000,
         owner_id = self.first_user.id,
         description = "Aliquam sit amet interdum lacus. Proin finibus vehicula sagittis.",
         address = "Bastero 6",
@@ -435,7 +435,7 @@ class SeedDataUser:
     )
 
     self.fourth_room = Room( 
-        id = 4,
+        id = 4000,
         owner_id = self.first_user.id,
         description = "Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
         address= "Bastero 6",
@@ -458,7 +458,7 @@ class SeedDataUser:
 # *********** ESTE SEED NO FUNCIONA **************
 #   def create_seed_reviews(self):
 #     self.first_review = Reviews( 
-#         id = 1,
+#         id = 1000,
 #         owner_id = self.first_user.id,
 #         tenant_id = self.second_user.id,
 #         room_id = self.first_room,
@@ -468,7 +468,7 @@ class SeedDataUser:
 #     )
 
 #     self.second_review = Reviews( 
-#         id = 2,
+#         id = 2000,
 #         owner_id = self.first_user.id,
 #         tenant_id = self.third_user.id,
 #         room_id = self.third_room,
@@ -478,7 +478,7 @@ class SeedDataUser:
 #     )
 
 #     self.third_review = Reviews( 
-#         id = 3,
+#         id = 3000,
 #         owner_id = self.first_user.id,
 #         tenant_id = self.fourth_user.id,
 #         room_id = self.fourth_room,

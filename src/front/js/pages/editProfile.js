@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import perfil from "../../img/fotodeperfil.png";
@@ -8,27 +8,54 @@ import { Language } from "../component/language";
 export const EditProfile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
-	function handleSubmit(e) {
+	const [formValue, setFormValue] = useState({
+		fullName: "",
+		email: "",
+		interests: "",
+		languages: "",
+		phone: null,
+		birthday: "",
+		sex: "",
+		occupation: "",
+		personalDescription: ""
+	});
+
+	const inputHandelChange = e => {
+		//"[e.target.name]" is the name of form inputs
+		setFormValue({ ...formValue, [e.target.name]: e.target.value });
+		console.log("formValue ----->>>> ", formValue);
+	};
+
+	const handleSubmit = async e => {
 		e.preventDefault();
 		alert("Excellent ... Profile Updated!");
-		history.push("/profile");
-	}
+
+		const signUpError = await actions.editProfile(formValue);
+
+		if (!signUpError) {
+			history.push("/profile");
+		}
+	};
+
 	return (
 		<div>
-			{/*Añadido por Felipe*/}
-			{/*	<div className="row pictureediperfile m-auto justify-content-center d-flex ">
-				<div className="detalle" style={{ width: "37rem", height: "29rem" }}>
-					<form>*/}
-			<div className=" pictureediperfile m-auto justify-content-center d-flex flex-column ">
+			<form
+				className=" pictureediperfile m-auto justify-content-center d-flex flex-column"
+				onSubmit={handleSubmit}>
 				<div className="detalle row d-flex justify-content-around " style={{ height: "40rem" }}>
-					<form className="col-6">
+					<div className="col-6">
 						<table className="tableeditusu">
 							<tr>
 								<th scope="col" className="textoeditusu">
-									Name * :
+									Full Name * :
 								</th>
 								<th scope="col">
-									<input type="name" className="form-inputs" id="name" />
+									<input
+										type="name"
+										className="form-inputs"
+										name="fullName"
+										onChange={inputHandelChange}
+									/>
 								</th>
 							</tr>
 							<tr>
@@ -36,14 +63,20 @@ export const EditProfile = () => {
 									Email * :
 								</th>
 								<th scope="col">
-									<input type="email" className="form-inputs" id="email" />
+									<input
+										type="email"
+										className="form-inputs"
+										name="email"
+										onChange={inputHandelChange}
+									/>
 								</th>
 							</tr>
 							<tr>
 								<th scope="col" className="textoeditusu">
 									Interests * :
 								</th>
-								<th scope="col " className="checklist">
+								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
+								<th scope="col " className="checklist" name="interests" onChange={inputHandelChange}>
 									<AnimatedMulti />
 								</th>
 							</tr>
@@ -51,7 +84,8 @@ export const EditProfile = () => {
 								<th scope="col" className="textoeditusu">
 									Languages :
 								</th>
-								<th scope="col" className="checklist">
+								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
+								<th scope="col" className="checklist" name="languages" onChange={inputHandelChange}>
 									<Language />
 								</th>
 							</tr>
@@ -60,7 +94,12 @@ export const EditProfile = () => {
 									Phone :
 								</th>
 								<th scope="col">
-									<input type="phone" className="form-inputs" id="phone" />
+									<input
+										type="phone"
+										className="form-inputs"
+										name="phone"
+										onChange={inputHandelChange}
+									/>
 								</th>
 							</tr>
 							<tr>
@@ -68,7 +107,12 @@ export const EditProfile = () => {
 									Birthday :
 								</th>
 								<th scope="col">
-									<input type="age" className="form-inputs" id="age" />
+									<input
+										type="date"
+										className="form-inputs"
+										name="birthday"
+										onChange={inputHandelChange}
+									/>
 								</th>
 							</tr>
 							<tr>
@@ -85,8 +129,9 @@ export const EditProfile = () => {
 												<input
 													className="form-check-input "
 													type="checkbox"
-													id="inlineCheckbox2"
 													value="man"
+													name="sex"
+													onChange={inputHandelChange}
 												/>
 											</th>
 											<th scope="col">
@@ -96,8 +141,9 @@ export const EditProfile = () => {
 												<input
 													className="form-check-input "
 													type="checkbox"
-													id="inlineCheckbox3"
 													value="woman"
+													name="sex"
+													onChange={inputHandelChange}
 												/>
 											</th>
 										</tr>
@@ -118,8 +164,9 @@ export const EditProfile = () => {
 												<input
 													className="form-check-input "
 													type="checkbox"
-													id="inlineCheckbox2"
-													value="man"
+													value="worker"
+													name="occupation"
+													onChange={inputHandelChange}
 												/>
 											</th>
 											<th scope="col">
@@ -129,8 +176,9 @@ export const EditProfile = () => {
 												<input
 													className="form-check-input "
 													type="checkbox"
-													id="inlineCheckbox3"
-													value="woman"
+													value="student"
+													name="occupation"
+													onChange={inputHandelChange}
 												/>
 											</th>
 										</tr>
@@ -138,7 +186,7 @@ export const EditProfile = () => {
 								</th>
 							</tr>
 						</table>
-					</form>
+					</div>
 					<div className=" col-3  detalle justify-content-center" style={{ width: "10rem", height: "29rem" }}>
 						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
 						<form>
@@ -150,7 +198,7 @@ export const EditProfile = () => {
 						</form>
 						<br />
 						{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
-						<button type="submit" className="btn btn-warning" onClick={handleSubmit}>
+						<button type="submit" className="btn btn-warning">
 							SAVE
 						</button>
 					</div>
@@ -158,11 +206,17 @@ export const EditProfile = () => {
 
 				<br />
 				<div className=" detalle" style={{ height: "16rem" }}>
-					<label className="textoeditusu   ">Tell us about you :</label>
+					<label className="textoeditusu">Tell us about you :</label>
 					<br />
-					<textarea className="form-control" id="exampleFormControlTextarea1" rows="3" />
+					<textarea
+						className="form-control"
+						id="exampleFormControlTextarea1"
+						rows="3"
+						name="personalDescription"
+						onChange={inputHandelChange}
+					/>
 				</div>
-			</div>
+			</form>
 		</div>
 	);
 };

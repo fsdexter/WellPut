@@ -73,6 +73,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ user: logedUser });
 				}
 			},
+			editProfile: async userValues => {
+				console.log("SE LLAMÓ A LA FUNCIÓN DE EDITAR PERFIL");
+
+				const store = getStore();
+
+				const requestOptions = {
+					method: "PATCH",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(userValues),
+					redirect: "follow"
+				};
+
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/edit_profile`, requestOptions);
+
+					if (response.status >= 400) {
+						const errorMsg = "Error during the edition process";
+						throw new Error(errorMsg);
+					} else {
+						const newStore = await response.json();
+						setStore({ user: newStore });
+						localStorage.setItem("user", JSON.stringify(store.user));
+
+						console.log("USUARIO EDITADO");
+					}
+				} catch (error) {
+					return error.message;
+				}
+			},
 			logOut: () => {
 				setStore({ user: null });
 				localStorage.clear();
