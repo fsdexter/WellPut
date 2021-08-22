@@ -19,6 +19,21 @@ export const EditProfile = () => {
 		occupation: "",
 		personalDescription: ""
 	});
+	const [addrtype, setAddrtype] = useState([
+		"Spanish",
+		"English",
+		"Chinese",
+		"Hindi",
+		"French",
+		"Arab",
+		"Russian",
+		"Portuguese",
+		"Bengali",
+		"German"
+	]);
+	const Add = addrtype.map(Add => Add);
+
+	const handleAddrTypeChange = e => console.log(addrtype[e.target.value]);
 
 	const inputHandelChange = e => {
 		//"[e.target.name]" is the name of form inputs
@@ -44,150 +59,159 @@ export const EditProfile = () => {
 				onSubmit={handleSubmit}>
 				<div className="detalle row d-flex justify-content-around " style={{ height: "40rem" }}>
 					<div className="col-6">
-						<table className="tableeditusu">
-							<tr>
-								<th scope="col" className="textoeditusu">
+						<div className="">
+							<div className=" d-flex">
+								<div scope="col" className="textoeditusu ">
 									Full Name * :
-								</th>
-								<th scope="col">
+								</div>
+
+								<div scope="col">
 									<input
 										type="name"
-										className="form-inputs"
+										className="inputeditusu"
 										name="fullName"
 										onChange={inputHandelChange}
 									/>
-								</th>
-							</tr>
-							<tr>
-								<th scope="col" className="textoeditusu">
+								</div>
+							</div>
+							<div className="row  d-flex">
+								<div scope="col-" className="textoeditusu">
 									Email * :
-								</th>
-								<th scope="col">
+								</div>
+								<div scope="col-10">
 									<input
 										type="email"
-										className="form-inputs"
+										className="inputeditusu"
 										name="email"
 										onChange={inputHandelChange}
 									/>
-								</th>
-							</tr>
-							<tr>
-								<th scope="col" className="textoeditusu">
+								</div>
+							</div>
+							<div className=" d-flex">
+								<div scope="col" className="textoeditusu">
 									Interests * :
-								</th>
+								</div>
 								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
-								<th scope="col " className="checklist" name="interests" onChange={inputHandelChange}>
+								<div scope="col " className="inputeditusu" name="interests" onClick={inputHandelChange}>
 									<AnimatedMulti />
-								</th>
-							</tr>
-							<tr>
-								<th scope="col" className="textoeditusu">
-									Languages :
-								</th>
+								</div>
+							</div>
+							<div className=" d-flex">
+								<div scope="col" className="textoeditusu">
+									Language * :
+								</div>
 								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
-								<th scope="col" className="checklist" name="languages" onChange={inputHandelChange}>
-									<Language />
-								</th>
-							</tr>
-							<tr>
-								<th scope="col" className="textoeditusu">
+								<div scope="col" className="inputeditusu" name="languages" onClick={inputHandelChange}>
+									<select
+										onChange={e => handleAddrTypeChange(e)}
+										className="browser-default custom-select">
+										{Add.map((address, key, index) => (
+											<option key={index} value={key}>
+												{address}
+											</option>
+										))}
+									</select>
+								</div>
+							</div>
+							<div className=" d-flex">
+								<div scope="col" className="textoeditusu">
 									Phone :
-								</th>
-								<th scope="col">
+								</div>
+								<div scope="col">
 									<input
 										type="phone"
-										className="form-inputs"
+										className="inputeditusu"
 										name="phone"
 										onChange={inputHandelChange}
 									/>
-								</th>
-							</tr>
-							<tr>
-								<th scope="col" className="textoeditusu">
+								</div>
+							</div>
+							<div className=" d-flex">
+								<div scope="col" className="textoeditusu">
 									Birthday :
-								</th>
-								<th scope="col">
+								</div>
+								<div scope="col">
 									<input
 										type="date"
-										className="form-inputs"
+										className="inputeditusu"
 										name="birthday"
 										onChange={inputHandelChange}
 									/>
-								</th>
-							</tr>
-							<tr>
-								<th scope="col" className="textoeditusu">
+								</div>
+							</div>
+							<div className=" d-flex">
+								<div scope="col" className="textoeditusu">
 									Sex :
-								</th>
-								<th scope="col">
-									<table className="table">
-										<tr>
-											<th scope="col">
-												<i className="fa fa-male fa-4x" aria-hidden="true" />
-											</th>
-											<th scope="col">
+								</div>
+								<div scope="col">
+									<div className="div">
+										<div className=" d-flex ">
+											<div scope="col">
+												<i className="fa fa-male fa-4x" aria-hidden="divue" />
+											</div>
+											<div scope="col">
 												<input
-													className="form-check-input "
+													className="form-check-input  "
 													type="checkbox"
 													value="man"
 													name="sex"
 													onChange={inputHandelChange}
 												/>
-											</th>
-											<th scope="col">
+											</div>
+											<div scope="col">
 												<i className="fas fa-female fa-4x " />
-											</th>
-											<th scope="col">
+											</div>
+											<div scope="col">
 												<input
-													className="form-check-input "
+													className="form-check-input"
 													type="checkbox"
 													value="woman"
 													name="sex"
 													onChange={inputHandelChange}
 												/>
-											</th>
-										</tr>
-									</table>
-								</th>
-							</tr>
-							<tr>
-								<th scope="col" className="textoeditusu">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div className=" d-flex">
+								<div scope="col" className="textoeditusu">
 									Occupation :
-								</th>
-								<th scope="col">
-									<table className="table">
-										<tr>
-											<th scope="col">
+								</div>
+								<div scope="col">
+									<div className="div">
+										<div className=" d-flex">
+											<div scope="col">
 												<i className="fas fa-briefcase fa-2x" />
-											</th>
-											<th scope="col">
+											</div>
+											<div scope="col">
 												<input
-													className="form-check-input "
+													className="form-check-input  "
 													type="checkbox"
 													value="worker"
 													name="occupation"
 													onChange={inputHandelChange}
 												/>
-											</th>
-											<th scope="col">
+											</div>
+											<div scope="col">
 												<i className="fas fa-user-graduate fa-2x" />
-											</th>
-											<th scope="col">
+											</div>
+											<div scope="col">
 												<input
-													className="form-check-input "
+													className="form-check-input"
 													type="checkbox"
 													value="student"
 													name="occupation"
 													onChange={inputHandelChange}
 												/>
-											</th>
-										</tr>
-									</table>
-								</th>
-							</tr>
-						</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div className=" col-3  detalle justify-content-center" style={{ width: "10rem", height: "29rem" }}>
+					<div className=" col  detalle justify-content-center" style={{ width: "10rem", height: "29rem" }}>
 						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
 						<form>
 							{/*<input type="file" />*/}
@@ -198,7 +222,7 @@ export const EditProfile = () => {
 						</form>
 						<br />
 						{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
-						<button type="submit" className="btn btn-warning">
+						<button type="submit" className="btn btn-warning" onClick={inputHandelChange}>
 							SAVE
 						</button>
 					</div>
