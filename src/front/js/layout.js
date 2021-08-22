@@ -30,7 +30,10 @@ const Layout = () => {
 						<Route exact path="/detailedView">
 							<DetailedView />
 						</Route>
-						<Route exact path="/edit_profile">
+						{/* <Route exact path={`/edit_profile/${user_id}`}>
+							<EditProfile />
+						</Route> */}
+						<Route exact path={`/edit_profile`}>
 							<EditProfile />
 						</Route>
 						<Route exact path="/profile">

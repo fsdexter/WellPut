@@ -21,9 +21,7 @@ api = Blueprint('api', __name__)
 @api.route('/sign_up', methods=['POST'])
 def sign_up_user():
     body_request = request.get_json()
-    print('body_request', body_request)
     email_request = body_request.get("email", None)
-    print('email_request', email_request)
     full_name_request = body_request.get("full_name", None)
     password_request = body_request.get("password", None)
     
@@ -32,8 +30,6 @@ def sign_up_user():
         full_name = full_name_request, 
         password = generate_password_hash(password_request, "sha256")
         )
-    
-    print('new_user', new_user)
     
     db.session.add(new_user)
     db.session.commit()
@@ -57,7 +53,6 @@ def login_user():
     
     # New token
     access_token = create_access_token(identity = user_checked.serialize())
-    print('access_token', access_token)
 
     return jsonify({"access_token": access_token, "user": user_checked.serialize()}), 200
 
@@ -75,6 +70,46 @@ def user_profile():
 def current_user(identity):
   print(identity["id"])
   return User.query.get(identity["id"])
+
+
+@api.route('/users', methods=['GET'])
+def get_users():
+    list_users = []
+    users_list_in_DB = User.query.all()
+    
+    for user in users_list_in_DB:
+        list_users.append(user.serialize())
+    
+    return jsonify(list_users), 200
+
+@api.route('/users/<int:user_id>', methods=['GET'])
+def get_single_user(user_id):
+    body = request.get_json()
+    user_selected = User.query.get(user_id)
+    return jsonify(user_selected.serialize()), 200
+
+
+@api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # NO FUNCIONA !!!!
+def edit_profile(user_id):
+    body_request = request.get_json()
+    user_to_edit = User.query.get_or_404(user_id)
+    user_to_edit.full_name = body_request.get("full_name", None)
+    user_to_edit.email = body_request.get("email", None)
+    user_to_edit.birthday = body_request.get("birthday", None)
+    user_to_edit.phone = body_request.get("phone", None)
+    user_to_edit.sex = body_request.get("sex", None)
+    user_to_edit.personal_description = body_request.get("personal_description", None)
+    user_to_edit.city = body_request.get("city", None)
+    #user_to_edit.avatar_url = body_request.get("avatar_url", None)
+    
+    print("USUARIO PARA EDITAR -- ", user_to_edit)
+    print("TELEFONO AÑADIDO ??¿¿¿¿¿¿¿¿????? -- ", user_to_edit.phone)
+    db.session.commit()
+    
+    print("body_request *********************** ", body_request)
+    
+    return jsonify(body_request), 200
+
 
 # -------------------------- SEED -------------------------
 
