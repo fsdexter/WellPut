@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 5d7c19b2e614
+Revision ID: d69b97d09f0c
 Revises: 
-Create Date: 2021-08-16 16:34:57.965350
+Create Date: 2021-08-22 10:03:17.169862
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5d7c19b2e614'
+revision = 'd69b97d09f0c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,11 +35,12 @@ def upgrade():
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('full_name', sa.String(length=120), nullable=True),
     sa.Column('password', sa.String(length=250), nullable=False),
-    sa.Column('birth_day', sa.DateTime(), nullable=True),
+    sa.Column('birthday', sa.DateTime(), nullable=True),
     sa.Column('phone', sa.String(length=120), nullable=True),
     sa.Column('sex', sa.String(length=120), nullable=True),
-    sa.Column('personal_descripction', sa.String(length=220), nullable=True),
+    sa.Column('personal_description', sa.String(length=220), nullable=True),
     sa.Column('avatar_url', sa.String(length=220), nullable=True),
+    sa.Column('city', sa.String(length=120), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
@@ -51,21 +52,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('review_owner',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('owner_id', sa.Integer(), nullable=True),
-    sa.Column('tenant_id', sa.Integer(), nullable=True),
-    sa.Column('comment', sa.String(length=220), nullable=True),
-    sa.Column('rating', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['owner_id'], ['user.id'], ),
-    sa.ForeignKeyConstraint(['tenant_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
     op.create_table('room',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=True),
-    sa.Column('photo_url', sa.String(length=255), nullable=True),
-    sa.Column('descripction', sa.String(length=280), nullable=True),
+    sa.Column('description', sa.String(length=280), nullable=True),
     sa.Column('address', sa.String(length=220), nullable=True),
     sa.Column('city', sa.String(length=120), nullable=True),
     sa.Column('country', sa.String(length=120), nullable=True),
@@ -73,7 +63,8 @@ def upgrade():
     sa.Column('deposit', sa.Integer(), nullable=True),
     sa.Column('title', sa.String(length=120), nullable=True),
     sa.Column('type_bed', sa.String(length=50), nullable=True),
-    sa.Column('type_room', sa.String(length=50), nullable=True),
+    sa.Column('latitude', sa.Float(precision=7), nullable=True),
+    sa.Column('longitude', sa.Float(precision=7), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -85,42 +76,37 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('user_archives',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('url', sa.String(length=500), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
     op.create_table('expenses_included',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('room_id', sa.Integer(), nullable=True),
-    sa.Column('descripction', sa.String(length=20), nullable=True),
+    sa.Column('description', sa.String(length=20), nullable=True),
     sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('other_feature',
+    op.create_table('features',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('room_id', sa.Integer(), nullable=True),
-    sa.Column('descripction', sa.String(length=20), nullable=True),
+    sa.Column('description', sa.String(length=20), nullable=True),
     sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('review_room',
+    op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('owner_id', sa.Integer(), nullable=True),
+    sa.Column('tenant_id', sa.Integer(), nullable=True),
     sa.Column('room_id', sa.Integer(), nullable=True),
     sa.Column('comment', sa.String(length=220), nullable=True),
     sa.Column('rating', sa.Integer(), nullable=True),
+    sa.Column('date', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['owner_id'], ['user.id'], ),
     sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['tenant_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('room_archive',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('url', sa.String(length=250), nullable=True),
     sa.Column('room_id', sa.Integer(), nullable=True),
-    sa.Column('kind', sa.String(length=20), nullable=True),
     sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -130,13 +116,11 @@ def upgrade():
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
     op.drop_table('room_archive')
-    op.drop_table('review_room')
-    op.drop_table('other_feature')
+    op.drop_table('reviews')
+    op.drop_table('features')
     op.drop_table('expenses_included')
-    op.drop_table('user_archives')
     op.drop_table('spoken_languages')
     op.drop_table('room')
-    op.drop_table('review_owner')
     op.drop_table('characteristic_user')
     op.drop_table('user')
     op.drop_table('languages')
