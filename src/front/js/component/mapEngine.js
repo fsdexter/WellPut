@@ -15,9 +15,7 @@ export default function MyMap(props) {
 	return (
 		<div style={props.style}>
 			<MapWrapped
-				googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
-					store.key
-				}`}
+				googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${store.key}`}
 				loadingElement={<div style={{ height: `100%` }} />}
 				containerElement={<div style={props.style} />}
 				mapElement={<div style={{ height: `100%` }} />}

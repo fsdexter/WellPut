@@ -29,7 +29,8 @@ export const SignUp = () => {
 		closeBtn.current.click();
 		// to go "Edit Profile" after the correct sign up
 		if (!signUpError) {
-			history.push("/edit_profile");
+			//history.push(`/edit_profile/${user_id}`);
+			history.push(`/edit_profile/`);
 		}
 	};
 
