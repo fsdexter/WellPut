@@ -10,59 +10,65 @@ db = SQLAlchemy()
 #------------------------------------------------------------------------------------------------------------------------------
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120))
+    name = db.Column(db.String(120), nullable=True)
+    last_name = db.Column(db.String(120), nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    name = db.Column(db.String(120))
     password = db.Column(db.String(250), nullable=False)
-    birthday = db.Column(db.DateTime)
-    phone = db.Column(db.String(120))
-    sex = db.Column(db.String(120))
-    personal_description = db.Column(db.String(220))
+    birthday = db.Column(db.DateTime, nullable=True)
+    phone = db.Column(db.String(120), nullable=True)
+    gender = db.Column(db.String(120), nullable=True)
+    description = db.Column(db.String(220), nullable=True)
     avatar_url = db.Column(db.String(220), unique=False, nullable=True)
-    city = db.Column(db.String(120)) 
-
-    #relaciones de usuario (1 a muchos)
-    #user_archive= db.relationship('UserArchives', lazy=True) --> Sólo hay una foto por usuario, por lo que se quita esta tabla
-    characteristic_user = db.relationship('CharacteristicUser', lazy=True)
-    spokenLanguages = db.relationship('SpokenLanguages', lazy=True)
+    city_id = db.Column(db.String(120), nullable=True)
     
-    
-    # --- SE HAN UNIDOS LOS DOS TIPOS DE REVIEWS A UNA SOLA TABLA ----
-    # #forma para relacionar una misma tabla con dos columnas de otra tabla a la vez
-    # owner = db.relationship('ReviewOwner', backref='owner', lazy='joined', foreign_keys ='ReviewOwner.owner_id')
-    # tenant = db.relationship('ReviewOwner', backref='tenant', lazy='joined', foreign_keys ='ReviewOwner.tenant_id')
-
-    #relaciones de Room
-    owner_room = db.relationship('Room', lazy=True)
-    
-    # --- SE HAN UNIDOS LOS DOS TIPOS DE REVIEWS A UNA SOLA TABLA ----
-    #review_room= db.relationship('ReviewRoom', lazy=True)
-    
-    #forma para relacionar una misma tabla con dos columnas de otra tabla a la vez
-    owner = db.relationship('Reviews', backref='owner', lazy='joined', foreign_keys ='Reviews.owner_id')
-    tenant = db.relationship('Reviews', backref='tenant', lazy='joined', foreign_keys ='Reviews.tenant_id')
+    city_id = db.Column(Integer, db.ForeignKey('city.id'))
+    city = relationship("City", back_populates="users")
     
     def __repr__(self):
-        return '<User %r>' % self.full_name
+        return '<User %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
+            "name": self.name,
+            "last_name": self.last_name,
             "email": self.email,
-            "full_name": self.full_name,
-            "phone": self.phone,
-            "sex": self.sex,
             "password":self.password,
             "birthday": self.birthday,
+            "phone": self.phone,
+            "gender": self.gender,
+            "description": self.description,
             "avatar_url": self.avatar_url,
-            "personal_description": self.personal_description,
-            "city": self.city,
+            "city_id": self.city_id,
         }
         
     # method to check the password and that verify that it is the user password
     def check_password(self, password_param):
        return safe_str_cmp(self.password.encode('utf-8'), password_param.encode('utf-8'))
-   
+
+#------------------------------------------------------------------------------------------------------------------------------
+#  CITY
+#------------------------------------------------------------------------------------------------------------------------------
+class City(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=True)
+    last_name = db.Column(db.String(120), nullable=True)
+    
+    users = relationship("User", back_populates="city")
+    
+    def __repr__(self):
+        return '<City %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "last_name": self.last_name
+        }
+
+
+        
+
 
 class CharacteristicUser(db.Model):
     #quite el name y la descrpcion por que ya estan en la tabla con la que se relaciona
