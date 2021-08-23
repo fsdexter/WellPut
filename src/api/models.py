@@ -243,6 +243,7 @@ class Room (db.Model):
     
     expenses_room = db.relationship("ExpensesRoom", back_populates="room")
 
+    room_archive = db.relationship("RoomArchive", back_populates="room")
 
     def __repr__(self):
         return '<Room %r>' % self.title
@@ -309,7 +310,9 @@ class Expense(db.Model):
 class RoomArchive(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(250))
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
+    
+    room_id = db.Column(Integer, db.ForeignKey('room.id'))
+    room = db.relationship("Room", back_populates="room_archive")
 
     def __repr__(self):
         return '<RoomArchive %r>' % self.id
