@@ -21,10 +21,10 @@ class User(db.Model):
     avatar_url = db.Column(db.String(220), unique=False, nullable=True)
     
     city_id = db.Column(Integer, db.ForeignKey('city.id'))
-    city =  db.relationship("City", back_populates="users")
     
+    city =  db.relationship("City", back_populates="users")
     characteristics_user = db.relationship("CharacteristicUser", back_populates="user")
-
+    spoken_languages = db.relationship("SpokenLanguages", back_populates="user")
     
     def __repr__(self):
         return '<User %r>' % self.id
@@ -60,7 +60,7 @@ class City(db.Model):
     country_id =  db.Column(Integer, db.ForeignKey('country.id'))
     country =  db.relationship("Country", back_populates="cities")
     
-    rooms =  db.relationship("Room", back_populates="parent")
+    rooms =  db.relationship("Room", back_populates="user")
     
     def __repr__(self):
         return '<City %r>' % self.id
@@ -97,7 +97,7 @@ class Country(db.Model):
 class CharacteristicUser(db.Model):
     id = db.Column(db.Integer, primary_key=True) 
     
-    user_id =  db.Column(Integer,  db.ForeignKey('user.id'))
+    user_id =  db.Column(Integer, db.ForeignKey('user.id'))
     user =  db.relationship("User", back_populates="characteristics_user")
     
     characteristic_id = db.Column(Integer, db.ForeignKey('characteristic.id'))
@@ -130,12 +130,17 @@ class Characteristic(db.Model):
             "kind": self.kind
         } 
 
-
-
+#------------------------------------------------------------------------------------------------------------------------------
+# Languages
+#------------------------------------------------------------------------------------------------------------------------------
 class SpokenLanguages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    languages_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
+    
+    user_id = db.Column(Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User", back_populates="spoken_languages")
+    
+    language_id = db.Column(Integer, db.ForeignKey('language.id'))
+    language = db.relationship("Language", back_populates="spoken_languages")
     
     def __repr__(self):
         return '<SpokenLanguages %r>' % self.id
@@ -144,19 +149,18 @@ class SpokenLanguages(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "languages_id": self.languages_id
+            "language_id": self.language_id
         }  
  
-class Languages(db.Model):
+class Language(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     locale = db.Column(db.String(50))
 
-    Spoken_languages = db.relationship('SpokenLanguages', lazy=True)
+    spoken_languages = db.relationship("SpokenLanguages", back_populates="language")
     
-
     def __repr__(self):
-        return '<Languages %r>' % self.id
+        return '<Language %r>' % self.id
 
     def serialize(self):
         return {
