@@ -21,7 +21,10 @@ class User(db.Model):
     avatar_url = db.Column(db.String(220), unique=False, nullable=True)
     
     city_id = db.Column(Integer, db.ForeignKey('city.id'))
-    city = relationship("City", back_populates="users")
+    city =  db.relationship("City", back_populates="users")
+    
+    characteristics_user = db.relationship("CharacteristicUser", back_populates="user")
+
     
     def __repr__(self):
         return '<User %r>' % self.id
@@ -53,9 +56,11 @@ class City(db.Model):
     name = db.Column(db.String(120), nullable=True)
     last_name = db.Column(db.String(120), nullable=True)
     
-    users = relationship("User", back_populates="city")
-    country_id = Column(Integer, ForeignKey('country.id'))
-    country = relationship("Country", back_populates="cities")
+    users =  db.relationship("User", back_populates="city")
+    country_id =  db.Column(Integer, db.ForeignKey('country.id'))
+    country =  db.relationship("Country", back_populates="cities")
+    
+    rooms =  db.relationship("Room", back_populates="parent")
     
     def __repr__(self):
         return '<City %r>' % self.id
@@ -85,14 +90,18 @@ class Country(db.Model):
             "id": self.id,
             "name": self.name
         }
-        
 
-
+#------------------------------------------------------------------------------------------------------------------------------
+#  Characteristics User
+#------------------------------------------------------------------------------------------------------------------------------       
 class CharacteristicUser(db.Model):
-    #quite el name y la descrpcion por que ya estan en la tabla con la que se relaciona
     id = db.Column(db.Integer, primary_key=True) 
-    Characteristic_id = db.Column(db.Integer, db.ForeignKey('characteristic.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
+    user_id =  db.Column(Integer,  db.ForeignKey('user.id'))
+    user =  db.relationship("User", back_populates="characteristics_user")
+    
+    characteristic_id = db.Column(Integer, db.ForeignKey('characteristic.id'))
+    characteristic = db.relationship("Characteristic", back_populates="characteristics_user")
     
     def __repr__(self):
         return '<CharacteristicUser %r>' % self.id
@@ -100,19 +109,16 @@ class CharacteristicUser(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "Characteristic_id": self.Characteristic_id,
+            "characteristic_id": self.characteristic_id,
             "user_id": self.user_id
-
         }  
 
-  
 class Characteristic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(20)) #cambie a type para decir si es hobby ocupacion 
-    name = db.Column(db.String(220)) #y el nombre de la ocupacion o hobby
-    
-    # 1 característica puede ser tenida por muchos usuarios (1 a muchos)
-    characteristic_user = db.relationship('CharacteristicUser', lazy=True)
+    name = db.Column(db.String(220))
+    kind = db.Column(db.String(20)) # -->> Occupation e Interests
+   
+    characteristics_user = db.relationship("CharacteristicUser", back_populates="characteristic")
 
     def __repr__(self):
         return '<Characteristic %r>' % self.id
@@ -121,44 +127,9 @@ class Characteristic(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "type": self.type
+            "kind": self.kind
         } 
 
-# --- SE HAN UNIDOS LOS DOS TIPOS DE REVIEWS A UNA SOLA TABLA ----
-# class ReviewOwner(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     tenant_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     comment = db.Column(db.String(220))
-#     rating = db.Column(db.Integer)
-
-#     def __repr__(self):
-#         return '<ReviewOwner %r>' % self.id
-
-#     def serialize(self):
-#         return {
-#             "id": self.id,
-#             "owner_id": self.owner_id,
-#             "tenant_id": self.tenant_id,
-#             "comment": self.comment,
-#             "rating": self.rating
-#         }  
-
-# --> Sólo hay una foto por usuario, por lo que se quita esta tabla
-# class UserArchives(db.Model): 
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     url = db.Column(db.String(500))
-
-#     def __repr__(self):
-#         return '<UserArchives %r>' % self.id
-
-#     def serialize(self):
-#         return {
-#             "id": self.id,
-#             "user_id": self.user_id,
-#             "url": self.url
-#         }  
 
 
 class SpokenLanguages(db.Model):
@@ -199,7 +170,6 @@ class Languages(db.Model):
 class Room (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    #photo_url = db.Column(db.String(255), unique=False, nullable=True) -->> Se encuentran el la tabla RoomArchive
     description = db.Column(db.String(280))
     address = db.Column(db.String(220))
     city = db.Column(db.String(120))
@@ -210,12 +180,11 @@ class Room (db.Model):
     type_bed = db.Column(db.String(50))
     latitude = db.Column(db.Float(7))
     longitude = db.Column(db.Float(7))
+    
+    city_id = db.Column(Integer,  db.ForeignKey('city.id'))
+    city =  db.relationship("City", back_populates="rooms")
 
-    room_archive = db.relationship('RoomArchive', lazy=True)
-    #review_Room = db.relationship('ReviewRoom', lazy=True)
-    reviews = db.relationship('Reviews', lazy=True)
-    expenses_included = db.relationship('ExpensesIncluded', lazy=True)
-    features = db.relationship('Features', lazy=True)
+    
 
     def __repr__(self):
         return '<Room %r>' % self.title
@@ -224,7 +193,6 @@ class Room (db.Model):
         return {
             "id": self.id,
             "owner_id": self.owner_id,
-           # "photo_url": self.photo_url,
             "description": self.description,
             "address": self.address,
             "city": self.city,
