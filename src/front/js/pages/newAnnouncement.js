@@ -10,6 +10,51 @@ import addPic from "../../img/addPic.png";
 export const NewAnnouncement = () => {
 	const { store, actions } = useContext(Context);
 	const [move, setMove] = useState("location");
+	const [city, setCity] = useState("");
+	const [address, setAddress] = useState("");
+	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const [price, setPrice] = useState("");
+	const [deposit, setDeposit] = useState("");
+
+	function functionTest() {
+		if (document.getElementById("checkWifi").checked) {
+			console.log("Wifi");
+		}
+		if (document.getElementById("checkShower").checked) {
+			console.log("Water");
+		}
+		if (document.getElementById("checkBurn").checked) {
+			console.log("Gas");
+		}
+		if (document.getElementById("checkBulb").checked) {
+			console.log("Electricity");
+		}
+		if (document.getElementById("checkFacing").checked) {
+			console.log("Facing the street");
+		}
+		if (document.getElementById("checkFurnished").checked) {
+			console.log("Furnished");
+		}
+		if (document.getElementById("checkSuite").checked) {
+			console.log("Suite Room");
+		}
+		if (document.getElementById("checkedShared").checked) {
+			console.log("Shared Room");
+		}
+		if (document.getElementById("checkSingle").checked) {
+			console.log("Single Bed");
+		}
+		if (document.getElementById("checkDouble").checked) {
+			console.log("Double Bed");
+		}
+		if (document.getElementById("checkNope").checked) {
+			console.log("No Bed");
+		}
+		if (document.getElementById("checkSofa").checked) {
+			console.log("Sofa Bed");
+		}
+	}
 
 	return (
 		<div className="container">
@@ -53,6 +98,7 @@ export const NewAnnouncement = () => {
 						<h5>Pictures</h5>
 					</a>
 				</li>
+				{/*
 				<li className="nav-item">
 					<a
 						className={move == "preview" ? "nav-link active noLink" : "nav-link noLink"}
@@ -66,6 +112,7 @@ export const NewAnnouncement = () => {
 						<h5>Preview</h5>
 					</a>
 				</li>
+				*/}
 			</ul>
 			<div className="tab-content" id="myTabContent">
 				<div
@@ -80,18 +127,23 @@ export const NewAnnouncement = () => {
 							{/*<p className="pl-4">Number</p>*/}
 						</div>
 						<div className="col pt-3">
-							<input type="text" className="form-control roundShape" placeholder="" />
-							<input type="text" className="form-control roundShape mt-3" placeholder="" />
-							{/*<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />*/}
+							<input
+								type="text"
+								className="form-control roundShape"
+								onChange={event => {
+									setCity(event.target.value);
+								}}
+							/>
+							<input
+								type="text"
+								className="form-control roundShape mt-3"
+								onChange={event => {
+									setAddress(event.target.value);
+								}}
+							/>
 						</div>
-						<div className="col-2 pt-3 fontInput">
-							{/*	<p className="pl-4">Floor</p>*/}
-							{/*	<p className="pl-4">P.Code</p>*/}
-						</div>
-						<div className="col-3">
-							{/*	<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />*/}
-							{/*	<input type="text" className="form-control roundShape mt-3 inputNumber" placeholder="" />*/}
-						</div>
+						<div className="col-2 pt-3 fontInput" />
+						<div className="col-3" />
 					</div>
 					<center>
 						<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "500px", height: "350px" }} />
@@ -116,7 +168,13 @@ export const NewAnnouncement = () => {
 							<p className="fontInput pl-5">Title </p>{" "}
 						</div>
 						<div className="col ">
-							<input type="text" className="form-control roundShape" placeholder="" />
+							<input
+								type="text"
+								className="form-control roundShape"
+								onChange={event => {
+									setTitle(event.target.value);
+								}}
+							/>
 						</div>
 						<div className="col-2" />
 					</div>
@@ -129,6 +187,9 @@ export const NewAnnouncement = () => {
 								className="form-control descriptionBack roundShape"
 								id="exampleFormControlTextarea1 "
 								rows="3"
+								onChange={event => {
+									setDescription(event.target.value);
+								}}
 							/>
 						</div>
 						<div className="col-1" />
@@ -139,23 +200,35 @@ export const NewAnnouncement = () => {
 								<div className="col-4">
 									<p className="fontInput pl-2">Price</p>{" "}
 								</div>
-								<div className="col-3">
-									<input type="text" className="form-control" placeholder="Min." />
+								<div className="col-5">
+									<input
+										type="text"
+										className="form-control"
+										onChange={event => {
+											setPrice(event.target.value);
+										}}
+									/>
 								</div>
-								<div className="col-3 mb-2">
+								{/*	<div className="col-3 mb-2">
 									<input type="text" className="form-control" placeholder="Max." />
-								</div>
+								</div>*/}
 							</div>
 							<div className="row ">
 								<div className="col-4">
 									<p className="fontInput pl-2">Deposit </p>{" "}
 								</div>
-								<div className="col-3">
-									<input type="text" className="form-control" placeholder="Min." />
+								<div className="col-5">
+									<input
+										type="text"
+										className="form-control"
+										onChange={event => {
+											setDeposit(event.target.value);
+										}}
+									/>
 								</div>
-								<div className="col-3 mb-2">
+								{/*<div className="col-3 mb-2">
 									<input type="text" className="form-control" placeholder="Max." />
-								</div>
+							</div>*/}
 							</div>
 						</div>
 						<div className="col">
@@ -172,7 +245,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio1"
+										id="checkWifi"
 										value="option1"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
@@ -184,7 +257,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio2"
+										id="checkShower"
 										value="option2"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
@@ -197,7 +270,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio3"
+										id="checkBurn"
 										value="option3"
 									/>
 									<label className="form-check-label " htmlFor="inlineRadio3">
@@ -209,7 +282,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio4"
+										id="checkBulb"
 										value="option4"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
@@ -230,7 +303,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio1"
+										id="checkFacing"
 										value="option1"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
@@ -244,7 +317,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio2"
+										id="checkFurnished"
 										value="option2"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
@@ -259,7 +332,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio3"
+										id="checkSuite"
 										value="option3"
 									/>
 									<label className="form-check-label " htmlFor="inlineRadio3">
@@ -273,7 +346,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="checkbox"
 										name="inlineRadioOptions"
-										id="inlineRadio4"
+										id="checkedShared"
 										value="option4"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
@@ -294,7 +367,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="radio"
 										name="inlineRadioOptions"
-										id="inlineRadio1"
+										id="checkSingle"
 										value="option1"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
@@ -308,7 +381,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="radio"
 										name="inlineRadioOptions"
-										id="inlineRadio2"
+										id="checkDouble"
 										value="option2"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
@@ -323,7 +396,7 @@ export const NewAnnouncement = () => {
 										className=" form-check-input"
 										type="radio"
 										name="inlineRadioOptions"
-										id="inlineRadio3"
+										id="checkNope"
 										value="option3"
 									/>
 									<label className="form-check-label " htmlFor="inlineRadio3">
@@ -337,7 +410,7 @@ export const NewAnnouncement = () => {
 										className="form-check-input"
 										type="radio"
 										name="inlineRadioOptions"
-										id="inlineRadio4"
+										id="checkSofa"
 										value="option4"
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
@@ -420,15 +493,17 @@ export const NewAnnouncement = () => {
 								className="btn btn-warning mb-5 ml-5"
 								data-toggle="tab"
 								href="#previewTab"
-								onClick={() => setMove("preview")}>
-								Continue
+								onClick={() =>
+									console.log(city, address, title, description, price, deposit, functionTest())
+								}>
+								Upload
 							</button>
 						</div>
 					</div>
 				</div>
-				<div className="tab-pane fade" id="previewTab" role="tabpanel" aria-labelledby="previewTab-tab">
+				{/*<div className="tab-pane fade" id="previewTab" role="tabpanel" aria-labelledby="previewTab-tab">
 					4
-				</div>
+				</div>*/}
 			</div>
 		</div>
 	);
