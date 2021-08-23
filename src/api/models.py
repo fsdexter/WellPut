@@ -101,7 +101,7 @@ class Country(db.Model):
 class CharacteristicUser(db.Model): 
     id = db.Column(db.Integer, primary_key=True) 
     
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     characteristic_id = db.Column(db.Integer, db.ForeignKey('characteristic.id'))
     
     user = db.relationship(User, backref=backref("characteristicUser", cascade="all, delete-orphan"))
@@ -123,7 +123,7 @@ class Characteristic(db.Model):
     name = db.Column(db.String(220))
     kind = db.Column(db.String(20)) # -->> Occupation e Interests
    
-    users = relationship("User", secondary="characteristicUser")
+    user = relationship("User", secondary="characteristicUser")
 
     def __repr__(self):
         return '<Characteristic %r>' % self.id
@@ -244,12 +244,10 @@ class Room (db.Model):
     
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="rooms")
-    
-    expenses_room = db.relationship("ExpensesRoom", back_populates="room")
 
     room_archive = db.relationship("RoomArchive", back_populates="room")
 
-    features_room = db.relationship("FeaturesRoom", back_populates="room")
+    expense = db.relationship("Expense", secondary="expensesRoom")
     
     def __repr__(self):
         return '<Room %r>' % self.title
@@ -276,11 +274,11 @@ class Room (db.Model):
 class ExpensesRoom(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
-    expense_id = db.Column(db.Integer, db.ForeignKey('expense.id'))
-    expense = db.relationship("Expense", back_populates="expenses_room")
-
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-    room = db.relationship("Room", back_populates="expenses_room")
+    expense_id = db.Column(db.Integer, db.ForeignKey('expense.id'))
+    
+    room = db.relationship(Room, backref=backref("expensesRoom", cascade="all, delete-orphan"))
+    expense = db.relationship(Expense, backref=backref("expensesRoom", cascade="all, delete-orphan"))
     
     def __repr__(self):
         return '<ExpensesRoom %r>' % self.id
@@ -298,15 +296,15 @@ class ExpensesRoom(db.Model):
 class Expense(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
-    expenses_room = db.relationship("ExpensesRoom", back_populates="expense")
-
+    
+    room = db.relationship("Room", secondary="expensesRoom")
+    
     def __repr__(self):
         return '<Expense %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
-            "room_id": self.id,
             "name": self.name
         }
         
