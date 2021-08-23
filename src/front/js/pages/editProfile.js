@@ -46,6 +46,7 @@ export const EditProfile = () => {
 		{ value: "Partying", label: "Partying" },
 		{ value: "Gay Friendly", label: "Gay Friendly" }
 	];
+	
 	const handleAddrTypeChange = (f, key) => {
 		console.log(f, key, "<-----");
 		setFormValue({
