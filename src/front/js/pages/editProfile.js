@@ -12,7 +12,7 @@ export const EditProfile = () => {
 		fullName: "",
 		email: "",
 		interests: "",
-		languages: { addrtype },
+		languages: "",
 		phone: null,
 		birthday: "",
 		sex: "",
@@ -20,23 +20,41 @@ export const EditProfile = () => {
 		personalDescription: ""
 	});
 	///////////////agregar language////
-	const [addrtype, setAddrtype] = useState([
-		"Spanish",
-		"English",
-		"Chinese",
-		"Hindi",
-		"French",
-		"Arab",
-		"Russian",
-		"Portuguese",
-		"Bengali",
-		"German"
-	]);
-
-	const handleAddrTypeChange = f => {
-		//	let Add = addrtype.map(Add => Add);
-		setAddrtype({ ...addrtype, [f.target.name]: f.target.value });
-		console.log("addrtype ----->>>> ", addrtype);
+	const addrtype = [
+		{ value: "Spanish", label: "Spanish" },
+		{ value: "English", label: "English" },
+		{ value: "Chinese", label: "Chinese" },
+		{ value: "Hindi", label: "Hindi" },
+		{ value: "French", label: "French" },
+		{ value: "Arab", label: "Arab" },
+		{ value: "Russian", label: "Russian" },
+		{ value: "Portuguese", label: "Portuguese" },
+		{ value: "Bengali", label: "Bengali" },
+		{ value: "German", label: "German" }
+	];
+	const interestsOptions = [
+		{ value: "Sporty", label: "Sporty" },
+		{ value: "Dancer", label: "Dancer" },
+		{ value: "Vegan", label: "Vegan" },
+		{ value: "Sociable", label: "Sociable" },
+		{ value: "Musician", label: "Musician" },
+		{ value: "Reader", label: "Reader" },
+		{ value: "Vegetarian", label: "Vegetarian" },
+		{ value: "Animal Lover", label: "Animal Lover" },
+		{ value: "Movies", label: "Movies" },
+		{ value: "Traveler", label: "Traveler" },
+		{ value: "Partying", label: "Partying" },
+		{ value: "Gay Friendly", label: "Gay Friendly" }
+	];
+	const handleAddrTypeChange = (f, key) => {
+		console.log(f, key, "<-----");
+		setFormValue({
+			...formValue,
+			[key]: f.map(item => {
+				return item.value;
+			})
+		});
+		console.log("addrtype ----->>>> ", formValue);
 	};
 	//////////////////////////////////////////////
 	const inputHandelChange = e => {
@@ -97,7 +115,10 @@ export const EditProfile = () => {
 								</div>
 								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
 								<div scope="col " className="inputeditusu" name="interests">
-									<AnimatedMulti />
+									<AnimatedMulti
+										options={interestsOptions}
+										change={f => handleAddrTypeChange(f, "interests")}
+									/>
 								</div>
 							</div>
 							<div className=" d-flex">
@@ -106,15 +127,10 @@ export const EditProfile = () => {
 								</div>
 								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
 								<div scope="col" className="inputeditusu" name="languages">
-									<select
-										onChange={f => handleAddrTypeChange(f)}
-										className="browser-default custom-select">
-										{Add.map((address, key, index) => (
-											<option key={index} value={key}>
-												{address}
-											</option>
-										))}
-									</select>
+									<AnimatedMulti
+										options={addrtype}
+										change={f => handleAddrTypeChange(f, "languages")}
+									/>
 								</div>
 							</div>
 							<div className=" d-flex">

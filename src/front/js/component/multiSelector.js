@@ -3,6 +3,8 @@ import React from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
+const animatedComponents = makeAnimated();
+
 const interestsOptions = [
 	{ value: "Sporty", label: "Sporty" },
 	{ value: "Dancer", label: "Dancer" },
@@ -18,16 +20,15 @@ const interestsOptions = [
 	{ value: "Gay Friendly", label: "Gay Friendly" }
 ];
 
-const animatedComponents = makeAnimated();
-
-export function AnimatedMulti() {
+export function AnimatedMulti(selectOptions) {
 	return (
 		<Select
 			closeMenuOnSelect={false}
 			components={animatedComponents}
 			isMulti
-			options={interestsOptions}
+			options={selectOptions.options}
 			className="fontColor"
+			onChange={e => selectOptions.change(e)}
 		/>
 	);
 }
