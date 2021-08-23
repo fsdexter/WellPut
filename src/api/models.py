@@ -10,8 +10,9 @@ db = SQLAlchemy()
 #------------------------------------------------------------------------------------------------------------------------------
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120))
     email = db.Column(db.String(120), unique=True, nullable=False)
-    full_name = db.Column(db.String(120))
+    name = db.Column(db.String(120))
     password = db.Column(db.String(250), nullable=False)
     birthday = db.Column(db.DateTime)
     phone = db.Column(db.String(120))
