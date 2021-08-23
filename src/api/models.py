@@ -25,6 +25,7 @@ class User(db.Model):
     city =  db.relationship("City", back_populates="users")
     characteristics_user = db.relationship("CharacteristicUser", back_populates="user")
     spoken_languages = db.relationship("SpokenLanguages", back_populates="user")
+    tenancies = db.relationship("Tenancy", back_populates="user")
     
     def __repr__(self):
         return '<User %r>' % self.id
@@ -167,7 +168,30 @@ class Language(db.Model):
             "id": self.id,
             "name": self.name,
             "locale": self.locale
-        }    
+        }   
+
+#------------------------------------------------------------------------------------------------------------------------------
+#  Tenancy (renter in the room)
+#------------------------------------------------------------------------------------------------------------------------------
+class Tenancy(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    
+    user_id = db.Column(Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User", back_populates="tenancies")
+
+    room_id = db.Column(Integer, db.ForeignKey('room.id'))
+    room = db.relationship("Room", back_populates="tenancies")
+    
+    def __repr__(self):
+        return '<Tenancy %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "room_id": self.room_id
+        } 
+ 
 #------------------------------------------------------------------------------------------------------------------------------
 #  ROOM
 #------------------------------------------------------------------------------------------------------------------------------
@@ -187,6 +211,8 @@ class Room (db.Model):
     
     city_id = db.Column(Integer,  db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="rooms")
+
+    tenancies = db.relationship("Tenancy", back_populates="room")
 
     
 
@@ -225,26 +251,6 @@ class RoomArchive(db.Model):
             "room_id": self.room_id
         }   
 
-# --- SE HAN UNIDOS LOS DOS TIPOS DE REVIEWS A UNA SOLA TABLA ----
-# class ReviewRoom(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-#     comment = db.Column(db.String(220))
-#     rating = db.Column(db.Integer)
-
-#     def __repr__(self):
-#         return '<ReviewRoom %r>' % self.id
-
-#     def serialize(self):
-#         return {
-#             "id": self.id,
-#             "user_id": self.user_id,
-#             "room_id": self.room_id,
-#             "comment": self.comment,
-#             "rating": self.rating
-#         }  
- 
   
 class ExpensesIncluded(db.Model):
     id = db.Column(db.Integer, primary_key=True)
