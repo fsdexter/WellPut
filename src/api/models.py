@@ -20,9 +20,9 @@ class User(db.Model):
     description = db.Column(db.String(220), nullable=True)
     avatar_url = db.Column(db.String(220), unique=False, nullable=True)
     
-    city_id = db.Column(Integer, db.ForeignKey('city.id'))
-    
+    city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="users")
+    
     characteristics_user = db.relationship("CharacteristicUser", back_populates="user")
     spoken_languages = db.relationship("SpokenLanguages", back_populates="user")
     tenancies = db.relationship("Tenancy", back_populates="user")
@@ -58,9 +58,10 @@ class City(db.Model):
     name = db.Column(db.String(120), nullable=True)
     last_name = db.Column(db.String(120), nullable=True)
     
-    users =  db.relationship("User", back_populates="city")
-    country_id =  db.Column(Integer, db.ForeignKey('country.id'))
+    country_id =  db.Column(db.Integer, db.ForeignKey('country.id'))
     country =  db.relationship("Country", back_populates="cities")
+    
+    users =  db.relationship("User", back_populates="city")
     
     rooms =  db.relationship("Room", back_populates="user")
     
@@ -82,7 +83,7 @@ class Country(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=True)
     
-    cities = relationship("City", back_populates="country")
+    cities = db.relationship("City", back_populates="country")
     
     def __repr__(self):
         return '<Country %r>' % self.id
@@ -99,10 +100,10 @@ class Country(db.Model):
 class CharacteristicUser(db.Model):
     id = db.Column(db.Integer, primary_key=True) 
     
-    user_id =  db.Column(Integer, db.ForeignKey('user.id'))
+    user_id =  db.Column(db.Integer, db.ForeignKey('user.id'))
     user =  db.relationship("User", back_populates="characteristics_user")
     
-    characteristic_id = db.Column(Integer, db.ForeignKey('characteristic.id'))
+    characteristic_id = db.Column(db.Integer, db.ForeignKey('characteristic.id'))
     characteristic = db.relationship("Characteristic", back_populates="characteristics_user")
     
     def __repr__(self):
@@ -138,10 +139,10 @@ class Characteristic(db.Model):
 class SpokenLanguages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
-    user_id = db.Column(Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="spoken_languages")
     
-    language_id = db.Column(Integer, db.ForeignKey('language.id'))
+    language_id = db.Column(db.Integer, db.ForeignKey('language.id'))
     language = db.relationship("Language", back_populates="spoken_languages")
     
     def __repr__(self):
@@ -177,10 +178,10 @@ class Language(db.Model):
 class Tenancy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
-    user_id = db.Column(Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="tenancies")
 
-    room_id = db.Column(Integer, db.ForeignKey('room.id'))
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
     room = db.relationship("Room", back_populates="tenancies")
     
     reviews = db.relationship("Review", back_populates="tenancy")
@@ -198,13 +199,13 @@ class Tenancy(db.Model):
 #------------------------------------------------------------------------------------------------------------------------------
 #  Review
 #------------------------------------------------------------------------------------------------------------------------------
- class Review(db.Model):
+class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(220))
     rating = db.Column(db.Integer)
     date = db.Column(db.DateTime)
     
-    tenancy_id = db.Column(Integer, db.ForeignKey('tenancy.id'))
+    tenancy_id = db.Column(db.Integer, db.ForeignKey('tenancy.id'))
     tenancy = db.relationship("Tenancy", back_populates="reviews")
 
     def __repr__(self):
@@ -234,11 +235,12 @@ class Room (db.Model):
     lat = db.Column(db.Float(15))
     long = db.Column(db.Float(15))
     
-    city_id = db.Column(Integer,  db.ForeignKey('city.id'))
+    city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="rooms")
+    
     tenancies = db.relationship("Tenancy", back_populates="room")
     
-    user_id = db.Column(Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="rooms")
     
     expenses_room = db.relationship("ExpensesRoom", back_populates="room")
@@ -272,10 +274,10 @@ class Room (db.Model):
 class ExpensesRoom(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
-    expense_id = db.Column(Integer, db.ForeignKey('expense.id'))
+    expense_id = db.Column(db.Integer, db.ForeignKey('expense.id'))
     expense = db.relationship("Expense", back_populates="expenses_room")
 
-    room_id = db.Column(Integer, db.ForeignKey('room.id'))
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
     room = db.relationship("Room", back_populates="expenses_room")
     
     def __repr__(self):
@@ -313,7 +315,7 @@ class RoomArchive(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(250))
     
-    room_id = db.Column(Integer, db.ForeignKey('room.id'))
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
     room = db.relationship("Room", back_populates="room_archive")
 
     def __repr__(self):
@@ -333,10 +335,10 @@ class RoomArchive(db.Model):
 class FeaturesRoom(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
-    room_id = db.Column(Integer, db.ForeignKey('room.id'))
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
     room = db.relationship("Room", back_populates="features_room")
     
-    feature_id = db.Column(Integer, db.ForeignKey('feature.id'))
+    feature_id = db.Column(db.Integer, db.ForeignKey('feature.id'))
     feature = db.relationship("Feature", back_populates="features_room")
 
     def __repr__(self):
@@ -356,7 +358,7 @@ class Feature(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
     
-    features_room = relationship("FeaturesRoom", back_populates="feature")
+    features_room =  db.relationship("FeaturesRoom", back_populates="feature")
 
     def __repr__(self):
         return '<Feature %r>' % self.id
@@ -561,9 +563,9 @@ class Feature(db.Model):
 #     db.session.commit()
     
     
-  def create_seed_data(self):
-    self.create_seed_user()
-    self.create_seed_room()
+#   def create_seed_data(self):
+#     self.create_seed_user()
+#     self.create_seed_room()
     # *********** ESTE SEED NO FUNCIONA **************
     #self.create_seed_reviews()
     

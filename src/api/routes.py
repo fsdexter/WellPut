@@ -4,7 +4,8 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedDataUser, Room
+#from api.models import db, User, SeedDataUser, Room
+from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
 from flask_jwt_extended import create_access_token
@@ -129,9 +130,9 @@ def edit_profile(user_id):
 
 # -------------------------- SEED -------------------------
 
-@api.route('/seed_data_user', methods=['GET'])
-def handle_seed_user_data():
-    seeder = SeedDataUser()
-    seeder.create_seed_data()
+# @api.route('/seed_data_user', methods=['GET'])
+# def handle_seed_user_data():
+#     seeder = SeedDataUser()
+#     seeder.create_seed_data()
 
-    return jsonify({"msg": "The user was created!" }), 200
+#     return jsonify({"msg": "The user was created!" }), 200
