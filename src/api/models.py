@@ -19,7 +19,6 @@ class User(db.Model):
     gender = db.Column(db.String(120), nullable=True)
     description = db.Column(db.String(220), nullable=True)
     avatar_url = db.Column(db.String(220), unique=False, nullable=True)
-    city_id = db.Column(db.String(120), nullable=True)
     
     city_id = db.Column(Integer, db.ForeignKey('city.id'))
     city = relationship("City", back_populates="users")
@@ -39,7 +38,7 @@ class User(db.Model):
             "gender": self.gender,
             "description": self.description,
             "avatar_url": self.avatar_url,
-            "city_id": self.city_id,
+            "city_id": self.city_id
         }
         
     # method to check the password and that verify that it is the user password
@@ -55,6 +54,8 @@ class City(db.Model):
     last_name = db.Column(db.String(120), nullable=True)
     
     users = relationship("User", back_populates="city")
+    country_id = Column(Integer, ForeignKey('country.id'))
+    country = relationship("Country", back_populates="cities")
     
     def __repr__(self):
         return '<City %r>' % self.id
@@ -63,10 +64,27 @@ class City(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "last_name": self.last_name
+            "last_name": self.last_name,
+            "country_id": self.country_id
         }
 
+#------------------------------------------------------------------------------------------------------------------------------
+#  Country
+#------------------------------------------------------------------------------------------------------------------------------
+class Country(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=True)
+    
+    cities = relationship("City", back_populates="country")
+    
+    def __repr__(self):
+        return '<Country %r>' % self.id
 
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }
         
 
 
