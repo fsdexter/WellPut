@@ -23,10 +23,11 @@ class User(db.Model):
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="users")
     
-    characteristics_user = db.relationship("CharacteristicUser", back_populates="user")
-    spoken_languages = db.relationship("SpokenLanguages", back_populates="user")
     tenancies = db.relationship("Tenancy", back_populates="user")
     rooms = db.relationship("Room", back_populates="user")
+    
+    language = db.relationship("Language", secondary="spoken_languages")
+    characteristic = db.relationship("Characteristic", secondary="characteristicUser")
     
     def __repr__(self):
         return '<User %r>' % self.id
@@ -63,7 +64,7 @@ class City(db.Model):
     
     users =  db.relationship("User", back_populates="city")
     
-    rooms =  db.relationship("Room", back_populates="user")
+    rooms =  db.relationship("Room", back_populates="city")
     
     def __repr__(self):
         return '<City %r>' % self.id
@@ -95,16 +96,17 @@ class Country(db.Model):
         }
 
 #------------------------------------------------------------------------------------------------------------------------------
-#  Characteristics User
+#  Characteristics User: Tabla intermedia entre Usuario y caracteristicas (muchos a muchos)
 #------------------------------------------------------------------------------------------------------------------------------       
-class CharacteristicUser(db.Model):
+class CharacteristicUser(db.Model): 
     id = db.Column(db.Integer, primary_key=True) 
     
-    user_id =  db.Column(db.Integer, db.ForeignKey('user.id'))
-    user =  db.relationship("User", back_populates="characteristics_user")
-    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     characteristic_id = db.Column(db.Integer, db.ForeignKey('characteristic.id'))
-    characteristic = db.relationship("Characteristic", back_populates="characteristics_user")
+    
+    user = db.relationship(User, backref=backref("characteristicUser", cascade="all, delete-orphan"))
+    characteristic = db.relationship(Characteristic, backref=backref("characteristicUser", cascade="all, delete-orphan"))
+
     
     def __repr__(self):
         return '<CharacteristicUser %r>' % self.id
@@ -121,7 +123,7 @@ class Characteristic(db.Model):
     name = db.Column(db.String(220))
     kind = db.Column(db.String(20)) # -->> Occupation e Interests
    
-    characteristics_user = db.relationship("CharacteristicUser", back_populates="characteristic")
+    users = relationship("User", secondary="characteristicUser")
 
     def __repr__(self):
         return '<Characteristic %r>' % self.id
@@ -140,10 +142,10 @@ class SpokenLanguages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship("User", back_populates="spoken_languages")
-    
     language_id = db.Column(db.Integer, db.ForeignKey('language.id'))
-    language = db.relationship("Language", back_populates="spoken_languages")
+    
+    user = db.relationship(User, backref=backref("spoken_languages", cascade="all, delete-orphan"))
+    language = db.relationship(Language, backref=backref("spoken_languages", cascade="all, delete-orphan"))
     
     def __repr__(self):
         return '<SpokenLanguages %r>' % self.id
@@ -160,7 +162,7 @@ class Language(db.Model):
     name = db.Column(db.String(80))
     locale = db.Column(db.String(50))
 
-    spoken_languages = db.relationship("SpokenLanguages", back_populates="language")
+    user = db.relationship("User", secondary="spoken_languages")
     
     def __repr__(self):
         return '<Language %r>' % self.id
