@@ -248,6 +248,7 @@ class Room (db.Model):
     room_archive = db.relationship("RoomArchive", back_populates="room")
 
     expense = db.relationship("Expense", secondary="expensesRoom")
+    feature = db.relationship("Feature", secondary="featuresRoom")
     
     def __repr__(self):
         return '<Room %r>' % self.title
@@ -336,10 +337,10 @@ class FeaturesRoom(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-    room = db.relationship("Room", back_populates="features_room")
-    
     feature_id = db.Column(db.Integer, db.ForeignKey('feature.id'))
-    feature = db.relationship("Feature", back_populates="features_room")
+    
+    room = db.relationship(Room, backref=backref("featuresRoom", cascade="all, delete-orphan"))
+    feature = db.relationship(Feature, backref=backref("featuresRoom", cascade="all, delete-orphan"))
 
     def __repr__(self):
         return '<FeaturesRoom %r>' % self.id
@@ -358,7 +359,7 @@ class Feature(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
     
-    features_room =  db.relationship("FeaturesRoom", back_populates="feature")
+    room = db.relationship("Room", secondary="featuresRoom")
 
     def __repr__(self):
         return '<Feature %r>' % self.id
