@@ -1,10 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey, DateTime
+from sqlalchemy.orm import relationship, backref
 # to check the password
 from werkzeug.security import safe_str_cmp
 from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
+
 #------------------------------------------------------------------------------------------------------------------------------
 #  USER
 #------------------------------------------------------------------------------------------------------------------------------
@@ -104,8 +106,8 @@ class CharacteristicUser(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     characteristic_id = db.Column(db.Integer, db.ForeignKey('characteristic.id'))
     
-    user = db.relationship(User, backref=backref("characteristicUser", cascade="all, delete-orphan"))
-    characteristic = db.relationship(Characteristic, backref=backref("characteristicUser", cascade="all, delete-orphan"))
+    user = db.relationship("User", backref=backref("characteristicUser", cascade="all, delete-orphan"))
+    characteristic = db.relationship("Characteristic", backref=backref("characteristicUser", cascade="all, delete-orphan"))
 
     
     def __repr__(self):
@@ -123,7 +125,7 @@ class Characteristic(db.Model):
     name = db.Column(db.String(220))
     kind = db.Column(db.String(20)) # -->> Occupation e Interests
    
-    user = relationship("User", secondary="characteristicUser")
+    user = db.relationship("User", secondary="characteristicUser")
 
     def __repr__(self):
         return '<Characteristic %r>' % self.id
@@ -144,8 +146,8 @@ class SpokenLanguages(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     language_id = db.Column(db.Integer, db.ForeignKey('language.id'))
     
-    user = db.relationship(User, backref=backref("spoken_languages", cascade="all, delete-orphan"))
-    language = db.relationship(Language, backref=backref("spoken_languages", cascade="all, delete-orphan"))
+    user = db.relationship("User", backref=backref("spoken_languages", cascade="all, delete-orphan"))
+    language = db.relationship("Language", backref=backref("spoken_languages", cascade="all, delete-orphan"))
     
     def __repr__(self):
         return '<SpokenLanguages %r>' % self.id
@@ -278,8 +280,8 @@ class ExpensesRoom(db.Model):
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
     expense_id = db.Column(db.Integer, db.ForeignKey('expense.id'))
     
-    room = db.relationship(Room, backref=backref("expensesRoom", cascade="all, delete-orphan"))
-    expense = db.relationship(Expense, backref=backref("expensesRoom", cascade="all, delete-orphan"))
+    room = db.relationship("Room", backref=backref("expensesRoom", cascade="all, delete-orphan"))
+    expense = db.relationship("Expense", backref=backref("expensesRoom", cascade="all, delete-orphan"))
     
     def __repr__(self):
         return '<ExpensesRoom %r>' % self.id
@@ -339,8 +341,8 @@ class FeaturesRoom(db.Model):
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
     feature_id = db.Column(db.Integer, db.ForeignKey('feature.id'))
     
-    room = db.relationship(Room, backref=backref("featuresRoom", cascade="all, delete-orphan"))
-    feature = db.relationship(Feature, backref=backref("featuresRoom", cascade="all, delete-orphan"))
+    room = db.relationship("Room", backref=backref("featuresRoom", cascade="all, delete-orphan"))
+    feature = db.relationship("Feature", backref=backref("featuresRoom", cascade="all, delete-orphan"))
 
     def __repr__(self):
         return '<FeaturesRoom %r>' % self.id
