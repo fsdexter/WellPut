@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import perfil from "../../img/fotodeperfil.png";
 import { AnimatedMulti } from "../component/multiSelector";
 import "../../styles/perfiledit.scss";
-import { Language } from "../component/language";
+
 export const EditProfile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
@@ -12,13 +12,14 @@ export const EditProfile = () => {
 		fullName: "",
 		email: "",
 		interests: "",
-		languages: "",
+		languages: { addrtype },
 		phone: null,
 		birthday: "",
 		sex: "",
 		occupation: "",
 		personalDescription: ""
 	});
+	///////////////agregar language////
 	const [addrtype, setAddrtype] = useState([
 		"Spanish",
 		"English",
@@ -31,10 +32,13 @@ export const EditProfile = () => {
 		"Bengali",
 		"German"
 	]);
-	const Add = addrtype.map(Add => Add);
 
-	const handleAddrTypeChange = e => console.log(addrtype[e.target.value]);
-
+	const handleAddrTypeChange = f => {
+		//	let Add = addrtype.map(Add => Add);
+		setAddrtype({ ...addrtype, [f.target.name]: f.target.value });
+		console.log("addrtype ----->>>> ", addrtype);
+	};
+	//////////////////////////////////////////////
 	const inputHandelChange = e => {
 		//"[e.target.name]" is the name of form inputs
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
@@ -92,7 +96,7 @@ export const EditProfile = () => {
 									Interests * :
 								</div>
 								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
-								<div scope="col " className="inputeditusu" name="interests" onClick={inputHandelChange}>
+								<div scope="col " className="inputeditusu" name="interests">
 									<AnimatedMulti />
 								</div>
 							</div>
@@ -101,9 +105,9 @@ export const EditProfile = () => {
 									Language * :
 								</div>
 								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
-								<div scope="col" className="inputeditusu" name="languages" onClick={inputHandelChange}>
+								<div scope="col" className="inputeditusu" name="languages">
 									<select
-										onChange={e => handleAddrTypeChange(e)}
+										onChange={f => handleAddrTypeChange(f)}
 										className="browser-default custom-select">
 										{Add.map((address, key, index) => (
 											<option key={index} value={key}>
