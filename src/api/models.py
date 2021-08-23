@@ -171,7 +171,7 @@ class Language(db.Model):
         }   
 
 #------------------------------------------------------------------------------------------------------------------------------
-#  Tenancy (renter in the room)
+#  Tenancy (relation between tenant and room)
 #------------------------------------------------------------------------------------------------------------------------------
 class Tenancy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -182,6 +182,8 @@ class Tenancy(db.Model):
     room_id = db.Column(Integer, db.ForeignKey('room.id'))
     room = db.relationship("Room", back_populates="tenancies")
     
+    reviews = db.relationship("Review", back_populates="tenancy")
+    
     def __repr__(self):
         return '<Tenancy %r>' % self.id
 
@@ -191,7 +193,31 @@ class Tenancy(db.Model):
             "user_id": self.user_id,
             "room_id": self.room_id
         } 
- 
+        
+#------------------------------------------------------------------------------------------------------------------------------
+#  Review
+#------------------------------------------------------------------------------------------------------------------------------
+ class Review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String(220))
+    rating = db.Column(db.Integer)
+    date = db.Column(db.DateTime)
+    
+    tenancy_id = db.Column(Integer, db.ForeignKey('tenancy.id'))
+    tenancy = db.relationship("Tenancy", back_populates="reviews")
+
+    def __repr__(self):
+        return '<Review %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "comment": self.comment,
+            "rating": self.rating,
+            "date": self.date,
+            "tenancy_id": self.tenancy_id
+        }  
+        
 #------------------------------------------------------------------------------------------------------------------------------
 #  ROOM
 #------------------------------------------------------------------------------------------------------------------------------
@@ -282,28 +308,7 @@ class Features(db.Model):
             "description": self.description,
         }  
         
-class Reviews(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    tenant_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-    comment = db.Column(db.String(220))
-    rating = db.Column(db.Integer)
-    date = db.Column(db.DateTime)
 
-    def __repr__(self):
-        return '<Reviews %r>' % self.id
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "owner_id": self.owner_id,
-            "tenant_id": self.tenant_id,
-            "room_id": self.room_id,
-            "comment": self.comment,
-            "rating": self.rating,
-            "date": self.date
-        }  
 
 
 #------------------------------------------------------------------------------------------------------------------------------
