@@ -5,20 +5,41 @@ from werkzeug.security import safe_str_cmp
 from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
+
+#------------------------------------------------------------------------------------------------------------------------------
+#  CITY
+#------------------------------------------------------------------------------------------------------------------------------
+
+class City(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    lat = db.Column(db.Float(15))
+    long = db.Column(db.Float(15))
+    users = db.relationship("User", back_populates="city")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "lat": self.lat,
+            "long": self.users
+        }
+
 #------------------------------------------------------------------------------------------------------------------------------
 #  USER
 #------------------------------------------------------------------------------------------------------------------------------
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    full_name = db.Column(db.String(120))
+    name = db.Column(db.String(120), nullable=True)
+    last_name = db.Column(db.String(120), nullable=True)
     password = db.Column(db.String(250), nullable=False)
-    birthday = db.Column(db.DateTime)
-    phone = db.Column(db.String(120))
-    sex = db.Column(db.String(120))
-    personal_description = db.Column(db.String(220))
+    birthday = db.Column(db.DateTime, nullable=True)
+    phone = db.Column(db.String(120), nullable=True)
+    gender = db.Column(db.String(120), nullable=True)
+    personal_description = db.Column(db.String(220), nullable=True)
     avatar_url = db.Column(db.String(220), unique=False, nullable=True)
-    city = db.Column(db.String(120)) 
+    
+    city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
+    city = db.relationship("City", back_populates="users")
 
     #relaciones de usuario (1 a muchos)
     #user_archive= db.relationship('UserArchives', lazy=True) --> Sólo hay una foto por usuario, por lo que se quita esta tabla
@@ -42,15 +63,16 @@ class User(db.Model):
     tenant = db.relationship('Reviews', backref='tenant', lazy='joined', foreign_keys ='Reviews.tenant_id')
     
     def __repr__(self):
-        return '<User %r>' % self.full_name
+        return '<User %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
             "email": self.email,
-            "full_name": self.full_name,
+            "name": self.name,
+            "lastName": self.last_name,
             "phone": self.phone,
-            "sex": self.sex,
+            "gender": self.gender,
             "password":self.password,
             "birthday": self.birthday,
             "avatar_url": self.avatar_url,
@@ -177,7 +199,6 @@ class Room (db.Model):
     #photo_url = db.Column(db.String(255), unique=False, nullable=True) -->> Se encuentran el la tabla RoomArchive
     description = db.Column(db.String(280))
     address = db.Column(db.String(220))
-    city = db.Column(db.String(120))
     country = db.Column(db.String(120))
     price = db.Column(db.Integer)
     deposit = db.Column(db.Integer)
