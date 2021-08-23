@@ -26,6 +26,7 @@ class User(db.Model):
     characteristics_user = db.relationship("CharacteristicUser", back_populates="user")
     spoken_languages = db.relationship("SpokenLanguages", back_populates="user")
     tenancies = db.relationship("Tenancy", back_populates="user")
+    rooms = db.relationship("Room", back_populates="user")
     
     def __repr__(self):
         return '<User %r>' % self.id
@@ -223,24 +224,25 @@ class Tenancy(db.Model):
 #------------------------------------------------------------------------------------------------------------------------------
 class Room (db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     description = db.Column(db.String(280))
     address = db.Column(db.String(220))
-    city = db.Column(db.String(120))
     country = db.Column(db.String(120))
     price = db.Column(db.Integer)
     deposit = db.Column(db.Integer)
     title =db.Column(db.String(120))
     type_bed = db.Column(db.String(50))
-    latitude = db.Column(db.Float(7))
-    longitude = db.Column(db.Float(7))
+    lat = db.Column(db.Float(15))
+    long = db.Column(db.Float(15))
     
     city_id = db.Column(Integer,  db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="rooms")
-
     tenancies = db.relationship("Tenancy", back_populates="room")
-
     
+    user_id = db.Column(Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User", back_populates="rooms")
+    
+    expenses_room = db.relationship("ExpensesRoom", back_populates="room")
+
 
     def __repr__(self):
         return '<Room %r>' % self.title
@@ -248,20 +250,62 @@ class Room (db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "owner_id": self.owner_id,
             "description": self.description,
             "address": self.address,
-            "city": self.city,
             "country": self.country,
             "price": self.price,
             "deposit": self.deposit,
             "title": self.title, 
             "type_bed": self.type_bed,
-            "latitude": self.latitude,
-            "longitude": self.longitude,
+            "lat": self.lat,
+            "long": self.long,
+            "city_id": self.city_id,
+            "user_id": self.user_id,
         }
+        
+#------------------------------------------------------------------------------------------------------------------------------
+#  Expenses ROOM
+#------------------------------------------------------------------------------------------------------------------------------  
+class ExpensesRoom(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    
+    expense_id = db.Column(Integer, db.ForeignKey('expense.id'))
+    expense = db.relationship("Expense", back_populates="expenses_room")
 
+    room_id = db.Column(Integer, db.ForeignKey('room.id'))
+    room = db.relationship("Room", back_populates="expenses_room")
+    
+    def __repr__(self):
+        return '<ExpensesRoom %r>' % self.id
 
+    def serialize(self):
+        return {
+            "id": self.id,
+            "expense_id": self.expense_id,
+            "room_id": self.room_id
+        }
+        
+#------------------------------------------------------------------------------------------------------------------------------
+#  Expenses ROOM
+#------------------------------------------------------------------------------------------------------------------------------  
+class Expense(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120))
+    expenses_room = db.relationship("ExpensesRoom", back_populates="expense")
+
+    def __repr__(self):
+        return '<Expense %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "room_id": self.id,
+            "name": self.name
+        }
+        
+#------------------------------------------------------------------------------------------------------------------------------
+#  RoomArchive
+#------------------------------------------------------------------------------------------------------------------------------
 class RoomArchive(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(250))
@@ -276,23 +320,10 @@ class RoomArchive(db.Model):
             "url": self.url,
             "room_id": self.room_id
         }   
-
   
-class ExpensesIncluded(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-    description = db.Column(db.String(20))
-
-    def __repr__(self):
-        return '<ExpensesIncluded %r>' % self.id
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "room_id": self.id,
-            "description": self.description
-        }  
-         
+#------------------------------------------------------------------------------------------------------------------------------
+#  Features
+#------------------------------------------------------------------------------------------------------------------------------        
 class Features(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
