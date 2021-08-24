@@ -5,7 +5,6 @@ import makeAnimated from "react-select/animated";
 
 const animatedComponents = makeAnimated();
 
-
 export function AnimatedMulti(selectOptions) {
 	return (
 		<Select

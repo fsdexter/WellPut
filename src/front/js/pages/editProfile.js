@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import perfil from "../../img/fotodeperfil.png";
 import { AnimatedMulti } from "../component/multiSelector";
 import "../../styles/perfiledit.scss";
+import { interestsOptions, languageOptions } from "../constants";
 
 export const EditProfile = () => {
 	const history = useHistory();
@@ -19,34 +20,6 @@ export const EditProfile = () => {
 		occupation: "",
 		personalDescription: ""
 	});
-	///////////////agregar language////
-	const addrtype = [
-		{ value: "Spanish", label: "Spanish" },
-		{ value: "English", label: "English" },
-		{ value: "Chinese", label: "Chinese" },
-		{ value: "Hindi", label: "Hindi" },
-		{ value: "French", label: "French" },
-		{ value: "Arab", label: "Arab" },
-		{ value: "Russian", label: "Russian" },
-		{ value: "Portuguese", label: "Portuguese" },
-		{ value: "Bengali", label: "Bengali" },
-		{ value: "German", label: "German" }
-	];
-	const interestsOptions = [
-		{ value: "Sporty", label: "Sporty" },
-		{ value: "Dancer", label: "Dancer" },
-		{ value: "Vegan", label: "Vegan" },
-		{ value: "Sociable", label: "Sociable" },
-		{ value: "Musician", label: "Musician" },
-		{ value: "Reader", label: "Reader" },
-		{ value: "Vegetarian", label: "Vegetarian" },
-		{ value: "Animal Lover", label: "Animal Lover" },
-		{ value: "Movies", label: "Movies" },
-		{ value: "Traveler", label: "Traveler" },
-		{ value: "Partying", label: "Partying" },
-		{ value: "Gay Friendly", label: "Gay Friendly" }
-	];
-	
 	const handleAddrTypeChange = (f, key) => {
 		console.log(f, key, "<-----");
 		setFormValue({
@@ -129,7 +102,7 @@ export const EditProfile = () => {
 								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
 								<div scope="col" className="inputeditusu" name="languages">
 									<AnimatedMulti
-										options={addrtype}
+										options={languageOptions}
 										change={f => handleAddrTypeChange(f, "languages")}
 									/>
 								</div>
