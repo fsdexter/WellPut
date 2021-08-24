@@ -10,6 +10,11 @@ db = SQLAlchemy()
 #------------------------------------------------------------------------------------------------------------------------------
 #  USER
 #------------------------------------------------------------------------------------------------------------------------------
+#characteristic = db.Table('characteristic',
+#    db.Column('characteristic_id', db.Integer, db.ForeignKey('characteristic.id'), primary_key=True),
+#    db.Column('user_id', db.Integer, db.ForeignKey('user_id'), primary_key=True)
+#)
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=True)
@@ -29,7 +34,7 @@ class User(db.Model):
     rooms = db.relationship("Room", back_populates="user")
     
     language = db.relationship("Language", secondary="spoken_languages")
-    characteristic = db.relationship("Characteristic", secondary="characteristicUser")
+    characteristic = db.relationship("Characteristic", secondary="characteristic_user", lazy='subquery')
     
     def __repr__(self):
         return '<User %r>' % self.id
@@ -125,7 +130,7 @@ class Characteristic(db.Model):
     name = db.Column(db.String(220))
     kind = db.Column(db.String(20)) # -->> Occupation e Interests
    
-    user = db.relationship("User", secondary="characteristicUser")
+    user = db.relationship("User", secondary="characteristic_user")
 
     def __repr__(self):
         return '<Characteristic %r>' % self.id
@@ -249,8 +254,8 @@ class Room (db.Model):
 
     room_archive = db.relationship("RoomArchive", back_populates="room")
 
-    expense = db.relationship("Expense", secondary="expensesRoom")
-    feature = db.relationship("Feature", secondary="featuresRoom")
+    expense = db.relationship("Expense", secondary="expenses_room")
+    feature = db.relationship("Feature", secondary="features_room")
     
     def __repr__(self):
         return '<Room %r>' % self.title
@@ -300,7 +305,7 @@ class Expense(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
     
-    room = db.relationship("Room", secondary="expensesRoom")
+    room = db.relationship("Room", secondary="expenses_room")
     
     def __repr__(self):
         return '<Expense %r>' % self.id
@@ -361,7 +366,7 @@ class Feature(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
     
-    room = db.relationship("Room", secondary="featuresRoom")
+    room = db.relationship("Room", secondary="features_room")
 
     def __repr__(self):
         return '<Feature %r>' % self.id
