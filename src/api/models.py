@@ -303,7 +303,7 @@ class ExpensesRoom(db.Model):
         }
         
 #------------------------------------------------------------------------------------------------------------------------------
-#  Expenses ROOM
+#  Expense
 #------------------------------------------------------------------------------------------------------------------------------  
 class Expense(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -407,7 +407,47 @@ class SeedData:
         self.first_review = None
         self.second_review = None
         self.third_review = None
-    
+        self.first_characteristic = None
+        self.second_characteristic = None
+        self.third_characteristic = None
+        self.fourth_characteristic = None
+        self.fifth_characteristic = None
+        self.first_characteristicUser = None 
+        self.second_characteristicUser = None
+        self.third_characteristicUser = None 
+        self.fourth_characteristicUser = None 
+        self.fifth_characteristicUser = None
+        self.first_language = None
+        self.second_language = None
+        self.third_language = None
+        self.first_spokenLanguages = None
+        self.second_spokenLanguages = None
+        self.third_spokenLanguages = None
+        self.fourth_spokenLanguages = None
+        self.first_expense = None
+        self.second_expense = None
+        self.third_expense = None
+        self.fourth_expense = None
+        self.first_expensesRoom = None
+        self.second_expensesRoom = None
+        self.third_expensesRoom = None
+        self.fourth_expensesRoom = None
+        self.first_roomArchive = None
+        self.second_roomArchive = None
+        self.third_roomArchive = None
+        self.fourth_roomArchive = None
+        self.fifth_roomArchive = None
+        self.sixth_roomArchive = None
+        self.seventh_roomArchive = None
+        self.eighth_roomArchive = None
+        self.first_feature = None
+        self.second_feature = None
+        self.third_feature = None
+        self.fourth_feature = None
+        self.first_featuresRoom = None
+        self.second_featuresRoom = None
+        self.third_featuresRoom = None
+        self.fourth_featuresRoom = None 
     
 #------------------------
 #  Country
@@ -518,9 +558,9 @@ class SeedData:
         db.session.commit()
 
    
-    #------------------------
-    #  Room
-    #------------------------
+#------------------------
+#  Room
+#------------------------
     def create_seed_room(self):
         self.first_room = Room( 
             id = 1000,
@@ -588,9 +628,9 @@ class SeedData:
         db.session.add(self.fourth_room)
         db.session.commit()
 
-    #------------------------
-    #  Tenancy (La relación entre inquilino y habitación)
-    #------------------------
+#------------------------
+#  Tenancy (La relación entre inquilino y habitación)
+#------------------------
     def create_seed_tenancy(self):
         self.first_tenancy = Tenancy(
             id = 1000,
@@ -615,9 +655,9 @@ class SeedData:
         db.session.add(self.third_tenancy)
         db.session.commit()
 
-    #------------------------
-    #  Review
-    #------------------------
+#------------------------
+#  Review
+#------------------------
     def create_seed_review(self):
         self.first_review = Review( 
             id = 1000,
@@ -648,7 +688,309 @@ class SeedData:
         db.session.add(self.third_review)
         db.session.commit()
         
+#------------------------
+#  Characteristic
+#------------------------
+    def create_seed_characteristic(self):
+            self.first_characteristic = Characteristic(
+                id = 1000,
+                name = "worker",
+                kind = "occupation"
+            )
+            self.second_characteristic = Characteristic(
+                id = 2000,
+                name = "student",
+                kind = "occupation"
+            )
+            self.third_characteristic = Characteristic(
+                id = 3000,
+                name = "animal lover",
+                kind = "interest"
+            )
+            self.fourth_characteristic = Characteristic(
+                id = 4000,
+                name = "dancer",
+                kind = "interest"
+            )
+            self.fifth_characteristic = Characteristic(
+                id = 5000,
+                name = "vegan",
+                kind = "interest"
+            )
+            
+            db.session.add(self.first_characteristic)
+            db.session.add(self.second_characteristic)
+            db.session.add(self.third_characteristic)
+            db.session.add(self.fourth_characteristic)
+            db.session.add(self.fifth_characteristic)
+            db.session.commit()  
+
+#------------------------
+#  characteristicUser
+#------------------------
+    def create_seed_characteristicUser(self):
+        self.first_characteristicUser = CharacteristicUser(
+            id = 1000,
+            user_id = self.first_user.id,
+            characteristic_id = self.first_characteristic.id
+        )
+        self.second_characteristicUser = CharacteristicUser(
+            id = 2000,
+            user_id = self.second_user.id,
+            characteristic_id = self.second_characteristic.id
+        )
+        self.third_characteristicUser = CharacteristicUser(
+            id = 3000,
+            user_id = self.first_user.id,
+            characteristic_id = self.third_characteristic.id
+        )
+        self.fourth_characteristicUser = CharacteristicUser(
+            id = 4000,
+            user_id = self.first_user.id,
+            characteristic_id = self.fourth_characteristic.id
+        )
+        self.fifth_characteristicUser = CharacteristicUser(
+            id = 5000,
+            user_id = self.second_user.id,
+            characteristic_id = self.fifth_characteristic.id
+        )
         
+        db.session.add(self.first_characteristicUser)
+        db.session.add(self.second_characteristicUser)
+        db.session.add(self.third_characteristicUser)
+        db.session.add(self.fourth_characteristicUser)
+        db.session.add(self.fifth_characteristicUser)
+        db.session.commit() 
+
+#------------------------
+#  Language
+#------------------------
+    def create_seed_language(self):
+        self.first_language = Language(
+            id = 1000,
+            name = "Spanish",
+            locale = "es"
+        )
+        self.second_language = Language(
+            id = 2000,
+            name = "English",
+            locale = "en"
+        )
+        self.third_language = Language(
+            id = 3000,
+            name = "French",
+            locale = "fr"
+        )
+        
+        db.session.add(self.first_language)
+        db.session.add(self.second_language)
+        db.session.add(self.third_language)
+        db.session.commit() 
+
+#------------------------
+#  SpokenLanguages   ----->>>>> DA ERROR CON EL ID DEL IDIOMA
+#------------------------
+    def create_seed_spokenLanguages(self):
+        self.first_spokenLanguages = SpokenLanguages(
+            id = 1000,
+            user_id = self.first_user.id,
+            language_id = self.first_language.id
+        )
+        self.second_spokenLanguages = SpokenLanguages(
+            id = 2000,
+            user_id = self.first_user.id,
+            language_id = self.second_language.id
+        )
+        self.third_spokenLanguages = SpokenLanguages(
+            id = 3000,
+            user_id = self.second_user.id,
+            language_id = self.second_language.id
+        )
+        self.fourth_spokenLanguages = SpokenLanguages(
+            id = 4000,
+            user_id = self.third_user.id,
+            language_id = self.third_language.id
+        )
+        
+        db.session.add(self.first_spokenLanguages)
+        db.session.add(self.second_spokenLanguages)
+        db.session.add(self.third_spokenLanguages)
+        db.session.add(self.fourth_spokenLanguages)
+        db.session.commit()  
+
+#------------------------
+#  Expense
+#------------------------
+    def create_seed_expense(self):
+        self.first_expense = Expense(
+            id = 1000,
+            name = "wifi"
+        )
+        self.second_expense = Expense(
+            id = 2000,
+            name = "light"
+        )
+        self.third_expense = Expense(
+            id = 3000,
+            name = "Water"
+        )
+        self.fourth_expense = Expense(
+            id = 4000,
+            name = "gas"
+        )
+        
+        db.session.add(self.first_expense)
+        db.session.add(self.second_expense)
+        db.session.add(self.third_expense)
+        db.session.add(self.fourth_expense)
+        db.session.commit()
+
+#------------------------
+#  Expenses ROOM
+#------------------------
+    def create_seed_expensesRoom(self):
+        self.first_expensesRoom = ExpensesRoom(
+            id = 1000,
+            room_id = self.first_room.id,
+            expense_id = self.first_expense.id
+        )
+        self.second_expensesRoom = ExpensesRoom(
+            id = 2000,
+            room_id = self.first_room.id,
+            expense_id = self.second_expense.id
+        )
+        self.third_expensesRoom = ExpensesRoom(
+            id = 3000,
+            room_id = self.first_room.id,
+            expense_id = self.third_expense.id
+        )
+        self.fourth_expensesRoom = ExpensesRoom(
+            id = 4000,
+            room_id = self.first_room.id,
+            expense_id = self.fourth_expense.id
+        )
+        
+        db.session.add(self.first_expensesRoom)
+        db.session.add(self.second_expensesRoom)
+        db.session.add(self.third_expensesRoom)
+        db.session.add(self.fourth_expensesRoom)
+        db.session.commit()  
+        
+#------------------------
+#  RoomArchive
+#------------------------
+    def create_seed_roomArchive(self):
+        self.first_roomArchive = RoomArchive(
+            id = 1000,
+            url = "https://archzine.es/wp-content/uploads/2019/12/blanco-y-gris-decoracion-dormitorios-como-decorar-una-habitacion-peque%C3%B1a-guirnalda-de-bombillas-alfombra-color-gris.jpg",
+            room_id = self.first_room.id
+        )
+        self.second_roomArchive = RoomArchive(
+            id = 2000,
+            url = "https://www.milideas.net/wp-content/uploads/ba%C3%B1o-peque%C3%B1o-moderno-bonito-22.jpg",
+            room_id = self.first_room.id
+        )
+        self.third_roomArchive = RoomArchive(
+            id = 3000,
+            url = "https://www.elmueble.com/medio/2020/10/14/00449673_eaa6ff1e_600x600.jpg",
+            room_id = self.first_room.id
+        )
+        self.fourth_roomArchive = RoomArchive(
+            id = 4000,
+            url = "https://tucasabonita.es/wp-content/uploads/2018/04/ideas-decorar-dormitorios-juveniles-modernos-chicas-29.jpg",
+            room_id = self.second_room.id
+        )
+        self.fifth_roomArchive = RoomArchive(
+            id = 5000,
+            url = "https://casaydiseno.com/wp-content/uploads/2016/08/dormitorios-con-encanto-decoracion-pequeno-comodo.jpg",
+            room_id = self.third_room.id
+        )
+        self.sixth_roomArchive = RoomArchive(
+            id = 6000,
+            url = "https://decoraideas.com/wp-content/uploads/2018/12/10_guetzli-2-768x768.jpg",
+            room_id = self.fourth_room.id
+        )
+        self.seventh_roomArchive = RoomArchive(
+            id = 7000,
+            url = "https://2.bp.blogspot.com/-4OV19xVw0pw/WMa0mk2B3hI/AAAAAAAAevw/gCnN8PtgwLYj-zQh07bz94pOlAdFn0xYgCEw/s1600/ban%25CC%2583o%2Bestrecho.jpg",
+            room_id = self.third_room.id
+        )
+        self.eighth_roomArchive = RoomArchive(
+            id = 8000,
+            url = "https://i.pinimg.com/originals/28/b2/a7/28b2a7bcda63e8fc1eb65631057c699a.jpg",
+            room_id = self.second_room.id
+        )
+        
+        db.session.add(self.first_roomArchive)
+        db.session.add(self.second_roomArchive)
+        db.session.add(self.third_roomArchive)
+        db.session.add(self.fourth_roomArchive)
+        db.session.add(self.fifth_roomArchive)
+        db.session.add(self.sixth_roomArchive)
+        db.session.add(self.seventh_roomArchive)
+        db.session.add(self.eighth_roomArchive)
+        db.session.commit() 
+        
+#------------------------
+#  Feature
+#------------------------
+    def create_seed_feature(self):
+        self.first_feature = Feature(
+            id = 1000,
+            name = "facing the street"
+        )
+        self.second_feature = Feature(
+            id = 2000,
+            name = "furnished room"
+        )
+        self.third_feature = Feature(
+            id = 3000,
+            name = "suite room"
+        )
+        self.fourth_feature = Feature(
+            id = 4000,
+            name = "shared room"
+        )
+
+        db.session.add(self.first_feature)
+        db.session.add(self.second_feature)
+        db.session.add(self.third_feature)
+        db.session.add(self.fourth_feature)
+        db.session.commit()  
+
+#------------------------
+#  FeaturesRoom
+#------------------------
+    def create_seed_featuresRoom(self):
+        self.first_featuresRoom = FeaturesRoom(
+            id = 1000,
+            room_id = self.first_room.id,
+            feature_id = self.first_feature.id
+        )
+        self.second_featuresRoom = FeaturesRoom(
+            id = 2000,
+            room_id = self.second_room.id,
+            feature_id = self.second_feature.id
+        )
+        self.third_featuresRoom = FeaturesRoom(
+            id = 3000,
+            room_id = self.third_room.id,
+            feature_id = self.third_feature.id
+        )
+        self.fourth_featuresRoom = FeaturesRoom(
+            id = 4000,
+            room_id = self.fourth_room.id,
+            feature_id = self.fourth_feature.id
+        )
+
+        db.session.add(self.first_featuresRoom)
+        db.session.add(self.second_featuresRoom)
+        db.session.add(self.third_featuresRoom)
+        db.session.add(self.fourth_featuresRoom)
+        db.session.commit()          
+          
+                                   
+       
     def create_seed_data(self):
         self.create_seed_country()
         self.create_seed_city()
@@ -656,6 +998,14 @@ class SeedData:
         self.create_seed_room()
         self.create_seed_tenancy()
         self.create_seed_review()
+        self.create_seed_characteristic()
+        self.create_seed_characteristicUser()
+        self.create_seed_spokenLanguages()
+        self.create_seed_expense()
+        self.create_seed_expensesRoom()
+        self.create_seed_roomArchive()
+        self.create_seed_feature()
+        self.create_seed_featuresRoom()
         
     
 
