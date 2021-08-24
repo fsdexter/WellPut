@@ -394,6 +394,20 @@ class SeedData:
     self.third_user = None
     self.fourth_user = None
     self.fifth_user = None
+    self.first_city = None
+    self.first_country = None
+    self.first_room = None
+    self.second_room = None
+    self.third_room = None
+    self.fourth_room = None
+    self.first_tenancy = None
+    self.second_tenancy = None
+    self.third_tenancy = None
+    self.first_review = None
+    self.second_review = None
+    self.third_review = None
+    
+    
 
 #------------------------
 #  User
@@ -402,7 +416,7 @@ class SeedData:
     self.first_user = User( 
         id = 1000,
         name = "Adan",
-        last_name = "Sánchez Romero"
+        last_name = "Sánchez Romero",
         email = "adan_user@gmail.com",
         password = "1111",
         birthday = "01/01/1980",
@@ -410,59 +424,63 @@ class SeedData:
         gender = "male",
         description = "ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
         avatar_url = "https://d1bvpoagx8hqbg.cloudfront.net/259/b59e40d45c7460cb65467d2000705086.jpg",
-        city = self.first_city.id
+        city_id = self.first_city
     ) 
 
     self.second_user = User( 
         id = 2000,
         email = "eva_user@gmail.com",
-        full_name = "Eva Gelion",
+        name = "Eva",
+        last_name = "Genesis",
         password = "1111",
         birthday = "01/01/1982",
         phone = "666362970",
         gender = "female",
         description = "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
         avatar_url = "https://img.europapress.es/fotoweb/fotonoticia_20200907131946_420.jpg",
-        city = self.first_city.id
+        city_id = self.first_city
     )
 
     self.third_user = User( 
         id = 3000,
         email = "sara_user@gmail.com",
-        full_name = "Sara Genesis",
+        name = "Sara",
+        last_name = "Santiago Rojas",
         password = "1111",
         birthday = "01/01/1985",
         phone = "666362978",
         gender = "female",
         description = "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
         avatar_url = "https://img.europapress.es/fotoweb/fotonoticia_20180118120033_420.jpg",
-        city = self.first_city.id
+        city_id = self.first_city
     )
 
     self.fourth_user = User( 
         id = 4000,
         email = "abraham_user@gmail.com",
-        full_name = "Abraham Genesis",
+        name = "Abraham",
+        last_name = "Browm",
         password = "1111",
         birthday = "01/01/1990",
         phone = "666362980",
         gender = "male",
         description =  "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio.",
         avatar_url = "https://i.pinimg.com/474x/98/04/af/9804afb070c93c2260c8de5505651e7e.jpg",
-        city = self.first_city.id
+        city_id = self.first_city
     )
 
     self.fifth_user = User( 
         id = 5000,
         email = "noe_user@gmail.com",
-        full_name = "Noé Genesis",
+        name = "Noé",
+        last_name = "Herrera Muñoz",
         password = "1111",
         birthday = "01/01/1992",
         phone = "666362986",
         gender = "male",
         description = "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates.",
         avatar_url = "https://media.istockphoto.com/photos/teenage-boy-with-glasses-sitting-outside-picture-id1175540541?k=6&m=1175540541&s=612x612&w=0&h=1KwTZmQz7E6iMcB4vGYOfLYSWz62qtR7GdaUrI7-Jjw=",
-        city = self.first_city.id
+        city_id = self.first_city
     )
   
     db.session.add(self.first_user)
@@ -481,7 +499,7 @@ class SeedData:
         name = "Madrid",
         lat = 40.42297365084645, 
         long = -3.707010830149073,
-        country = self.first_country.id
+        country_id = self.first_country
     )
        
     db.session.add(self.first_city)
@@ -514,8 +532,8 @@ class SeedData:
         type_bed = "single",
         lat = 33.4329,
         long = -4.642371,
-        city = self.city.id,
-        user_id = self.first_user.id,
+        city_id = self.first_city,
+        user_id = self.first_user,
     )
 
     self.second_room = Room( 
@@ -529,8 +547,8 @@ class SeedData:
         type_bed = "single",
         lat = 33.4329,
         long = -4.642371,
-        city = self.city.id,
-        user_id = self.first_user.id,
+        city_id = self.first_city,
+        user_id = self.first_user,
     )
 
     self.third_room = Room( 
@@ -544,8 +562,8 @@ class SeedData:
         type_bed ="double",
         lat = 33.4329,
         long = -4.642371,
-        city = self.city.id,
-        user_id = self.first_user.id,
+        city_id = self.first_city,
+        user_id = self.first_user,
     )
 
     self.fourth_room = Room( 
@@ -559,8 +577,8 @@ class SeedData:
         type_bed = "double",
         lat = 33.4329,
         long = -4.642371,
-        city = self.city.id,
-        user_id = self.first_user.id,
+        city_id = self.first_city,
+        user_id = self.first_user,
     )
 
     db.session.add(self.first_room)
@@ -575,20 +593,20 @@ class SeedData:
   def create_seed_tenancy(self):
     self.first_tenancy = Tenancy(
         id = 1000,
-        user_id = self.second_user.id,
-        room_id = self.first_room.id
+        user_id = self.second_user,
+        room_id = self.first_room
     )
     
     self.second_tenancy = Tenancy(
         id = 1000,
-        user_id = self.third_user.id,
-        room_id = self.second_room.id
+        user_id = self.third_user,
+        room_id = self.second_room
     )
     
     self.third_tenancy = Tenancy(
         id = 1000,
-        user_id = self.fourth_user.id,
-        room_id = self.third_room.id
+        user_id = self.fourth_user,
+        room_id = self.third_room
     )
        
     db.session.add(self.first_tenancy)
@@ -599,29 +617,29 @@ class SeedData:
 #------------------------
 #  Review
 #------------------------
-  def create_seed_reviews(self):
-    self.first_review = Reviews( 
+  def create_seed_review(self):
+    self.first_review = Review( 
         id = 1000,
         comment = "The neighborhood is great, it is well connected by public transport, the metro is 5 minutes away and there are many nice areas to hang out.",
         rating = 4,
         date = "01/01/2021",
-        tenancy_id = self.first_tenancy.id
+        tenancy_id = self.first_tenancy
     )
 
-    self.second_review = Reviews( 
+    self.second_review = Review( 
         id = 2000,
         comment = "The area of the flat has a lot of night life. It is amazing!",
         rating = 5,
         date = "22/05/2021",
-        tenancy_id = self.second_tenancy.id
+        tenancy_id = self.second_tenancy
     )
 
-    self.third_review = Reviews( 
+    self.third_review = Review( 
         id = 3000,
         comment = "The area has many vegan and garden produce stores. I loved that !!",
         rating = 3,
         date = "10/06/2021",
-        tenancy_id = self.third_tenancy.id
+        tenancy_id = self.third_tenancy
     )
 
     db.session.add(self.first_review)
@@ -636,7 +654,15 @@ class SeedData:
     self.create_seed_country()
     self.create_seed_room()
     self.create_seed_tenancy()
-    self.create_seed_reviews()
+    self.create_seed_review()
+    
+    # db.session.add(self.create_seed_user())
+    # db.session.add(self.create_seed_city())
+    # db.session.add(self.create_seed_country())
+    # db.session.add(self.create_seed_room())
+    # db.session.add(self.create_seed_tenancy())
+    # db.session.add(self.create_seed_review())
+    # db.session.commit()
     
 
 #------------------------------------------------------------------------------------------------------------------------------
