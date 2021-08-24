@@ -4,7 +4,8 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedDataUser, Room
+from api.models import db, User, SeedData, Room
+#from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
 from flask_jwt_extended import create_access_token
@@ -22,12 +23,12 @@ api = Blueprint('api', __name__)
 def sign_up_user():
     body_request = request.get_json()
     email_request = body_request.get("email", None)
-    full_name_request = body_request.get("full_name", None)
+    name_request = body_request.get("name", None)
     password_request = body_request.get("password", None)
     
     new_user = User(
         email = email_request, 
-        full_name = full_name_request, 
+        name = name_request, 
         password = generate_password_hash(password_request, "sha256")
         )
     
@@ -109,17 +110,14 @@ def get_single_room(room_id):
 def edit_profile(user_id):
     body_request = request.get_json()
     user_to_edit = User.query.get_or_404(user_id)
-    user_to_edit.full_name = body_request.get("full_name", None)
-    user_to_edit.email = body_request.get("email", None)
-    user_to_edit.birthday = body_request.get("birthday", None)
-    user_to_edit.phone = body_request.get("phone", None)
-    user_to_edit.sex = body_request.get("sex", None)
-    user_to_edit.personal_description = body_request.get("personal_description", None)
-    user_to_edit.city = body_request.get("city", None)
-    #user_to_edit.avatar_url = body_request.get("avatar_url", None)
     
-    print("USUARIO PARA EDITAR -- ", user_to_edit)
-    print("TELEFONO AÑADIDO ??¿¿¿¿¿¿¿¿????? -- ", user_to_edit.phone)
+    for key in body_request:
+        
+        if key == "name":
+            user_to_edit.name = body_request[key]
+            print("body_request[key] ----- ", body_request[key])
+            print("user_to_edit[key] ----- ", user_to_edit.name)
+    
     db.session.commit()
     
     print("body_request *********************** ", body_request)
@@ -129,9 +127,9 @@ def edit_profile(user_id):
 
 # -------------------------- SEED -------------------------
 
-@api.route('/seed_data_user', methods=['GET'])
+@api.route('/seed_data', methods=['GET'])
 def handle_seed_user_data():
-    seeder = SeedDataUser()
+    seeder = SeedData()
     seeder.create_seed_data()
 
     return jsonify({"msg": "The user was created!" }), 200
