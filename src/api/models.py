@@ -64,7 +64,8 @@ class User(db.Model):
 class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=True)
-    last_name = db.Column(db.String(120), nullable=True)
+    lat = db.Column(db.Float(15))
+    long = db.Column(db.Float(15))
     
     country_id =  db.Column(db.Integer, db.ForeignKey('country.id'))
     country =  db.relationship("Country", back_populates="cities")
@@ -80,7 +81,8 @@ class City(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "last_name": self.last_name,
+            "lat": self.lat,
+            "long": self.long,
             "country_id": self.country_id
         }
 
@@ -383,199 +385,258 @@ class Feature(db.Model):
 #------------------------------------------------------------------------------------------------------------------------------
 #  SEED
 #------------------------------------------------------------------------------------------------------------------------------
-# class SeedDataUser:
 
-#   def __init__(self):
-#     self.first_user = None
-#     self.second_user = None
-#     self.third_user = None
-#     self.fourth_user = None
-#     self.fifth_user = None
+class SeedData:
 
-#   def create_seed_user(self):
-#     self.first_user = User( 
-#         id = 1000,
-#         email = "adan_user@gmail.com",
-#         full_name = "Adan Genesis",
-#         password = "1111",
-#         birthday = "01/01/1980",
-#         phone = "666362969",
-#         sex = "male",
-#         personal_description = "ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-#         avatar_url = "https://d1bvpoagx8hqbg.cloudfront.net/259/b59e40d45c7460cb65467d2000705086.jpg",
-#         city = "Madrid"
-#     ) 
+  def __init__(self):
+    self.first_user = None
+    self.second_user = None
+    self.third_user = None
+    self.fourth_user = None
+    self.fifth_user = None
 
-#     self.second_user = User( 
-#         id = 2000,
-#         email = "eva_user@gmail.com",
-#         full_name = "Eva Gelion",
-#         password = "1111",
-#         birthday = "01/01/1982",
-#         phone = "666362970",
-#         sex = "female",
-#         personal_description = "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
-#         avatar_url = "https://img.europapress.es/fotoweb/fotonoticia_20200907131946_420.jpg",
-#         city = "Madrid"
-#     )
+#------------------------
+#  User
+#------------------------
+  def create_seed_user(self):
+    self.first_user = User( 
+        id = 1000,
+        name = "Adan",
+        last_name = "Sánchez Romero"
+        email = "adan_user@gmail.com",
+        password = "1111",
+        birthday = "01/01/1980",
+        phone = "666362969",
+        gender = "male",
+        description = "ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+        avatar_url = "https://d1bvpoagx8hqbg.cloudfront.net/259/b59e40d45c7460cb65467d2000705086.jpg",
+        city = self.first_city.id
+    ) 
 
-#     self.third_user = User( 
-#         id = 3000,
-#         email = "sara_user@gmail.com",
-#         full_name = "Sara Genesis",
-#         password = "1111",
-#         birthday = "01/01/1985",
-#         phone = "666362978",
-#         sex = "female",
-#         personal_description = "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
-#         avatar_url = "https://img.europapress.es/fotoweb/fotonoticia_20180118120033_420.jpg",
-#         city = "Barcelona"
-#     )
+    self.second_user = User( 
+        id = 2000,
+        email = "eva_user@gmail.com",
+        full_name = "Eva Gelion",
+        password = "1111",
+        birthday = "01/01/1982",
+        phone = "666362970",
+        gender = "female",
+        description = "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+        avatar_url = "https://img.europapress.es/fotoweb/fotonoticia_20200907131946_420.jpg",
+        city = self.first_city.id
+    )
 
-#     self.fourth_user = User( 
-#         id = 4000,
-#         email = "abraham_user@gmail.com",
-#         full_name = "Abraham Genesis",
-#         password = "1111",
-#         birthday = "01/01/1990",
-#         phone = "666362980",
-#         sex = "male",
-#         personal_description =  "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio.",
-#         avatar_url = "https://i.pinimg.com/474x/98/04/af/9804afb070c93c2260c8de5505651e7e.jpg",
-#         city = "Granada"
-#     )
+    self.third_user = User( 
+        id = 3000,
+        email = "sara_user@gmail.com",
+        full_name = "Sara Genesis",
+        password = "1111",
+        birthday = "01/01/1985",
+        phone = "666362978",
+        gender = "female",
+        description = "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
+        avatar_url = "https://img.europapress.es/fotoweb/fotonoticia_20180118120033_420.jpg",
+        city = self.first_city.id
+    )
 
-#     self.fifth_user = User( 
-#         id = 5000,
-#         email = "noe_user@gmail.com",
-#         full_name = "Noé Genesis",
-#         password = "1111",
-#         birthday = "01/01/1992",
-#         phone = "666362986",
-#         sex = "male",
-#         personal_description = "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates.",
-#         avatar_url = "https://media.istockphoto.com/photos/teenage-boy-with-glasses-sitting-outside-picture-id1175540541?k=6&m=1175540541&s=612x612&w=0&h=1KwTZmQz7E6iMcB4vGYOfLYSWz62qtR7GdaUrI7-Jjw=",
-#         city = "Sevilla"
-#     )
+    self.fourth_user = User( 
+        id = 4000,
+        email = "abraham_user@gmail.com",
+        full_name = "Abraham Genesis",
+        password = "1111",
+        birthday = "01/01/1990",
+        phone = "666362980",
+        gender = "male",
+        description =  "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio.",
+        avatar_url = "https://i.pinimg.com/474x/98/04/af/9804afb070c93c2260c8de5505651e7e.jpg",
+        city = self.first_city.id
+    )
+
+    self.fifth_user = User( 
+        id = 5000,
+        email = "noe_user@gmail.com",
+        full_name = "Noé Genesis",
+        password = "1111",
+        birthday = "01/01/1992",
+        phone = "666362986",
+        gender = "male",
+        description = "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates.",
+        avatar_url = "https://media.istockphoto.com/photos/teenage-boy-with-glasses-sitting-outside-picture-id1175540541?k=6&m=1175540541&s=612x612&w=0&h=1KwTZmQz7E6iMcB4vGYOfLYSWz62qtR7GdaUrI7-Jjw=",
+        city = self.first_city.id
+    )
   
-#     db.session.add(self.first_user)
-#     db.session.add(self.second_user)
-#     db.session.add(self.third_user)
-#     db.session.add(self.fourth_user)
-#     db.session.add(self.fifth_user)
-#     db.session.commit()
+    db.session.add(self.first_user)
+    db.session.add(self.second_user)
+    db.session.add(self.third_user)
+    db.session.add(self.fourth_user)
+    db.session.add(self.fifth_user)
+    db.session.commit()
 
-#   def create_seed_room(self):
-#     self.first_room = Room( 
-#         id = 1000,
-#         owner_id = self.first_user.id,
-#         description = "Cras ac fermentum neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
-#         address = "Bastero 6",
-#         city = "Madrid",
-#         country = "Spain",
-#         price = 450,
-#         deposit = 450,
-#         title = "Habitacion en casa moderna.",
-#         type_bed = "single",
-#         latitude = 33.4329,
-#         longitude = -4.642371
-#     )
+#------------------------
+#  City
+#------------------------    
+  def create_seed_city(self):
+    self.first_city = City(
+        id = 1000,
+        name = "Madrid",
+        lat = 40.42297365084645, 
+        long = -3.707010830149073,
+        country = self.first_country.id
+    )
+       
+    db.session.add(self.first_city)
+    db.session.commit()
+       
+#------------------------
+#  Country
+#------------------------
+  def create_seed_country(self):
+    self.first_country = Country(
+        id = 1000,
+        name = "Spain"
+    )
+       
+    db.session.add(self.first_country)
+    db.session.commit()
 
-#     self.second_room = Room( 
-#         id = 2000,
-#         owner_id = self.first_user.id,
-#         description = "Vestibulum auctor purus in leo laoreet, ac aliquam sem tincidunt. Vivamus eleifend magna a leo pulvinar.",
-#         address = "Bastero 6",
-#         city = "Madrid",
-#         country = "Spain",
-#         price = 400,
-#         deposit = 400,
-#         title = "Habitacion pequeña y luminosa.",
-#         type_bed = "single",
-#         latitude = 33.4329,
-#         longitude = -4.642371
-#     )
+#------------------------
+#  Room
+#------------------------
+  def create_seed_room(self):
+    self.first_room = Room( 
+        id = 1000,
+        description = "Cras ac fermentum neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+        address = "Bastero 6",
+        country = "Spain",
+        price = 450,
+        deposit = 450,
+        title = "Habitacion en casa moderna.",
+        type_bed = "single",
+        lat = 33.4329,
+        long = -4.642371,
+        city = self.city.id,
+        user_id = self.first_user.id,
+    )
 
-#     self.third_room = Room( 
-#         id = 3000,
-#         owner_id = self.first_user.id,
-#         description = "Aliquam sit amet interdum lacus. Proin finibus vehicula sagittis.",
-#         address = "Bastero 6",
-#         city = "Madrid",
-#         country = "Spain",
-#         price = 500,
-#         deposit = 500,
-#         title = "Habitacion suite con cama grande.",
-#         type_bed ="double",
-#         latitude = 33.4329,
-#         longitude = -4.642371
-#     )
+    self.second_room = Room( 
+        id = 2000,
+        description = "Vestibulum auctor purus in leo laoreet, ac aliquam sem tincidunt. Vivamus eleifend magna a leo pulvinar.",
+        address = "Bastero 6",
+        country = "Spain",
+        price = 400,
+        deposit = 400,
+        title = "Habitacion pequeña y luminosa.",
+        type_bed = "single",
+        lat = 33.4329,
+        long = -4.642371,
+        city = self.city.id,
+        user_id = self.first_user.id,
+    )
 
-#     self.fourth_room = Room( 
-#         id = 4000,
-#         owner_id = self.first_user.id,
-#         description = "Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
-#         address= "Bastero 6",
-#         city= "Madrid",
-#         country = "Spain",
-#         price = 500,
-#         deposit = 500,
-#         title = "Hermosa habitación amueblada.",
-#         type_bed = "double",
-#         latitude = 33.4329,
-#         longitude = -4.642371
-#     )
+    self.third_room = Room( 
+        id = 3000,
+        description = "Aliquam sit amet interdum lacus. Proin finibus vehicula sagittis.",
+        address = "Bastero 6",
+        country = "Spain",
+        price = 500,
+        deposit = 500,
+        title = "Habitacion suite con cama grande.",
+        type_bed ="double",
+        lat = 33.4329,
+        long = -4.642371,
+        city = self.city.id,
+        user_id = self.first_user.id,
+    )
 
-#     db.session.add(self.first_room)
-#     db.session.add(self.second_room)
-#     db.session.add(self.third_room)
-#     db.session.add(self.fourth_room)
-#     db.session.commit()
+    self.fourth_room = Room( 
+        id = 4000,
+        description = "Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
+        address= "Bastero 6",
+        country = "Spain",
+        price = 500,
+        deposit = 500,
+        title = "Hermosa habitación amueblada.",
+        type_bed = "double",
+        lat = 33.4329,
+        long = -4.642371,
+        city = self.city.id,
+        user_id = self.first_user.id,
+    )
 
-# *********** ESTE SEED NO FUNCIONA **************
-#   def create_seed_reviews(self):
-#     self.first_review = Reviews( 
-#         id = 1000,
-#         owner_id = self.first_user.id,
-#         tenant_id = self.second_user.id,
-#         room_id = self.first_room,
-#         comment = "The neighborhood is great, it is well connected by public transport, the metro is 5 minutes away and there are many nice areas to hang out.",
-#         rating = 4,
-#         date = "01/01/2021",
-#     )
+    db.session.add(self.first_room)
+    db.session.add(self.second_room)
+    db.session.add(self.third_room)
+    db.session.add(self.fourth_room)
+    db.session.commit()
 
-#     self.second_review = Reviews( 
-#         id = 2000,
-#         owner_id = self.first_user.id,
-#         tenant_id = self.third_user.id,
-#         room_id = self.third_room,
-#         comment = "The area of the flat has a lot of night life. It is amazing!",
-#         rating = 5,
-#         date = "22/05/2021",
-#     )
+#------------------------
+#  Tenancy (La relación entre inquilino y habitación)
+#------------------------
+  def create_seed_tenancy(self):
+    self.first_tenancy = Tenancy(
+        id = 1000,
+        user_id = self.second_user.id,
+        room_id = self.first_room.id
+    )
+    
+    self.second_tenancy = Tenancy(
+        id = 1000,
+        user_id = self.third_user.id,
+        room_id = self.second_room.id
+    )
+    
+    self.third_tenancy = Tenancy(
+        id = 1000,
+        user_id = self.fourth_user.id,
+        room_id = self.third_room.id
+    )
+       
+    db.session.add(self.first_tenancy)
+    db.session.add(self.second_tenancy)
+    db.session.add(self.third_tenancy)
+    db.session.commit()
 
-#     self.third_review = Reviews( 
-#         id = 3000,
-#         owner_id = self.first_user.id,
-#         tenant_id = self.fourth_user.id,
-#         room_id = self.fourth_room,
-#         comment = "The area has many vegan and garden produce stores. I loved that !!",
-#         rating = 3,
-#         date = "10/06/2021",
-#     )
+#------------------------
+#  Review
+#------------------------
+  def create_seed_reviews(self):
+    self.first_review = Reviews( 
+        id = 1000,
+        comment = "The neighborhood is great, it is well connected by public transport, the metro is 5 minutes away and there are many nice areas to hang out.",
+        rating = 4,
+        date = "01/01/2021",
+        tenancy_id = self.first_tenancy.id
+    )
 
+    self.second_review = Reviews( 
+        id = 2000,
+        comment = "The area of the flat has a lot of night life. It is amazing!",
+        rating = 5,
+        date = "22/05/2021",
+        tenancy_id = self.second_tenancy.id
+    )
 
-#     db.session.add(self.first_review)
-#     db.session.add(self.second_review)
-#     db.session.add(self.third_review)
-#     db.session.commit()
+    self.third_review = Reviews( 
+        id = 3000,
+        comment = "The area has many vegan and garden produce stores. I loved that !!",
+        rating = 3,
+        date = "10/06/2021",
+        tenancy_id = self.third_tenancy.id
+    )
+
+    db.session.add(self.first_review)
+    db.session.add(self.second_review)
+    db.session.add(self.third_review)
+    db.session.commit()
     
     
-#   def create_seed_data(self):
-#     self.create_seed_user()
-#     self.create_seed_room()
-    # *********** ESTE SEED NO FUNCIONA **************
-    #self.create_seed_reviews()
+  def create_seed_data(self):
+    self.create_seed_user()
+    self.create_seed_city()
+    self.create_seed_country()
+    self.create_seed_room()
+    self.create_seed_tenancy()
+    self.create_seed_reviews()
     
 
 #------------------------------------------------------------------------------------------------------------------------------
