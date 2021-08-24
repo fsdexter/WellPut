@@ -40,8 +40,9 @@ export const Profile = () => {
 							<div className="col-8 text-white">
 								<div className="row">
 									<h1 className="textwhhite ml-5">
-										{JSON.parse(localStorage.getItem("user")).user.full_name ||
-											store.user.full_name}
+										{JSON.parse(localStorage.getItem("user")).user.name || store.user.name}{" "}
+										{JSON.parse(localStorage.getItem("user")).user.last_name ||
+											store.user.last_name}
 									</h1>
 									<div className="d-flex align-items-center ml-3">
 										{/** LAS ESTRELLAS PROCEDDEN DE LAS REVIEWS */}
@@ -60,8 +61,8 @@ export const Profile = () => {
 									</div>
 
 									<h3>
-										{JSON.parse(localStorage.getItem("user")).user.personal_description ||
-											store.user.personal_description}
+										{JSON.parse(localStorage.getItem("user")).user.description ||
+											store.user.description}
 									</h3>
 								</div>
 							</div>

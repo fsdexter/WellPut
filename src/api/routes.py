@@ -87,7 +87,24 @@ def get_users():
 def get_single_user(user_id):
     body = request.get_json()
     user_selected = User.query.get(user_id)
-    return jsonify(user_selected.serialize()), 200
+    
+    details_person = user_selected.rooms
+    person = user_selected.serialize()
+    rooms = []
+    
+    for detail in details_person:
+        # Para obtener la relación entre habitación y ciudad y que salgan en Postman
+        city = detail.city.serialize()
+        detail_res = detail.serialize()
+        
+        # Añadir al Objeto "detail_res" la propiedad "city"
+        detail_res['city'] = city
+        rooms.append(detail_res)
+    
+    # Añadir al Objeto "person" la propiedad "rooms" para que salgan las habitaciones del usuario
+    person['rooms'] = rooms
+    
+    return jsonify(person), 200
 
 @api.route('/', methods=['GET'])
 def get_rooms():
