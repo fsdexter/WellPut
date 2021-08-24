@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 
 import "../../styles/home.scss";
@@ -17,6 +17,7 @@ import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	const [city, setCity] = useState("");
 
 	return (
 		<div className="container-fluid">
@@ -45,7 +46,14 @@ export const Home = () => {
 						</div>
 						<form>
 							<div className=" ml-3 pt-3">
-								<input type="text" className="form-control roundShape" placeholder="write a city..." />
+								<input
+									type="text"
+									className="form-control roundShape"
+									placeholder="write a city..."
+									onChange={event => {
+										setCity(event.target.value);
+									}}
+								/>
 							</div>
 						</form>
 					</div>
