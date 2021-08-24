@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+
 import { Context } from "../store/appContext";
 import recorte from "../../img/recorte.jpg";
 import maps from "../../img/maps.png";
@@ -11,6 +12,8 @@ import { FilterOcc } from "../component/filterOcc";
 import { FilterFea } from "../component/filterFea";
 import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
+import { interestsOptions, languageOptions } from "../constants";
+
 import { Link } from "react-router-dom";
 import MyMap from "../component/mapEngine";
 import {
@@ -24,7 +27,19 @@ import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-
+	const [formValue, setFormValue] = useState({
+		interests: ""
+	});
+	const handleAddrTypeChange = (f, key) => {
+		console.log(f, key, "<-----");
+		setFormValue({
+			...formValue,
+			[key]: f.map(item => {
+				return item.value;
+			})
+		});
+		console.log("addrtype ----->>>> ", formValue);
+	};
 	return (
 		<div className="container-fluid">
 			<div style={{ height: "400px" }}>
@@ -100,7 +115,10 @@ export const Home = () => {
 									<h3 className="ml-4">Interests</h3>
 								</div>
 								<div className="col-8">
-									<AnimatedMulti /> {/* Instalar paquete para que funcione*/}
+									<AnimatedMulti
+										options={interestsOptions}
+										change={f => handleAddrTypeChange(f, "interests")}
+									/>
 								</div>
 							</div>
 						</div>
