@@ -87,7 +87,54 @@ def get_users():
 def get_single_user(user_id):
     body = request.get_json()
     user_selected = User.query.get(user_id)
-    return jsonify(user_selected.serialize()), 200
+    
+    rooms_user = user_selected.rooms
+    user = user_selected.serialize()
+    rooms = []
+    
+    for room in rooms_user:
+        # Para obtener la relación entre habitación y ciudad y que salgan en Postman
+        city = room.city.serialize()
+        room_res = room.serialize()
+        
+        # Añadir al Objeto "room_res" la propiedad "city"
+        room_res['city'] = city
+        rooms.append(room_res)
+    
+    characteristic_user = user_selected.characteristic
+    user = user_selected.serialize()
+    characteristics = []
+    
+    for characteristic in characteristic_user:
+        characteristic_res = characteristic.serialize()
+        characteristics.append(characteristic_res)
+    
+    language_user = user_selected.language
+    user = user_selected.serialize()
+    languages = []
+    
+    for language in language_user:
+        language_res = language.serialize()
+        languages.append(language_res)
+        
+    tenancies_user = user_selected.tenancies
+    user = user_selected.serialize()
+    tenancies = []
+    
+    for tenancies in tenancies_user:
+        tenancies_res = tenancies.serialize()
+        tenancies.append(tenancies_res)
+     
+    # Añadir al Objeto "user" la propiedad "rooms" para que salgan las habitaciones del usuario
+    user['rooms'] = rooms   
+    # Añadir al Objeto "user" la propiedad "characteristic" para que salga en el usuario
+    user['characteristics'] = characteristics
+    # Añadir al Objeto "user" la propiedad "language" para que salga en el usuario
+    user['languages'] = languages
+    # Añadir al Objeto "user" la propiedad "tenancies" para que salga en el usuario
+    user['tenancies'] = tenancies
+    
+    return jsonify(user), 200
 
 @api.route('/', methods=['GET'])
 def get_rooms():
