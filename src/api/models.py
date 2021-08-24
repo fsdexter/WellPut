@@ -655,13 +655,6 @@ class SeedData:
         self.create_seed_tenancy()
         self.create_seed_review()
         
-        # db.session.add(self.create_seed_user())
-        # db.session.add(self.create_seed_city())
-        # db.session.add(self.create_seed_country())
-        # db.session.add(self.create_seed_room())
-        # db.session.add(self.create_seed_tenancy())
-        # db.session.add(self.create_seed_review())
-        # db.session.commit()
     
 
 #------------------------------------------------------------------------------------------------------------------------------
