@@ -8,16 +8,29 @@ import bedsofaBlack from "../../img/bedsofaBlack.png";
 import addPic from "../../img/addPic.png";
 
 export const NewAnnouncement = () => {
-	const { store, actions } = useContext(Context);
-	const [move, setMove] = useState("location");
+	/*const { store, actions } = useContext(Context);
+	
 	const [city, setCity] = useState("");
 	const [address, setAddress] = useState("");
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState("");
-	const [deposit, setDeposit] = useState("");
+	const [deposit, setDeposit] = useState("");*/
 
-	function functionTest() {
+	const [move, setMove] = useState("");
+	const [roomData, setRoomData] = useState({
+		city: "",
+		address: "",
+		title: "",
+		description: "",
+		price: "",
+		deposit: ""
+	});
+	const handleRoomData = e => {
+		const { name, value } = e.target;
+		setRoomData(prevState => ({ ...prevState, [name]: value }));
+	};
+	/*function functionTest() {
 		if (document.getElementById("checkWifi").checked) {
 			console.log("Wifi");
 		}
@@ -54,7 +67,7 @@ export const NewAnnouncement = () => {
 		if (document.getElementById("checkSofa").checked) {
 			console.log("Sofa Bed");
 		}
-	}
+	}*/
 
 	return (
 		<div className="container">
@@ -130,16 +143,14 @@ export const NewAnnouncement = () => {
 							<input
 								type="text"
 								className="form-control roundShape"
-								onChange={event => {
-									setCity(event.target.value);
-								}}
+								name="city"
+								onChange={handleRoomData}
 							/>
 							<input
 								type="text"
 								className="form-control roundShape mt-3"
-								onChange={event => {
-									setAddress(event.target.value);
-								}}
+								name="address"
+								onChange={handleRoomData}
 							/>
 						</div>
 						<div className="col-2 pt-3 fontInput" />
@@ -171,9 +182,8 @@ export const NewAnnouncement = () => {
 							<input
 								type="text"
 								className="form-control roundShape"
-								onChange={event => {
-									setTitle(event.target.value);
-								}}
+								name="title"
+								onChange={handleRoomData}
 							/>
 						</div>
 						<div className="col-2" />
@@ -187,9 +197,8 @@ export const NewAnnouncement = () => {
 								className="form-control descriptionBack roundShape"
 								id="exampleFormControlTextarea1 "
 								rows="3"
-								onChange={event => {
-									setDescription(event.target.value);
-								}}
+								name="description"
+								onChange={handleRoomData}
 							/>
 						</div>
 						<div className="col-1" />
@@ -204,9 +213,8 @@ export const NewAnnouncement = () => {
 									<input
 										type="text"
 										className="form-control"
-										onChange={event => {
-											setPrice(event.target.value);
-										}}
+										name="price"
+										onChange={handleRoomData}
 									/>
 								</div>
 								{/*	<div className="col-3 mb-2">
@@ -221,9 +229,8 @@ export const NewAnnouncement = () => {
 									<input
 										type="text"
 										className="form-control"
-										onChange={event => {
-											setDeposit(event.target.value);
-										}}
+										name="deposit"
+										onChange={handleRoomData}
 									/>
 								</div>
 								{/*<div className="col-3 mb-2">
@@ -493,9 +500,7 @@ export const NewAnnouncement = () => {
 								className="btn btn-warning mb-5 ml-5"
 								data-toggle="tab"
 								href="#previewTab"
-								onClick={() =>
-									console.log(city, address, title, description, price, deposit, functionTest())
-								}>
+								onClick={() => console.log(roomData /*functionTest()*/)}>
 								Upload
 							</button>
 						</div>
