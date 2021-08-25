@@ -88,20 +88,15 @@ def get_single_user(user_id):
     body = request.get_json()
     user_selected = User.query.get(user_id)
     
-    rooms_user = user_selected.rooms
+    rooms_user = user_selected.rooms # -- "rooms" is a relationship in the table User
     user = user_selected.serialize()
     rooms = []
     
     for room in rooms_user:
-        # Para obtener la relación entre habitación y ciudad y que salgan en Postman
-        city = room.city.serialize()
         room_res = room.serialize()
-        
-        # Añadir al Objeto "room_res" la propiedad "city"
-        room_res['city'] = city
         rooms.append(room_res)
     
-    characteristic_user = user_selected.characteristic
+    characteristic_user = user_selected.characteristic  # -- "characteristic" is a relationship in the table User
     user = user_selected.serialize()
     characteristics = []
     
@@ -109,7 +104,7 @@ def get_single_user(user_id):
         characteristic_res = characteristic.serialize()
         characteristics.append(characteristic_res)
     
-    language_user = user_selected.language
+    language_user = user_selected.language # -- "language" is a relationship in the table User
     user = user_selected.serialize()
     languages = []
     
@@ -117,13 +112,13 @@ def get_single_user(user_id):
         language_res = language.serialize()
         languages.append(language_res)
         
-    tenancies_user = user_selected.tenancies
+    tenancies_user = user_selected.tenancies # -- "tenancies" is a relationship in the table User
     user = user_selected.serialize()
-    tenancies = []
+    tenancies_list = []
     
-    for tenancies in tenancies_user:
-        tenancies_res = tenancies.serialize()
-        tenancies.append(tenancies_res)
+    for tenancy in tenancies_user:
+        tenancies_res = tenancy.serialize()
+        tenancies_list.append(tenancies_res)
      
     # Añadir al Objeto "user" la propiedad "rooms" para que salgan las habitaciones del usuario
     user['rooms'] = rooms   
@@ -132,7 +127,7 @@ def get_single_user(user_id):
     # Añadir al Objeto "user" la propiedad "language" para que salga en el usuario
     user['languages'] = languages
     # Añadir al Objeto "user" la propiedad "tenancies" para que salga en el usuario
-    user['tenancies'] = tenancies
+    user['tenancies'] = tenancies_list
     
     return jsonify(user), 200
 

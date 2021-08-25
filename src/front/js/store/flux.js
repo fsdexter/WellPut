@@ -112,7 +112,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/edit_profile/${user_id}`, requestOptions);
-					
+
 					if (response.status >= 400) {
 						const errorMsg = "Error during the edition process";
 						throw new Error(errorMsg);
