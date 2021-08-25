@@ -168,18 +168,18 @@ def get_single_room(room_id):
     room_selected = Room.query.get(room_id)
     return jsonify(room_selected.serialize()), 200
 
-
+# -----------
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # NO FUNCIONA !!!!
 def edit_profile(user_id):
-    body_request = request.get_json()
-    user_to_edit = User.query.get_or_404(user_id)
+    body_request = request.get_json() # ----------- recoge datos para el body ---------
+    user_to_edit = User.query.get_or_404(user_id) # ----------- hace referencia al usuario a editar ---------
     
-    for key in body_request:
+    for key in body_request:  # ----------- recibo array de objetos--
         
-        if key == "name":
-            user_to_edit.name = body_request[key]
-            print("body_request[key] ----- ", body_request[key])
-            print("user_to_edit[key] ----- ", user_to_edit.name)
+        if key == body_request[key]:    # -----------si extiste , sustituye ---------
+            user_to_edit[key] = body_request[key] # ----------- hacer dinamica. ---------
+            print("body_request[key] ---------------------------------- ", body_request[key])
+            print("user_to_edit[key] ---------------------------------- ", user_to_edit[key])
     
     db.session.commit()
     
