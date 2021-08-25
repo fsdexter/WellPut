@@ -9,15 +9,54 @@ import addPic from "../../img/addPic.png";
 
 export const NewAnnouncement = () => {
 	const { store, actions } = useContext(Context);
-	const [move, setMove] = useState("location");
-	const [city, setCity] = useState("");
-	const [address, setAddress] = useState("");
-	const [title, setTitle] = useState("");
-	const [description, setDescription] = useState("");
-	const [price, setPrice] = useState("");
-	const [deposit, setDeposit] = useState("");
 
-	function functionTest() {
+	const [move, setMove] = useState("");
+	const [roomData, setRoomData] = useState({
+		city: "",
+		address: "",
+		title: "",
+		description: "",
+		price: "",
+		deposit: "",
+		facingTheStreet: "",
+		furnishedRoom: "",
+		suiteRoom: "",
+		sharedRoom: "",
+		expWiFi: "",
+		expGas: "",
+		expElectricity: "",
+		expWater: "",
+		singleBed: "",
+		doubleBed: "",
+		sofaBed: "",
+		noBed: ""
+	});
+	const handleRoomData = e => {
+		const { name, value } = e.target;
+		setRoomData(prevState => ({ ...prevState, [name]: value }));
+	};
+
+	const onClickHandeler = e => {
+		var item = roomData[e.target.name];
+		if (item == "") {
+			setRoomData({ ...roomData, [e.target.name]: e.target.name }); //o cambiar esto por false, para ser booleano
+		} else {
+			setRoomData({ ...roomData, [e.target.name]: "" });
+		}
+	};
+	const onClickHandelerBed = e => {
+		var item = e.target.value;
+		if (item == "singleBed") {
+			setRoomData({ ...roomData, singleBed: item, doubleBed: "", sofaBed: "", noBed: "" });
+		} else if (item == "doubleBed") {
+			setRoomData({ ...roomData, singleBed: "", doubleBed: item, sofaBed: "", noBed: "" });
+		} else if (item == "sofaBed") {
+			setRoomData({ ...roomData, singleBed: "", doubleBed: "", sofaBed: item, noBed: "" });
+		} else if (item == "noBed") {
+			setRoomData({ ...roomData, singleBed: "", doubleBed: "", sofaBed: "", noBed: item });
+		}
+	};
+	/*function functionTest() {
 		if (document.getElementById("checkWifi").checked) {
 			console.log("Wifi");
 		}
@@ -54,7 +93,7 @@ export const NewAnnouncement = () => {
 		if (document.getElementById("checkSofa").checked) {
 			console.log("Sofa Bed");
 		}
-	}
+	}*/
 
 	return (
 		<div className="container">
@@ -130,16 +169,14 @@ export const NewAnnouncement = () => {
 							<input
 								type="text"
 								className="form-control roundShape"
-								onChange={event => {
-									setCity(event.target.value);
-								}}
+								name="city"
+								onChange={handleRoomData}
 							/>
 							<input
 								type="text"
 								className="form-control roundShape mt-3"
-								onChange={event => {
-									setAddress(event.target.value);
-								}}
+								name="address"
+								onChange={handleRoomData}
 							/>
 						</div>
 						<div className="col-2 pt-3 fontInput" />
@@ -171,9 +208,8 @@ export const NewAnnouncement = () => {
 							<input
 								type="text"
 								className="form-control roundShape"
-								onChange={event => {
-									setTitle(event.target.value);
-								}}
+								name="title"
+								onChange={handleRoomData}
 							/>
 						</div>
 						<div className="col-2" />
@@ -187,9 +223,8 @@ export const NewAnnouncement = () => {
 								className="form-control descriptionBack roundShape"
 								id="exampleFormControlTextarea1 "
 								rows="3"
-								onChange={event => {
-									setDescription(event.target.value);
-								}}
+								name="description"
+								onChange={handleRoomData}
 							/>
 						</div>
 						<div className="col-1" />
@@ -204,9 +239,8 @@ export const NewAnnouncement = () => {
 									<input
 										type="text"
 										className="form-control"
-										onChange={event => {
-											setPrice(event.target.value);
-										}}
+										name="price"
+										onChange={handleRoomData}
 									/>
 								</div>
 								{/*	<div className="col-3 mb-2">
@@ -221,9 +255,8 @@ export const NewAnnouncement = () => {
 									<input
 										type="text"
 										className="form-control"
-										onChange={event => {
-											setDeposit(event.target.value);
-										}}
+										name="deposit"
+										onChange={handleRoomData}
 									/>
 								</div>
 								{/*<div className="col-3 mb-2">
@@ -244,9 +277,10 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="expWiFi"
 										id="checkWifi"
 										value="option1"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
 										<i className="fas fa-wifi fa-2x" />
@@ -256,9 +290,10 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="expWater"
 										id="checkShower"
 										value="option2"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
 										<i className="fas fa-shower fa-2x" />
@@ -269,9 +304,10 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="expGas"
 										id="checkBurn"
 										value="option3"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label " htmlFor="inlineRadio3">
 										<i className="fas fa-burn fa-2x  " />
@@ -281,9 +317,10 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="expElectricity"
 										id="checkBulb"
 										value="option4"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
 										<i className="far fa-lightbulb fa-2x " />
@@ -302,9 +339,10 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="facingTheStreet"
 										id="checkFacing"
 										value="option1"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
 										<i className="fas fa-building fa-2x" />
@@ -316,9 +354,10 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="furnishedRoom"
 										id="checkFurnished"
 										value="option2"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
 										<i className="fas fa-couch fa-2x" />
@@ -331,9 +370,10 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="suiteRoom"
 										id="checkSuite"
 										value="option3"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label " htmlFor="inlineRadio3">
 										<i className="fas fa-bath fa-2x" />
@@ -345,9 +385,11 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="sharedRoom"
 										id="checkedShared"
 										value="option4"
+										onClick={onClickHandeler}
+										s
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
 										<i className="fab fa-slideshare fa-2x" />
@@ -364,13 +406,14 @@ export const NewAnnouncement = () => {
 								</div>
 								<div className="form-check form-check-inline col-3 pb-5">
 									<input
-										className=" form-check-input"
+										className="form-check-input"
 										type="radio"
-										name="inlineRadioOptions"
+										name="beds"
 										id="checkSingle"
-										value="option1"
+										value="singleBed"
+										onClick={onClickHandelerBed}
 									/>
-									<label className="form-check-label" htmlFor="inlineRadio1">
+									<label className="form-check-label" htmlFor="checkSingle">
 										<i className="fas fa-bed fa-2x" />
 										<br />
 										Single Bed
@@ -380,11 +423,12 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="radio"
-										name="inlineRadioOptions"
+										name="beds"
 										id="checkDouble"
-										value="option2"
+										value="doubleBed"
+										onClick={onClickHandelerBed}
 									/>
-									<label className="form-check-label" htmlFor="inlineRadio2">
+									<label className="form-check-label" htmlFor="checkDouble">
 										<img id="doubleBed" src={doubleBlack} />
 										<br />
 										Double Bed
@@ -395,11 +439,12 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="radio"
-										name="inlineRadioOptions"
+										name="beds"
 										id="checkNope"
-										value="option3"
+										value="noBed"
+										onClick={onClickHandelerBed}
 									/>
-									<label className="form-check-label " htmlFor="inlineRadio3">
+									<label className="form-check-label " htmlFor="checkNope">
 										<i className="fas fa-times fa-2x" />
 										<br />
 										No Bed
@@ -409,11 +454,12 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="radio"
-										name="inlineRadioOptions"
+										name="beds"
 										id="checkSofa"
-										value="option4"
+										value="sofaBed"
+										onClick={onClickHandelerBed}
 									/>
-									<label className="form-check-label" htmlFor="inlineRadio4">
+									<label className="form-check-label" htmlFor="checkSofa">
 										<img id="sofaBed" src={bedsofaBlack} />
 										<br />
 										Sofa Bed
@@ -493,9 +539,7 @@ export const NewAnnouncement = () => {
 								className="btn btn-warning mb-5 ml-5"
 								data-toggle="tab"
 								href="#previewTab"
-								onClick={() =>
-									console.log(city, address, title, description, price, deposit, functionTest())
-								}>
+								onClick={() => actions.postNewAnnouncement(roomData)}>
 								Upload
 							</button>
 						</div>
