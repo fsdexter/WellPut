@@ -1,15 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import perfil from "../../img/fotodeperfil.png";
 import { AnimatedMulti } from "../component/multiSelector";
 import { UserProfileForm } from "../component/uploadprofilepicture";
 import "../../styles/perfiledit.scss";
+import { useParams } from "react-router-dom";
 import { interestsOptions, languageOptions } from "../constants";
 
 export const EditProfile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
+	let { id } = useParams();
+
 	const [formValue, setFormValue] = useState({
 		fullName: "",
 		email: "",
@@ -21,6 +24,16 @@ export const EditProfile = () => {
 		occupation: "",
 		personalDescription: ""
 	});
+
+	useEffect(() => {
+		loadUser();
+	}, []);
+
+	const loadUser = async () => {
+		await actions.getUser(id);
+		setFormValue(JSON.parse(localStorage.getItem("user"))["user"]);
+	};
+
 	const handleAddrTypeChange = (f, key) => {
 		console.log(f, key, "<-----");
 		setFormValue({

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { SignUp } from "./signUp";
 import { Login } from "./login";
@@ -18,7 +19,9 @@ export const Navbar = () => {
 		actions.logOut();
 		history.push("/");
 	};
-
+	useEffect(() => {
+		actions.getUser(id);
+	}, []);
 	const changeElementNavbarActive = element => {
 		if (element) {
 			setIsActive(element);
@@ -37,7 +40,8 @@ export const Navbar = () => {
 			<div className="col-10" id="brown">
 				{localStorage.getItem("user") || store.user !== null ? (
 					<div className="col-12 d-flex justify-content-between" id="yellow">
-						<Link to="/profile">
+						{console.log(localStorage.getItem("user").user.id)}
+						<Link to={`/profile/${localStorage.getItem("user").user.id}`}>
 							<span
 								className={
 									isActive === "profile"

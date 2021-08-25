@@ -10,16 +10,14 @@ import "../../styles/viewprofile.scss";
 export const Profile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
-	let { user_id } = useParams();
+	let { id } = useParams();
 
 	useEffect(() => {
-		//actions.getUser(user_id);
-		actions.getUser(1000);
+		actions.getUser(id);
 	}, []);
 
 	function handleSubmit() {
-		//history.push(`/edit_profile/${user_id}`);
-		history.push(`/edit_profile/`);
+		history.push(`/edit_profile/${id}`);
 	}
 	function favorites() {
 		history.push("/favorites");
@@ -57,7 +55,10 @@ export const Profile = () => {
 								<div className="col-12 detallefondblack" id="presentationUser">
 									<div className="d-flex mb-5">
 										<i className="fas fa-map-marker-alt fa-2x text-white mr-4"></i>
-										<h2>{JSON.parse(localStorage.getItem("user")).user.city || store.user.city}</h2>
+										<h2>
+											{JSON.parse(localStorage.getItem("user")).user.city_id ||
+												store.user.city_id}
+										</h2>
 									</div>
 
 									<h3>

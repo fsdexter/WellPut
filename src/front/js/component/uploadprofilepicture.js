@@ -15,7 +15,8 @@ export const UserProfileForm = () => {
 			method: "POST"
 		};
 		// you need to have the user_id in the localStorage
-		const currentUserId = localStorage.getItem("user_id");
+		const currentUserId = JSON.parse(localStorage.getItem("user"))["user"]["id"];
+		console.log(currentUserId, "<---------------");
 		fetch(`${process.env.BACKEND_URL}/user/${currentUserId}/image`, options)
 			.then(resp => resp.json())
 			.then(data => {
