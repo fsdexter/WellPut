@@ -25,18 +25,18 @@ export const NewAnnouncement = () => {
 		description: "",
 		price: "",
 		deposit: "",
-		facingTheStreet: false,
-		furnishedRoom: false,
-		suiteRoom: false,
-		sharedRoom: false,
-		expWiFi: false,
-		expGas: false,
-		expElectricity: false,
-		expWater: false,
-		singleBed: false,
-		doubleBed: false,
-		sofaBed: false,
-		noBed: false
+		facingTheStreet: "",
+		furnishedRoom: "",
+		suiteRoom: "",
+		sharedRoom: "",
+		expWiFi: "",
+		expGas: "",
+		expElectricity: "",
+		expWater: "",
+		singleBed: "",
+		doubleBed: "",
+		sofaBed: "",
+		noBed: ""
 	});
 	const handleRoomData = e => {
 		const { name, value } = e.target;
@@ -44,11 +44,11 @@ export const NewAnnouncement = () => {
 	};
 
 	const onClickHandeler = e => {
-		var iten = roomData[e.target.name];
-		if (iten == false) {
-			setRoomData({ ...roomData, [e.target.name]: true });
+		var item = roomData[e.target.name];
+		if (item == "") {
+			setRoomData({ ...roomData, [e.target.name]: e.target.name }); //o cambiar esto por false, para ser booleano
 		} else {
-			setRoomData({ ...roomData, [e.target.name]: false });
+			setRoomData({ ...roomData, [e.target.name]: "" });
 		}
 	};
 	/*function functionTest() {
