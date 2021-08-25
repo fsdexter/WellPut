@@ -17,7 +17,23 @@ from werkzeug.security import check_password_hash
 
 
 api = Blueprint('api', __name__)
+# ----------- Upload Photo User ---------------------------------
+@api.route('/user/<int:user_id>/avatar_url', methods=['PUT', 'POST'])
+def handle_upload(user_id):
+    if 'avatar_url' in request.files:
+        result = cloudinary.uploader.upload(request.files['avatar_url'])
+        user1 = User.query.get(user_id)
+        print(user1.avatar_url, "å########")
+        user1.avatar_url = result['secure_url']     
+        print(result['secure_url'],"@@@@@@@@@@@")
+        db.session.add(user1)
+        db.session.commit()
 
+        return jsonify(user1.serialize()), 200
+    else:
+        raise APIException('Missing profile_image on the FormData')
+
+#________________________________________________________________________
 
 @api.route('/sign_up', methods=['POST'])
 def sign_up_user():

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import perfil from "../../img/fotodeperfil.png";
 import { AnimatedMulti } from "../component/multiSelector";
+import { UserProfileForm } from "../component/uploadprofilepicture";
 import "../../styles/perfiledit.scss";
 import { interestsOptions, languageOptions } from "../constants";
 
@@ -207,16 +208,10 @@ export const EditProfile = () => {
 					</div>
 					<div className=" col  detalle justify-content-center" style={{ width: "10rem", height: "29rem" }}>
 						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
-						<form>
-							{/*<input type="file" />*/}
-
-							<button type="submit" className="btn btn-warning">
-								Upload
-							</button>
-						</form>
+						<UserProfileForm />
 						<br />
 						{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
-						<button type="submit" className="btn btn-warning" onClick={inputHandelChange}>
+						<button className="btn btn-warning" onClick={inputHandelChange}>
 							SAVE
 						</button>
 					</div>
