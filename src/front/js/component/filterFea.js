@@ -1,20 +1,39 @@
 import React, { useState } from "react";
 
 export const FilterFea = () => {
-	const [features, setFeatures] = useState({
-		facingTheStreet: false,
-		furnishedRoom: false,
-		suiteRoom: false,
-		sharedRoom: false
-	});
+	const [features, setFeatures] = useState([]);
 
 	const onClickHandeler = e => {
-		var iten = features[e.target.name];
-		if (iten == false) {
-			setFeatures({ ...features, [e.target.name]: true });
+		const checker = value => ![e.target.name].some(element => value.includes(element));
+
+		if (features.length > 0) {
+			if (features.includes(e.target.name)) {
+				setFeatures(features.filter(checker));
+				// for (let i = 0; i < features.length; i++) {
+				// 	if (features[i] == e.target.name) {
+
+				// 	}
+				// }
+			} else {
+				setFeatures([...features, e.target.name]);
+			}
+			// for( let i = 0; i < arr.length; i++){
+			// 	if(e.target.name == arr[i]{
+
+			// 	})
+			// }
 		} else {
-			setFeatures({ ...features, [e.target.name]: false });
+			setFeatures([e.target.name]);
 		}
+
+		//setFeatures([...features, e.target.name]);
+
+		// if (!features.some(iten => (iten = [e.target.name]))) {
+		// 	setFeatures([...features, [e.target.name]]);
+		// } else {
+		// 	//features.pop([e.target.name]);
+		// 	//setFeatures({ ...features, [e.target.name]: false });
+		// }
 	};
 
 	return (
