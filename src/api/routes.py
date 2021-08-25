@@ -15,9 +15,7 @@ from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 
 
-
 api = Blueprint('api', __name__)
-
 
 @api.route('/sign_up', methods=['POST'])
 def sign_up_user():
@@ -88,20 +86,15 @@ def get_single_user(user_id):
     body = request.get_json()
     user_selected = User.query.get(user_id)
     
-    rooms_user = user_selected.rooms
+    rooms_user = user_selected.rooms # -- "rooms" is a relationship in the table User
     user = user_selected.serialize()
     rooms = []
     
     for room in rooms_user:
-        # Para obtener la relación entre habitación y ciudad y que salgan en Postman
-        city = room.city.serialize()
         room_res = room.serialize()
-        
-        # Añadir al Objeto "room_res" la propiedad "city"
-        room_res['city'] = city
         rooms.append(room_res)
     
-    characteristic_user = user_selected.characteristic
+    characteristic_user = user_selected.characteristic  # -- "characteristic" is a relationship in the table User
     user = user_selected.serialize()
     characteristics = []
     
@@ -109,7 +102,7 @@ def get_single_user(user_id):
         characteristic_res = characteristic.serialize()
         characteristics.append(characteristic_res)
     
-    language_user = user_selected.language
+    language_user = user_selected.language # -- "language" is a relationship in the table User
     user = user_selected.serialize()
     languages = []
     
@@ -117,13 +110,13 @@ def get_single_user(user_id):
         language_res = language.serialize()
         languages.append(language_res)
         
-    tenancies_user = user_selected.tenancies
+    tenancies_user = user_selected.tenancies # -- "tenancies" is a relationship in the table User
     user = user_selected.serialize()
-    tenancies = []
+    tenancies_list = []
     
-    for tenancies in tenancies_user:
-        tenancies_res = tenancies.serialize()
-        tenancies.append(tenancies_res)
+    for tenancy in tenancies_user:
+        tenancies_res = tenancy.serialize()
+        tenancies_list.append(tenancies_res)
      
     # Añadir al Objeto "user" la propiedad "rooms" para que salgan las habitaciones del usuario
     user['rooms'] = rooms   
@@ -132,11 +125,11 @@ def get_single_user(user_id):
     # Añadir al Objeto "user" la propiedad "language" para que salga en el usuario
     user['languages'] = languages
     # Añadir al Objeto "user" la propiedad "tenancies" para que salga en el usuario
-    user['tenancies'] = tenancies
+    user['tenancies'] = tenancies_list
     
     return jsonify(user), 200
 
-@api.route('/', methods=['GET'])
+@api.route('/', methods=['GET']) # LISTA DE TODAS LAS HABITACIONES
 def get_rooms():
     rooms_list = []
     rooms_list_in_DB = Room.query.all()
@@ -146,24 +139,62 @@ def get_rooms():
     
     return jsonify(rooms_list), 200
 
-@api.route('/detailedView/<int:room_id>', methods=['GET']) # EN POSTMAN FUNCIONA
+@api.route('/detailed_room/<int:room_id>', methods=['GET']) # EN POSTMAN FUNCIONA
 def get_single_room(room_id):
     body = request.get_json()
     room_selected = Room.query.get(room_id)
-    return jsonify(room_selected.serialize()), 200
+    
+    tenancies_room = room_selected.tenancies
+    room = room_selected.serialize()
+    tenancies_list = []
+    
+    for tenancy in tenancies_room:
+        tenancy_res = tenancy.serialize()
+        tenancies_list.append(tenancy_res)
+        
+    room_archive_room = room_selected.room_archive
+    room = room_selected.serialize()
+    room_archives = []
+    
+    for room_archive in room_archive_room:
+        room_archive_res = room_archive.serialize()
+        room_archives.append(room_archive_res)
+    
+    expense_room = room_selected.expense
+    room = room_selected.serialize()
+    expensives = []
+    
+    for expensive in expense_room:
+        expensive_res = expensive.serialize()
+        expensives.append(expensive_res)
+    
+    feature_room = room_selected.feature
+    room = room_selected.serialize()
+    features = []
+    
+    for feature in feature_room:
+        feature_res = feature.serialize()
+        features.append(feature_res)
+    
+    room['tenancies'] = tenancies_list
+    room['room_archives'] = room_archives
+    room['expensives'] = expensives
+    room['features'] = features
+    
+    return jsonify(room), 200
 
 
-@api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # NO FUNCIONA !!!!
+@api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # En consola sale el cambio !!!!
 def edit_profile(user_id):
     body_request = request.get_json()
     user_to_edit = User.query.get_or_404(user_id)
     
     for key in body_request:
         
-        if key == "name":
-            user_to_edit.name = body_request[key]
+        if key == body_request[key]:
+            user_to_edit[key] = body_request[key]
             print("body_request[key] ----- ", body_request[key])
-            print("user_to_edit[key] ----- ", user_to_edit.name)
+            print("user_to_edit[key] ----- ", user_to_edit[key])
     
     db.session.commit()
     
