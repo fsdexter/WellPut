@@ -15,9 +15,7 @@ from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 
 
-
 api = Blueprint('api', __name__)
-
 
 @api.route('/sign_up', methods=['POST'])
 def sign_up_user():
