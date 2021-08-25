@@ -152,8 +152,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				} else {
 					setStore({ filters: [e.target.name] });
-				}
-			}
+				},
+		  	postNewAnnouncement: room => {
+          fetch(API_BASE_URL + "/api/blablabla", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(room)
+          })
+            .then(res => res.json())
+            .then(data => console.log(data, "response postNewAnnouncement"));
+        }
 		}
 	};
 };

@@ -1,7 +1,7 @@
   
 import os
 from flask_admin import Admin
-from .models import db, User, Reviews, CharacteristicUser, Characteristic, SpokenLanguages, Languages, Room, RoomArchive, ExpensesIncluded, Features
+from .models import db, User, City, Country, CharacteristicUser, Characteristic, SpokenLanguages, Language, Tenancy, Review, Room, ExpensesRoom, Expense, RoomArchive, FeaturesRoom, Feature
 from flask_admin.contrib.sqla import ModelView
 
 def setup_admin(app):
@@ -10,12 +10,19 @@ def setup_admin(app):
     admin = Admin(app, name='4Geeks Admin', template_mode='bootstrap3')
 
     admin.add_view(ModelView(User, db.session))
-    admin.add_view(ModelView(Reviews, db.session))
+    admin.add_view(ModelView(City, db.session))
+    admin.add_view(ModelView(Country, db.session))
     admin.add_view(ModelView(CharacteristicUser, db.session))
     admin.add_view(ModelView(Characteristic, db.session))
     admin.add_view(ModelView(SpokenLanguages, db.session))
-    admin.add_view(ModelView(Languages, db.session))
-    admin.add_view(ModelView(Room, db.session))   
-    admin.add_view(ModelView(RoomArchive, db.session))  
-    admin.add_view(ModelView(ExpensesIncluded, db.session))  
-    admin.add_view(ModelView(Features, db.session))
+    admin.add_view(ModelView(Language, db.session))
+    admin.add_view(ModelView(Tenancy, db.session))
+    admin.add_view(ModelView(Review, db.session))
+    admin.add_view(ModelView(Room, db.session))
+    admin.add_view(ModelView(ExpensesRoom, db.session))
+    admin.add_view(ModelView(Expense, db.session))
+    admin.add_view(ModelView(RoomArchive, db.session))
+    admin.add_view(ModelView(FeaturesRoom, db.session))
+    admin.add_view(ModelView(Feature, db.session))
+     
+    
