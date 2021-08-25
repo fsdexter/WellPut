@@ -9,7 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			rooms: [],
 			favorites: [],
 			reviews: [],
-			roomies: []
+			roomies: [],
+			filters: []
 		},
 		actions: {
 			signUp: async userValues => {
@@ -139,18 +140,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 			deleteRoomie: () => {
 				console.log("SE ELIMINÓ A UN COMPAÑERO DE PISO");
 			},
+			onClickHandeler: e => {
+				const store = getStore();
+				const checker = value => ![e.target.name].some(element => value.includes(element));
 
-			postNewAnnouncement: room => {
-				fetch(API_BASE_URL + "/api/blablabla", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify(room)
-				})
-					.then(res => res.json())
-					.then(data => console.log(data, "response postNewAnnouncement"));
-			}
+				if (store.filters.length > 0) {
+					if (store.filters.includes(e.target.name)) {
+						setStore({ filters: store.filters.filter(checker) });
+					} else {
+						setStore({ filters: [...store.filters, e.target.name] });
+					}
+				} else {
+					setStore({ filters: [e.target.name] });
+				},
+		  	postNewAnnouncement: room => {
+          fetch(API_BASE_URL + "/api/blablabla", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(room)
+          })
+            .then(res => res.json())
+            .then(data => console.log(data, "response postNewAnnouncement"));
+        }
 		}
 	};
 };

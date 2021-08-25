@@ -56,7 +56,7 @@ It is recomended to install the backend first, make sure you have Python 3.8, Pi
 
 - Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
 
-1. Install the packages: `$ npm install`
+1. Install the packages: `$ npm install` "npm install && python docs/assets/greeting.py front"
 2. Start coding! start the webpack dev server `$ npm run start`
 
 ## Publish your website!

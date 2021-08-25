@@ -14,9 +14,12 @@ export const FilterExp = () => {
 				<input
 					className=" form-check-input"
 					type="checkbox"
-					name="inlineRadioOptions"
+					name="wifi"
 					id="inlineRadio1"
 					value="option1"
+					onClick={e => {
+						actions.onClickHandeler(e);
+					}}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio1">
 					<i className="fas fa-wifi fa-2x" />
@@ -26,9 +29,12 @@ export const FilterExp = () => {
 				<input
 					className="form-check-input"
 					type="checkbox"
-					name="inlineRadioOptions"
+					name="Water"
 					id="inlineRadio2"
 					value="option2"
+					onClick={e => {
+						actions.onClickHandeler(e);
+					}}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio2">
 					<i className="fas fa-shower fa-2x" />
@@ -39,9 +45,12 @@ export const FilterExp = () => {
 				<input
 					className=" form-check-input"
 					type="checkbox"
-					name="inlineRadioOptions"
+					name="gas"
 					id="inlineRadio3"
 					value="option3"
+					onClick={e => {
+						actions.onClickHandeler(e);
+					}}
 				/>
 				<label className="form-check-label " htmlFor="inlineRadio3">
 					<i className="fas fa-burn fa-2x  " />
@@ -51,9 +60,12 @@ export const FilterExp = () => {
 				<input
 					className="form-check-input"
 					type="checkbox"
-					name="inlineRadioOptions"
+					name="light "
 					id="inlineRadio4"
 					value="option4"
+					onClick={e => {
+						actions.onClickHandeler(e);
+					}}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio4">
 					<i className="far fa-lightbulb fa-2x " />
