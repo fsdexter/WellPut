@@ -9,7 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			rooms: [],
 			favorites: [],
 			reviews: [],
-			roomies: []
+			roomies: [],
+			filters: []
 		},
 		actions: {
 			signUp: async userValues => {
@@ -138,6 +139,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteRoomie: () => {
 				console.log("SE ELIMINÓ A UN COMPAÑERO DE PISO");
+			},
+			onClickHandeler: e => {
+				const store = getStore();
+				const checker = value => ![e.target.name].some(element => value.includes(element));
+
+				if (store.filters.length > 0) {
+					if (store.filters.includes(e.target.name)) {
+						setStore({ filters: store.filters.filter(checker) });
+					} else {
+						setStore({ filters: [...store.filters, e.target.name] });
+					}
+				} else {
+					setStore({ filters: [e.target.name] });
+				}
 			}
 		}
 	};

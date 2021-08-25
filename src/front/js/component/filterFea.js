@@ -1,40 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { Context } from "../store/appContext";
 
 export const FilterFea = () => {
-	const [features, setFeatures] = useState([]);
-
-	const onClickHandeler = e => {
-		const checker = value => ![e.target.name].some(element => value.includes(element));
-
-		if (features.length > 0) {
-			if (features.includes(e.target.name)) {
-				setFeatures(features.filter(checker));
-				// for (let i = 0; i < features.length; i++) {
-				// 	if (features[i] == e.target.name) {
-
-				// 	}
-				// }
-			} else {
-				setFeatures([...features, e.target.name]);
-			}
-			// for( let i = 0; i < arr.length; i++){
-			// 	if(e.target.name == arr[i]{
-
-			// 	})
-			// }
-		} else {
-			setFeatures([e.target.name]);
-		}
-
-		//setFeatures([...features, e.target.name]);
-
-		// if (!features.some(iten => (iten = [e.target.name]))) {
-		// 	setFeatures([...features, [e.target.name]]);
-		// } else {
-		// 	//features.pop([e.target.name]);
-		// 	//setFeatures({ ...features, [e.target.name]: false });
-		// }
-	};
+	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="row ">
@@ -47,7 +15,9 @@ export const FilterFea = () => {
 					type="checkbox"
 					name="facingTheStreet"
 					id="inlineRadio1"
-					onClick={onClickHandeler}
+					onClick={e => {
+						actions.onClickHandeler(e);
+					}}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio1">
 					<i className="fas fa-building fa-2x" />
@@ -61,7 +31,9 @@ export const FilterFea = () => {
 					type="checkbox"
 					name="furnishedRoom"
 					id="inlineRadio2"
-					onClick={onClickHandeler}
+					onClick={e => {
+						actions.onClickHandeler(e);
+					}}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio2">
 					<i className="fas fa-couch fa-2x" />
@@ -76,7 +48,9 @@ export const FilterFea = () => {
 					type="checkbox"
 					name="suiteRoom"
 					id="inlineRadio3"
-					onClick={onClickHandeler}
+					onClick={e => {
+						actions.onClickHandeler(e);
+					}}
 				/>
 				<label className="form-check-label " htmlFor="inlineRadio3">
 					<i className="fas fa-bath fa-2x" />
@@ -90,7 +64,9 @@ export const FilterFea = () => {
 					type="checkbox"
 					name="sharedRoom"
 					id="inlineRadio4"
-					onClick={onClickHandeler}
+					onClick={e => {
+						actions.onClickHandeler(e);
+					}}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio4">
 					<i className="fab fa-slideshare fa-2x" />
@@ -101,3 +77,37 @@ export const FilterFea = () => {
 		</div>
 	);
 };
+// const [features, setFeatures] = useState([]);
+
+// 	const onClickHandeler = e => {
+// 		const checker = value => ![e.target.name].some(element => value.includes(element));
+
+// 		if (features.length > 0) {
+// 			if (features.includes(e.target.name)) {
+// 				setFeatures(features.filter(checker));
+// 				// for (let i = 0; i < features.length; i++) {
+// 				// 	if (features[i] == e.target.name) {
+
+// 				// 	}
+// 				// }
+// 			} else {
+// 				setFeatures([...features, e.target.name]);
+// 			}
+// 			// for( let i = 0; i < arr.length; i++){
+// 			// 	if(e.target.name == arr[i]{
+
+// 			// 	})
+// 			// }
+// 		} else {
+// 			setFeatures([e.target.name]);
+// 		}
+
+// 		//setFeatures([...features, e.target.name]);
+
+// 		// if (!features.some(iten => (iten = [e.target.name]))) {
+// 		// 	setFeatures([...features, [e.target.name]]);
+// 		// } else {
+// 		// 	//features.pop([e.target.name]);
+// 		// 	//setFeatures({ ...features, [e.target.name]: false });
+// 		// }
+// 	};

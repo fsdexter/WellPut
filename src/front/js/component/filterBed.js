@@ -3,7 +3,7 @@ import double from "../../img/double.png";
 import bedsofa from "../../img/bedsofa.png";
 
 export const FilterBed = () => {
-	const [besType, setBedType] = useState();
+	const [bedType, setBedType] = useState();
 	return (
 		<div className="row">
 			<div className="col-4">
