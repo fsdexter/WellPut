@@ -8,14 +8,7 @@ import bedsofaBlack from "../../img/bedsofaBlack.png";
 import addPic from "../../img/addPic.png";
 
 export const NewAnnouncement = () => {
-	/*const { store, actions } = useContext(Context);
-	
-	const [city, setCity] = useState("");
-	const [address, setAddress] = useState("");
-	const [title, setTitle] = useState("");
-	const [description, setDescription] = useState("");
-	const [price, setPrice] = useState("");
-	const [deposit, setDeposit] = useState("");*/
+	const { store, actions } = useContext(Context);
 
 	const [move, setMove] = useState("");
 	const [roomData, setRoomData] = useState({
@@ -49,6 +42,18 @@ export const NewAnnouncement = () => {
 			setRoomData({ ...roomData, [e.target.name]: e.target.name }); //o cambiar esto por false, para ser booleano
 		} else {
 			setRoomData({ ...roomData, [e.target.name]: "" });
+		}
+	};
+	const onClickHandelerBed = e => {
+		var item = e.target.value;
+		if (item == "singleBed") {
+			setRoomData({ ...roomData, singleBed: item, doubleBed: "", sofaBed: "", noBed: "" });
+		} else if (item == "doubleBed") {
+			setRoomData({ ...roomData, singleBed: "", doubleBed: item, sofaBed: "", noBed: "" });
+		} else if (item == "sofaBed") {
+			setRoomData({ ...roomData, singleBed: "", doubleBed: "", sofaBed: item, noBed: "" });
+		} else if (item == "noBed") {
+			setRoomData({ ...roomData, singleBed: "", doubleBed: "", sofaBed: "", noBed: item });
 		}
 	};
 	/*function functionTest() {
@@ -92,6 +97,32 @@ export const NewAnnouncement = () => {
 
 	return (
 		<div className="container">
+			<div className="form-check">
+				<input
+					className="form-check-input"
+					type="radio"
+					name="exampleRadios"
+					id="exampleRadios1"
+					value="option1"
+					onClick={() => console.log("hello")}
+				/>
+				<label className="form-check-label" htmlFor="exampleRadios1">
+					Default radio
+				</label>
+			</div>
+			<div className="form-check">
+				<input
+					className="form-check-input"
+					type="radio"
+					name="exampleRadios"
+					id="exampleRadios2"
+					value="option2"
+				/>
+				<label className="form-check-label" htmlFor="exampleRadios2">
+					Second default radio
+				</label>
+			</div>
+
 			<ul className="nav nav-tabs " id="myTab" role="tablist">
 				<li className="nav-item">
 					<a
@@ -401,14 +432,14 @@ export const NewAnnouncement = () => {
 								</div>
 								<div className="form-check form-check-inline col-3 pb-5">
 									<input
-										className=" form-check-input"
+										className="form-check-input"
 										type="radio"
-										name="singleBed"
+										name="beds"
 										id="checkSingle"
-										value="option1"
-										onClick={onClickHandeler}
+										value="singleBed"
+										onClick={onClickHandelerBed}
 									/>
-									<label className="form-check-label" htmlFor="inlineRadio1">
+									<label className="form-check-label" htmlFor="checkSingle">
 										<i className="fas fa-bed fa-2x" />
 										<br />
 										Single Bed
@@ -418,12 +449,12 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="radio"
-										name="doubleBed"
+										name="beds"
 										id="checkDouble"
-										value="option2"
-										onClick={onClickHandeler}
+										value="doubleBed"
+										onClick={onClickHandelerBed}
 									/>
-									<label className="form-check-label" htmlFor="inlineRadio2">
+									<label className="form-check-label" htmlFor="checkDouble">
 										<img id="doubleBed" src={doubleBlack} />
 										<br />
 										Double Bed
@@ -434,12 +465,12 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="radio"
-										name="noBed"
+										name="beds"
 										id="checkNope"
-										value="option3"
-										onClick={onClickHandeler}
+										value="noBed"
+										onClick={onClickHandelerBed}
 									/>
-									<label className="form-check-label " htmlFor="inlineRadio3">
+									<label className="form-check-label " htmlFor="checkNope">
 										<i className="fas fa-times fa-2x" />
 										<br />
 										No Bed
@@ -449,12 +480,12 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="radio"
-										name="sofaBed"
+										name="beds"
 										id="checkSofa"
-										value="option4"
-										onClick={onClickHandeler}
+										value="sofaBed"
+										onClick={onClickHandelerBed}
 									/>
-									<label className="form-check-label" htmlFor="inlineRadio4">
+									<label className="form-check-label" htmlFor="checkSofa">
 										<img id="sofaBed" src={bedsofaBlack} />
 										<br />
 										Sofa Bed
@@ -534,7 +565,7 @@ export const NewAnnouncement = () => {
 								className="btn btn-warning mb-5 ml-5"
 								data-toggle="tab"
 								href="#previewTab"
-								onClick={() => console.log(roomData /*functionTest()*/)}>
+								onClick={() => actions.postNewAnnouncement(roomData)}>
 								Upload
 							</button>
 						</div>
