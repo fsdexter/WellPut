@@ -97,32 +97,6 @@ export const NewAnnouncement = () => {
 
 	return (
 		<div className="container">
-			<div className="form-check">
-				<input
-					className="form-check-input"
-					type="radio"
-					name="exampleRadios"
-					id="exampleRadios1"
-					value="option1"
-					onClick={() => console.log("hello")}
-				/>
-				<label className="form-check-label" htmlFor="exampleRadios1">
-					Default radio
-				</label>
-			</div>
-			<div className="form-check">
-				<input
-					className="form-check-input"
-					type="radio"
-					name="exampleRadios"
-					id="exampleRadios2"
-					value="option2"
-				/>
-				<label className="form-check-label" htmlFor="exampleRadios2">
-					Second default radio
-				</label>
-			</div>
-
 			<ul className="nav nav-tabs " id="myTab" role="tablist">
 				<li className="nav-item">
 					<a
