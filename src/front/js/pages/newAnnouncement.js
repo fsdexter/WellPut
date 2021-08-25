@@ -24,11 +24,32 @@ export const NewAnnouncement = () => {
 		title: "",
 		description: "",
 		price: "",
-		deposit: ""
+		deposit: "",
+		facingTheStreet: false,
+		furnishedRoom: false,
+		suiteRoom: false,
+		sharedRoom: false,
+		expWiFi: false,
+		expGas: false,
+		expElectricity: false,
+		expWater: false,
+		singleBed: false,
+		doubleBed: false,
+		sofaBed: false,
+		noBed: false
 	});
 	const handleRoomData = e => {
 		const { name, value } = e.target;
 		setRoomData(prevState => ({ ...prevState, [name]: value }));
+	};
+
+	const onClickHandeler = e => {
+		var iten = roomData[e.target.name];
+		if (iten == false) {
+			setRoomData({ ...roomData, [e.target.name]: true });
+		} else {
+			setRoomData({ ...roomData, [e.target.name]: false });
+		}
 	};
 	/*function functionTest() {
 		if (document.getElementById("checkWifi").checked) {
@@ -251,9 +272,10 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="expWiFi"
 										id="checkWifi"
 										value="option1"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
 										<i className="fas fa-wifi fa-2x" />
@@ -263,9 +285,10 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="expWater"
 										id="checkShower"
 										value="option2"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
 										<i className="fas fa-shower fa-2x" />
@@ -276,9 +299,10 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="expGas"
 										id="checkBurn"
 										value="option3"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label " htmlFor="inlineRadio3">
 										<i className="fas fa-burn fa-2x  " />
@@ -288,9 +312,10 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="expElectricity"
 										id="checkBulb"
 										value="option4"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
 										<i className="far fa-lightbulb fa-2x " />
@@ -309,9 +334,10 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="facingTheStreet"
 										id="checkFacing"
 										value="option1"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
 										<i className="fas fa-building fa-2x" />
@@ -323,9 +349,10 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="furnishedRoom"
 										id="checkFurnished"
 										value="option2"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
 										<i className="fas fa-couch fa-2x" />
@@ -338,9 +365,10 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="suiteRoom"
 										id="checkSuite"
 										value="option3"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label " htmlFor="inlineRadio3">
 										<i className="fas fa-bath fa-2x" />
@@ -352,9 +380,11 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="checkbox"
-										name="inlineRadioOptions"
+										name="sharedRoom"
 										id="checkedShared"
 										value="option4"
+										onClick={onClickHandeler}
+										s
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
 										<i className="fab fa-slideshare fa-2x" />
@@ -373,9 +403,10 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="radio"
-										name="inlineRadioOptions"
+										name="singleBed"
 										id="checkSingle"
 										value="option1"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio1">
 										<i className="fas fa-bed fa-2x" />
@@ -387,9 +418,10 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="radio"
-										name="inlineRadioOptions"
+										name="doubleBed"
 										id="checkDouble"
 										value="option2"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio2">
 										<img id="doubleBed" src={doubleBlack} />
@@ -402,9 +434,10 @@ export const NewAnnouncement = () => {
 									<input
 										className=" form-check-input"
 										type="radio"
-										name="inlineRadioOptions"
+										name="noBed"
 										id="checkNope"
 										value="option3"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label " htmlFor="inlineRadio3">
 										<i className="fas fa-times fa-2x" />
@@ -416,9 +449,10 @@ export const NewAnnouncement = () => {
 									<input
 										className="form-check-input"
 										type="radio"
-										name="inlineRadioOptions"
+										name="sofaBed"
 										id="checkSofa"
 										value="option4"
+										onClick={onClickHandeler}
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
 										<img id="sofaBed" src={bedsofaBlack} />
