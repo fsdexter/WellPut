@@ -171,6 +171,16 @@ def edit_profile(user_id):
     
     return jsonify(body_request), 200
 
+@api.route('/new_announcement', methods=['POST'])
+def create_announcement():
+    body_request = request.get_json()
+    print("acá están los parámetros")
+    print(body_request)
+    city_request = body_request.get("city", None)
+    _request = body_request.get("", None)
+
+    return jsonify(body_request), 200
+
 
 # -------------------------- SEED -------------------------
 
