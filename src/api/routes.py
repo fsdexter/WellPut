@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedData, Room
+from api.models import db, User, SeedData, Room, City, Expense, Feature
 #from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
@@ -200,6 +200,89 @@ def edit_profile(user_id):
     
     print("body_request *********************** ", body_request)
     
+    return jsonify(body_request), 200
+
+@api.route('/new_announcement', methods=['POST'])
+def create_announcement():
+    body_request = request.get_json()
+    print("acá están los parámetros")
+    print(body_request)
+    city_request = body_request.get("city", None)
+    address_request = body_request.get("address", None)
+    title_request = body_request.get("title", None)
+    description_request = body_request.get("description", None)
+    price_request = body_request.get("price", None)
+    deposit_request = body_request.get("deposit", None)
+    facingTheStreet_request = body_request.get("facingTheStreet", None)
+    furnishedRoom_request = body_request.get("furnishedRoom", None)
+    suiteRoom_request = body_request.get("suiteRoom", None)
+    sharedRoom_request = body_request.get("sharedRoom", None)
+    expWiFi_request = body_request.get("expWiFi", None)
+    expGas_request = body_request.get("expGas", None)
+    expElectricity_request = body_request.get("expElectricity", None)
+    expWater_request = body_request.get("expWater", None)
+    type_bed_request = body_request.get("type_bed", None)
+    # singleBed_request = body_request.get("singleBed", None)
+    # doubleBed_request = body_request.get("doubleBed", None)
+    # sofaBed_request = body_request.get("sofaBed", None)
+    # noBed_request = body_request.get("noBed", None)
+
+    city_room= City(
+        name = city_request
+    )
+    expense_room= Expense(
+        name = expWater_request
+    )
+    expense2_room= Expense(
+        name = expWiFi_request
+    )
+    expense3_room= Expense(
+        name = expElectricity_request
+    )
+    expense4_room= Expense(
+        name = expGas_request
+    )
+
+    feature1_room= Feature(
+        name=facingTheStreet_request
+    )
+    feature2_room= Feature(
+        name=furnishedRoom_request
+    )
+    feature3_room= Feature(
+        name=suiteRoom_request
+    )
+    feature4_room= Feature(
+        name=sharedRoom_request
+    )
+
+
+
+    new_room = Room(
+        address = address_request, 
+        title = title_request, 
+        description = description_request,
+        price = price_request,
+        deposit = deposit_request,
+        # facingTheStreet = facingTheStreet_request,
+        # furnishedRoom = furnishedRoom_request,
+        # suiteRoom = suiteRoom_request,
+        # sharedRoom = sharedRoom_request,
+        type_bed = type_bed_request
+        )
+    
+    db.session.add(city_room)
+    db.session.add(new_room)
+    db.session.add(feature1_room)
+    db.session.add(feature2_room)
+    db.session.add(feature3_room)
+    db.session.add(feature4_room)
+    db.session.add(expense_room)
+    db.session.add(expense2_room)
+    db.session.add(expense3_room)
+    db.session.add(expense4_room)
+    db.session.commit()
+
     return jsonify(body_request), 200
 
 
