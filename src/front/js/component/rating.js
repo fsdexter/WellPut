@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
 
 export function Rating() {
+	const { store, actions } = useContext(Context);
 	const [stars, setStars] = useState(0);
 
 	return (
@@ -11,13 +13,13 @@ export function Rating() {
 					return (
 						<div
 							key={i}
-							className={stars < i + 1 ? "far fa-star fa-2x" : "fas fa-star fa-2x"}
+							className={store.rating < i + 1 ? "far fa-star fa-2x" : "fas fa-star fa-2x"}
 							onClick={() => {
 								let s = i + 1;
-								if (s == stars) {
+								if (s == store.rating) {
 									s -= 1;
 								}
-								setStars(s);
+								actions.setRating(s);
 							}}></div>
 					);
 				})}

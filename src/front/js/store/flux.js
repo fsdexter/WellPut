@@ -10,7 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favorites: [],
 			reviews: [],
 			roomies: [],
-			filters: []
+			filters: [],
+			rating: []
 		},
 		actions: {
 			signUp: async userValues => {
@@ -153,6 +154,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					setStore({ filters: [e.target.name] });
 				}
+			},
+			setRating: s => {
+				const store = getStore();
+				setStore({ rating: [s] });
 			},
 			postNewAnnouncement: room => {
 				fetch(API_BASE_URL + "/api/blablabla", {
