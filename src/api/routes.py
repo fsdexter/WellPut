@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedData, Room
+from api.models import db, User, SeedData, Room, City
 #from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
@@ -195,27 +195,30 @@ def create_announcement():
     sofaBed_request = body_request.get("sofaBed", None)
     noBed_request = body_request.get("noBed", None)
 
+    city_room= City(
+        name = city_request
+    )
     new_room = Room(
-        city = city_request, 
         address = address_request, 
         title = title_request, 
         description = description_request,
         price = price_request,
         deposit = deposit_request,
-        facingTheStreet = facingTheStreet_request,
-        furnishedRoom = furnishedRoom_request,
-        suiteRoom = suiteRoom_request,
-        sharedRoom = sharedRoom_request,
-        expWiFi = expWiFi_request,
-        expGas = expGas_request,
-        expElectricity = expElectricity_request,
-        expWater = expWater_request,
-        singleBed = singleBed_request,
-        doubleBed = doubleBed_request,
-        sofaBed = sofaBed_request,
-        noBed = noBed_request
+        # facingTheStreet = facingTheStreet_request,
+        # furnishedRoom = furnishedRoom_request,
+        # suiteRoom = suiteRoom_request,
+        # sharedRoom = sharedRoom_request,
+        # expWiFi = expWiFi_request,
+        # expGas = expGas_request,
+        # expElectricity = expElectricity_request,
+        # expWater = expWater_request,
+        # singleBed = singleBed_request,
+        # doubleBed = doubleBed_request,
+        # sofaBed = sofaBed_request,
+        # noBed = noBed_request
         )
     
+    db.session.add(city_room)
     db.session.add(new_room)
     db.session.commit()
 
