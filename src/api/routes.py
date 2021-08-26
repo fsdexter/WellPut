@@ -189,12 +189,19 @@ def edit_profile(user_id):
     body_request = request.get_json()
     user_to_edit = User.query.get_or_404(user_id)
     
-    for key in body_request:
+    for param in body_request:
+        print('param ----- ', param)
+        print('body_request ----- ', body_request)
+        print('body_request.keys() ----- ', body_request.keys())
         
-        if key == body_request[key]:
-            user_to_edit[key] = body_request[key]
-            print("body_request[key] ----- ", body_request[key])
-            print("user_to_edit[key] ----- ", user_to_edit[key])
+        for key in body_request.keys():
+            print('key ------------- ', key)
+            
+            if param == key:
+                # user_to_edit[key] = k
+                # print("body_request[k] ----- ", body_request[k])
+                # print("user_to_edit[key] ----- ", user_to_edit[key])
+                print('holaaaaaa')
     
     db.session.commit()
     
