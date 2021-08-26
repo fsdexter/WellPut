@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedData, Room, City, Expense
+from api.models import db, User, SeedData, Room, City, Expense, Feature
 #from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
@@ -190,10 +190,11 @@ def create_announcement():
     expGas_request = body_request.get("expGas", None)
     expElectricity_request = body_request.get("expElectricity", None)
     expWater_request = body_request.get("expWater", None)
-    singleBed_request = body_request.get("singleBed", None)
-    doubleBed_request = body_request.get("doubleBed", None)
-    sofaBed_request = body_request.get("sofaBed", None)
-    noBed_request = body_request.get("noBed", None)
+    type_bed_request = body_request.get("type_bed", None)
+    # singleBed_request = body_request.get("singleBed", None)
+    # doubleBed_request = body_request.get("doubleBed", None)
+    # sofaBed_request = body_request.get("sofaBed", None)
+    # noBed_request = body_request.get("noBed", None)
 
     city_room= City(
         name = city_request
@@ -211,6 +212,21 @@ def create_announcement():
         name = expGas_request
     )
 
+    feature1_room= Feature(
+        name=facingTheStreet_request
+    )
+    feature2_room= Feature(
+        name=furnishedRoom_request
+    )
+    feature3_room= Feature(
+        name=suiteRoom_request
+    )
+    feature4_room= Feature(
+        name=sharedRoom_request
+    )
+
+
+
     new_room = Room(
         address = address_request, 
         title = title_request, 
@@ -221,11 +237,15 @@ def create_announcement():
         # furnishedRoom = furnishedRoom_request,
         # suiteRoom = suiteRoom_request,
         # sharedRoom = sharedRoom_request,
-        type_bed = [singleBed_request, doubleBed_request, sofaBed_request, noBed_request]
+        type_bed = type_bed_request
         )
     
     db.session.add(city_room)
     db.session.add(new_room)
+    db.session.add(feature1_room)
+    db.session.add(feature2_room)
+    db.session.add(feature3_room)
+    db.session.add(feature4_room)
     db.session.add(expense_room)
     db.session.add(expense2_room)
     db.session.add(expense3_room)
