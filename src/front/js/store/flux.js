@@ -141,6 +141,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			postNewAnnouncement: room => {
+				console.log(room);
 				fetch(API_BASE_URL + "/api/new_announcement", {
 					method: "POST",
 					headers: {
