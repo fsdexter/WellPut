@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedData, Room, City
+from api.models import db, User, SeedData, Room, City, Expense
 #from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
@@ -198,6 +198,19 @@ def create_announcement():
     city_room= City(
         name = city_request
     )
+    expense_room= Expense(
+        name = expWater_request
+    )
+    expense2_room= Expense(
+        name = expWiFi_request
+    )
+    expense3_room= Expense(
+        name = expElectricity_request
+    )
+    expense4_room= Expense(
+        name = expGas_request
+    )
+
     new_room = Room(
         address = address_request, 
         title = title_request, 
@@ -208,18 +221,15 @@ def create_announcement():
         # furnishedRoom = furnishedRoom_request,
         # suiteRoom = suiteRoom_request,
         # sharedRoom = sharedRoom_request,
-        # expWiFi = expWiFi_request,
-        # expGas = expGas_request,
-        # expElectricity = expElectricity_request,
-        # expWater = expWater_request,
-        # singleBed = singleBed_request,
-        # doubleBed = doubleBed_request,
-        # sofaBed = sofaBed_request,
-        # noBed = noBed_request
+        type_bed = [singleBed_request, doubleBed_request, sofaBed_request, noBed_request]
         )
     
     db.session.add(city_room)
     db.session.add(new_room)
+    db.session.add(expense_room)
+    db.session.add(expense2_room)
+    db.session.add(expense3_room)
+    db.session.add(expense4_room)
     db.session.commit()
 
     return jsonify(body_request), 200
