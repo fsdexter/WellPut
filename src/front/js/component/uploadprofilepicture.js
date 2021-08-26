@@ -1,15 +1,17 @@
 import React, { useContext, useState } from "react";
 
+
 export const UserProfileForm = () => {
 	const [files, setFiles] = useState(null);
 	const [avatar_url, setAvatarUrl] = useState(null);
+	const { store, actions } = useContext(Context);
 
 	const uploadImage = evt => {
 		evt.preventDefault();
 		// we are about to send this to the backend.
 		console.log("This are the files", files);
 		let body = new FormData();
-		body.append("profile_image", files[0]);
+		body.append("avatar_url", files[0]);
 		const options = {
 			body,
 			method: "POST"

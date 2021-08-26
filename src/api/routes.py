@@ -22,7 +22,7 @@ api = Blueprint('api', __name__)
 def handle_upload(user_id):
     if 'avatar_url' in request.files:
         result = cloudinary.uploader.upload(request.files['avatar_url'])
-        user1 = User.query.get(user_id)
+        user1 = User.query.filter_by(email='noe_user@gmail.com').first()
         print(user1.avatar_url, "å########")
         user1.avatar_url = result['secure_url']     
         print(result['secure_url'],"@@@@@@@@@@@")
