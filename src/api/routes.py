@@ -178,22 +178,22 @@ def create_announcement():
     print(body_request)
     city_request = body_request.get("city", None)
     address_request = body_request.get("address", None)
-    title = body_request.get("title", None)
-    description = body_request.get("description", None)
-    price = body_request.get("price", None)
-    deposit = body_request.get("deposit", None)
-    facingTheStreet = body_request.get("facingTheStreet", None)
-    furnishedRoom = body_request.get("furnishedRoom", None)
-    suiteRoom = body_request.get("suiteRoom", None)
-    sharedRoom = body_request.get("sharedRoom", None)
-    expWiFi = body_request.get("expWiFi", None)
-    expGas = body_request.get("expGas", None)
-    expElectricity = body_request.get("expElectricity", None)
-    expWater = body_request.get("expWater", None)
-    singleBed = body_request.get("singleBed", None)
-    doubleBed = body_request.get("doubleBed", None)
-    sofaBed = body_request.get("sofaBed", None)
-    noBed = body_request.get("noBed", None)
+    title_request = body_request.get("title", None)
+    description_request = body_request.get("description", None)
+    price_request = body_request.get("price", None)
+    deposit_request = body_request.get("deposit", None)
+    facingTheStreet_request = body_request.get("facingTheStreet", None)
+    furnishedRoom_request = body_request.get("furnishedRoom", None)
+    suiteRoom_request = body_request.get("suiteRoom", None)
+    sharedRoom_request = body_request.get("sharedRoom", None)
+    expWiFi_request = body_request.get("expWiFi", None)
+    expGas_request = body_request.get("expGas", None)
+    expElectricity_request = body_request.get("expElectricity", None)
+    expWater_request = body_request.get("expWater", None)
+    singleBed_request = body_request.get("singleBed", None)
+    doubleBed_request = body_request.get("doubleBed", None)
+    sofaBed_request = body_request.get("sofaBed", None)
+    noBed_request = body_request.get("noBed", None)
 
     new_room = Room(
         city = city_request, 
@@ -213,7 +213,7 @@ def create_announcement():
         singleBed = singleBed_request,
         doubleBed = doubleBed_request,
         sofaBed = sofaBed_request,
-        noBed = noBed
+        noBed = noBed_request
         )
     
     db.session.add(new_room)
