@@ -89,7 +89,7 @@ export const Home = () => {
 								<div className="col">
 									<h3 className="ml-4">Rating</h3>
 								</div>
-								<div className="mr-3 col-6 mb-3 d-flex">
+								<div className=" col-6 d-flex ratings">
 									<Rating />
 								</div>
 							</div>

@@ -4,7 +4,7 @@ export function Rating() {
 	const [stars, setStars] = useState(0);
 
 	return (
-		<div className="container mt-5 p-0 w-25">
+		<div className="d-flex">
 			{Array(5)
 				.fill(0)
 				.map((item, i) => {
