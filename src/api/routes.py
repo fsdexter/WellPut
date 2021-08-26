@@ -187,27 +187,38 @@ def get_single_room(room_id):
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # En consola sale el cambio !!!!
 def edit_profile(user_id):
     body_request = request.get_json()
-    user_to_edit = User.query.get_or_404(user_id)
+    user_selected = User.query.get_or_404(user_id)
+    user_to_edit = user_selected.serialize()
     
-    for param in body_request:
-        print('param ----- ', param)
-        print('body_request ----- ', body_request)
-        print('body_request.keys() ----- ', body_request.keys())
-        
-        for key in body_request.keys():
-            print('key ------------- ', key)
-            
-            if param == key:
-                # user_to_edit[key] = k
-                # print("body_request[k] ----- ", body_request[k])
-                # print("user_to_edit[key] ----- ", user_to_edit[key])
-                print('holaaaaaa')
-    
+    db.session.delete(user_selected)
     db.session.commit()
     
-    print("body_request *********************** ", body_request)
+    #print("body_request ---- ", body_request)
+    #print("user_to_edit --------- ", user_to_edit)
     
-    return jsonify(body_request), 200
+    for param in body_request:
+        user_to_edit[param] = body_request[param]
+        
+    new_user = User(
+        avatar_url = user_to_edit["avatar_url"],
+        birthday = user_to_edit["birthday"],
+        city_id = user_to_edit["city_id"],
+        description = user_to_edit["description"],
+        email = user_to_edit["email"],
+        gender = user_to_edit["gender"],
+        id = user_to_edit["id"],
+        last_name = user_to_edit["last_name"],
+        name = user_to_edit["name"],
+        password = generate_password_hash(user_to_edit["password"], "sha256"),
+        phone = user_to_edit["phone"]
+    )
+    
+    db.session.add(new_user)
+    db.session.commit()
+    
+    print("user_to_edit *********************** ", user_to_edit)
+    
+    return jsonify(user_to_edit), 200
 
 @api.route('/new_announcement', methods=['POST'])
 def create_announcement():
