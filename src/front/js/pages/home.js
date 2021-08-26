@@ -65,9 +65,7 @@ export const Home = () => {
 									type="text"
 									className="form-control roundShape"
 									placeholder="write a city..."
-									onChange={event => {
-										setCity(event.target.value);
-									}}
+									onChange={event => {}}
 								/>
 							</div>
 						</form>
