@@ -159,6 +159,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ rating: [s] });
 			},
+			setRoomies: r => {
+				const store = getStore();
+				setStore({ roomies: r });
+			},
 			postNewAnnouncement: room => {
 				fetch(API_BASE_URL + "/api/blablabla", {
 					method: "POST",

@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 
 export function Rating() {
 	const { store, actions } = useContext(Context);
-	const [stars, setStars] = useState(0);
 
 	return (
 		<div className="d-flex">
