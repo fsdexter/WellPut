@@ -19,6 +19,7 @@ import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	const [city, setCity] = useState("");
 
 	const [formValue, setFormValue] = useState({
 		interests: ""
