@@ -87,7 +87,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return error.message;
 				}
 			},
+
+			////////////////////////getuser
 			getUser: async user_id => {
+				console.log(user_id);
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/profile/${user_id}`);
 					const user = await response.json();
@@ -97,9 +100,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return error.message;
 				}
 			},
+
+			/////////////////////////////////////////edit user
 			editProfile: async userValues => {
 				console.log("SE LLAMÓ A LA FUNCIÓN DE EDITAR PERFIL");
-
+				console.log(store.user.id);
 				const store = getStore();
 
 				const requestOptions = {
@@ -110,7 +115,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const response = await fetch(`${API_BASE_URL}/api/edit_profile/${user_id}`, requestOptions);
+					const response = await fetch(`${API_BASE_URL}/api/edit_profile/${store.user.id}`, requestOptions);
 
 					if (response.status >= 400) {
 						const errorMsg = "Error during the edition process";

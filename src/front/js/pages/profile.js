@@ -13,11 +13,20 @@ export const Profile = () => {
 	let { id } = useParams();
 
 	useEffect(() => {
-		actions.getUser(id);
+		actions.getUser(JSON.parse(localStorage.getItem("user")).user.id);
+		// actions.getUser(id);
+		// actions.getUserAuthentificted();
 	}, []);
+	// useEffect(() => {
+	// 	loadUser();
+	// }, []);
+
+	// const loadUser = async () => {
+	// 	await actions.getUser(JSON.parse(localStorage.getItem("user")));
+	// };
 
 	function handleSubmit() {
-		history.push(`/edit_profile/${id}`);
+		history.push(`/edit_profile/${store.user.id}`);
 	}
 	function favorites() {
 		history.push("/favorites");
@@ -38,7 +47,7 @@ export const Profile = () => {
 							<div className="col-8 text-white">
 								<div className="row">
 									<h1 className="textwhhite ml-5">
-										{JSON.parse(localStorage.getItem("user")).user.name || store.user.name}{" "}
+										{JSON.parse(localStorage.getItem("user")).user.name || store.user.name}
 										{JSON.parse(localStorage.getItem("user")).user.last_name ||
 											store.user.last_name}
 									</h1>

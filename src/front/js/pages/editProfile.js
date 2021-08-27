@@ -25,16 +25,14 @@ export const EditProfile = () => {
 		personalDescription: ""
 	});
 
-	{
-		/*useEffect(() => {
+	useEffect(() => {
 		loadUser();
 	}, []);
 
 	const loadUser = async () => {
-		await actions.getUser(id);
+		await actions.getUser(store.user.id);
 		setFormValue(JSON.parse(localStorage.getItem("user"))["user"]);
-	};*/
-	}
+	};
 
 	const handleAddrTypeChange = (f, key) => {
 		console.log(f, key, "<-----");
@@ -224,7 +222,7 @@ export const EditProfile = () => {
 					<div className=" col  detalle justify-content-center" style={{ width: "10rem", height: "29rem" }}>
 						<img
 							className="card-img-top roundShape imgperfil "
-							src={store.user.avatar_}
+							src={store.user.avatar_url}
 							alt="Card image cap"
 						/>
 						<UserProfileForm />
