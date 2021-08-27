@@ -28,7 +28,9 @@ export const PriceInput = () => {
 							className="form-control"
 							placeholder="Min."
 							name="priceMIN"
-							onChange={changeHandler}
+							onChange={e => {
+								actions.setMoney(e);
+							}}
 						/>
 					</div>
 					<div className="col-3 mr-2">
@@ -37,7 +39,9 @@ export const PriceInput = () => {
 							className="form-control"
 							placeholder="Max."
 							name="priceMAX"
-							onChange={changeHandler}
+							onChange={e => {
+								actions.setMoney(e);
+							}}
 						/>
 					</div>
 				</div>
@@ -52,7 +56,9 @@ export const PriceInput = () => {
 							className="form-control"
 							placeholder="Min."
 							name="depositoMIN"
-							onChange={changeHandler}
+							onChange={e => {
+								actions.setMoney(e);
+							}}
 						/>
 					</div>
 					<div className="col-3 mr-2 mb-2">
@@ -61,7 +67,9 @@ export const PriceInput = () => {
 							className="form-control"
 							placeholder="Max."
 							name="depositoMAX"
-							onChange={changeHandler}
+							onChange={e => {
+								actions.setMoney(e);
+							}}
 						/>
 					</div>
 				</div>

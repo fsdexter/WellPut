@@ -170,9 +170,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ bedType: b });
 			},
-			setMoney: x => {
+			setMoney: e => {
 				const store = getStore();
-				setStore({ money: x });
+				setStore({ ...store.money, [e.target.name]: e.target.value });
 			},
 			postNewAnnouncement: room => {
 				fetch(API_BASE_URL + "/api/blablabla", {
