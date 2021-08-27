@@ -382,7 +382,47 @@ class Feature(db.Model):
             "id": self.id,
             "name": self.name,
         }  
-        
+
+
+#------------------------------------------------------------------------------------------------------------------------------
+#  Rooms Favorites
+#------------------------------------------------------------------------------------------------------------------------------        
+class RoomsFavorites(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
+    feature_id = db.Column(db.Integer, db.ForeignKey('feature.id'))
+    
+    room = db.relationship("Room", backref=backref("RoomsFavorites", cascade="all, delete-orphan"))
+    feature = db.relationship("Feature", backref=backref("RoomsFavorites", cascade="all, delete-orphan"))
+
+    def __repr__(self):
+        return '<RoomsFavorites %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "room_id": self.room_id,
+            "feature_id": self.feature_id,
+        }
+  
+#------------------------------------------------------------------------------------------------------------------------------
+#  Favorite
+#------------------------------------------------------------------------------------------------------------------------------        
+class Favorite(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+    
+    room = db.relationship("Room", secondary="rooms_favorites")
+
+    def __repr__(self):
+        return '<Favorite %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+        }  
 
 
 
