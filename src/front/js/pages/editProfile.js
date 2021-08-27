@@ -222,7 +222,11 @@ export const EditProfile = () => {
 						</div>
 					</div>
 					<div className=" col  detalle justify-content-center" style={{ width: "10rem", height: "29rem" }}>
-						<img className="card-img-top roundShape imgperfil " src={} alt="Card image cap" />
+						<img
+							className="card-img-top roundShape imgperfil "
+							src={store.user.avatar_}
+							alt="Card image cap"
+						/>
 						<UserProfileForm />
 						<br />
 						{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}

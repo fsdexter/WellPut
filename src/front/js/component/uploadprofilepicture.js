@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 
-
 export const UserProfileForm = () => {
 	const [files, setFiles] = useState(null);
 	const [avatar_url, setAvatarUrl] = useState(null);
