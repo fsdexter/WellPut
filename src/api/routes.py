@@ -141,7 +141,6 @@ def get_rooms():
 
 @api.route('/detailed_room/<int:room_id>', methods=['GET']) # EN POSTMAN FUNCIONA
 def get_single_room(room_id):
-    body = request.get_json()
     room_selected = Room.query.get(room_id)
     
     tenancies_room = room_selected.tenancies
@@ -312,3 +311,13 @@ def handle_seed_user_data():
     seeder.create_seed_data()
 
     return jsonify({"msg": "The user was created!" }), 200
+
+# -------------------------- search room -------------------------
+@api.route('/search_room', methods=['POST'])
+def search_room():
+    body_request = request.get_json()
+    queries = [X.y == 'a']
+    if b:
+        queries.append(X.z == 'b')
+        q.filter(*queries)
+    return "OK",200

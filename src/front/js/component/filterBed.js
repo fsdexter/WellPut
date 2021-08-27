@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
 import double from "../../img/double.png";
 import bedsofa from "../../img/bedsofa.png";
 
 export const FilterBed = () => {
-	const [bedType, setBedType] = useState();
+	const { store, actions } = useContext(Context);
+
 	return (
 		<div className="row">
 			<div className="col-4">
@@ -16,7 +18,7 @@ export const FilterBed = () => {
 					name="inlineRadioOptions"
 					id="inlineRadio1"
 					value="option1"
-					onClick={() => setBedType("Single Bed")}
+					onClick={() => actions.setBedType("Single Bed")}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio1">
 					<i className="fas fa-bed fa-2x" />
@@ -31,7 +33,7 @@ export const FilterBed = () => {
 					name="inlineRadioOptions"
 					id="inlineRadio2"
 					value="option2"
-					onClick={() => setBedType("Double Bed")}
+					onClick={() => actions.setBedType("Double Bed")}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio2">
 					<img id="doubleBed" src={double} />
@@ -47,7 +49,7 @@ export const FilterBed = () => {
 					name="inlineRadioOptions"
 					id="inlineRadio3"
 					value="option3"
-					onClick={() => setBedType("No Bed")}
+					onClick={() => actions.setBedType("No Bed")}
 				/>
 				<label className="form-check-label " htmlFor="inlineRadio3">
 					<i className="fas fa-times fa-2x" />
@@ -62,7 +64,7 @@ export const FilterBed = () => {
 					name="inlineRadioOptions"
 					id="inlineRadio4"
 					value="option4"
-					onClick={() => setBedType("Sofa Bed")}
+					onClick={() => actions.setBedType("Sofa Bed")}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio4">
 					<img id="sofaBed" src={bedsofa} />
