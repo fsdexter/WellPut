@@ -67,7 +67,7 @@ class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=True)
     lat = db.Column(db.Float(15))
-    long = db.Column(db.Float(15))
+    lng = db.Column(db.Float(15))
     
     country_id =  db.Column(db.Integer, db.ForeignKey('country.id'))
     country =  db.relationship("Country", back_populates="cities")
@@ -84,7 +84,7 @@ class City(db.Model):
             "id": self.id,
             "name": self.name,
             "lat": self.lat,
-            "long": self.long,
+            "lng": self.lng,
             "country_id": self.country_id
         }
 
@@ -246,7 +246,7 @@ class Room (db.Model):
     title =db.Column(db.String(120))
     type_bed = db.Column(db.String(50))
     lat = db.Column(db.Float(15))
-    long = db.Column(db.Float(15))
+    lng = db.Column(db.Float(15))
     
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="rooms")
@@ -275,7 +275,7 @@ class Room (db.Model):
             "title": self.title, 
             "type_bed": self.type_bed,
             "lat": self.lat,
-            "long": self.long,
+            "lng": self.lng,
             "city_id": self.city_id,
             "user_id": self.user_id,
         }
@@ -467,7 +467,7 @@ class SeedData:
         self.first_city = City(
             name = "Madrid",
             lat = 40.42297365084645, 
-            long = -3.707010830149073,
+            lng = -3.707010830149073,
             country_id = self.first_country.id
         )
         
@@ -564,7 +564,7 @@ class SeedData:
             title = "Habitacion en casa moderna.",
             type_bed = "single",
             lat = 33.4329,
-            long = -4.642371,
+            lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
         )
@@ -578,7 +578,7 @@ class SeedData:
             title = "Habitacion pequeña y luminosa.",
             type_bed = "single",
             lat = 33.4329,
-            long = -4.642371,
+            lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
         )
@@ -592,7 +592,7 @@ class SeedData:
             title = "Habitacion suite con cama grande.",
             type_bed ="double",
             lat = 33.4329,
-            long = -4.642371,
+            lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
         )
@@ -606,7 +606,7 @@ class SeedData:
             title = "Hermosa habitación amueblada.",
             type_bed = "double",
             lat = 33.4329,
-            long = -4.642371,
+            lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
         )

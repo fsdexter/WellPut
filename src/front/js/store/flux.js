@@ -174,6 +174,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ ...store.money, [e.target.name]: e.target.value });
 			},
+			searchRoom: () => {
+				const store = getStore();
+				fetch(API_BASE_URL + "/api/search_room", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						roomies: store.roomies,
+						filters: store.filters,
+						rating: store.rating,
+						bedType: store.bedType,
+						city: store.city,
+						money: store.money
+					})
+				})
+					.then(res => res.json())
+					.then(data => console.log(data, "response serach_room"));
+			},
 			postNewAnnouncement: room => {
 				fetch(API_BASE_URL + "/api/blablabla", {
 					method: "POST",

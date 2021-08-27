@@ -140,6 +140,12 @@ export const Home = () => {
 						<CarouselRoomImg4 />
 					</div>
 				</div>
+				<button
+					onClick={() => {
+						actions.searchRoom();
+					}}>
+					Search
+				</button>
 			</div>
 			<Footer />
 		</div>
