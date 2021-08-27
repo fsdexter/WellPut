@@ -30,7 +30,7 @@ export const EditProfile = () => {
 	}, []);
 
 	const loadUser = async () => {
-		await actions.getUser(store.user.id);
+		await actions.getUser(JSON.parse(localStorage.getItem("user")).user.id);
 		setFormValue(JSON.parse(localStorage.getItem("user"))["user"]);
 	};
 
@@ -77,6 +77,11 @@ export const EditProfile = () => {
 
 								<div scope="col">
 									<input
+										value={
+											JSON.parse(localStorage.getItem("user")).user.name ||
+											store.user.name + JSON.parse(localStorage.getItem("user")).user.last_name ||
+											store.user.last_name
+										}
 										type="name"
 										className="inputeditusu"
 										name="fullName"
@@ -222,7 +227,7 @@ export const EditProfile = () => {
 					<div className=" col  detalle justify-content-center" style={{ width: "10rem", height: "29rem" }}>
 						<img
 							className="card-img-top roundShape imgperfil "
-							src={store.user.avatar_url}
+							src={JSON.parse(localStorage.getItem("user")).user.avatar_url}
 							alt="Card image cap"
 						/>
 						<UserProfileForm />

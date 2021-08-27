@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
+
 export const UserProfileForm = () => {
 	const [files, setFiles] = useState(null);
 	const [avatar_url, setAvatarUrl] = useState(null);
@@ -8,6 +10,7 @@ export const UserProfileForm = () => {
 	const uploadImage = evt => {
 		evt.preventDefault();
 		// we are about to send this to the backend.
+		//	history.push(`/edit_profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
 		console.log("This are the files", files);
 		let body = new FormData();
 		body.append("avatar_url", files[0]);
@@ -16,7 +19,7 @@ export const UserProfileForm = () => {
 			method: "POST"
 		};
 		// you need to have the user_id in the localStorage
-		const currentUserId = JSON.parse(localStorage.getItem("user"))["user"]["id"];
+		const currentUserId = JSON.parse(localStorage.getItem("user")).user.id;
 		console.log(currentUserId, "<---------------");
 		fetch(`${process.env.BACKEND_URL}/user/${currentUserId}/image`, options)
 			.then(resp => resp.json())

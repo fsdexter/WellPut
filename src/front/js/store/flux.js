@@ -104,7 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			/////////////////////////////////////////edit user
 			editProfile: async userValues => {
 				console.log("SE LLAMÓ A LA FUNCIÓN DE EDITAR PERFIL");
-				console.log(store.user.id);
+				console.log(JSON.parse(localStorage.getItem("user")).user.id);
 				const store = getStore();
 
 				const requestOptions = {
@@ -115,7 +115,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const response = await fetch(`${API_BASE_URL}/api/edit_profile/${store.user.id}`, requestOptions);
+					const response = await fetch(
+						`${API_BASE_URL}/api/edit_profile/${localStorage.getItem("user").user.id}`,
+						requestOptions
+					);
 
 					if (response.status >= 400) {
 						const errorMsg = "Error during the edition process";
