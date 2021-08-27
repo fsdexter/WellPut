@@ -241,8 +241,8 @@ class Room (db.Model):
     description = db.Column(db.String(280))
     address = db.Column(db.String(220))
     country = db.Column(db.String(120))
-    price = db.Column(db.Integer)
-    deposit = db.Column(db.Integer)
+    price = db.Column(db.String(50))
+    deposit = db.Column(db.String(50))
     title =db.Column(db.String(120))
     type_bed = db.Column(db.String(50))
     isFavorite = db.Column(db.Boolean, default=False, nullable=False)
@@ -561,8 +561,8 @@ class SeedData:
             description = "Cras ac fermentum neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
             address = "Bastero 6",
             country = "Spain",
-            price = 450,
-            deposit = 450,
+            price = "450",
+            deposit = "450",
             title = "Habitacion en casa moderna.",
             type_bed = "single",
             isFavorite = True,
@@ -576,8 +576,8 @@ class SeedData:
             description = "Vestibulum auctor purus in leo laoreet, ac aliquam sem tincidunt. Vivamus eleifend magna a leo pulvinar.",
             address = "Bastero 6",
             country = "Spain",
-            price = 400,
-            deposit = 400,
+            price = "400",
+            deposit = "400",
             title = "Habitacion pequeña y luminosa.",
             type_bed = "single",
             isFavorite = True,
@@ -591,8 +591,8 @@ class SeedData:
             description = "Aliquam sit amet interdum lacus. Proin finibus vehicula sagittis.",
             address = "Bastero 6",
             country = "Spain",
-            price = 500,
-            deposit = 500,
+            price = "500",
+            deposit = "500",
             title = "Habitacion suite con cama grande.",
             type_bed ="double",
             isFavorite = False,
@@ -606,8 +606,8 @@ class SeedData:
             description = "Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
             address= "Bastero 6",
             country = "Spain",
-            price = 500,
-            deposit = 500,
+            price = "500",
+            deposit = "500",
             title = "Hermosa habitación amueblada.",
             type_bed = "double",
             isFavorite = False,
