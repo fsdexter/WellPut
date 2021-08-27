@@ -37,7 +37,7 @@ export const Navbar = () => {
 			<div className="col-10" id="brown">
 				{localStorage.getItem("user") || store.user !== null ? (
 					<div className="col-12 d-flex justify-content-between" id="yellow">
-						<Link to="/profile">
+						{/* <Link to={`/profile/${JSON.parse(localStorage.getItem("user")).user.id}`}>
 							<span
 								className={
 									isActive === "profile"
@@ -47,7 +47,19 @@ export const Navbar = () => {
 								onClick={() => changeElementNavbarActive("profile")}>
 								Profile
 							</span>
-						</Link>
+						</Link> */}
+						<span
+							className={
+								isActive === "profile"
+									? "navbar-brand mb-0 mr-2 btn btn-navb my-active"
+									: "navbar-brand mb-0 mr-2 btn btn-navb"
+							}
+							onClick={() => {
+								changeElementNavbarActive("profile");
+								history.push(`/profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
+							}}>
+							Profile
+						</span>
 						<Link to="/announcements">
 							<span
 								className={

@@ -26,7 +26,7 @@ export const Profile = () => {
 	// };
 
 	function handleSubmit() {
-		history.push(`/edit_profile/${store.user.id}`);
+		history.push(`/edit_profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
 	}
 	function favorites() {
 		history.push("/favorites");
