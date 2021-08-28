@@ -118,18 +118,18 @@ def get_single_user(user_id):
         tenancies_res = tenancy.serialize()
         tenancies_list.append(tenancies_res)
      
-    # Añadir al Objeto "user" la propiedad "rooms" para que salgan las habitaciones del usuario
+    # To add to "user" object the "rooms" property to appear inside the user
     user['rooms'] = rooms   
-    # Añadir al Objeto "user" la propiedad "characteristic" para que salga en el usuario
+    # To add to "user" object the "characteristic" property to appear inside the user
     user['characteristics'] = characteristics
-    # Añadir al Objeto "user" la propiedad "language" para que salga en el usuario
+    # To add to "user" object the "language" property to appear inside the user
     user['languages'] = languages
-    # Añadir al Objeto "user" la propiedad "tenancies" para que salga en el usuario
+    # To add to "user" object the "tenancies" property to appear inside the user
     user['tenancies'] = tenancies_list
     
     return jsonify(user), 200
 
-@api.route('/', methods=['GET']) # LISTA DE TODAS LAS HABITACIONES
+@api.route('/', methods=['GET']) # ALL ROOMS LIST
 def get_rooms():
     rooms_list = []
     rooms_list_in_DB = Room.query.all()
@@ -139,7 +139,7 @@ def get_rooms():
     
     return jsonify(rooms_list), 200
 
-@api.route('/detailed_room/<int:room_id>', methods=['GET']) # EN POSTMAN FUNCIONA
+@api.route('/detailed_room/<int:room_id>', methods=['GET'])
 def get_single_room(room_id):
     room_selected = Room.query.get(room_id)
     
