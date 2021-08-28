@@ -21,20 +21,18 @@ export const EditProfile = () => {
 		personalDescription: ""
 	});
 	const handleAddrTypeChange = (f, key) => {
-		console.log(f, key, "<-----");
 		setFormValue({
 			...formValue,
 			[key]: f.map(item => {
 				return item.value;
 			})
 		});
-		console.log("addrtype ----->>>> ", formValue);
 	};
 	//////////////////////////////////////////////
 	const inputHandelChange = e => {
 		//"[e.target.name]" is the name of form inputs
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
-		console.log("formValue ----->>>> ", formValue);
+		console.log(formValue);
 	};
 
 	const handleSubmit = async e => {
@@ -49,163 +47,115 @@ export const EditProfile = () => {
 	};
 
 	return (
-		<div>
+		<div className="picturefond col-12 d-flex justify-content-center text-white">
 			<form
-				className=" pictureediperfile m-auto justify-content-center d-flex flex-column"
+				// className="container pictureediperfile m-auto justify-content-center d-flex flex-column"
+				className="container col-11 detallefondblackEditarPerfil"
 				onSubmit={handleSubmit}>
-				<div className="detalle row d-flex justify-content-around " style={{ height: "40rem" }}>
-					<div className="col-6">
-						<div className="">
-							<div className=" d-flex">
-								<div scope="col" className="textoeditusu ">
-									Full Name * :
-								</div>
+				<div className="row d-flex justify-content-around">
+					<div className="col-7 d-flex flex-column" id="myContainerFormInputs">
+						<div className="d-flex justify-content-around mt-3">
+							<h3 className="col-3">Name * :</h3>
+							<input type="name" name="name" onChange={inputHandelChange} className="col-6" />
+						</div>
 
-								<div scope="col">
-									<input
-										type="name"
-										className="inputeditusu"
-										name="fullName"
-										onChange={inputHandelChange}
-									/>
-								</div>
+						<div className="d-flex justify-content-around mt-3">
+							<h3 className="col-3">Last Name * :</h3>
+							<input type="name" className="col-6" name="lastName" onChange={inputHandelChange} />
+						</div>
+
+						<div className="d-flex justify-content-around mt-3">
+							<h3 className="col-3">Email * :</h3>
+							<input type="email" className="col-6" name="email" onChange={inputHandelChange} />
+						</div>
+
+						<div className="d-flex justify-content-around mt-3">
+							<h3 className="col-3">Phone :</h3>
+							<input type="phone" className="col-6" name="phone" onChange={inputHandelChange} />
+						</div>
+
+						<div className="d-flex justify-content-around mt-3">
+							<h3 className="col-3">Birthday :</h3>
+							<input type="date" className="col-6" name="birthday" onChange={inputHandelChange} />
+						</div>
+
+						<div className="d-flex justify-content-around mt-3">
+							<h3 className="col-3">Interests * :</h3>
+							<div className="col-6" name="interests">
+								<AnimatedMulti
+									options={interestsOptions}
+									change={f => handleAddrTypeChange(f, "interests")}
+								/>
 							</div>
-							<div className="row  d-flex">
-								<div scope="col-" className="textoeditusu">
-									Email * :
-								</div>
-								<div scope="col-10">
-									<input
-										type="email"
-										className="inputeditusu"
-										name="email"
-										onChange={inputHandelChange}
-									/>
-								</div>
+						</div>
+
+						<div className="d-flex justify-content-around mt-3">
+							<h3 className="col-3">Language * :</h3>
+							<div className="col-6" name="languages">
+								<AnimatedMulti
+									options={languageOptions}
+									change={f => handleAddrTypeChange(f, "languages")}
+								/>
 							</div>
-							<div className=" d-flex">
-								<div scope="col" className="textoeditusu">
-									Interests * :
-								</div>
-								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
-								<div scope="col " className="inputeditusu" name="interests">
-									<AnimatedMulti
-										options={interestsOptions}
-										change={f => handleAddrTypeChange(f, "interests")}
-									/>
-								</div>
-							</div>
-							<div className=" d-flex">
-								<div scope="col" className="textoeditusu">
-									Language * :
-								</div>
-								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
-								<div scope="col" className="inputeditusu" name="languages">
-									<AnimatedMulti
-										options={languageOptions}
-										change={f => handleAddrTypeChange(f, "languages")}
-									/>
-								</div>
-							</div>
-							<div className=" d-flex">
-								<div scope="col" className="textoeditusu">
-									Phone :
-								</div>
-								<div scope="col">
-									<input
-										type="phone"
-										className="inputeditusu"
-										name="phone"
-										onChange={inputHandelChange}
-									/>
-								</div>
-							</div>
-							<div className=" d-flex">
-								<div scope="col" className="textoeditusu">
-									Birthday :
-								</div>
-								<div scope="col">
-									<input
-										type="date"
-										className="inputeditusu"
-										name="birthday"
-										onChange={inputHandelChange}
-									/>
-								</div>
-							</div>
-							<div className=" d-flex">
-								<div scope="col" className="textoeditusu">
-									Sex :
-								</div>
-								<div scope="col">
-									<div className="div">
-										<div className=" d-flex ">
-											<div scope="col">
-												<i className="fa fa-male fa-4x" aria-hidden="divue" />
-											</div>
-											<div scope="col">
-												<input
-													className="form-check-input  "
-													type="checkbox"
-													value="man"
-													name="sex"
-													onChange={inputHandelChange}
-												/>
-											</div>
-											<div scope="col">
-												<i className="fas fa-female fa-4x " />
-											</div>
-											<div scope="col">
-												<input
-													className="form-check-input"
-													type="checkbox"
-													value="woman"
-													name="sex"
-													onChange={inputHandelChange}
-												/>
-											</div>
-										</div>
+						</div>
+
+						<div className="row no-gutters d-flex justify-content-between mt-3">
+							<div className="col-5 d-flex justify-content-around mt-3 ml-4">
+								<h3 className="col-4">Sex :</h3>
+								<div className="col-4 d-flex justify-content-between">
+									<div className="d-flex">
+										<i className="fa fa-male fa-4x" aria-hidden="divue" />
+										<input
+											className="form-check-input"
+											type="checkbox"
+											value="man"
+											name="sex"
+											onChange={inputHandelChange}
+										/>
+									</div>
+
+									<div className="d-flex">
+										<i className="fas fa-female fa-4x" />
+										<input
+											className="form-check-input"
+											type="checkbox"
+											value="woman"
+											name="sex"
+											onChange={inputHandelChange}
+										/>
 									</div>
 								</div>
 							</div>
-							<div className=" d-flex">
-								<div scope="col" className="textoeditusu">
-									Occupation :
-								</div>
-								<div scope="col">
-									<div className="div">
-										<div className=" d-flex">
-											<div scope="col">
-												<i className="fas fa-briefcase fa-2x" />
-											</div>
-											<div scope="col">
-												<input
-													className="form-check-input  "
-													type="checkbox"
-													value="worker"
-													name="occupation"
-													onChange={inputHandelChange}
-												/>
-											</div>
-											<div scope="col">
-												<i className="fas fa-user-graduate fa-2x" />
-											</div>
-											<div scope="col">
-												<input
-													className="form-check-input"
-													type="checkbox"
-													value="student"
-													name="occupation"
-													onChange={inputHandelChange}
-												/>
-											</div>
-										</div>
+
+							<div className="col-6 d-flex justify-content-around mt-3">
+								<h3 className="col-5">Occupation :</h3>
+								<div className="col-4 d-flex justify-content-between">
+									<div className="d-flex">
+										<i className="fas fa-briefcase fa-2x" />
+										<input
+											className="form-check-input  "
+											type="checkbox"
+											value="worker"
+											name="occupation"
+											onChange={inputHandelChange}
+										/>
+									</div>
+
+									<div className="d-flex">
+										<i className="fas fa-user-graduate fa-2x" />
+										<input
+											className="form-check-input"
+											type="checkbox"
+											value="student"
+											name="occupation"
+											onChange={inputHandelChange}
+										/>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div className=" col  detalle justify-content-center" style={{ width: "10rem", height: "29rem" }}>
+					<div className="col-3  justify-content-center" id="detalleIMG">
 						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
 						<form>
 							{/*<input type="file" />*/}
