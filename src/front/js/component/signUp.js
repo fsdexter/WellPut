@@ -83,13 +83,26 @@ export const SignUp = () => {
 						<input
 							className="col-12 inputSinLog"
 							type="text"
-							name="fullName"
-							id="fullName"
-							placeholder="Full Name"
+							name="name"
+							id="name"
+							placeholder="Name"
 							onChange={inputHandelChange}
 							required
 						/>
 					</div>
+
+					<div className="form-grup row mt-2 mb-4">
+						<input
+							className="col-12 inputSinLog"
+							type="text"
+							name="lastName"
+							id="lastName"
+							placeholder="Last Name"
+							onChange={inputHandelChange}
+							required
+						/>
+					</div>
+
 					<div className="form-grup row mt-2 mb-4">
 						<input
 							className="col-12 inputSinLog"
