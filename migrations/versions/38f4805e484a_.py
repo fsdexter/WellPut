@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 9a085bfb61dd
+Revision ID: 38f4805e484a
 Revises: 
-Create Date: 2021-08-27 17:13:47.674815
+Create Date: 2021-08-28 08:07:59.977283
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9a085bfb61dd'
+revision = '38f4805e484a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -49,7 +49,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=True),
     sa.Column('lat', sa.Float(precision=15), nullable=True),
-    sa.Column('long', sa.Float(precision=15), nullable=True),
+    sa.Column('log', sa.Float(precision=15), nullable=True),
     sa.Column('country_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['country_id'], ['country.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -87,9 +87,8 @@ def upgrade():
     sa.Column('deposit', sa.String(length=50), nullable=True),
     sa.Column('title', sa.String(length=120), nullable=True),
     sa.Column('type_bed', sa.String(length=50), nullable=True),
-    sa.Column('isFavorite', sa.Boolean(), nullable=False),
     sa.Column('lat', sa.Float(precision=15), nullable=True),
-    sa.Column('long', sa.Float(precision=15), nullable=True),
+    sa.Column('log', sa.Float(precision=15), nullable=True),
     sa.Column('city_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['city_id'], ['city.id'], ),
@@ -110,6 +109,14 @@ def upgrade():
     sa.Column('expense_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['expense_id'], ['expense.id'], ),
     sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('favorites',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('room_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('features_room',
@@ -153,6 +160,7 @@ def downgrade():
     op.drop_table('tenancy')
     op.drop_table('room_archive')
     op.drop_table('features_room')
+    op.drop_table('favorites')
     op.drop_table('expenses_room')
     op.drop_table('spoken_languages')
     op.drop_table('room')
