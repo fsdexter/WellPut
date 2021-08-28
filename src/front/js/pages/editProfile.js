@@ -29,6 +29,8 @@ export const EditProfile = () => {
 		loadUser();
 	}, []);
 
+	let userParse = JSON.parse(localStorage.getItem("user")).user;
+
 	const loadUser = async () => {
 		await actions.getUser(JSON.parse(localStorage.getItem("user")).user.id);
 		setFormValue(JSON.parse(localStorage.getItem("user"))["user"]);
@@ -48,6 +50,9 @@ export const EditProfile = () => {
 	const inputHandelChange = e => {
 		//"[e.target.name]" is the name of form inputs
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
+		userParse = JSON.parse(localStorage.getItem("user")).user;
+		var emailform = document.getElementById("email-form");
+		emailform.value = userParse.email;
 		console.log("formValue ----->>>> ", formValue);
 	};
 
@@ -79,7 +84,9 @@ export const EditProfile = () => {
 									<input
 										value={
 											JSON.parse(localStorage.getItem("user")).user.name ||
-											store.user.name + JSON.parse(localStorage.getItem("user")).user.last_name ||
+											store.user.name +
+												" " +
+												JSON.parse(localStorage.getItem("user")).user.last_name || ///poner otro input
 											store.user.last_name
 										}
 										type="name"
@@ -95,7 +102,9 @@ export const EditProfile = () => {
 								</div>
 								<div scope="col-10">
 									<input
+										value={userParse.email}
 										type="email"
+										id="email-form"
 										className="inputeditusu"
 										name="email"
 										onChange={inputHandelChange}
@@ -132,6 +141,7 @@ export const EditProfile = () => {
 								</div>
 								<div scope="col">
 									<input
+										value={JSON.parse(localStorage.getItem("user")).user.phone}
 										type="phone"
 										className="inputeditusu"
 										name="phone"
@@ -144,7 +154,10 @@ export const EditProfile = () => {
 									Birthday :
 								</div>
 								<div scope="col">
+									{JSON.parse(localStorage.getItem("user")).user.birthday}
 									<input
+										/// C_DATE($date) $date:=JSON Parse("\"2008-01-01T12:00:00Z\"";Is date)
+										value={JSON.parse(localStorage.getItem("user")).user.birthday}
 										type="date"
 										className="inputeditusu"
 										name="birthday"
