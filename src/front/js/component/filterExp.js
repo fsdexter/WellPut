@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../store/appContext";
 
 export const FilterExp = () => {
+	const { store, actions } = useContext(Context);
 	return (
 		<div className="row">
 			<div className="col-4">

@@ -126,18 +126,23 @@ def get_single_user(user_id):
         favorite_res = favorite.serialize()
         favorites_list.append(favorite_res)
      
-    # Añadir al Objeto "user" la propiedad "rooms" para que salgan las habitaciones del usuario
+    # To add to "user" object the "rooms" property to appear inside the user
     user['rooms'] = rooms   
-    # Añadir al Objeto "user" la propiedad "characteristic" para que salga en el usuario
+    # To add to "user" object the "characteristic" property to appear inside the user
     user['characteristics'] = characteristics
-    # Añadir al Objeto "user" la propiedad "language" para que salga en el usuario
+    # To add to "user" object the "language" property to appear inside the user
     user['languages'] = languages
+
     # Añadir al Objeto "user" la propiedad "favorites" para que salga en el usuario
     user['favorites'] = favorites_list
+
+    # To add to "user" object the "tenancies" property to appear inside the user
+    user['tenancies'] = tenancies_list
+
     
     return jsonify(user), 200
 
-@api.route('/', methods=['GET']) # LISTA DE TODAS LAS HABITACIONES
+@api.route('/', methods=['GET']) # ALL ROOMS LIST
 def get_rooms():
     rooms_list = []
     rooms_list_in_DB = Room.query.all()
@@ -147,9 +152,8 @@ def get_rooms():
     
     return jsonify(rooms_list), 200
 
-@api.route('/detailed_room/<int:room_id>', methods=['GET']) # EN POSTMAN FUNCIONA
+@api.route('/detailed_room/<int:room_id>', methods=['GET'])
 def get_single_room(room_id):
-    body = request.get_json()
     room_selected = Room.query.get(room_id)
     
     tenancies_room = room_selected.tenancies
@@ -320,3 +324,13 @@ def handle_seed_user_data():
     seeder.create_seed_data()
 
     return jsonify({"msg": "The user was created!" }), 200
+
+# -------------------------- search room -------------------------
+@api.route('/search_room', methods=['POST'])
+def search_room():
+    body_request = request.get_json()
+    queries = [X.y == 'a']
+    if b:
+        queries.append(X.z == 'b')
+        q.filter(*queries)
+    return "OK",200

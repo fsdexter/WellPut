@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
+
 export function Counter() {
-	const [count, setCount] = useState(1);
-	if (count < 1) {
-		setCount(1);
+	const { store, actions } = useContext(Context);
+
+	if (store.roomies < 1) {
+		actions.setRoomies(1);
 	}
 	return (
 		<div className="d-flex">
-			<button className="mr-2 btn btn-default btn-circle" onClick={() => setCount(count - 1)}>
+			<button className="mr-2 btn btn-default btn-circle" onClick={() => actions.setRoomies(store.roomies - 1)}>
 				<i className="fas fa-minus" />
 			</button>{" "}
-			<h5>{count}</h5>
-			<button className="ml-2 btn btn-default btn-circle" onClick={() => setCount(count + 1)}>
+			<h5>{store.roomies}</h5>
+			<button className="ml-2 btn btn-default btn-circle" onClick={() => actions.setRoomies(store.roomies + 1)}>
 				<i className="fas fa-plus" />
 			</button>{" "}
 		</div>

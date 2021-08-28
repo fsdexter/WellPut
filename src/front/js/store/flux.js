@@ -10,7 +10,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favorites: [],
 			reviews: [],
 			roomies: [],
-			filters: []
+			filters: [],
+			rating: [],
+			bedType: [],
+			city: [],
+			money: []
 		},
 		actions: {
 			signUp: async userValues => {
@@ -152,6 +156,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					setStore({ filters: [e.target.name] });
 				}
+			},
+			setRating: s => {
+				const store = getStore();
+				setStore({ rating: [s] });
+			},
+			setRoomies: r => {
+				const store = getStore();
+				setStore({ roomies: r });
+			},
+			setBedType: b => {
+				const store = getStore();
+				setStore({ bedType: b });
+			},
+			setMoney: e => {
+				const store = getStore();
+				setStore({ ...store.money, [e.target.name]: e.target.value });
+			},
+			searchRoom: () => {
+				const store = getStore();
+				fetch(API_BASE_URL + "/api/search_room", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						roomies: store.roomies,
+						filters: store.filters,
+						rating: store.rating,
+						bedType: store.bedType,
+						city: store.city,
+						money: store.money
+					})
+				})
+					.then(res => res.json())
+					.then(data => console.log(data, "response serach_room"));
 			},
 			postNewAnnouncement: room => {
 				console.log(room);
