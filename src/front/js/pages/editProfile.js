@@ -99,12 +99,12 @@ export const EditProfile = () => {
 							</div>
 						</div>
 
-						<div className="row no-gutters d-flex justify-content-between mt-3">
+						<div className="row no-gutters d-flex justify-content-between mt-3 mb-4">
 							<div className="col-5 d-flex justify-content-around mt-3 ml-4">
 								<h3 className="col-4">Sex :</h3>
 								<div className="col-4 d-flex justify-content-between">
 									<div className="d-flex">
-										<i className="fa fa-male fa-4x" aria-hidden="divue" />
+										<i className="fas fa-mars fa-3x" aria-hidden="divue" />
 										<input
 											className="form-check-input"
 											type="checkbox"
@@ -115,7 +115,7 @@ export const EditProfile = () => {
 									</div>
 
 									<div className="d-flex">
-										<i className="fas fa-female fa-4x" />
+										<i className="fas fa-venus fa-3x" />
 										<input
 											className="form-check-input"
 											type="checkbox"
@@ -129,9 +129,9 @@ export const EditProfile = () => {
 
 							<div className="col-6 d-flex justify-content-around mt-3">
 								<h3 className="col-5">Occupation :</h3>
-								<div className="col-4 d-flex justify-content-between">
+								<div className="col-4 d-flex justify-content-between mr-5">
 									<div className="d-flex">
-										<i className="fas fa-briefcase fa-2x" />
+										<i className="fas fa-briefcase fa-3x" />
 										<input
 											className="form-check-input  "
 											type="checkbox"
@@ -142,7 +142,7 @@ export const EditProfile = () => {
 									</div>
 
 									<div className="d-flex">
-										<i className="fas fa-user-graduate fa-2x" />
+										<i className="fas fa-user-graduate fa-3x" />
 										<input
 											className="form-check-input"
 											type="checkbox"
@@ -157,18 +157,14 @@ export const EditProfile = () => {
 					</div>
 					<div className="col-3  justify-content-center" id="detalleIMG">
 						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
-						<form>
-							{/*<input type="file" />*/}
-
+						<div className="d-flex justify-content-around">
 							<button type="submit" className="btn btn-warning">
 								Upload
 							</button>
-						</form>
-						<br />
-						{/* HACER  BOTON DE GUARDAR LA IMAGEN Y OTRO GUARDAR LOS DATOS DEL PERFIL , ESTE VA A LLAMAR FUNCION Y REDIRECCIONAR AL PROFILE*/}
-						<button type="submit" className="btn btn-warning" onClick={inputHandelChange}>
-							SAVE
-						</button>
+							<button type="submit" className="btn btn-warning" onClick={inputHandelChange}>
+								SAVE
+							</button>
+						</div>
 					</div>
 				</div>
 
