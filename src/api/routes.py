@@ -117,6 +117,14 @@ def get_single_user(user_id):
     for tenancy in tenancies_user:
         tenancies_res = tenancy.serialize()
         tenancies_list.append(tenancies_res)
+        
+    favorites_user = user_selected.favorites # -- "favorites" is a relationship in the table User
+    user = user_selected.serialize()
+    favorites_list = []
+    
+    for favorite in favorites_user:
+        favorite_res = favorite.serialize()
+        favorites_list.append(favorite_res)
      
     # To add to "user" object the "rooms" property to appear inside the user
     user['rooms'] = rooms   
@@ -124,8 +132,13 @@ def get_single_user(user_id):
     user['characteristics'] = characteristics
     # To add to "user" object the "language" property to appear inside the user
     user['languages'] = languages
+
+    # Añadir al Objeto "user" la propiedad "favorites" para que salga en el usuario
+    user['favorites'] = favorites_list
+
     # To add to "user" object the "tenancies" property to appear inside the user
     user['tenancies'] = tenancies_list
+
     
     return jsonify(user), 200
 

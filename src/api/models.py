@@ -38,6 +38,8 @@ class User(db.Model):
     language = db.relationship("Language", secondary="spoken_languages")
     characteristic = db.relationship("Characteristic", secondary="characteristic_user", lazy='subquery')
     
+    favorites = db.relationship("Favorites", back_populates="user")
+    
     def __repr__(self):
         return '<User %r>' % self.id
 
@@ -245,7 +247,6 @@ class Room (db.Model):
     deposit = db.Column(db.String(50))
     title =db.Column(db.String(120))
     type_bed = db.Column(db.String(50))
-    isFavorite = db.Column(db.Boolean, default=False, nullable=False)
     lat = db.Column(db.Float(15))
     lng = db.Column(db.Float(15))
     
@@ -253,7 +254,7 @@ class Room (db.Model):
     city =  db.relationship("City", back_populates="rooms")
     
     tenancies = db.relationship("Tenancy", back_populates="room")
-    
+
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="rooms")
 
@@ -261,6 +262,13 @@ class Room (db.Model):
 
     expense = db.relationship("Expense", secondary="expenses_room")
     feature = db.relationship("Feature", secondary="features_room")
+    
+    # Relación de 1 Room muchos Favorites
+    favorites = db.relationship("Favorites", back_populates="room")
+   
+    # Relación de 1 Favorites muchas Rooms
+    # favorites_id = db.Column(db.Integer, db.ForeignKey('favorites.id'))
+    # favorites = db.relationship("Favorites", back_populates="room")
     
     def __repr__(self):
         return '<Room %r>' % self.title
@@ -275,11 +283,11 @@ class Room (db.Model):
             "deposit": self.deposit,
             "title": self.title, 
             "type_bed": self.type_bed,
-            "isFavorite": self.isFavorite,
             "lat": self.lat,
             "lng": self.lng,
             "city_id": self.city_id,
             "user_id": self.user_id,
+            #"favorites_id": self.favorites_id,
         }
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -382,7 +390,33 @@ class Feature(db.Model):
             "id": self.id,
             "name": self.name,
         }  
-        
+
+  
+#------------------------------------------------------------------------------------------------------------------------------
+#  Favorites
+#------------------------------------------------------------------------------------------------------------------------------        
+class Favorites(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User", back_populates="favorites")
+    
+    # Relación de 1 Room muchos Favorites
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
+    room = db.relationship("Room", back_populates="favorites")
+    
+    # Relación de 1 Favorites muchas Rooms
+   # room = db.relationship("Room", back_populates="favorites")
+    
+
+    def __repr__(self):
+        return '<Favorites %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            #"user_id": self.user_id, --->>> como salen el los datos del usuario, no haría falta serializarlo
+            "room_id": self.room_id,
+        }  
 
 
 
@@ -399,10 +433,14 @@ class SeedData:
         self.fifth_user = None
         self.first_city = None
         self.first_country = None
+       # self.first_favorites = None --->>> Un favorito muchas habitaciones
         self.first_room = None
         self.second_room = None
         self.third_room = None
         self.fourth_room = None
+        self.first_favorites = None # --->>> una habitación muchos favoritos
+        self.second_favorites = None
+        self.third_favorites = None
         self.first_tenancy = None
         self.second_tenancy = None
         self.third_tenancy = None
@@ -450,6 +488,7 @@ class SeedData:
         self.second_featuresRoom = None
         self.third_featuresRoom = None
         self.fourth_featuresRoom = None 
+        
     
 #------------------------
 #  Country
@@ -551,7 +590,6 @@ class SeedData:
         db.session.add(self.fourth_user)
         db.session.add(self.fifth_user)
         db.session.commit()
-
    
 #------------------------
 #  Room
@@ -565,11 +603,11 @@ class SeedData:
             deposit = "450",
             title = "Habitacion en casa moderna.",
             type_bed = "single",
-            isFavorite = True,
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
+            #favorites_id = self.first_favorites.id
         )
 
         self.second_room = Room( 
@@ -580,11 +618,11 @@ class SeedData:
             deposit = "400",
             title = "Habitacion pequeña y luminosa.",
             type_bed = "single",
-            isFavorite = True,
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
+            #favorites_id = self.first_favorites.id
         )
 
         self.third_room = Room( 
@@ -595,11 +633,11 @@ class SeedData:
             deposit = "500",
             title = "Habitacion suite con cama grande.",
             type_bed ="double",
-            isFavorite = False,
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
+            #favorites_id = None
         )
 
         self.fourth_room = Room( 
@@ -610,11 +648,11 @@ class SeedData:
             deposit = "500",
             title = "Hermosa habitación amueblada.",
             type_bed = "double",
-            isFavorite = False,
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
+            #favorites_id = None
         )
 
         db.session.add(self.first_room)
@@ -622,6 +660,30 @@ class SeedData:
         db.session.add(self.third_room)
         db.session.add(self.fourth_room)
         db.session.commit()
+        
+#------------------------
+#  Favorites
+#------------------------
+    def create_seed_favorites(self):
+        self.first_favorites = Favorites(
+            room_id = self.first_room.id,
+            user_id = self.second_user.id
+        )
+        
+        self.second_favorites = Favorites(
+            room_id = self.second_room.id,
+            user_id = self.second_user.id
+        )
+        
+        self.third_favorites = Favorites(
+            room_id = self.third_room.id,
+            user_id = self.second_user.id
+        )
+        
+        db.session.add(self.first_favorites)
+        db.session.add(self.second_favorites)
+        db.session.add(self.third_favorites)
+        db.session.commit() 
 
 #------------------------
 #  Tenancy (La relación entre inquilino y habitación)
@@ -936,14 +998,15 @@ class SeedData:
         db.session.add(self.third_featuresRoom)
         db.session.add(self.fourth_featuresRoom)
         db.session.commit()          
-          
-                                   
+                                          
        
     def create_seed_data(self):
         self.create_seed_country()
         self.create_seed_city()
         self.create_seed_user()
+        #self.create_seed_favorites() ----->>> Cuando es 1 favorito muchas habitaciones
         self.create_seed_room()
+        self.create_seed_favorites() # ---->>> 1 habitación muchos favoritos
         self.create_seed_tenancy()
         self.create_seed_review()
         self.create_seed_characteristic()
@@ -955,6 +1018,7 @@ class SeedData:
         self.create_seed_roomArchive()
         self.create_seed_feature()
         self.create_seed_featuresRoom()
+       
         
     
 
