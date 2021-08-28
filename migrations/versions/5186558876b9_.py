@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 38f4805e484a
+Revision ID: 5186558876b9
 Revises: 
-Create Date: 2021-08-28 08:07:59.977283
+Create Date: 2021-08-28 08:29:57.739350
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '38f4805e484a'
+revision = '5186558876b9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -49,7 +49,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=True),
     sa.Column('lat', sa.Float(precision=15), nullable=True),
-    sa.Column('log', sa.Float(precision=15), nullable=True),
+    sa.Column('lng', sa.Float(precision=15), nullable=True),
     sa.Column('country_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['country_id'], ['country.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -88,7 +88,7 @@ def upgrade():
     sa.Column('title', sa.String(length=120), nullable=True),
     sa.Column('type_bed', sa.String(length=50), nullable=True),
     sa.Column('lat', sa.Float(precision=15), nullable=True),
-    sa.Column('log', sa.Float(precision=15), nullable=True),
+    sa.Column('lng', sa.Float(precision=15), nullable=True),
     sa.Column('city_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['city_id'], ['city.id'], ),

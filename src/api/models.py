@@ -439,6 +439,8 @@ class SeedData:
         self.third_room = None
         self.fourth_room = None
         self.first_favorites = None # --->>> una habitación muchos favoritos
+        self.second_favorites = None
+        self.third_favorites = None
         self.first_tenancy = None
         self.second_tenancy = None
         self.third_tenancy = None
@@ -666,7 +668,19 @@ class SeedData:
             user_id = self.second_user.id
         )
         
+        self.second_favorites = Favorites(
+            room_id = self.second_room.id,
+            user_id = self.second_user.id
+        )
+        
+        self.third_favorites = Favorites(
+            room_id = self.third_room.id,
+            user_id = self.second_user.id
+        )
+        
         db.session.add(self.first_favorites)
+        db.session.add(self.second_favorites)
+        db.session.add(self.third_favorites)
         db.session.commit() 
 
 #------------------------
