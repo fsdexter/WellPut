@@ -81,7 +81,7 @@ def get_users():
     
     return jsonify(list_users), 200
 
-@api.route('/profile/<int:user_id>', methods=['GET']) # EN POSTMAN FUNCIONA
+@api.route('/profile/<int:user_id>', methods=['GET'])
 def get_single_user(user_id):
     body = request.get_json()
     user_selected = User.query.get(user_id)
@@ -117,6 +117,9 @@ def get_single_user(user_id):
     for tenancy in tenancies_user:
         tenancies_res = tenancy.serialize()
         tenancies_list.append(tenancies_res)
+    
+    city = City.query.filter(City.id == User.city_id).first()
+    city_user = [city.serialize()]
      
     # To add to "user" object the "rooms" property to appear inside the user
     user['rooms'] = rooms   
@@ -126,6 +129,10 @@ def get_single_user(user_id):
     user['languages'] = languages
     # To add to "user" object the "tenancies" property to appear inside the user
     user['tenancies'] = tenancies_list
+    # To add to "user" object the "city" property to appear inside the user
+    user['city'] = city_user
+    
+    
     
     return jsonify(user), 200
 
@@ -175,10 +182,14 @@ def get_single_room(room_id):
         feature_res = feature.serialize()
         features.append(feature_res)
     
+    city = City.query.filter(City.id == Room.city_id).first()
+    city_room = [city.serialize()]
+    
     room['tenancies'] = tenancies_list
     room['room_archives'] = room_archives
     room['expensives'] = expensives
     room['features'] = features
+    room['city'] = city_room
     
     return jsonify(room), 200
 
