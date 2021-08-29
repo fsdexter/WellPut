@@ -30,31 +30,35 @@ export const Reviews = () => {
 						width: "100%",
 						height: "100%"
 					}}>
-					{store.room.tenanciesRoom || JSON.parse(localStorage.getItem("tenanciesRoom"))
-						? JSON.parse(localStorage.getItem("tenanciesRoom")).map(tenancy => {
-								console.log(tenancy);
-								return (
-									<div key={tenancy.id} className="container col-10 text-white pt-4" id="bxReviews">
-										<div
-											className="col-10 d-flex justify-content-around mt-3"
-											id="commentsContainer">
-											{tenancy.user.map(user => {
-												return <img key={user.id} src={user.avatar_url} className="col-2" />;
-											})}
+					<div className="container col-10 text-white pt-4 mb-3 mt-3" id="bxReviews">
+						{store.room.tenanciesRoom || JSON.parse(localStorage.getItem("tenanciesRoom"))
+							? JSON.parse(localStorage.getItem("tenanciesRoom")).map(tenancy => {
+									return (
+										<div key={tenancy.id}>
+											<div
+												className="col-10 d-flex justify-content-around my-3"
+												id="commentsContainer">
+												<img
+													key={tenancy.user.id}
+													src={tenancy.user.avatar_url}
+													className="col-2 imgAvatarUserRev"
+												/>
 
-											{tenancy.reviews.map(review => {
-												return (
-													<div key={review.id} className="col-9 d-flex flex-column">
-														<p>{review.date}</p>
-														<h3>{review.comment}</h3>
-													</div>
-												);
-											})}
+												{tenancy.reviews.map(review => {
+													return (
+														<div key={review.id} className="col-9 d-flex flex-column">
+															<h5 className="mb-3 userNameReviws">{tenancy.user.name}</h5>
+															<h3>{review.comment}</h3>
+															<p className="mt-2">{review.date}</p>
+														</div>
+													);
+												})}
+											</div>
 										</div>
-									</div>
-								);
-						  })
-						: null}
+									);
+							  })
+							: null}
+					</div>
 				</div>
 			) : (
 				"NOT FOUND THE ROOM SELECTED"
