@@ -326,8 +326,17 @@ def get_reviews_room(room_id):
     for review in tenancy_reviews:
         review_res = review.serialize()
         reviews_list.append(review_res)
+        
+    user = User.query.filter(User.id == Tenancy.user_id).first()
+    user_tenancy = [user.serialize()]
+    
+    room = Room.query.filter(Room.id == Tenancy.room_id).first()
+    room_tenancy = [room.serialize()]
     
     tenancy['reviews'] = reviews_list
+    tenancy['user'] = user_tenancy
+    tenancy['room'] = room_tenancy
+    
     return jsonify([tenancy]), 200  
 
 # -------------------------- SEED -------------------------

@@ -207,8 +207,8 @@ class Tenancy(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "room_id": self.room_id
+            #"user_id": self.user_id, --->> LOS DATOS SALEN DIRECTOS EN LA TENANCY
+            #"room_id": self.room_id
         } 
         
 #------------------------------------------------------------------------------------------------------------------------------

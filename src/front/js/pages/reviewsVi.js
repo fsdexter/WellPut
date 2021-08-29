@@ -13,10 +13,8 @@ export const Reviews = () => {
 	console.log("room_id en comentarios : ", room_id);
 
 	useEffect(() => {
-		//actions.getReviews(room_id);
-		actions.getReviews(1);
-		//actions.getDetailsRoom(room_id);
-		//actions.getDetailsRoom(1)
+		//actions.getTenancies(room_id);
+		actions.getTenancies(1);
 	}, []);
 
 	return (
@@ -26,11 +24,12 @@ export const Reviews = () => {
 					key={JSON.parse(localStorage.getItem("room")).room_archives[0].id}
 					style={{
 						backgroundImage: "url(" + JSON.parse(localStorage.getItem("room")).room_archives[0].url + ")",
-						//backgroundSize: "cover",
+						backgroundSize: "cover",
+						backgroundPosition: "center center",
 						width: "100%",
 						height: "100%"
 					}}>
-					{store.room.reviewsRoom || JSON.parse(localStorage.getItem("reviewsRoom")) ? (
+					{store.room.tenanciesRoom || JSON.parse(localStorage.getItem("tenanciesRoom")) ? (
 						<div>cdvfvbfgbfgbbgf</div>
 					) : null}
 				</div>

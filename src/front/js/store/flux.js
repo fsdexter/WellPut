@@ -8,14 +8,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY",
 			rooms: [],
 			favorites: [],
-			reviews: [],
 			roomies: [],
 			filters: [],
 			rating: [],
 			bedType: [],
 			city: [],
 			money: [],
-			reviewsRoom: [],
+			tenanciesRoom: [],
 			room: {}
 		},
 		actions: {
@@ -207,18 +206,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(res => res.json())
 					.then(data => console.log(data, "response postNewAnnouncement"));
 			},
-			getReviews: async room_id => {
+			getTenancies: async room_id => {
 				const store = getStore();
 				console.log("room_id ---- ", room_id);
 
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews/${room_id}`);
-					const reviewsRoom = await response.json();
+					const tenanciesRoom = await response.json();
 
-					console.log("comentarios desde el back ---->> ", reviewsRoom);
+					console.log("tenanciesRoom desde el back ---->> ", tenanciesRoom);
 
-					setStore({ reviewsRoom: reviewsRoom });
-					localStorage.setItem("reviewsRoom", JSON.stringify(store.reviewsRoom));
+					setStore({ tenanciesRoom: tenanciesRoom });
+					localStorage.setItem("tenanciesRoom", JSON.stringify(store.tenanciesRoom));
 				} catch (error) {
 					return error.message;
 				}
