@@ -23,18 +23,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const keys = Object.keys(localStorage);
 				keys.pop();
-				console.log("keys", keys);
+
 				const tmpStore = {};
+
 				keys.forEach(paramName => {
 					const paramValue = JSON.parse(localStorage.getItem(paramName));
 					tmpStore[paramName] = paramValue;
 				});
-				console.log(tmpStore);
-				setStore({ myLocalStore: tmpStore });
-				//console.log("JSON.parse(localStorage)", Object.keys(localStorage));
-				//localStorage.setItem("localStore", JSON.stringify());
 
-				console.log("store.myLocalStore --- ", store.myLocalStore);
+				setStore({ myLocalStore: tmpStore });
 			},
 			signUp: async userValues => {
 				const store = getStore();
