@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedData, Room, City, Expense, Feature, Review
+from api.models import db, User, SeedData, Room, City, Expense, Feature, Review, Tenancy
 #from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
@@ -315,26 +315,20 @@ def create_announcement():
     return jsonify(body_request), 200
 
 
-@api.route('/reviews_room/<int:room_id>', methods=['GET']) #FUNCIONA!!
+@api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) #FUNCIONA!!
 def get_reviews_room(room_id):
     
-    room_selected = Room.query.get_or_404(room_id)
-    review = Reviews.query.filter(Reviews.id == Room.city_id).first()
-    
+    tenancy_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).first()
+    tenancy_reviews = tenancy_room_selected.reviews
+    tenancy = tenancy_room_selected.serialize()
     reviews_list = []
-    reviews_list_in_DB = Room.query.all()
     
-    tenancies_room = [room_selected.tenancy]
-    reviews_room = room_selected.serialize()
-    tenancies = []
+    for review in tenancy_reviews:
+        review_res = review.serialize()
+        reviews_list.append(review_res)
     
-    for tenancy_room in tenancies_room:
-        tenancy_res = tenancy_room.serialize()
-        tenancies.append(tenancy_res)
-    
-    reviews_room['tenancies'] = tenancies
-    
-    return jsonify(reviews_room), 200
+    tenancy['reviews'] = reviews_list
+    return jsonify([tenancy]), 200  
 
 # -------------------------- SEED -------------------------
 

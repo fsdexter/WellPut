@@ -16,7 +16,7 @@ export const Reviews = () => {
 		//actions.getReviews(room_id);
 		actions.getReviews(1);
 		//actions.getDetailsRoom(room_id);
-		//actions.getDetailsRoom(1);
+		//actions.getDetailsRoom(1)
 	}, []);
 
 	return (

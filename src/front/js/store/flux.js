@@ -212,7 +212,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("room_id ---- ", room_id);
 
 				try {
-					const response = await fetch(`${API_BASE_URL}/api/reviews_room/${room_id}`);
+					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews/${room_id}`);
 					const reviewsRoom = await response.json();
 
 					console.log("comentarios desde el back ---->> ", reviewsRoom);

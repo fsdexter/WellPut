@@ -232,7 +232,7 @@ class Review(db.Model):
             "comment": self.comment,
             "rating": self.rating,
             "date": self.date,
-            "tenancy_id": self.tenancy_id
+            #"tenancy_id": self.tenancy_id
         }  
         
 #------------------------------------------------------------------------------------------------------------------------------
