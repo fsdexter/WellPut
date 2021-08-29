@@ -10,7 +10,7 @@ import { FilterOcc } from "../component/filterOcc";
 import { FilterFea } from "../component/filterFea";
 import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
-import { interestsOptions, languageOptions } from "../constants";
+import { interestsOptions, languageOptions, cityOptions } from "../constants";
 
 import { Link } from "react-router-dom";
 import MyMap from "../component/mapEngine";
@@ -19,7 +19,12 @@ import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const [city, setCity] = useState("");
+	const [city, setCity] = useState({
+		valeu: "Madrid",
+		label: "Madrid",
+		lat: 40.416775,
+		lng: -3.70379
+	});
 
 	const [formValue, setFormValue] = useState({
 		interests: ""
@@ -33,6 +38,13 @@ export const Home = () => {
 			})
 		});
 		console.log("addrtype ----->>>> ", formValue);
+	};
+	const handleCity = c => {
+		console.log(c);
+		console.log(city);
+		setCity(c);
+		console.log("addrtype ----->>>> ", city);
+		console.log(city.lat);
 	};
 
 	return (
@@ -65,16 +77,17 @@ export const Home = () => {
 								<input
 									type="text"
 									className="form-control roundShape"
-									placeholder="write a city..."
+									placeholder={city.lat}
 									onChange={event => {}}
 								/>
+								<AnimatedMulti options={cityOptions} change={c => handleCity(c)} />
 							</div>
 						</form>
 					</div>
 					<br />
 					<center>
 						<MyMap
-							center={{ lat: 40.416775, lng: -3.70379 }}
+							center={{ lat: city.lat, lng: city.lng }}
 							style={{ width: "270px", height: "150px" }}
 							zoom={8}
 						/>

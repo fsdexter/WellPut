@@ -29,9 +29,9 @@ export const languageOptions = [
 	{ value: "German", label: "German" }
 ];
 
-export const cityOpitoons = [
-	{ valeu: "Madrid", label: "Madrid", lat: "40.416775", lng: "-3.703790" },
-	{ valeu: "Barcelona", label: "Barcelona", lat: "41.385063", lng: "2.173404" },
-	{ valeu: "Malaga", label: "Malaga", lat: "36.721275", lng: "-4.421399" },
-	{ valeu: "Valencia", label: "Valencia", lat: "36.721275", lng: "-4.421399" }
+export const cityOptions = [
+	{ valeu: "Madrid", label: "Madrid", lat: 40.416775, lng: -3.70379 },
+	{ valeu: "Barcelona", label: "Barcelona", lat: 41.385063, lng: 2.173404 },
+	{ valeu: "Malaga", label: "Malaga", lat: 36.721275, lng: -4.421399 },
+	{ valeu: "Valencia", label: "Valencia", lat: 36.721275, lng: -4.421399 }
 ];
