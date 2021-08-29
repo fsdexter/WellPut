@@ -14,7 +14,7 @@ export const Login = () => {
 		password: ""
 	});
 	useEffect(() => {
-		actions.getUser(JSON.parse(localStorage.getItem("user")).user.id);
+		// actions.getUser(JSON.parse(localStorage.getItem("user")).user.id);
 	}, []);
 	const [errorMsg, setErrorMsg] = useState(null);
 

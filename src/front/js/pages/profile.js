@@ -10,7 +10,7 @@ import "../../styles/viewprofile.scss";
 export const Profile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
-	let { id } = useParams();
+	let { userId } = useParams();
 
 	useEffect(() => {
 		actions.getUser(JSON.parse(localStorage.getItem("user")).user.id);
@@ -27,6 +27,7 @@ export const Profile = () => {
 
 	function handleSubmit() {
 		history.push(`/edit_profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
+		//history.push(`/edit_profile/${userId}`);
 	}
 	function favorites() {
 		history.push("/favorites");

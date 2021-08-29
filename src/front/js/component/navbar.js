@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { SignUp } from "./signUp";
 import { Login } from "./login";
@@ -13,6 +14,7 @@ export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	const [isActive, setIsActive] = useState(null);
 	const history = useHistory();
+	const { userId } = useParams();
 
 	const goodbye = () => {
 		actions.logOut();
@@ -46,6 +48,7 @@ export const Navbar = () => {
 							onClick={() => {
 								changeElementNavbarActive("profile");
 								history.push(`/profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
+								//history.push(`/profile/${userId}`);
 							}}>
 							Profile
 						</span>

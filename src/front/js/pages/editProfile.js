@@ -16,14 +16,15 @@ export const EditProfile = () => {
 
 	const [formValue, setFormValue] = useState({
 		name: userParse.name ? userParse.name : "",
+		last_name: userParse.last_name ? userParse.last_name : "",
 		email: userParse.email ? userParse.email : "",
 		interests: userParse.interests ? userParse.interests : "",
 		languages: userParse.languages ? userParse.languages : "",
 		phone: userParse.phone ? userParse.phone : null,
 		birthday: userParse.birthday ? userParse.birthday : "",
-		sex: userParse.sex ? userParse.sex : "",
+		gender: userParse.gender ? userParse.gender : "",
 		occupation: userParse.occupation ? userParse.occupation : "",
-		personalDescription: userParse.personalDescription ? userParse.personalDescription : ""
+		description: userParse.description ? userParse.description : ""
 	});
 
 	useEffect(() => {
@@ -54,46 +55,67 @@ export const EditProfile = () => {
 
 	const handleSubmit = async e => {
 		e.preventDefault();
-		alert("Excellent ... Profile Updated!");
+
+		console.log("formValue --------->>> ", formValue);
 
 		const signUpError = await actions.editProfile(formValue);
-
+		console.log(66, signUpError);
 		if (!signUpError) {
-			history.push("/profile");
+			history.push(`/profile/${userId}`);
 		}
 	};
 
 	return (
 		<div className="picturefond col-12 d-flex justify-content-center text-white">
-			<form
-				// className="container pictureediperfile m-auto justify-content-center d-flex flex-column"
-				className="container col-11 detallefondblackEditarPerfil"
-				onSubmit={handleSubmit}>
+			<form className="container col-11 detallefondblackEditarPerfil" onSubmit={handleSubmit}>
 				<div className="row d-flex justify-content-around">
 					<div className="col-7 d-flex flex-column" id="myContainerFormInputs">
 						<div className="d-flex justify-content-around mt-3">
 							<h3 className="col-3">Name * :</h3>
-							<input type="name" name="name" onChange={inputHandelChange} className="col-6" />
+							<input value={formValue.name} name="name" onChange={inputHandelChange} className="col-6" />
 						</div>
 
 						<div className="d-flex justify-content-around mt-3">
 							<h3 className="col-3">Last Name * :</h3>
-							<input type="name" className="col-6" name="lastName" onChange={inputHandelChange} />
+							<input
+								value={formValue.last_name}
+								className="col-6"
+								name="last_name"
+								onChange={inputHandelChange}
+							/>
 						</div>
 
 						<div className="d-flex justify-content-around mt-3">
 							<h3 className="col-3">Email * :</h3>
-							<input type="email" className="col-6" name="email" onChange={inputHandelChange} />
+							<input
+								value={formValue.email}
+								type="email"
+								className="col-6"
+								name="email"
+								onChange={inputHandelChange}
+							/>
 						</div>
 
 						<div className="d-flex justify-content-around mt-3">
 							<h3 className="col-3">Phone :</h3>
-							<input type="phone" className="col-6" name="phone" onChange={inputHandelChange} />
+							<input
+								value={formValue.phone}
+								type="phone"
+								className="col-6"
+								name="phone"
+								onChange={inputHandelChange}
+							/>
 						</div>
 
 						<div className="d-flex justify-content-around mt-3">
 							<h3 className="col-3">Birthday :</h3>
-							<input type="date" className="col-6" name="birthday" onChange={inputHandelChange} />
+							<input
+								value={formValue.birthday}
+								type="date"
+								className="col-6"
+								name="birthday"
+								onChange={inputHandelChange}
+							/>
 						</div>
 
 						<div className="d-flex justify-content-around mt-3">
@@ -118,7 +140,7 @@ export const EditProfile = () => {
 
 						<div className="row no-gutters d-flex justify-content-between mt-3 mb-4">
 							<div className="col-5 d-flex justify-content-around mt-3 ml-4">
-								<h3 className="col-4">Sex :</h3>
+								<h3 className="col-4">Gender :</h3>
 								<div className="col-4 d-flex justify-content-between">
 									<div className="d-flex">
 										<i className="fas fa-mars fa-3x" aria-hidden="divue" />
@@ -126,7 +148,7 @@ export const EditProfile = () => {
 											className="form-check-input"
 											type="checkbox"
 											value="man"
-											name="sex"
+											name="gender"
 											onChange={inputHandelChange}
 										/>
 									</div>
@@ -175,12 +197,8 @@ export const EditProfile = () => {
 					<div className="col-3  justify-content-center" id="detalleIMG">
 						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
 						<div className="d-flex justify-content-around">
-							<button type="submit" className="btn btn-warning">
-								Upload
-							</button>
-							<button type="submit" className="btn btn-warning" onClick={inputHandelChange}>
-								SAVE
-							</button>
+							{/* <button className="btn btn-warning">Upload</button> */}
+							<input type="submit" className="btn btn-warning"></input>
 						</div>
 					</div>
 				</div>

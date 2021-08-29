@@ -15,9 +15,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 			city: [],
 			money: [],
 			tenanciesRoom: [],
-			room: {}
+			room: {},
+			myLocalStore: {}
 		},
 		actions: {
+			getLocalStore: () => {
+				const store = getStore();
+				const keys = Object.keys(localStorage);
+				keys.pop();
+				console.log("keys", keys);
+				const tmpStore = {};
+				keys.forEach(paramName => {
+					const paramValue = JSON.parse(localStorage.getItem(paramName));
+					tmpStore[paramName] = paramValue;
+				});
+				console.log(tmpStore);
+				setStore({ myLocalStore: tmpStore });
+				//console.log("JSON.parse(localStorage)", Object.keys(localStorage));
+				//localStorage.setItem("localStore", JSON.stringify());
+
+				console.log("store.myLocalStore --- ", store.myLocalStore);
+			},
 			signUp: async userValues => {
 				const store = getStore();
 
@@ -111,23 +129,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			/////////////////////////////////////////edit user
 			editProfile: async userValues => {
-				console.log("SE LLAMÓ A LA FUNCIÓN DE EDITAR PERFIL");
-				console.log(JSON.parse(localStorage.getItem("user")).user.id);
-				const store = getStore();
-
-				const requestOptions = {
-					method: "PATCH",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(userValues),
-					redirect: "follow"
-				};
-
 				try {
+					console.log("SE LLAMÓ A LA FUNCIÓN DE EDITAR PERFIL");
+					console.log(JSON.parse(localStorage.getItem("user")).user.id);
+					const store = getStore();
+
+					const requestOptions = {
+						method: "PATCH",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(userValues),
+						redirect: "follow"
+					};
+
+					console.log(333, requestOptions);
+
+					console.log(444);
 					const response = await fetch(
-						`${API_BASE_URL}/api/edit_profile/${localStorage.getItem("user").user.id}`,
+						`${API_BASE_URL}/api/edit_profile/${JSON.parse(localStorage.getItem("user")).user.id}`,
 						requestOptions
 					);
-					//const response = await fetch(`${API_BASE_URL}/api/edit_profile/${user_id}`, requestOptions);
+					console.log(555);
+					console.log("holaaaaaaaaaa -- ", response); //const response = await fetch(`${API_BASE_URL}/api/edit_profile/${user_id}`, requestOptions);
 
 					if (response.status >= 400) {
 						const errorMsg = "Error during the edition process";
