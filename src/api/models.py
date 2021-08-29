@@ -53,7 +53,7 @@ class User(db.Model):
             "gender": self.gender,
             "description": self.description,
             "avatar_url": self.avatar_url,
-            #"city_id": self.city_id, -->> No hace falta pq en su método GET ya aparece la ciudad
+            "city_id": self.city_id,
         }
         
     # method to check the password and that verify that it is the user password

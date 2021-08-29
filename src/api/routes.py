@@ -194,7 +194,7 @@ def get_single_room(room_id):
     return jsonify(room), 200
 
 
-@api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # En consola sale el cambio !!!!
+@api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # FUNCIONA !!!!
 def edit_profile(user_id):
     body_request = request.get_json()
     user_selected = User.query.get_or_404(user_id)
@@ -202,9 +202,6 @@ def edit_profile(user_id):
     
     db.session.delete(user_selected)
     db.session.commit()
-    
-    #print("body_request ---- ", body_request)
-    #print("user_to_edit --------- ", user_to_edit)
     
     for param in body_request:
         user_to_edit[param] = body_request[param]
@@ -225,9 +222,7 @@ def edit_profile(user_id):
     
     db.session.add(new_user)
     db.session.commit()
-    
-    print("user_to_edit *********************** ", user_to_edit)
-    
+     
     return jsonify(user_to_edit), 200
 
 @api.route('/new_announcement', methods=['POST'])
@@ -321,7 +316,7 @@ def handle_seed_user_data():
     seeder = SeedData()
     seeder.create_seed_data()
 
-    return jsonify({"msg": "The user was created!" }), 200
+    return jsonify({"msg": "The data was created!" }), 200
 
 # -------------------------- search room -------------------------
 @api.route('/search_room', methods=['POST'])
