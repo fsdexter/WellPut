@@ -73,7 +73,11 @@ export const Home = () => {
 					</div>
 					<br />
 					<center>
-						<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "270px", height: "150px" }} />
+						<MyMap
+							center={{ lat: 40.416775, lng: -3.70379 }}
+							style={{ width: "270px", height: "150px" }}
+							zoom={8}
+						/>
 					</center>
 					<br />
 					<div>

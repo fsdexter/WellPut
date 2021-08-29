@@ -7,7 +7,7 @@ export default function MyMap(props) {
 	const { store, actions } = useContext(Context);
 
 	function Map() {
-		return <GoogleMap defaultZoom={16} defaultCenter={props.center} />;
+		return <GoogleMap defaultZoom={props.zoom} defaultCenter={props.center} />;
 	}
 
 	const MapWrapped = withScriptjs(withGoogleMap(Map));
@@ -26,5 +26,6 @@ export default function MyMap(props) {
 
 MyMap.propTypes = {
 	center: PropTypes.object,
-	style: PropTypes.object.isRequired
+	style: PropTypes.object.isRequired,
+	zoom: PropTypes.number
 };
