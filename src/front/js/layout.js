@@ -30,7 +30,7 @@ const Layout = () => {
 						<Route exact path="/detailedView">
 							<DetailedView />
 						</Route>
-						{/* <Route exact path={`/edit_profile/${user_id}`}>
+						{/* <Route exact path="/edit_profile/:user_id">
 							<EditProfile />
 						</Route> */}
 						<Route exact path={`/edit_profile`}>
@@ -48,7 +48,7 @@ const Layout = () => {
 						<Route exact path="/favorites">
 							<Favorites />
 						</Route>
-						<Route exact path="/reviews">
+						<Route exact path="/reviews/:room_id">
 							<Reviews />
 						</Route>
 						<Route>

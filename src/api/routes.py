@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedData, Room, City, Expense, Feature
+from api.models import db, User, SeedData, Room, City, Expense, Feature, Review
 #from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
@@ -67,7 +67,6 @@ def user_profile():
 
 # ----------- to verify the identity of the user ----------
 def current_user(identity):
-  print(identity["id"])
   return User.query.get(identity["id"])
 
 
@@ -81,7 +80,7 @@ def get_users():
     
     return jsonify(list_users), 200
 
-@api.route('/profile/<int:user_id>', methods=['GET']) # EN POSTMAN FUNCIONA
+@api.route('/profile/<int:user_id>', methods=['GET'])
 def get_single_user(user_id):
     body = request.get_json()
     user_selected = User.query.get(user_id)
@@ -117,7 +116,10 @@ def get_single_user(user_id):
     for tenancy in tenancies_user:
         tenancies_res = tenancy.serialize()
         tenancies_list.append(tenancies_res)
-        
+    
+    city = City.query.filter(City.id == User.city_id).first()
+    city_user = [city.serialize()]
+
     favorites_user = user_selected.favorites # -- "favorites" is a relationship in the table User
     user = user_selected.serialize()
     favorites_list = []
@@ -125,6 +127,7 @@ def get_single_user(user_id):
     for favorite in favorites_user:
         favorite_res = favorite.serialize()
         favorites_list.append(favorite_res)
+
      
     # To add to "user" object the "rooms" property to appear inside the user
     user['rooms'] = rooms   
@@ -132,14 +135,13 @@ def get_single_user(user_id):
     user['characteristics'] = characteristics
     # To add to "user" object the "language" property to appear inside the user
     user['languages'] = languages
-
     # Añadir al Objeto "user" la propiedad "favorites" para que salga en el usuario
     user['favorites'] = favorites_list
-
     # To add to "user" object the "tenancies" property to appear inside the user
     user['tenancies'] = tenancies_list
-
-    
+    # To add to "user" object the "city" property to appear inside the user
+    user['city'] = city_user
+ 
     return jsonify(user), 200
 
 @api.route('/', methods=['GET']) # ALL ROOMS LIST
@@ -188,15 +190,19 @@ def get_single_room(room_id):
         feature_res = feature.serialize()
         features.append(feature_res)
     
+    city = City.query.filter(City.id == Room.city_id).first()
+    city_room = [city.serialize()]
+    
     room['tenancies'] = tenancies_list
     room['room_archives'] = room_archives
     room['expensives'] = expensives
     room['features'] = features
+    room['city'] = city_room
     
     return jsonify(room), 200
 
 
-@api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # En consola sale el cambio !!!!
+@api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # FUNCIONA !!!!
 def edit_profile(user_id):
     body_request = request.get_json()
     user_selected = User.query.get_or_404(user_id)
@@ -204,9 +210,6 @@ def edit_profile(user_id):
     
     db.session.delete(user_selected)
     db.session.commit()
-    
-    #print("body_request ---- ", body_request)
-    #print("user_to_edit --------- ", user_to_edit)
     
     for param in body_request:
         user_to_edit[param] = body_request[param]
@@ -227,9 +230,7 @@ def edit_profile(user_id):
     
     db.session.add(new_user)
     db.session.commit()
-    
-    print("user_to_edit *********************** ", user_to_edit)
-    
+     
     return jsonify(user_to_edit), 200
 
 @api.route('/new_announcement', methods=['POST'])
@@ -286,8 +287,6 @@ def create_announcement():
         name=sharedRoom_request
     )
 
-
-
     new_room = Room(
         address = address_request, 
         title = title_request, 
@@ -316,6 +315,27 @@ def create_announcement():
     return jsonify(body_request), 200
 
 
+@api.route('/reviews_room/<int:room_id>', methods=['GET']) #FUNCIONA!!
+def get_reviews_room(room_id):
+    
+    room_selected = Room.query.get_or_404(room_id)
+    review = Reviews.query.filter(Reviews.id == Room.city_id).first()
+    
+    reviews_list = []
+    reviews_list_in_DB = Room.query.all()
+    
+    tenancies_room = [room_selected.tenancy]
+    reviews_room = room_selected.serialize()
+    tenancies = []
+    
+    for tenancy_room in tenancies_room:
+        tenancy_res = tenancy_room.serialize()
+        tenancies.append(tenancy_res)
+    
+    reviews_room['tenancies'] = tenancies
+    
+    return jsonify(reviews_room), 200
+
 # -------------------------- SEED -------------------------
 
 @api.route('/seed_data', methods=['GET'])
@@ -323,7 +343,7 @@ def handle_seed_user_data():
     seeder = SeedData()
     seeder.create_seed_data()
 
-    return jsonify({"msg": "The user was created!" }), 200
+    return jsonify({"msg": "The data was created!" }), 200
 
 # -------------------------- search room -------------------------
 @api.route('/search_room', methods=['POST'])
