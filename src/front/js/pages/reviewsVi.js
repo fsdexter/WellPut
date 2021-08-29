@@ -15,153 +15,28 @@ export const Reviews = () => {
 	useEffect(() => {
 		//actions.getReviews(room_id);
 		actions.getReviews(1);
+		//actions.getDetailsRoom(room_id);
+		//actions.getDetailsRoom(1);
 	}, []);
-
-	console.log(store.reviewsRoom);
 
 	return (
 		<>
-			<div className="container out">
-				<div className="row top">top row</div>
-				<div className="row d-flex ">
-					<div className="col-6">
-						<div className="container review-box">
-							<h4 className="secondary">proprietari review</h4>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review1} />
-								</div>
-								<div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, ea.</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review1} />
-								</div>
-								<div>Lorem ipsum dolor sit amet.</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review1} />
-								</div>
-								<div>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem eveniet quibusdam,
-									maiores accusantium rerum laboriosam!
-								</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review1} />
-								</div>
-								<div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, ea.</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review1} />
-								</div>
-								<div>Lorem ipsum dolor sit amet.</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review1} />
-								</div>
-								<div>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem eveniet quibusdam,
-									maiores accusantium rerum laboriosam!
-								</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review1} />
-								</div>
-								<div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, ea.</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review1} />
-								</div>
-								<div>Lorem ipsum dolor sit amet.</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review1} />
-								</div>
-								<div>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem eveniet quibusdam,
-									maiores accusantium rerum laboriosam!
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="col-6">
-						<div className="container review-box">
-							<h4 className="secondary">oner review</h4>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review2} />
-								</div>
-								<div>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem eveniet quibusdam,
-									maiores accusantium rerum laboriosam!
-								</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review2} />
-								</div>
-								<div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, ea.</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review2} />
-								</div>
-								<div>Lorem ipsum dolor sit amet.</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review2} />
-								</div>
-								<div>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem eveniet quibusdam,
-									maiores accusantium rerum laboriosam!
-								</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review2} />
-								</div>
-								<div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, ea.</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review2} />
-								</div>
-								<div>Lorem ipsum dolor sit amet.</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review2} />
-								</div>
-								<div>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem eveniet quibusdam,
-									maiores accusantium rerum laboriosam!
-								</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review2} />
-								</div>
-								<div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, ea.</div>
-							</div>
-							<div className="d-flex review">
-								<div className="imgbox">
-									<img src={review2} />
-								</div>
-								<div>Lorem ipsum dolor sit amet.</div>
-							</div>
-						</div>
-					</div>
+			{store.room.room_archives || JSON.parse(localStorage.getItem("room")).room_archives ? (
+				<div
+					key={JSON.parse(localStorage.getItem("room")).room_archives[0].id}
+					style={{
+						backgroundImage: "url(" + JSON.parse(localStorage.getItem("room")).room_archives[0].url + ")",
+						//backgroundSize: "cover",
+						width: "100%",
+						height: "100%"
+					}}>
+					{store.room.reviewsRoom || JSON.parse(localStorage.getItem("reviewsRoom")) ? (
+						<div>cdvfvbfgbfgbbgf</div>
+					) : null}
 				</div>
-			</div>
+			) : (
+				"NOT FOUND THE ROOM SELECTED"
+			)}
 		</>
 	);
 };

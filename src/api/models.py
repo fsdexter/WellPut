@@ -245,7 +245,6 @@ class Room (db.Model):
     deposit = db.Column(db.String(50))
     title =db.Column(db.String(120))
     type_bed = db.Column(db.String(50))
-    isFavorite = db.Column(db.Boolean, default=False, nullable=False)
     lat = db.Column(db.Float(15))
     lng = db.Column(db.Float(15))
     
@@ -275,7 +274,6 @@ class Room (db.Model):
             "deposit": self.deposit,
             "title": self.title, 
             "type_bed": self.type_bed,
-            "isFavorite": self.isFavorite,
             "lat": self.lat,
             "lng": self.lng,
             #"city_id": self.city_id, -->> No hace falta pq en su método GET ya aparece la ciudad
@@ -565,7 +563,6 @@ class SeedData:
             deposit = "450",
             title = "Habitacion en casa moderna.",
             type_bed = "single",
-            isFavorite = True,
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
@@ -580,7 +577,6 @@ class SeedData:
             deposit = "400",
             title = "Habitacion pequeña y luminosa.",
             type_bed = "single",
-            isFavorite = True,
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
@@ -595,7 +591,6 @@ class SeedData:
             deposit = "500",
             title = "Habitacion suite con cama grande.",
             type_bed ="double",
-            isFavorite = False,
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
@@ -610,7 +605,6 @@ class SeedData:
             deposit = "500",
             title = "Hermosa habitación amueblada.",
             type_bed = "double",
-            isFavorite = False,
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.first_city.id,

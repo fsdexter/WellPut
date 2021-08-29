@@ -67,7 +67,6 @@ def user_profile():
 
 # ----------- to verify the identity of the user ----------
 def current_user(identity):
-  print(identity["id"])
   return User.query.get(identity["id"])
 
 
@@ -309,9 +308,15 @@ def create_announcement():
 
 @api.route('/reviews_room/<int:room_id>', methods=['GET']) #FUNCIONA!!
 def get_reviews_room(room_id):
-    reviews_room_selected = Review.query.get_or_404(room_id)
-    tenancies_room = [reviews_room_selected.tenancy]
-    reviews_room = reviews_room_selected.serialize()
+    
+    room_selected = Room.query.get_or_404(room_id)
+    review = Reviews.query.filter(Reviews.id == Room.city_id).first()
+    
+    reviews_list = []
+    reviews_list_in_DB = Room.query.all()
+    
+    tenancies_room = [room_selected.tenancy]
+    reviews_room = room_selected.serialize()
     tenancies = []
     
     for tenancy_room in tenancies_room:

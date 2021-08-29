@@ -11,6 +11,8 @@ export const ReviewsResume = () => {
 	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
 
+	console.log("id de la habitación Resumen review --- ", room_id);
+
 	useEffect(() => {
 		//actions.getReviews(room_id);
 		actions.getReviews(1);

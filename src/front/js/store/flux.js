@@ -85,11 +85,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.clear();
 			},
 			getRooms: async () => {
+				const store = getStore();
+
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/`);
 					const roomsList = await response.json();
 					setStore({ rooms: roomsList });
-					localStorage.setItem(JSON.stringify(roomsList));
+					localStorage.setItem("rooms", JSON.stringify(store.rooms));
 
 					console.log("HABITACIONES ??? --- ", roomsList);
 				} catch (error) {
@@ -206,6 +208,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => console.log(data, "response postNewAnnouncement"));
 			},
 			getReviews: async room_id => {
+				const store = getStore();
 				console.log("room_id ---- ", room_id);
 
 				try {
@@ -215,7 +218,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("comentarios desde el back ---->> ", reviewsRoom);
 
 					setStore({ reviewsRoom: reviewsRoom });
-					localStorage.setItem(JSON.stringify(reviewsRoom));
+					localStorage.setItem("reviewsRoom", JSON.stringify(store.reviewsRoom));
 				} catch (error) {
 					return error.message;
 				}
@@ -224,6 +227,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("SE AGREGÓ UN NUEVO COMENTARIO A LA HABITACIÓN");
 			},
 			getDetailsRoom: async room_id => {
+				const store = getStore();
 				console.log("room_id ---- ", room_id);
 
 				try {
@@ -233,7 +237,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("HABITACIÓN  desde el back ---->> ", room);
 
 					setStore({ room: room });
-					localStorage.setItem(JSON.stringify(room));
+					localStorage.setItem("room", JSON.stringify(store.room));
 				} catch (error) {
 					return error.message;
 				}
