@@ -1,0 +1,20 @@
+#bxReviews{
+    background-color: rgba(0, 0, 0, 0.712);
+}
+
+#commentsContainer{
+    position: relative;
+    left: 5rem;
+}
+
+.userNameReviws{
+    color: #ffde59;
+}
+
+.imgAvatarUserRev{
+    border-radius: 50%;
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
+    object-position: center center;
+}

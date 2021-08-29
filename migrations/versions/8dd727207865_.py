@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e76fe57fbb7e
+Revision ID: 8dd727207865
 Revises: 
-Create Date: 2021-08-29 10:43:50.989239
+Create Date: 2021-08-29 15:17:29.679899
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e76fe57fbb7e'
+revision = '8dd727207865'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -87,7 +87,6 @@ def upgrade():
     sa.Column('deposit', sa.String(length=50), nullable=True),
     sa.Column('title', sa.String(length=120), nullable=True),
     sa.Column('type_bed', sa.String(length=50), nullable=True),
-    sa.Column('isFavorite', sa.Boolean(), nullable=False),
     sa.Column('lat', sa.Float(precision=15), nullable=True),
     sa.Column('lng', sa.Float(precision=15), nullable=True),
     sa.Column('city_id', sa.Integer(), nullable=True),
@@ -110,6 +109,14 @@ def upgrade():
     sa.Column('expense_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['expense_id'], ['expense.id'], ),
     sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('favorites',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('room_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('features_room',
@@ -153,6 +160,7 @@ def downgrade():
     op.drop_table('tenancy')
     op.drop_table('room_archive')
     op.drop_table('features_room')
+    op.drop_table('favorites')
     op.drop_table('expenses_room')
     op.drop_table('spoken_languages')
     op.drop_table('room')

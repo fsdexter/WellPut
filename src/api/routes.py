@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedData, Room, City, Expense, Feature, Review
+from api.models import db, User, SeedData, Room, City, Expense, Feature, Review, Tenancy
 #from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
@@ -315,26 +315,70 @@ def create_announcement():
     return jsonify(body_request), 200
 
 
-@api.route('/reviews_room/<int:room_id>', methods=['GET']) #FUNCIONA!!
+@api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) 
 def get_reviews_room(room_id):
     
-    room_selected = Room.query.get_or_404(room_id)
-    review = Reviews.query.filter(Reviews.id == Room.city_id).first()
+    #tenancy_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).first()
+    tenancies_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).all()
+    print("TENANCIES ???? --- ", tenancies_room_selected)
     
-    reviews_list = []
-    reviews_list_in_DB = Room.query.all()
+    tenancies_list = []
     
-    tenancies_room = [room_selected.tenancy]
-    reviews_room = room_selected.serialize()
-    tenancies = []
+    for tenancy_room_selected in tenancies_room_selected:
+        
+        tenancy_reviews = tenancy_room_selected.reviews
+        tenancy = tenancy_room_selected.serialize()
+        reviews_list = []
+        
+        for review in tenancy_reviews:
+            review_res = review.serialize()
+            reviews_list.append(review_res)
+            
+        tenancy_users = User.query.filter(User.id == tenancy_room_selected.user_id).all()
+        print("ID USUARIO --- ", tenancy_users)
+       
+        for user in tenancy_users:
+            tenancy_user = user.serialize()
+            print("USUARIO ??? -- ", tenancy_user)
+        
+        # print("USUARIOS ---- ", users)
+        # user_tenancy = []
+        
+        # for user in users:
+        #     print("USUARIO --- ", user)
+        #     user_tenancy.append(user)
+        
+        
+        room = Room.query.filter(Room.id == Tenancy.room_id).first()
+        room_tenancy = [room.serialize()]
+        
+        tenancy['reviews'] = reviews_list
+        tenancy['user'] = tenancy_user
+        tenancy['room'] = room_tenancy
+        
+        tenancies_list.append(tenancy)
+        
+    return jsonify(tenancies_list), 200  
     
-    for tenancy_room in tenancies_room:
-        tenancy_res = tenancy_room.serialize()
-        tenancies.append(tenancy_res)
+    # tenancy_reviews = tenancy_room_selected.reviews
+    # tenancy = tenancy_room_selected.serialize()
+    # reviews_list = []
     
-    reviews_room['tenancies'] = tenancies
+    # for review in tenancy_reviews:
+    #     review_res = review.serialize()
+    #     reviews_list.append(review_res)
+        
+    # user = User.query.filter(User.id == Tenancy.user_id).first()
+    # user_tenancy = [user.serialize()]
     
-    return jsonify(reviews_room), 200
+    # room = Room.query.filter(Room.id == Tenancy.room_id).first()
+    # room_tenancy = [room.serialize()]
+    
+    # tenancy['reviews'] = reviews_list
+    # tenancy['user'] = user_tenancy
+    # tenancy['room'] = room_tenancy
+    
+    # return jsonify([tenancy]), 200  
 
 # -------------------------- SEED -------------------------
 

@@ -207,8 +207,8 @@ class Tenancy(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "room_id": self.room_id
+            #"user_id": self.user_id, --->> LOS DATOS SALEN DIRECTOS EN LA TENANCY
+            #"room_id": self.room_id
         } 
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ class Review(db.Model):
             "comment": self.comment,
             "rating": self.rating,
             "date": self.date,
-            "tenancy_id": self.tenancy_id
+            #"tenancy_id": self.tenancy_id
         }  
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -696,12 +696,12 @@ class SeedData:
         
         self.second_tenancy = Tenancy(
             user_id = self.third_user.id,
-            room_id = self.second_room.id
+            room_id = self.first_room.id
         )
         
         self.third_tenancy = Tenancy(
             user_id = self.fourth_user.id,
-            room_id = self.third_room.id
+            room_id = self.first_room.id
         )
         
         db.session.add(self.first_tenancy)

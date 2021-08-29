@@ -8,14 +8,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY",
 			rooms: [],
 			favorites: [],
-			reviews: [],
 			roomies: [],
 			filters: [],
 			rating: [],
 			bedType: [],
 			city: [],
 			money: [],
-			reviewsRoom: [],
+			tenanciesRoom: [],
 			room: {}
 		},
 		actions: {
@@ -92,8 +91,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const roomsList = await response.json();
 					setStore({ rooms: roomsList });
 					localStorage.setItem("rooms", JSON.stringify(store.rooms));
-
-					console.log("HABITACIONES ??? --- ", roomsList);
 				} catch (error) {
 					return error.message;
 				}
@@ -207,18 +204,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(res => res.json())
 					.then(data => console.log(data, "response postNewAnnouncement"));
 			},
-			getReviews: async room_id => {
+			getTenancies: async room_id => {
 				const store = getStore();
-				console.log("room_id ---- ", room_id);
 
 				try {
-					const response = await fetch(`${API_BASE_URL}/api/reviews_room/${room_id}`);
-					const reviewsRoom = await response.json();
+					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews/${room_id}`);
+					const tenanciesRoom = await response.json();
 
-					console.log("comentarios desde el back ---->> ", reviewsRoom);
-
-					setStore({ reviewsRoom: reviewsRoom });
-					localStorage.setItem("reviewsRoom", JSON.stringify(store.reviewsRoom));
+					setStore({ tenanciesRoom: tenanciesRoom });
+					localStorage.setItem("tenanciesRoom", JSON.stringify(store.tenanciesRoom));
 				} catch (error) {
 					return error.message;
 				}
@@ -228,13 +222,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getDetailsRoom: async room_id => {
 				const store = getStore();
-				console.log("room_id ---- ", room_id);
 
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/detailed_room/${room_id}`);
 					const room = await response.json();
-
-					console.log("HABITACIÓN  desde el back ---->> ", room);
 
 					setStore({ room: room });
 					localStorage.setItem("room", JSON.stringify(store.room));
