@@ -322,9 +322,9 @@ def search_room():
         queries.append(Room.country == body_request["country"])
     if body_request["typeBed"]:
         queries.append(Room.type_bed == body_request["typeBed"])
-     if body_request["kye del flux"]:
-         for
-        queries.append(Room.type_bed == body_request["key"])
+#     if body_request["kye del flux"]:
+#         for
+#        queries.append(Room.type_bed == body_request["key"])
     
     search_filter = Room.query.filter(*queries).all()
     response = list(map(lambda room: room.serialize(),search_filter))
