@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import review1 from "../../img/review1.png";
@@ -8,6 +9,12 @@ import "../../styles/detailedView.scss";
 
 export const ReviewsResume = () => {
 	const { store, actions } = useContext(Context);
+	let { room_id } = useParams();
+
+	useEffect(() => {
+		//actions.getReviews(room_id);
+		actions.getReviews(1);
+	}, []);
 
 	return (
 		<div className="text-center mb-1" id="reviwsRC">
@@ -39,7 +46,7 @@ export const ReviewsResume = () => {
 				</div>
 				<div className="row text-center">
 					<div className="col-12">
-						<Link to="/reviews">
+						<Link to={`/reviews/${room_id}`}>
 							<button className="btn btnYellow mt-1 mb-3 btnYeOwnR2">Read more</button>
 						</Link>
 					</div>

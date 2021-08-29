@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import review1 from "../../img/review1.png";
@@ -8,6 +9,15 @@ import "../../styles/reviewsVi.scss";
 
 export const Reviews = () => {
 	const { store, actions } = useContext(Context);
+	let { room_id } = useParams();
+	console.log("room_id en comentarios : ", room_id);
+
+	useEffect(() => {
+		//actions.getReviews(room_id);
+		actions.getReviews(1);
+	}, []);
+
+	console.log(store.reviewsRoom);
 
 	return (
 		<>

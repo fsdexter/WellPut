@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedData, Room, City, Expense, Feature
+from api.models import db, User, SeedData, Room, City, Expense, Feature, Review
 #from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
@@ -279,8 +279,6 @@ def create_announcement():
         name=sharedRoom_request
     )
 
-
-
     new_room = Room(
         address = address_request, 
         title = title_request, 
@@ -308,6 +306,21 @@ def create_announcement():
 
     return jsonify(body_request), 200
 
+
+@api.route('/reviews_room/<int:room_id>', methods=['GET']) #FUNCIONA!!
+def get_reviews_room(room_id):
+    reviews_room_selected = Review.query.get_or_404(room_id)
+    tenancies_room = [reviews_room_selected.tenancy]
+    reviews_room = reviews_room_selected.serialize()
+    tenancies = []
+    
+    for tenancy_room in tenancies_room:
+        tenancy_res = tenancy_room.serialize()
+        tenancies.append(tenancy_res)
+    
+    reviews_room['tenancies'] = tenancies
+    
+    return jsonify(reviews_room), 200
 
 # -------------------------- SEED -------------------------
 

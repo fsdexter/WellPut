@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 // Librería para el carousel
 import AwesomeSlider from "react-awesome-slider";
@@ -20,6 +21,16 @@ const priceExple = 450;
 
 export const CarouselRoomImg = props => {
 	const { store, actions } = useContext(Context);
+
+	let { room_id } = useParams();
+
+	console.log("room id desde el componente del carrusel ---- ", room_id);
+
+	useEffect(() => {
+		//actions.getDetailsRoom(room_id);
+		actions.getDetailsRoom(1);
+	}, []);
+
 	const slider = (
 		<div id="carouselOne" className="carousel slide" data-ride="carousel" data-interval="false">
 			<Link to="/detailedView">
