@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../store/appContext";
 
 export const FilterOcc = () => {
+	const { store, actions } = useContext(Context);
 	return (
 		<div className="row ">
 			<div className="col">
@@ -10,9 +12,12 @@ export const FilterOcc = () => {
 				<input
 					className=" form-check-input"
 					type="checkbox"
-					name="inlineRadioOptions"
+					name="worker"
 					id="inlineRadio1"
 					value="option1"
+					onClick={e => {
+						actions.onClickHandeler(e);
+					}}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio1">
 					<i className="fas fa-briefcase fa-2x" />
@@ -22,9 +27,12 @@ export const FilterOcc = () => {
 				<input
 					className="form-check-input"
 					type="checkbox"
-					name="inlineRadioOptions"
+					name="estudente"
 					id="inlineRadio2"
 					value="option2"
+					onClick={e => {
+						actions.onClickHandeler(e);
+					}}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio2">
 					<i className="fas fa-user-graduate fa-2x" />

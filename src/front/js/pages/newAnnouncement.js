@@ -26,10 +26,11 @@ export const NewAnnouncement = () => {
 		expGas: "",
 		expElectricity: "",
 		expWater: "",
-		singleBed: "",
-		doubleBed: "",
-		sofaBed: "",
-		noBed: ""
+		// singleBed: "",
+		// doubleBed: "",
+		// sofaBed: "",
+		// noBed: ""
+		type_bed: ""
 	});
 	const handleRoomData = e => {
 		const { name, value } = e.target;
@@ -47,13 +48,17 @@ export const NewAnnouncement = () => {
 	const onClickHandelerBed = e => {
 		var item = e.target.value;
 		if (item == "singleBed") {
-			setRoomData({ ...roomData, singleBed: item, doubleBed: "", sofaBed: "", noBed: "" });
+			//	setRoomData({ ...roomData, singleBed: item, doubleBed: "", sofaBed: "", noBed: "" });
+			setRoomData({ ...roomData, type_bed: item });
 		} else if (item == "doubleBed") {
-			setRoomData({ ...roomData, singleBed: "", doubleBed: item, sofaBed: "", noBed: "" });
+			//setRoomData({ ...roomData, singleBed: "", doubleBed: item, sofaBed: "", noBed: "" });
+			setRoomData({ ...roomData, type_bed: item });
 		} else if (item == "sofaBed") {
-			setRoomData({ ...roomData, singleBed: "", doubleBed: "", sofaBed: item, noBed: "" });
+			//setRoomData({ ...roomData, singleBed: "", doubleBed: "", sofaBed: item, noBed: "" });
+			setRoomData({ ...roomData, type_bed: item });
 		} else if (item == "noBed") {
-			setRoomData({ ...roomData, singleBed: "", doubleBed: "", sofaBed: "", noBed: item });
+			//	setRoomData({ ...roomData, singleBed: "", doubleBed: "", sofaBed: "", noBed: item });
+			setRoomData({ ...roomData, type_bed: item });
 		}
 	};
 	/*function functionTest() {

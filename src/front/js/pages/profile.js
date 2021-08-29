@@ -40,7 +40,12 @@ export const Profile = () => {
 						<div className="row" key={JSON.parse(localStorage.getItem("user")).user.id || store.user.id}>
 							<img
 								className="card-img-top roundShape col-4"
-								src={JSON.parse(localStorage.getItem("user")).user.avatar_url || store.user.avatar_url}
+								src={
+									JSON.parse(localStorage.getItem("user")).user.avatar_url || store.user.avatar_url
+										? JSON.parse(localStorage.getItem("user")).user.avatar_url ||
+										  store.user.avatar_url
+										: "https://img.freepik.com/vector-gratis/silueta-hombre-rostro-cuenta-usuario-web-concepto-icono-aislado-imagen-personaje-masculino-que-utiliza-verificacion-presentacion-linea_275655-275.jpg?size=626&ext=jpg"
+								}
 								alt="Card image cap"
 							/>
 
@@ -81,23 +86,29 @@ export const Profile = () => {
 							<div className="col-4 contentfondblack">
 								<div className="mb-3">
 									<h3>CONTACT</h3>
+
 									<h5>{JSON.parse(localStorage.getItem("user")).user.email || store.user.email}</h5>
 								</div>
 								<div className="mt-4">
 									<h3>SPOKEN LANGUAGES</h3>
-									<h5>*English</h5>
-									<h5>*Spanish</h5>
-									<h5>*French</h5>
+									<h5>
+										{/* {(
+											JSON.parse(localStorage.getItem("user")).user.languages ||
+											store.user.languages
+										).map((language, indx) => {
+											<h5 key={indx}>{language.name}</h5>;
+										})} */}
+										Idiomas que habla el usuario
+									</h5>
 								</div>
 							</div>
 							<div className="col-4 contentfondblack">
 								<h3 className="mb-3">INTEREST</h3>
-								<h5>*Musician</h5>
-								<h5>*Traveler</h5>
-								<h5>*Movies</h5>
-								<h5>*Dancer</h5>
-								<h5>*Vegan</h5>
-								<h5>*Animal Lover</h5>
+								<h5>
+									{/* {JSON.parse(localStorage.getItem("user")).user.characteristics ||
+										store.user.characteristics} */}
+									Intereses personales del usuario
+								</h5>
 							</div>
 						</div>
 					</>

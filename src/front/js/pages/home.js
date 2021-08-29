@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-
 import { Context } from "../store/appContext";
 
 import "../../styles/home.scss";
@@ -20,6 +19,8 @@ import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	const [city, setCity] = useState("");
+
 	const [formValue, setFormValue] = useState({
 		interests: ""
 	});
@@ -33,6 +34,7 @@ export const Home = () => {
 		});
 		console.log("addrtype ----->>>> ", formValue);
 	};
+
 	return (
 		<div className="container-fluid">
 			<div style={{ height: "400px" }}>
@@ -60,7 +62,12 @@ export const Home = () => {
 						</div>
 						<form>
 							<div className=" ml-3 pt-3">
-								<input type="text" className="form-control roundShape" placeholder="write a city..." />
+								<input
+									type="text"
+									className="form-control roundShape"
+									placeholder="write a city..."
+									onChange={event => {}}
+								/>
 							</div>
 						</form>
 					</div>
@@ -81,7 +88,7 @@ export const Home = () => {
 								<div className="col">
 									<h3 className="ml-4">Rating</h3>
 								</div>
-								<div className="mr-3 col-6 mb-3 d-flex">
+								<div className=" col-6 d-flex ratings">
 									<Rating />
 								</div>
 							</div>
@@ -133,6 +140,12 @@ export const Home = () => {
 						<CarouselRoomImg4 />
 					</div>
 				</div>
+				<button
+					onClick={() => {
+						actions.searchRoom();
+					}}>
+					Search
+				</button>
 			</div>
 			<Footer />
 		</div>

@@ -28,3 +28,5 @@ export const languageOptions = [
 	{ value: "Bengali", label: "Bengali" },
 	{ value: "German", label: "German" }
 ];
+
+export const cityOpitoons = [{ valeu: "", label: "", lat: "", lng: "" }];
