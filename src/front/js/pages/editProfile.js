@@ -11,29 +11,27 @@ import { interestsOptions, languageOptions } from "../constants";
 export const EditProfile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
-	let { id } = useParams();
+	const { userId } = useParams();
+	const userParse = JSON.parse(localStorage.getItem("user")).user;
 
 	const [formValue, setFormValue] = useState({
-		fullName: "",
-		email: "",
-		interests: "",
-		languages: "",
-		phone: null,
-		birthday: "",
-		sex: "",
-		occupation: "",
-		personalDescription: ""
+		name: userParse.name ? userParse.name : "",
+		email: userParse.email ? userParse.email : "",
+		interests: userParse.interests ? userParse.interests : "",
+		languages: userParse.languages ? userParse.languages : "",
+		phone: userParse.phone ? userParse.phone : null,
+		birthday: userParse.birthday ? userParse.birthday : "",
+		sex: userParse.sex ? userParse.sex : "",
+		occupation: userParse.occupation ? userParse.occupation : "",
+		personalDescription: userParse.personalDescription ? userParse.personalDescription : ""
 	});
 
 	useEffect(() => {
 		loadUser();
 	}, []);
 
-	let userParse = JSON.parse(localStorage.getItem("user")).user;
-
 	const loadUser = async () => {
-		await actions.getUser(JSON.parse(localStorage.getItem("user")).user.id);
-		setFormValue(JSON.parse(localStorage.getItem("user"))["user"]);
+		await actions.getUser(userId);
 	};
 
 	const handleAddrTypeChange = (f, key) => {
@@ -50,10 +48,10 @@ export const EditProfile = () => {
 	const inputHandelChange = e => {
 		//"[e.target.name]" is the name of form inputs
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
-		userParse = JSON.parse(localStorage.getItem("user")).user;
-		var emailform = document.getElementById("email-form");
-		emailform.value = userParse.email;
-		console.log("formValue ----->>>> ", formValue);
+		// userParse = JSON.parse(localStorage.getItem("user")).user;
+		// var emailform = document.getElementById("email-form");
+		// emailform.value = userParse.email;
+		// console.log("formValue ----->>>> ", formValue);
 	};
 
 	const handleSubmit = async e => {
@@ -77,21 +75,15 @@ export const EditProfile = () => {
 						<div className="">
 							<div className=" d-flex">
 								<div scope="col" className="textoeditusu ">
-									Full Name * :
+									Name * :
 								</div>
 
 								<div scope="col">
 									<input
-										value={
-											JSON.parse(localStorage.getItem("user")).user.name ||
-											store.user.name +
-												" " +
-												JSON.parse(localStorage.getItem("user")).user.last_name || ///poner otro input
-											store.user.last_name
-										}
-										type="name"
+										value={formValue.name}
+										type="text"
 										className="inputeditusu"
-										name="fullName"
+										name="name"
 										onChange={inputHandelChange}
 									/>
 								</div>
@@ -102,7 +94,7 @@ export const EditProfile = () => {
 								</div>
 								<div scope="col-10">
 									<input
-										value={userParse.email}
+										value={formValue.email}
 										type="email"
 										id="email-form"
 										className="inputeditusu"
@@ -115,7 +107,6 @@ export const EditProfile = () => {
 								<div scope="col" className="textoeditusu">
 									Interests * :
 								</div>
-								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
 								<div scope="col " className="inputeditusu" name="interests">
 									<AnimatedMulti
 										options={interestsOptions}
@@ -127,7 +118,6 @@ export const EditProfile = () => {
 								<div scope="col" className="textoeditusu">
 									Language * :
 								</div>
-								{/*NO ESTOY SEGURA DE QUE SE HAGA ASI*/}
 								<div scope="col" className="inputeditusu" name="languages">
 									<AnimatedMulti
 										options={languageOptions}
@@ -141,7 +131,7 @@ export const EditProfile = () => {
 								</div>
 								<div scope="col">
 									<input
-										value={JSON.parse(localStorage.getItem("user")).user.phone}
+										value={formValue.phone}
 										type="phone"
 										className="inputeditusu"
 										name="phone"
@@ -154,10 +144,8 @@ export const EditProfile = () => {
 									Birthday :
 								</div>
 								<div scope="col">
-									{JSON.parse(localStorage.getItem("user")).user.birthday}
 									<input
-										/// C_DATE($date) $date:=JSON Parse("\"2008-01-01T12:00:00Z\"";Is date)
-										value={JSON.parse(localStorage.getItem("user")).user.birthday}
+										value={formValue.birthday}
 										type="date"
 										className="inputeditusu"
 										name="birthday"
