@@ -91,8 +91,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const roomsList = await response.json();
 					setStore({ rooms: roomsList });
 					localStorage.setItem("rooms", JSON.stringify(store.rooms));
-
-					console.log("HABITACIONES ??? --- ", roomsList);
 				} catch (error) {
 					return error.message;
 				}
@@ -208,13 +206,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getTenancies: async room_id => {
 				const store = getStore();
-				console.log("room_id ---- ", room_id);
 
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews/${room_id}`);
 					const tenanciesRoom = await response.json();
-
-					console.log("tenanciesRoom desde el back ---->> ", tenanciesRoom);
 
 					setStore({ tenanciesRoom: tenanciesRoom });
 					localStorage.setItem("tenanciesRoom", JSON.stringify(store.tenanciesRoom));
@@ -227,13 +222,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getDetailsRoom: async room_id => {
 				const store = getStore();
-				console.log("room_id ---- ", room_id);
 
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/detailed_room/${room_id}`);
 					const room = await response.json();
-
-					console.log("HABITACIÓN  desde el back ---->> ", room);
 
 					setStore({ room: room });
 					localStorage.setItem("room", JSON.stringify(store.room));

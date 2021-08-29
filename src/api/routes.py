@@ -318,26 +318,56 @@ def create_announcement():
 @api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) #FUNCIONA!!
 def get_reviews_room(room_id):
     
-    tenancy_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).first()
-    tenancy_reviews = tenancy_room_selected.reviews
-    tenancy = tenancy_room_selected.serialize()
-    reviews_list = []
+    #tenancy_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).first()
+    tenancies_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).all()
+    print("TENANCIES ???? --- ", tenancies_room_selected)
     
-    for review in tenancy_reviews:
-        review_res = review.serialize()
-        reviews_list.append(review_res)
+    tenancies_list = []
+    
+    for tenancy_room_selected in tenancies_room_selected:
+        print("TENANCY ???? --- ", tenancy_room_selected)
         
-    user = User.query.filter(User.id == Tenancy.user_id).first()
-    user_tenancy = [user.serialize()]
+        tenancy_reviews = tenancy_room_selected.reviews
+        tenancy = tenancy_room_selected.serialize()
+        reviews_list = []
+        
+        for review in tenancy_reviews:
+            review_res = review.serialize()
+            reviews_list.append(review_res)
+            
+        user = User.query.filter(User.id == Tenancy.user_id).first()
+        user_tenancy = [user.serialize()]
+        
+        room = Room.query.filter(Room.id == Tenancy.room_id).first()
+        room_tenancy = [room.serialize()]
+        
+        tenancy['reviews'] = reviews_list
+        tenancy['user'] = user_tenancy
+        tenancy['room'] = room_tenancy
+        
+        tenancies_list.append(tenancy)
+        
+    return jsonify(tenancies_list), 200  
     
-    room = Room.query.filter(Room.id == Tenancy.room_id).first()
-    room_tenancy = [room.serialize()]
+    # tenancy_reviews = tenancy_room_selected.reviews
+    # tenancy = tenancy_room_selected.serialize()
+    # reviews_list = []
     
-    tenancy['reviews'] = reviews_list
-    tenancy['user'] = user_tenancy
-    tenancy['room'] = room_tenancy
+    # for review in tenancy_reviews:
+    #     review_res = review.serialize()
+    #     reviews_list.append(review_res)
+        
+    # user = User.query.filter(User.id == Tenancy.user_id).first()
+    # user_tenancy = [user.serialize()]
     
-    return jsonify([tenancy]), 200  
+    # room = Room.query.filter(Room.id == Tenancy.room_id).first()
+    # room_tenancy = [room.serialize()]
+    
+    # tenancy['reviews'] = reviews_list
+    # tenancy['user'] = user_tenancy
+    # tenancy['room'] = room_tenancy
+    
+    # return jsonify([tenancy]), 200  
 
 # -------------------------- SEED -------------------------
 

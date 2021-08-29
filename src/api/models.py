@@ -696,12 +696,12 @@ class SeedData:
         
         self.second_tenancy = Tenancy(
             user_id = self.third_user.id,
-            room_id = self.second_room.id
+            room_id = self.first_room.id
         )
         
         self.third_tenancy = Tenancy(
             user_id = self.fourth_user.id,
-            room_id = self.third_room.id
+            room_id = self.first_room.id
         )
         
         db.session.add(self.first_tenancy)
