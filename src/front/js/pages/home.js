@@ -20,6 +20,7 @@ import { Footer } from "../component/footer";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [city, setCity] = useState();
+	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
 
 	const [formValue, setFormValue] = useState({
 		interests: ""
@@ -34,9 +35,21 @@ export const Home = () => {
 		});
 		console.log("addrtype ----->>>> ", formValue);
 	};
-	const handleCity = value => {
-		setCity(value);
-		console.log("OK");
+	const handleCity = e => {
+		setCity(e.target.value);
+		if (city != undefined) {
+			if (city.toLowerCase() === "madrid") {
+				setCenter({ lat: 40.416775, lng: -3.70379 });
+			} else if (city.toLowerCase() === "barcelona") {
+				setCenter({ lat: 41.385063, lng: 2.173404 });
+			} else if (city.toLowerCase() === "malaga") {
+				setCenter({ lat: 36.721275, lng: -4.421399 });
+			} else if (city.toLowerCase() === "valencia") {
+				setCenter({ lat: 39.47024, lng: -0.375 });
+			} else {
+				setCenter({ lat: 40.416775, lng: -3.70379 });
+			}
+		}
 	};
 	// const cordenates = {
 	// Madri = {lat: 40.416775, lng: -3.70379 };
@@ -72,17 +85,19 @@ export const Home = () => {
 						</div>
 						<form>
 							<div className=" ml-3 pt-3">
-								<input type="text" className="form-control roundShape" />
+								<input
+									type="text"
+									className="form-control roundShape"
+									onChange={e => {
+										handleCity(e);
+									}}
+								/>
 							</div>
 						</form>
 					</div>
 					<br />
 					<center>
-						<MyMap
-							center={{ lat: 40.416775, lng: -3.70379 }}
-							style={{ width: "270px", height: "150px" }}
-							zoom={8}
-						/>
+						<MyMap center={center} style={{ width: "270px", height: "150px" }} zoom={8} />
 					</center>
 					<br />
 					<div>
