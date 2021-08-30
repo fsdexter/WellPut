@@ -73,18 +73,6 @@ export const Home = () => {
 						<form>
 							<div className=" ml-3 pt-3">
 								<input type="text" className="form-control roundShape" />
-								<select id="title" name="title" onSelect={handleCity}>
-									<option value="" selected>
-										Please choose
-									</option>
-
-									<option value="Madrid" onClick={console.log("madrid")}>
-										Madrid
-									</option>
-									<option value="Barcelona">Barcelona</option>
-									<option value="Malaga">Malaga</option>
-									<option value="Valencia">Valencia</option>
-								</select>
 							</div>
 						</form>
 					</div>
