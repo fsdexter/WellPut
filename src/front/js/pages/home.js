@@ -19,12 +19,7 @@ import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const [city, setCity] = useState({
-		valeu: "Madrid",
-		label: "Madrid",
-		lat: 40.416775,
-		lng: -3.70379
-	});
+	const [city, setCity] = useState();
 
 	const [formValue, setFormValue] = useState({
 		interests: ""
@@ -39,13 +34,16 @@ export const Home = () => {
 		});
 		console.log("addrtype ----->>>> ", formValue);
 	};
-	const handleCity = c => {
-		console.log(c);
-		console.log(city);
-		setCity(c);
-		console.log("addrtype ----->>>> ", city);
-		console.log(city.lat);
+	const handleCity = value => {
+		setCity(value);
+		console.log("OK");
 	};
+	// const cordenates = {
+	// Madri = {lat: 40.416775, lng: -3.70379 };
+	// Barcelona = {lat: 41.385063, lng: 2.173404 }:
+	// malaga = {lat: 36.721275, lng: -4.421399}:
+	// valencia = {lat: 36.721275, lng: -4.421399}:
+	// };
 
 	return (
 		<div className="container-fluid">
@@ -74,20 +72,26 @@ export const Home = () => {
 						</div>
 						<form>
 							<div className=" ml-3 pt-3">
-								<input
-									type="text"
-									className="form-control roundShape"
-									placeholder={city.lat}
-									onChange={event => {}}
-								/>
-								<AnimatedMulti options={cityOptions} change={c => handleCity(c)} />
+								<input type="text" className="form-control roundShape" />
+								<select id="title" name="title" onSelect={handleCity}>
+									<option value="" selected>
+										Please choose
+									</option>
+
+									<option value="Madrid" onClick={console.log("madrid")}>
+										Madrid
+									</option>
+									<option value="Barcelona">Barcelona</option>
+									<option value="Malaga">Malaga</option>
+									<option value="Valencia">Valencia</option>
+								</select>
 							</div>
 						</form>
 					</div>
 					<br />
 					<center>
 						<MyMap
-							center={{ lat: city.lat, lng: city.lng }}
+							center={{ lat: 40.416775, lng: -3.70379 }}
 							style={{ width: "270px", height: "150px" }}
 							zoom={8}
 						/>
