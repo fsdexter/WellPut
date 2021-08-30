@@ -173,6 +173,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ ...store.money, [e.target.name]: e.target.value });
 			},
+			setCity: c => {
+				const store = getStore();
+				setStore({ city: c });
+			},
 			searchRoom: () => {
 				const store = getStore();
 				fetch(API_BASE_URL + "/api/search_room", {

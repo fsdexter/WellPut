@@ -37,14 +37,15 @@ export const Home = () => {
 	};
 	const handleCity = e => {
 		setCity(e.target.value);
+		actions.setCity(e.target.value);
 		if (city != undefined) {
-			if (city.toLowerCase() === "madrid") {
+			if (city.toLowerCase().trim() === "madri") {
 				setCenter({ lat: 40.416775, lng: -3.70379 });
-			} else if (city.toLowerCase() === "barcelona") {
+			} else if (city.toLowerCase() === "barcelon") {
 				setCenter({ lat: 41.385063, lng: 2.173404 });
-			} else if (city.toLowerCase() === "malaga") {
+			} else if (city.toLowerCase() === "malag") {
 				setCenter({ lat: 36.721275, lng: -4.421399 });
-			} else if (city.toLowerCase() === "valencia") {
+			} else if (city.toLowerCase().trim() === "valenci") {
 				setCenter({ lat: 39.47024, lng: -0.375 });
 			} else {
 				setCenter({ lat: 40.416775, lng: -3.70379 });
