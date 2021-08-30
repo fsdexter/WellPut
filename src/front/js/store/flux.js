@@ -130,8 +130,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			/////////////////////////////////////////edit user
 			editProfile: async (userValues, user_id) => {
 				try {
-					console.log("SE LLAMÓ A LA FUNCIÓN DE EDITAR PERFIL");
-					console.log("user_id --------- ", user_id);
 					const store = getStore();
 
 					const requestOptions = {
@@ -141,11 +139,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						redirect: "follow"
 					};
 
-					console.log(333, requestOptions);
-
-					console.log(444);
 					const response = await fetch(`${API_BASE_URL}/api/edit_profile/${user_id}`, requestOptions);
-					console.log(555);
+
 					console.log("holaaaaaaaaaa -- ", response);
 
 					if (response.status >= 400) {
@@ -156,7 +151,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ user: newStore });
 						localStorage.setItem("user", JSON.stringify(store.user));
 
-						console.log("USUARIO EDITADO");
+						console.log("USUARIO EDITADO ---- ", user);
 					}
 				} catch (error) {
 					return error.message;

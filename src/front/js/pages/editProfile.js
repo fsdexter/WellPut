@@ -217,7 +217,7 @@ export const EditProfile = () => {
 						className="form-control"
 						id="exampleFormControlTextarea1"
 						rows="3"
-						name="personalDescription"
+						name="description"
 						onChange={inputHandelChange}
 					/>
 				</div>

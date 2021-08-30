@@ -18,7 +18,6 @@ export const Navbar = () => {
 
 	useEffect(() => {
 		actions.getLocalStore();
-		console.log("CAMBIO ????? ");
 	}, []);
 
 	const goodbye = () => {
