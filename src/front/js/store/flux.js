@@ -115,12 +115,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			////////////////////////getuser
 			getUser: async user_id => {
+				const store = getStore();
 				console.log(user_id);
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/profile/${user_id}`);
 					const user = await response.json();
+
+					console.log("USUARIO ---- ", user);
+
 					setStore({ user: user });
-					localStorage.setItem(JSON.stringify(user));
+					localStorage.setItem("user", JSON.stringify(store.user));
 				} catch (error) {
 					return error.message;
 				}

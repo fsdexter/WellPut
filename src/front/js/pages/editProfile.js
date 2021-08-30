@@ -11,8 +11,8 @@ import { interestsOptions, languageOptions } from "../constants";
 export const EditProfile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
-	const { userId } = useParams();
-	const userParse = JSON.parse(localStorage.getItem("user"))?.user || JSON.parse(localStorage.getItem("user"));
+	const { user_id } = useParams();
+	const userParse = JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user"));
 
 	console.log(JSON.parse(localStorage.getItem("user")));
 
@@ -34,7 +34,7 @@ export const EditProfile = () => {
 	}, []);
 
 	const loadUser = async () => {
-		await actions.getUser(userId);
+		await actions.getUser(user_id);
 	};
 
 	const handleAddrTypeChange = (f, key) => {
@@ -49,10 +49,6 @@ export const EditProfile = () => {
 	const inputHandelChange = e => {
 		//"[e.target.name]" is the name of form inputs
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
-		// userParse = JSON.parse(localStorage.getItem("user")).user;
-		// var emailform = document.getElementById("email-form");
-		// emailform.value = userParse.email;
-		// console.log("formValue ----->>>> ", formValue);
 	};
 
 	const handleSubmit = async e => {
@@ -63,6 +59,7 @@ export const EditProfile = () => {
 		const signUpError = await actions.editProfile(formValue);
 		console.log(66, signUpError);
 		if (!signUpError) {
+			alert("Your profile was updated !! ");
 			history.push(`/profile/${userId}`);
 		}
 	};
@@ -200,7 +197,7 @@ export const EditProfile = () => {
 					<div className="col-3  justify-content-center" id="detalleIMG">
 						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
 						<div className="d-flex justify-content-around">
-							{/* <button className="btn btn-warning">Upload</button> */}
+							<button className="btn btn-warning">Upload</button>
 							<input type="submit" className="btn btn-warning"></input>
 						</div>
 					</div>

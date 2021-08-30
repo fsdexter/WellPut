@@ -33,7 +33,6 @@ export const SignUp = () => {
 		closeBtn.current.click();
 
 		if (!signUpError) {
-			//history.push(`/edit_profile/${user_id}`);
 			history.push(`/edit_profile/${JSON.parse(localStorage.getItem("user")).id}`);
 		}
 	};

@@ -84,7 +84,10 @@ export const Navbar = () => {
 										? "navbar-brand mb-0 mr-2 btn btn-navb my-active"
 										: "navbar-brand mb-0 mr-2 btn btn-navb"
 								}
-								onClick={() => changeElementNavbarActive("favorites")}>
+								onClick={() => {
+									changeElementNavbarActive("favorites");
+									history.push(`/favorites/${JSON.parse(localStorage.getItem("user")).id}`);
+								}}>
 								Favorites
 							</span>
 						</Link>
