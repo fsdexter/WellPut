@@ -14,8 +14,6 @@ export const EditProfile = () => {
 	const { user_id } = useParams();
 	const userParse = JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user"));
 
-	console.log(JSON.parse(localStorage.getItem("user")));
-
 	const [formValue, setFormValue] = useState({
 		name: userParse.name ? userParse.name : "",
 		last_name: userParse.last_name ? userParse.last_name : "",
@@ -34,7 +32,9 @@ export const EditProfile = () => {
 	}, []);
 
 	const loadUser = async () => {
-		await actions.getUser(user_id);
+		await actions.getUser(
+			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		);
 	};
 
 	const handleAddrTypeChange = (f, key) => {
@@ -45,7 +45,7 @@ export const EditProfile = () => {
 			})
 		});
 	};
-	//////////////////////////////////////////////
+
 	const inputHandelChange = e => {
 		//"[e.target.name]" is the name of form inputs
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
@@ -54,13 +54,17 @@ export const EditProfile = () => {
 	const handleSubmit = async e => {
 		e.preventDefault();
 
-		console.log("formValue --------->>> ", formValue);
+		const signUpError = await actions.editProfile(
+			formValue,
+			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		);
 
-		const signUpError = await actions.editProfile(formValue);
-		console.log(66, signUpError);
 		if (!signUpError) {
 			alert("Your profile was updated !! ");
-			history.push(`/profile/${userId}`);
+			history.push(
+				`/profile/${JSON.parse(localStorage.getItem("user")).user?.id ||
+					JSON.parse(localStorage.getItem("user")).id}`
+			);
 		}
 	};
 
@@ -140,7 +144,7 @@ export const EditProfile = () => {
 
 						<div className="row no-gutters d-flex justify-content-between mt-3 mb-4">
 							<div className="col-5 d-flex justify-content-around mt-3 ml-4">
-								<h3 className="col-4">Gender :</h3>
+								<h3 className="col-5">Gender :</h3>
 								<div className="col-4 d-flex justify-content-between">
 									<div className="d-flex">
 										<i className="fas fa-mars fa-3x" aria-hidden="divue" />
@@ -198,7 +202,9 @@ export const EditProfile = () => {
 						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
 						<div className="d-flex justify-content-around">
 							<button className="btn btn-warning">Upload</button>
-							<input type="submit" className="btn btn-warning"></input>
+							<button type="submit" className="btn btn-warning">
+								Save
+							</button>
 						</div>
 					</div>
 				</div>

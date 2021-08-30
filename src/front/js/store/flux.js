@@ -120,9 +120,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/profile/${user_id}`);
 					const user = await response.json();
-
-					console.log("USUARIO ---- ", user);
-
 					setStore({ user: user });
 					localStorage.setItem("user", JSON.stringify(store.user));
 				} catch (error) {
@@ -131,10 +128,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			/////////////////////////////////////////edit user
-			editProfile: async userValues => {
+			editProfile: async (userValues, user_id) => {
 				try {
 					console.log("SE LLAMÓ A LA FUNCIÓN DE EDITAR PERFIL");
-					console.log(JSON.parse(localStorage.getItem("user")).user.id);
+					console.log("user_id --------- ", user_id);
 					const store = getStore();
 
 					const requestOptions = {
@@ -147,10 +144,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(333, requestOptions);
 
 					console.log(444);
-					const response = await fetch(
-						`${API_BASE_URL}/api/edit_profile/${JSON.parse(localStorage.getItem("user")).user.id}`,
-						requestOptions
-					);
+					const response = await fetch(`${API_BASE_URL}/api/edit_profile/${user_id}`, requestOptions);
 					console.log(555);
 					console.log("holaaaaaaaaaa -- ", response);
 
