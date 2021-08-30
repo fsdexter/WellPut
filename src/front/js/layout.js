@@ -45,9 +45,12 @@ const Layout = () => {
 						<Route exact path="/newAnnouncement">
 							<NewAnnouncement />
 						</Route>
-						<Route exact path="/favorites/:user_id">
+						<Route exact path="/favorites">
 							<Favorites />
 						</Route>
+						{/* <Route exact path="/favorites:user_id">
+							<Favorites />
+						</Route> */}
 						<Route exact path="/reviews/:room_id">
 							<Reviews />
 						</Route>

@@ -53,15 +53,7 @@ export const Navbar = () => {
 							}
 							onClick={() => {
 								changeElementNavbarActive("profile");
-								console.log(
-									"store.myLocalStore.user ----- ",
-									store.myLocalStore.user,
-									" store.myLocalStore ---- ",
-									store.myLocalStore
-								);
 								history.push(`/profile/${JSON.parse(localStorage.getItem("user")).id}`);
-								//history.push(`/profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
-								//history.push(`/profile/${store.myLocalStore.user.user.id}`);
 							}}>
 							Profile
 						</span>
@@ -85,7 +77,7 @@ export const Navbar = () => {
 								}
 								onClick={() => {
 									changeElementNavbarActive("favorites");
-									history.push(`/favorites/${JSON.parse(localStorage.getItem("user")).id}`);
+									//history.push(`/favorites/${JSON.parse(localStorage.getItem("user")).id}`);
 								}}>
 								Favorites
 							</span>
