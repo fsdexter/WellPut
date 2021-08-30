@@ -18,6 +18,7 @@ export function Rating() {
 								if (s == store.rating) {
 									s -= 1;
 								}
+								console.log(s);
 								actions.setRating(s);
 							}}></div>
 					);

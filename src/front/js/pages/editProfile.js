@@ -7,6 +7,7 @@ import "../../styles/perfiledit.scss";
 import { interestsOptions, languageOptions } from "../constants";
 
 export const EditProfile = () => {
+	const userParse = JSON.parse(localStorage.getItem("user")).user;
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
 	const [formValue, setFormValue] = useState({

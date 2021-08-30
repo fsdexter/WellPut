@@ -192,6 +192,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(res => res.json())
 					.then(data => console.log(data, "response serach_room"));
 			},
+			//////////////////////////////////////////
 			postNewAnnouncement: room => {
 				console.log(room);
 				fetch(API_BASE_URL + "/api/new_announcement", {
@@ -204,6 +205,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(res => res.json())
 					.then(data => console.log(data, "response postNewAnnouncement"));
 			},
+			///////////////////////////////////get Tenancy
 			getTenancies: async room_id => {
 				const store = getStore();
 
@@ -217,9 +219,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return error.message;
 				}
 			},
-			addReview: () => {
-				console.log("SE AGREGÓ UN NUEVO COMENTARIO A LA HABITACIÓN");
+			/////////////////////AÑADIR REVIEW /////////////////////////////////////
+			addReview: (formValue, user, room_id) => {
+				console.log(formValue, user, room_id);
+				fetch(API_BASE_URL + "/api/tenancy_room_reviews", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(formValue)
+				})
+					.then(res => res.json())
+					.then(data => console.log(data, "response addReview"));
 			},
+			//////////////////////////////////////////////////////////º
+
 			getDetailsRoom: async room_id => {
 				const store = getStore();
 
