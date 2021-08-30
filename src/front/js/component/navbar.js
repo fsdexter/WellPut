@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { SignUp } from "./signUp";
 import { Login } from "./login";
@@ -13,9 +14,15 @@ export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	const [isActive, setIsActive] = useState(null);
 	const history = useHistory();
+	const { user_id } = useParams();
+
+	useEffect(() => {
+		actions.getLocalStore();
+	}, []);
 
 	const goodbye = () => {
 		actions.logOut();
+		actions.getLocalStore();
 		history.push("/");
 	};
 
@@ -35,19 +42,21 @@ export const Navbar = () => {
 				</Link>
 			</div>
 			<div className="col-10" id="brown">
-				{localStorage.getItem("user") || store.user !== null ? (
+				{/*store.myLocalStore.user ? (*/}
+				{store.myLocalStore.user ? (
 					<div className="col-12 d-flex justify-content-between" id="yellow">
-						<Link to="/profile">
-							<span
-								className={
-									isActive === "profile"
-										? "navbar-brand mb-0 mr-2 btn btn-navb my-active"
-										: "navbar-brand mb-0 mr-2 btn btn-navb"
-								}
-								onClick={() => changeElementNavbarActive("profile")}>
-								Profile
-							</span>
-						</Link>
+						<span
+							className={
+								isActive === "profile"
+									? "navbar-brand mb-0 mr-2 btn btn-navb my-active"
+									: "navbar-brand mb-0 mr-2 btn btn-navb"
+							}
+							onClick={() => {
+								changeElementNavbarActive("profile");
+								history.push(`/profile/${JSON.parse(localStorage.getItem("user")).id}`);
+							}}>
+							Profile
+						</span>
 						<Link to="/announcements">
 							<span
 								className={
@@ -66,7 +75,10 @@ export const Navbar = () => {
 										? "navbar-brand mb-0 mr-2 btn btn-navb my-active"
 										: "navbar-brand mb-0 mr-2 btn btn-navb"
 								}
-								onClick={() => changeElementNavbarActive("favorites")}>
+								onClick={() => {
+									changeElementNavbarActive("favorites");
+									//history.push(`/favorites/${JSON.parse(localStorage.getItem("user")).id}`);
+								}}>
 								Favorites
 							</span>
 						</Link>

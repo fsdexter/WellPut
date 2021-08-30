@@ -16,24 +16,47 @@ from werkzeug.security import check_password_hash
 
 
 api = Blueprint('api', __name__)
+# ----------- Upload Photo User ---------------------------------
+@api.route('/user/<int:user_id>/avatar_url', methods=['PUT', 'POST'])
+def handle_upload(user_id):
+    if 'avatar_url' in request.files:
+        result = cloudinary.uploader.upload(request.files['avatar_url'])
+        user1 = User.query.filter_by(user_id="user").first()
+        print("test")
+        print("user")
+        print(user1.avatar_url, "å########")
+        user1.avatar_url = result['secure_url']     
+        print(result['secure_url'],"@@@@@@@@@@@")
+        db.session.add(user1)
+        db.session.commit()
+
+        return jsonify(user1.serialize()), 200
+    else:
+        raise APIException('Missing profile_image on the FormData')
+
+#________________________________________________________________________
 
 @api.route('/sign_up', methods=['POST'])
 def sign_up_user():
     body_request = request.get_json()
     email_request = body_request.get("email", None)
     name_request = body_request.get("name", None)
+    last_name_request = body_request.get("last_name", None)
     password_request = body_request.get("password", None)
     
     new_user = User(
         email = email_request, 
-        name = name_request, 
+        name = name_request,
+        last_name = last_name_request, 
         password = generate_password_hash(password_request, "sha256")
         )
     
     db.session.add(new_user)
     db.session.commit()
     
-    return jsonify(body_request), 200
+    new_user_DB = User.query.filter(User.email == email_request).first()
+    
+    return jsonify(new_user_DB.serialize()), 200
 
 @api.route('/login', methods=['POST'])
 def login_user():
@@ -253,11 +276,7 @@ def create_announcement():
     expElectricity_request = body_request.get("expElectricity", None)
     expWater_request = body_request.get("expWater", None)
     type_bed_request = body_request.get("type_bed", None)
-    # singleBed_request = body_request.get("singleBed", None)
-    # doubleBed_request = body_request.get("doubleBed", None)
-    # sofaBed_request = body_request.get("sofaBed", None)
-    # noBed_request = body_request.get("noBed", None)
-
+    
     city_room= City(
         name = city_request
     )
@@ -293,10 +312,6 @@ def create_announcement():
         description = description_request,
         price = price_request,
         deposit = deposit_request,
-        # facingTheStreet = facingTheStreet_request,
-        # furnishedRoom = furnishedRoom_request,
-        # suiteRoom = suiteRoom_request,
-        # sharedRoom = sharedRoom_request,
         type_bed = type_bed_request
         )
     
@@ -318,9 +333,7 @@ def create_announcement():
 @api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) 
 def get_reviews_room(room_id):
     
-    #tenancy_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).first()
     tenancies_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).all()
-    print("TENANCIES ???? --- ", tenancies_room_selected)
     
     tenancies_list = []
     
@@ -335,19 +348,9 @@ def get_reviews_room(room_id):
             reviews_list.append(review_res)
             
         tenancy_users = User.query.filter(User.id == tenancy_room_selected.user_id).all()
-        print("ID USUARIO --- ", tenancy_users)
        
         for user in tenancy_users:
             tenancy_user = user.serialize()
-            print("USUARIO ??? -- ", tenancy_user)
-        
-        # print("USUARIOS ---- ", users)
-        # user_tenancy = []
-        
-        # for user in users:
-        #     print("USUARIO --- ", user)
-        #     user_tenancy.append(user)
-        
         
         room = Room.query.filter(Room.id == Tenancy.room_id).first()
         room_tenancy = [room.serialize()]
@@ -360,25 +363,6 @@ def get_reviews_room(room_id):
         
     return jsonify(tenancies_list), 200  
     
-    # tenancy_reviews = tenancy_room_selected.reviews
-    # tenancy = tenancy_room_selected.serialize()
-    # reviews_list = []
-    
-    # for review in tenancy_reviews:
-    #     review_res = review.serialize()
-    #     reviews_list.append(review_res)
-        
-    # user = User.query.filter(User.id == Tenancy.user_id).first()
-    # user_tenancy = [user.serialize()]
-    
-    # room = Room.query.filter(Room.id == Tenancy.room_id).first()
-    # room_tenancy = [room.serialize()]
-    
-    # tenancy['reviews'] = reviews_list
-    # tenancy['user'] = user_tenancy
-    # tenancy['room'] = room_tenancy
-    
-    # return jsonify([tenancy]), 200  
 
 # -------------------------- SEED -------------------------
 
