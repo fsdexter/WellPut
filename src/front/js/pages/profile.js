@@ -10,24 +10,19 @@ import "../../styles/viewprofile.scss";
 export const Profile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
-	let { userId } = useParams();
+	let { user_id } = useParams();
 
 	useEffect(() => {
-		actions.getUser(JSON.parse(localStorage.getItem("user")).user.id);
-		// actions.getUser(id);
-		// actions.getUserAuthentificted();
+		actions.getUser(
+			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		);
 	}, []);
-	// useEffect(() => {
-	// 	loadUser();
-	// }, []);
-
-	// const loadUser = async () => {
-	// 	await actions.getUser(JSON.parse(localStorage.getItem("user")));
-	// };
 
 	function handleSubmit() {
-		history.push(`/edit_profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
-		//history.push(`/edit_profile/${userId}`);
+		history.push(
+			`/edit_profile/${JSON.parse(localStorage.getItem("user")).user?.id ||
+				JSON.parse(localStorage.getItem("user")).id}`
+		);
 	}
 	function favorites() {
 		history.push("/favorites");
@@ -38,13 +33,19 @@ export const Profile = () => {
 			<div className="container col-10 detallefondblack">
 				{store.user || localStorage.getItem("user") ? (
 					<>
-						<div className="row" key={JSON.parse(localStorage.getItem("user")).user.id || store.user.id}>
+						<div
+							className="row"
+							key={
+								JSON.parse(localStorage.getItem("user")).user?.id ||
+								JSON.parse(localStorage.getItem("user")).id
+							}>
 							<img
 								className="card-img-top roundShape col-4"
 								src={
-									JSON.parse(localStorage.getItem("user")).user.avatar_url || store.user.avatar_url
-										? JSON.parse(localStorage.getItem("user")).user.avatar_url ||
-										  store.user.avatar_url
+									JSON.parse(localStorage.getItem("user")).user?.avatar_url ||
+									JSON.parse(localStorage.getItem("user")).avatar_url
+										? JSON.parse(localStorage.getItem("user")).user?.avatar_url ||
+										  JSON.parse(localStorage.getItem("user")).avatar_url
 										: "https://img.freepik.com/vector-gratis/silueta-hombre-rostro-cuenta-usuario-web-concepto-icono-aislado-imagen-personaje-masculino-que-utiliza-verificacion-presentacion-linea_275655-275.jpg?size=626&ext=jpg"
 								}
 								alt="Card image cap"
@@ -53,9 +54,10 @@ export const Profile = () => {
 							<div className="col-8 text-white">
 								<div className="row">
 									<h1 className="textwhhite ml-5">
-										{JSON.parse(localStorage.getItem("user")).user.name || store.user.name}
-										{JSON.parse(localStorage.getItem("user")).user.last_name ||
-											store.user.last_name}
+										{JSON.parse(localStorage.getItem("user")).user?.name ||
+											JSON.parse(localStorage.getItem("user")).name}
+										{JSON.parse(localStorage.getItem("user")).user?.last_name ||
+											JSON.parse(localStorage.getItem("user")).last_name}
 									</h1>
 									<div className="d-flex align-items-center ml-3">
 										{/** LAS ESTRELLAS PROCEDDEN DE LAS REVIEWS */}
@@ -71,14 +73,14 @@ export const Profile = () => {
 									<div className="d-flex mb-5">
 										<i className="fas fa-map-marker-alt fa-2x text-white mr-4"></i>
 										<h2>
-											{JSON.parse(localStorage.getItem("user")).user.city_id ||
-												store.user.city_id}
+											{JSON.parse(localStorage.getItem("user")).user?.name ||
+												JSON.parse(localStorage.getItem("user")).name}
 										</h2>
 									</div>
 
 									<h3>
-										{JSON.parse(localStorage.getItem("user")).user.description ||
-											store.user.description}
+										{JSON.parse(localStorage.getItem("user")).user?.name ||
+											JSON.parse(localStorage.getItem("user")).name}
 									</h3>
 								</div>
 							</div>
@@ -88,7 +90,10 @@ export const Profile = () => {
 								<div className="mb-3">
 									<h3>CONTACT</h3>
 
-									<h5>{JSON.parse(localStorage.getItem("user")).user.email || store.user.email}</h5>
+									<h5>
+										{JSON.parse(localStorage.getItem("user")).user?.name ||
+											JSON.parse(localStorage.getItem("user")).name}
+									</h5>
 								</div>
 								<div className="mt-4">
 									<h3>SPOKEN LANGUAGES</h3>

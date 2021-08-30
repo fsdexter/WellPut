@@ -30,6 +30,7 @@ export const Login = () => {
 		e.preventDefault();
 		// login function
 		let loginError = await actions.login(formValue);
+		actions.getLocalStore();
 
 		if (loginError) {
 			setErrorMsg(loginError);

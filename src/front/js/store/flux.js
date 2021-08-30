@@ -20,18 +20,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			getLocalStore: () => {
-				const store = getStore();
 				const keys = Object.keys(localStorage);
-				keys.pop();
-
 				const tmpStore = {};
 
 				keys.forEach(paramName => {
-					const paramValue = JSON.parse(localStorage.getItem(paramName));
-					tmpStore[paramName] = paramValue;
-				});
+					// "loglevel:webpack-dev-server" es una propiedad del LocalStorage, si se deja, revienta todo
+					if (paramName !== "loglevel:webpack-dev-server") {
+						const paramValue = JSON.parse(localStorage.getItem(paramName));
+						tmpStore[paramName] = paramValue;
 
-				setStore({ myLocalStore: tmpStore });
+						if (paramValue) {
+							setStore({ myLocalStore: tmpStore });
+						}
+					}
+				});
 			},
 			signUp: async userValues => {
 				const store = getStore();
@@ -95,7 +97,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			logOut: () => {
-				setStore({ user: null });
+				setStore({ user: null, myLocalStore: {} });
 				localStorage.clear();
 			},
 			getRooms: async () => {
@@ -146,7 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						requestOptions
 					);
 					console.log(555);
-					console.log("holaaaaaaaaaa -- ", response); //const response = await fetch(`${API_BASE_URL}/api/edit_profile/${user_id}`, requestOptions);
+					console.log("holaaaaaaaaaa -- ", response);
 
 					if (response.status >= 400) {
 						const errorMsg = "Error during the edition process";

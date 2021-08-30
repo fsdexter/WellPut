@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
@@ -14,10 +14,16 @@ export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	const [isActive, setIsActive] = useState(null);
 	const history = useHistory();
-	const { userId } = useParams();
+	const { user_id } = useParams();
+
+	useEffect(() => {
+		actions.getLocalStore();
+		console.log("CAMBIO ????? ");
+	}, []);
 
 	const goodbye = () => {
 		actions.logOut();
+		actions.getLocalStore();
 		history.push("/");
 	};
 
@@ -37,7 +43,8 @@ export const Navbar = () => {
 				</Link>
 			</div>
 			<div className="col-10" id="brown">
-				{localStorage.getItem("user") || store.user !== null ? (
+				{/*store.myLocalStore.user ? (*/}
+				{store.myLocalStore.user ? (
 					<div className="col-12 d-flex justify-content-between" id="yellow">
 						<span
 							className={
@@ -47,8 +54,15 @@ export const Navbar = () => {
 							}
 							onClick={() => {
 								changeElementNavbarActive("profile");
-								history.push(`/profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
-								//history.push(`/profile/${userId}`);
+								console.log(
+									"store.myLocalStore.user ----- ",
+									store.myLocalStore.user,
+									" store.myLocalStore ---- ",
+									store.myLocalStore
+								);
+								history.push(`/profile/${JSON.parse(localStorage.getItem("user")).id}`);
+								//history.push(`/profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
+								//history.push(`/profile/${store.myLocalStore.user.user.id}`);
 							}}>
 							Profile
 						</span>

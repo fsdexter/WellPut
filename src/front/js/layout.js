@@ -27,16 +27,16 @@ const Layout = () => {
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route exact path="/home/:userId">
+						<Route exact path="/home/">
 							<Home />
 						</Route>
 						<Route exact path="/detailedView">
 							<DetailedView />
 						</Route>
-						<Route exact path="/edit_profile/:userId">
+						<Route exact path="/edit_profile/:user_id">
 							<EditProfile />
 						</Route>
-						<Route exact path="/profile/:userId">
+						<Route exact path="/profile/:user_id">
 							<Profile />
 						</Route>
 						<Route exact path="/announcements">
@@ -45,7 +45,7 @@ const Layout = () => {
 						<Route exact path="/newAnnouncement">
 							<NewAnnouncement />
 						</Route>
-						<Route exact path="/favorites">
+						<Route exact path="/favorites/:user_id">
 							<Favorites />
 						</Route>
 						<Route exact path="/reviews/:room_id">

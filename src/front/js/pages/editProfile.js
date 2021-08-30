@@ -12,7 +12,9 @@ export const EditProfile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
 	const { userId } = useParams();
-	const userParse = JSON.parse(localStorage.getItem("user")).user;
+	const userParse = JSON.parse(localStorage.getItem("user"))?.user || JSON.parse(localStorage.getItem("user"));
+
+	console.log(JSON.parse(localStorage.getItem("user")));
 
 	const [formValue, setFormValue] = useState({
 		name: userParse.name ? userParse.name : "",
@@ -111,7 +113,8 @@ export const EditProfile = () => {
 							<h3 className="col-3">Birthday :</h3>
 							<input
 								value={formValue.birthday}
-								type="date"
+								// type="date"
+								type="text"
 								className="col-6"
 								name="birthday"
 								onChange={inputHandelChange}
