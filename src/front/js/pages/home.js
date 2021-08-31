@@ -139,7 +139,7 @@ export const Home = () => {
 					{store.rooms.map(room => {
 						return (
 							<div key={room.id} className="carHome">
-								<CarouselRoomImg title={room.title} />
+								<CarouselRoomImg title={room.title} price={room.price} />
 							</div>
 						);
 					})}
