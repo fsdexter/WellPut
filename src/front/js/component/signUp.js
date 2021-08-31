@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { useParams } from "react-router-dom";
 
 import "../../styles/signUp.scss";
 import room1 from "../../img/room1.png";
@@ -10,9 +11,11 @@ import room3 from "../../img/room3.png";
 export const SignUp = () => {
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
+	const { user_id } = useParams();
 	const closeBtn = useRef(null);
 	const [formValue, setFormValue] = useState({
-		fullName: "",
+		name: "",
+		last_name: "",
 		email: "",
 		password: "",
 		repeatPassword: ""
@@ -26,11 +29,11 @@ export const SignUp = () => {
 	const handlerSubmit = async e => {
 		e.preventDefault();
 		const signUpError = await actions.signUp(formValue);
+		actions.getLocalStore();
 		closeBtn.current.click();
-		// to go "Edit Profile" after the correct sign up
+
 		if (!signUpError) {
-			//history.push(`/edit_profile/${user_id}`);
-			history.push(`/edit_profile/`);
+			history.push(`/edit_profile/${JSON.parse(localStorage.getItem("user")).id}`);
 		}
 	};
 
@@ -83,13 +86,26 @@ export const SignUp = () => {
 						<input
 							className="col-12 inputSinLog"
 							type="text"
-							name="fullName"
-							id="fullName"
-							placeholder="Full Name"
+							name="name"
+							id="name"
+							placeholder="Name"
 							onChange={inputHandelChange}
 							required
 						/>
 					</div>
+
+					<div className="form-grup row mt-2 mb-4">
+						<input
+							className="col-12 inputSinLog"
+							type="text"
+							name="last_name"
+							id="last_name"
+							placeholder="Last Name"
+							onChange={inputHandelChange}
+							required
+						/>
+					</div>
+
 					<div className="form-grup row mt-2 mb-4">
 						<input
 							className="col-12 inputSinLog"

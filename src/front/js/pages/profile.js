@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { AddReview } from "../component/addReview";
 import { NotificationRoomie } from "../component/notificationRoomie";
 import "../../styles/viewprofile.scss";
+import avatar from "/workspace/WellPut/src/front/img/avatar.png";
 
 export const Profile = () => {
 	const history = useHistory();
@@ -13,13 +14,16 @@ export const Profile = () => {
 	let { user_id } = useParams();
 
 	useEffect(() => {
-		//actions.getUser(user_id);
-		actions.getUser(1000);
+		actions.getUser(
+			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		);
 	}, []);
 
 	function handleSubmit() {
-		//history.push(`/edit_profile/${user_id}`);
-		history.push(`/edit_profile/`);
+		history.push(
+			`/edit_profile/${JSON.parse(localStorage.getItem("user")).user?.id ||
+				JSON.parse(localStorage.getItem("user")).id}`
+		);
 	}
 	function favorites() {
 		history.push("/favorites");
@@ -30,19 +34,31 @@ export const Profile = () => {
 			<div className="container col-10 detallefondblack">
 				{store.user || localStorage.getItem("user") ? (
 					<>
-						<div className="row" key={JSON.parse(localStorage.getItem("user")).user.id || store.user.id}>
+						<div
+							className="row"
+							key={
+								JSON.parse(localStorage.getItem("user")).user?.id ||
+								JSON.parse(localStorage.getItem("user")).id
+							}>
 							<img
 								className="card-img-top roundShape col-4"
-								src={JSON.parse(localStorage.getItem("user")).user.avatar_url || store.user.avatar_url}
+								src={
+									JSON.parse(localStorage.getItem("user")).user?.avatar_url ||
+									JSON.parse(localStorage.getItem("user")).avatar_url
+										? JSON.parse(localStorage.getItem("user")).user?.avatar_url ||
+										  JSON.parse(localStorage.getItem("user")).avatar_url
+										: avatar
+								}
 								alt="Card image cap"
 							/>
 
 							<div className="col-8 text-white">
 								<div className="row">
 									<h1 className="textwhhite ml-5">
-										{JSON.parse(localStorage.getItem("user")).user.name || store.user.name}{" "}
-										{JSON.parse(localStorage.getItem("user")).user.last_name ||
-											store.user.last_name}
+										{JSON.parse(localStorage.getItem("user")).user?.name ||
+											JSON.parse(localStorage.getItem("user")).name}{" "}
+										{JSON.parse(localStorage.getItem("user")).user?.last_name ||
+											JSON.parse(localStorage.getItem("user")).last_name}
 									</h1>
 									<div className="d-flex align-items-center ml-3">
 										{/** LAS ESTRELLAS PROCEDDEN DE LAS REVIEWS */}
@@ -55,14 +71,24 @@ export const Profile = () => {
 								</div>
 
 								<div className="col-12 detallefondblack" id="presentationUser">
-									<div className="d-flex mb-5">
-										<i className="fas fa-map-marker-alt fa-2x text-white mr-4"></i>
-										<h2>{JSON.parse(localStorage.getItem("user")).user.city || store.user.city}</h2>
-									</div>
+									{JSON.parse(localStorage.getItem("user")).user?.city ||
+									JSON.parse(localStorage.getItem("user")).city
+										? (
+												JSON.parse(localStorage.getItem("user")).user?.city ||
+												JSON.parse(localStorage.getItem("user")).city
+										  ).map(city => {
+												return (
+													<div className="d-flex mb-5" key={city.id}>
+														<i className="fas fa-map-marker-alt fa-2x text-white mr-4"></i>
+														<h2>{city.name}</h2>
+													</div>
+												);
+										  })
+										: "My house"}
 
 									<h3>
-										{JSON.parse(localStorage.getItem("user")).user.description ||
-											store.user.description}
+										{JSON.parse(localStorage.getItem("user")).user?.description ||
+											JSON.parse(localStorage.getItem("user")).description}
 									</h3>
 								</div>
 							</div>
@@ -71,23 +97,53 @@ export const Profile = () => {
 							<div className="col-4 contentfondblack">
 								<div className="mb-3">
 									<h3>CONTACT</h3>
-									<h5>{JSON.parse(localStorage.getItem("user")).user.email || store.user.email}</h5>
+									<div className="d-flex ml-4 align-items-center">
+										<i className="far fa-envelope fa-2x"></i>
+										<h5 className="ml-3 align-self-center">
+											{JSON.parse(localStorage.getItem("user")).user?.email ||
+												JSON.parse(localStorage.getItem("user")).email}
+										</h5>
+									</div>
 								</div>
 								<div className="mt-4">
 									<h3>SPOKEN LANGUAGES</h3>
-									<h5>*English</h5>
-									<h5>*Spanish</h5>
-									<h5>*French</h5>
+									{JSON.parse(localStorage.getItem("user")).user?.languages ||
+									JSON.parse(localStorage.getItem("user")).languages
+										? (
+												JSON.parse(localStorage.getItem("user")).user?.languages ||
+												JSON.parse(localStorage.getItem("user")).languages
+										  ).map(language => {
+												return (
+													<div
+														key={language.id}
+														className="d-flex ml-4 mt-2 align-items-center">
+														{" "}
+														<i className="far fa-grin-tongue-wink fa-lg"></i>
+														<h5 className="ml-3">{language.name}</h5>
+													</div>
+												);
+										  })
+										: "I can speak... a lot of languages!! "}
 								</div>
 							</div>
 							<div className="col-4 contentfondblack">
 								<h3 className="mb-3">INTEREST</h3>
-								<h5>*Musician</h5>
-								<h5>*Traveler</h5>
-								<h5>*Movies</h5>
-								<h5>*Dancer</h5>
-								<h5>*Vegan</h5>
-								<h5>*Animal Lover</h5>
+								{JSON.parse(localStorage.getItem("user")).user?.characteristics ||
+								JSON.parse(localStorage.getItem("user")).characteristics
+									? (
+											JSON.parse(localStorage.getItem("user")).user?.characteristics ||
+											JSON.parse(localStorage.getItem("user")).characteristics
+									  ).map(characteristic => {
+											return (
+												<div
+													key={characteristic.id}
+													className="d-flex ml-4 mt-2 align-items-center">
+													<i className="far fa-check-circle fa-lg"></i>
+													<h5 className="ml-3 text-capitalize">{characteristic.name}</h5>
+												</div>
+											);
+									  })
+									: "I love do... mmmm I need to think "}
 							</div>
 						</div>
 					</>

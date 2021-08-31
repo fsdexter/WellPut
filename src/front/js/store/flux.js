@@ -8,16 +8,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 			key: "AIzaSyCzhBMjhiVX2elfehs4kBMElmWfs0d86xY",
 			rooms: [],
 			favorites: [],
-			reviews: [],
 			roomies: [],
 			filters: [],
 			rating: [],
 			bedType: [],
 			city: [],
 			money: {},
-			interests: []
+			interests: [],
+			tenanciesRoom: [],
+			room: {},
+			myLocalStore: {}
+
 		},
 		actions: {
+			getLocalStore: () => {
+				const keys = Object.keys(localStorage);
+				const tmpStore = {};
+
+				keys.forEach(paramName => {
+					// "loglevel:webpack-dev-server" es una propiedad del LocalStorage, si se deja, revienta todo
+					if (paramName !== "loglevel:webpack-dev-server") {
+						const paramValue = JSON.parse(localStorage.getItem(paramName));
+						tmpStore[paramName] = paramValue;
+
+						if (paramValue) {
+							setStore({ myLocalStore: tmpStore });
+						}
+					}
+				});
+			},
 			signUp: async userValues => {
 				const store = getStore();
 
@@ -80,43 +99,51 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			logOut: () => {
-				setStore({ user: null });
+				setStore({ user: null, myLocalStore: {} });
 				localStorage.clear();
 			},
 			getRooms: async () => {
+				const store = getStore();
+
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/`);
 					const roomsList = await response.json();
 					setStore({ rooms: roomsList });
-					localStorage.setItem("rooms", JSON.stringify(roomsList));
+					localStorage.setItem("rooms", JSON.stringify(store.rooms));
 				} catch (error) {
 					return error.message;
 				}
 			},
+
+			////////////////////////getuser
 			getUser: async user_id => {
+				const store = getStore();
+				console.log(user_id);
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/profile/${user_id}`);
 					const user = await response.json();
 					setStore({ user: user });
-					localStorage.setItem(JSON.stringify(user));
+					localStorage.setItem("user", JSON.stringify(store.user));
 				} catch (error) {
 					return error.message;
 				}
 			},
-			editProfile: async userValues => {
-				console.log("SE LLAMÓ A LA FUNCIÓN DE EDITAR PERFIL");
 
-				const store = getStore();
-
-				const requestOptions = {
-					method: "PATCH",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(userValues),
-					redirect: "follow"
-				};
-
+			/////////////////////////////////////////edit user
+			editProfile: async (userValues, user_id) => {
 				try {
+					const store = getStore();
+
+					const requestOptions = {
+						method: "PATCH",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(userValues),
+						redirect: "follow"
+					};
+
 					const response = await fetch(`${API_BASE_URL}/api/edit_profile/${user_id}`, requestOptions);
+
+					console.log("holaaaaaaaaaa -- ", response);
 
 					if (response.status >= 400) {
 						const errorMsg = "Error during the edition process";
@@ -126,7 +153,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ user: newStore });
 						localStorage.setItem("user", JSON.stringify(store.user));
 
-						console.log("USUARIO EDITADO");
+						console.log("USUARIO EDITADO ---- ", user);
 					}
 				} catch (error) {
 					return error.message;
@@ -134,9 +161,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			recoverPassword: userValues => {
 				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
-			},
-			addReview: () => {
-				console.log("SE AGREGÓ UN NUEVO COMENTARIO A LA HABITACIÓN");
 			},
 			addRoomie: () => {
 				console.log("SE AGREGÓ UN NUEVO COMPAÑERO DE PISO");
@@ -214,6 +238,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(res => res.json())
 					.then(data => console.log(data, "response postNewAnnouncement"));
+			},
+			getTenancies: async room_id => {
+				const store = getStore();
+
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews/${room_id}`);
+					const tenanciesRoom = await response.json();
+
+					setStore({ tenanciesRoom: tenanciesRoom });
+					localStorage.setItem("tenanciesRoom", JSON.stringify(store.tenanciesRoom));
+				} catch (error) {
+					return error.message;
+				}
+			},
+			addReview: () => {
+				console.log("SE AGREGÓ UN NUEVO COMENTARIO A LA HABITACIÓN");
+			},
+			getDetailsRoom: async room_id => {
+				const store = getStore();
+
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/detailed_room/${room_id}`);
+					const room = await response.json();
+
+					setStore({ room: room });
+					localStorage.setItem("room", JSON.stringify(store.room));
+				} catch (error) {
+					return error.message;
+				}
 			}
 		}
 	};
