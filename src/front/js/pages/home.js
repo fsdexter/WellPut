@@ -20,6 +20,9 @@ import { Footer } from "../component/footer";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [city, setCity] = useState("");
+	let listRooms = store.rooms.map((item, index) => {
+		return <li key={index}>{item}</li>;
+	});
 
 	const [formValue, setFormValue] = useState({
 		interests: ""
@@ -133,10 +136,15 @@ export const Home = () => {
 					</div>
 				</div>
 				<div className="col-6 ml-4 mt-3">
-					<div className="carHome">
-						<CarouselRoomImg />
-					</div>
-					<div className="carHome">
+					{store.rooms.map(room => {
+						return (
+							<div key={room.id} className="carHome">
+								<CarouselRoomImg title={room.title} />
+							</div>
+						);
+					})}
+
+					{/* <div className="carHome">
 						<CarouselRoomImg2 />
 					</div>
 					<div className="carHome">
@@ -144,7 +152,7 @@ export const Home = () => {
 					</div>
 					<div className="carHome">
 						<CarouselRoomImg4 />
-					</div>
+					</div> */}
 				</div>
 				<button
 					onClick={() => {

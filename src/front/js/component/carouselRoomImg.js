@@ -21,9 +21,6 @@ const priceExple = 450;
 
 export const CarouselRoomImg = props => {
 	const { store, actions } = useContext(Context);
-	let listRooms = store.rooms.map((item, index) => {
-		return <li key={index}>{console.log(item)}</li>;
-	});
 
 	let { room_id } = useParams();
 
@@ -64,7 +61,7 @@ export const CarouselRoomImg = props => {
 					<div className="carousel-item  ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails2} alt="Second slide" />
 						<div className="carousel-caption ">
-							<h4 className="maybeWorks">{titleExple} </h4>
+							<h4 className="maybeWorks">{props.title} </h4>
 							{/**/}
 							<div className=" row">
 								<div className="caroPrice">
@@ -85,7 +82,7 @@ export const CarouselRoomImg = props => {
 					<div className="carousel-item ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails3} alt="Third slide" />
 						<div className="carousel-caption ">
-							<h4 className="maybeWorks">{titleExple} </h4>
+							<h4 className="maybeWorks">{props.title} </h4>
 							{/**/}
 							<div className=" row">
 								<div className="caroPrice">
