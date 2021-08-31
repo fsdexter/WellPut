@@ -1,8 +1,6 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-import cloudinary;
-import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, SeedData, Room, City, Expense, Feature, Review, Tenancy, Characteristic, CharacteristicUser, Language, SpokenLanguages
 #from api.models import db, User, Room
@@ -14,6 +12,9 @@ from flask_jwt_extended import jwt_required
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 
+import cloudinary;
+import cloudinary.uploader;
+
 
 api = Blueprint('api', __name__)
 # ----------- Upload Photo User ---------------------------------
@@ -24,11 +25,10 @@ def handle_upload(user_id):
     
     if 'avatar_url' in request.files:
         result = cloudinary.uploader.upload(request.files['avatar_url'])
+        #result = cloudinary.uploader.upload(request.files[0])
         #user1 = User.query.filter_by(user_id="user").first()
         user1 = User.query.get(user_id)
-        print("user1 ---------- ", user1)
-       
-        user1.avatar_url = result['secure_url']     
+        user1["avatar_url"] = result['secure_url']     
        
         db.session.add(user1)
         db.session.commit()
