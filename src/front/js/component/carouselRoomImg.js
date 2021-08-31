@@ -21,9 +21,9 @@ const priceExple = 450;
 
 export const CarouselRoomImg = props => {
 	const { store, actions } = useContext(Context);
-	const listRooms = store.rooms.map((item, index) => {
+	/*const listRooms = store.rooms.map((item, index) => {
 		return <li key={index}>{item.title}</li>;
-	});
+	});*/
 
 	let { room_id } = useParams();
 
@@ -44,7 +44,7 @@ export const CarouselRoomImg = props => {
 					<div className="carousel-item  active ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails1} alt="First slide" />
 						<div className="carousel-caption">
-							<h4 className="maybeWorks">{props.title} </h4>
+							<h4 className="maybeWorks">{JSON.parse(localStorage.getItem("room")).title} </h4>
 							<div className={props.isDetailRoom ? "row rowCustom d-flex justify-content-center" : "row"}>
 								<div className={props.isDetailRoom ? "caroPriceCustom" : "caroPrice"}>
 									<h2>€{priceExple}</h2>
@@ -63,7 +63,7 @@ export const CarouselRoomImg = props => {
 					<div className="carousel-item  ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails2} alt="Second slide" />
 						<div className="carousel-caption ">
-							<h4 className="maybeWorks">{props.title} </h4>
+							<h4 className="maybeWorks">{JSON.parse(localStorage.getItem("room")).title} </h4>
 							{/**/}
 							<div className=" row">
 								<div className="caroPrice">
@@ -84,7 +84,7 @@ export const CarouselRoomImg = props => {
 					<div className="carousel-item ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails3} alt="Third slide" />
 						<div className="carousel-caption ">
-							<h4 className="maybeWorks">{props.title} </h4>
+							<h4 className="maybeWorks">{JSON.parse(localStorage.getItem("room")).title} </h4>
 							{/**/}
 							<div className=" row">
 								<div className="caroPrice">
