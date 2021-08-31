@@ -63,7 +63,7 @@ export const CarouselRoomImg = props => {
 					<div className="carousel-item  ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails2} alt="Second slide" />
 						<div className="carousel-caption ">
-							<h4 className="maybeWorks">{JSON.parse(localStorage.getItem("room")).title} </h4>
+							<h4 className="maybeWorks">{titleExple} </h4>
 							{/**/}
 							<div className=" row">
 								<div className="caroPrice">
@@ -84,7 +84,7 @@ export const CarouselRoomImg = props => {
 					<div className="carousel-item ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails3} alt="Third slide" />
 						<div className="carousel-caption ">
-							<h4 className="maybeWorks">{JSON.parse(localStorage.getItem("room")).title} </h4>
+							<h4 className="maybeWorks">{titleExple} </h4>
 							{/**/}
 							<div className=" row">
 								<div className="caroPrice">
