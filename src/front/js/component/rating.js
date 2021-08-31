@@ -19,7 +19,7 @@ export function Rating() {
 									s -= 1;
 								}
 								console.log(s);
-								actions.setRating(s);
+								actions.setRating(s); /// pasar rating a action.review. con user, room_id y comment
 							}}></div>
 					);
 				})}

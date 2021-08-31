@@ -9,7 +9,10 @@ export const AddReview = () => {
 	const { store, actions } = useContext(Context);
 
 	const [formValue, setFormValue] = useState({
-		comment: ""
+		comment: "",
+		rating: "",
+		room_id="",
+		user=""
 	});
 	/////////////
 	const inputHandelChange = e => {
@@ -24,7 +27,7 @@ export const AddReview = () => {
 	};
 
 	const reviewSubmit = () => {
-		actions.addReview(formValue, 1, 1);
+		actions.addReview(formValue, 1, 1); /// por ahora se le pasa como user 1 , room id 1
 		closeModalLogin();
 	};
 

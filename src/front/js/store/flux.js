@@ -15,7 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			city: [],
 			money: [],
 			tenanciesRoom: [],
-			room: {}
+			room: {},
+			review: {}
 		},
 		actions: {
 			signUp: async userValues => {
@@ -220,18 +221,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			/////////////////////AÑADIR REVIEW /////////////////////////////////////
-			addReview: (formValue, user, room_id) => {
-				console.log(formValue, user, room_id);
-				fetch(API_BASE_URL + "/api/tenancy_room_reviews", {
+			addReview: async (formValue, user, room_id) => {
+				console.log("hasta aqui llego", formValue, user, room_id);
+				const store = getStore();
+
+				const postreview = {
 					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify(formValue)
-				})
-					.then(res => res.json())
-					.then(data => console.log(data, "response addReview"));
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(formValue),
+					redirect: "follow"
+				};
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews`, postreview);
+					if (response.status >= 400) {
+						const errorMsg = "Error saving comment";
+						throw new Error(errorMsg);
+					} else {
+						const newStore = await response.json();
+						setStore({ review: newStore });
+						localStorage.setItem("review", JSON.stringify(store.review));
+						console.log("hasta aqui llega", review);
+					}
+				} catch (error) {
+					return error.message;
+				}
 			},
+
+			// .then(res => res.json())
+			// .then(data => console.log(data, "response addReview"));
+
 			//////////////////////////////////////////////////////////º
 
 			getDetailsRoom: async room_id => {
