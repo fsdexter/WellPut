@@ -18,7 +18,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			tenanciesRoom: [],
 			room: {},
 			myLocalStore: {}
-
 		},
 		actions: {
 			getLocalStore: () => {
@@ -118,7 +117,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			////////////////////////getuser
 			getUser: async user_id => {
 				const store = getStore();
-				console.log(user_id);
+
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/profile/${user_id}`);
 					const user = await response.json();
@@ -131,7 +130,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			/////////////////////////////////////////edit user
 			editProfile: async (userValues, user_id) => {
-				console.log("userValues - ", userValues, "user_id --- ", user_id);
 				try {
 					const store = getStore();
 

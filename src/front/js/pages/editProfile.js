@@ -61,11 +61,16 @@ export const EditProfile = () => {
 
 		if (!signUpError) {
 			alert("Your profile was updated !! ");
-			history.push(
-				`/profile/${JSON.parse(localStorage.getItem("user")).user?.id ||
-					JSON.parse(localStorage.getItem("user")).id}`
-			);
 		}
+
+		await actions.getUser(
+			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		);
+
+		history.push(
+			`/profile/${JSON.parse(localStorage.getItem("user")).user?.id ||
+				JSON.parse(localStorage.getItem("user")).id}`
+		);
 	};
 
 	return (
