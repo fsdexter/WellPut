@@ -17,16 +17,19 @@ from werkzeug.security import check_password_hash
 
 api = Blueprint('api', __name__)
 # ----------- Upload Photo User ---------------------------------
-@api.route('/user/<int:user_id>/avatar_url', methods=['PUT', 'POST'])
+@api.route('/user/<int:user_id>/image', methods=['POST'])
 def handle_upload(user_id):
+    
+    print("SE LLAMÓ A LA FUNCIÓN DE SUBIR FOTO???")
+    
     if 'avatar_url' in request.files:
         result = cloudinary.uploader.upload(request.files['avatar_url'])
-        user1 = User.query.filter_by(user_id="user").first()
-        print("test")
-        print("user")
-        print(user1.avatar_url, "å########")
+        #user1 = User.query.filter_by(user_id="user").first()
+        user1 = User.query.get(user_id)
+        print("user1 ---------- ", user1)
+       
         user1.avatar_url = result['secure_url']     
-        print(result['secure_url'],"@@@@@@@@@@@")
+       
         db.session.add(user1)
         db.session.commit()
 

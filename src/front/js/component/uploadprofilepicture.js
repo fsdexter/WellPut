@@ -11,8 +11,11 @@ export const UserProfileForm = () => {
 	const [avatar_url, setAvatarUrl] = useState(null);
 	const { store, actions } = useContext(Context);
 
-	const uploadImage = evt => {
-		evt.preventDefault();
+	const uploadImage = () => {
+		//evt.preventDefault();
+
+		console.log("ESTAMOS INTENTANDO SUBIR UNA FOTO");
+
 		// we are about to send this to the backend.
 		console.log("This are the files", files);
 		let body = new FormData();
@@ -24,7 +27,9 @@ export const UserProfileForm = () => {
 		const currentUserId =
 			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id;
 
-		fetch(`${API_BASE_URL}/user/${currentUserId}/image`, options)
+		console.log("currentUserId -- ", currentUserId);
+
+		fetch(`${API_BASE_URL}/api/user/${currentUserId}/image`, options)
 			.then(resp => resp.json())
 			.then(data => {
 				console.log("DATA DE LA IMAGEN DEL USUARIO ---->>> ", data);
@@ -32,15 +37,19 @@ export const UserProfileForm = () => {
 				setAvatarUrl(data.avatar_url);
 
 				//history.push(`/edit_profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
+
+				console.log("SE SUBIÓ LA FOTO !!!!!!!!!!! ");
 			})
 			.catch(error => console.error("ERRORRRRRR!!!", error));
 	};
 	return (
-		<div onSubmit={uploadImage} className="d-flex flex-column">
+		<div className="d-flex flex-column">
 			<img src={perfil} className="card-img-top roundShape imgperfil" alt="Card image cap" />
 			{avatar_url && <h2>You Have {unreadMessages.length} unread Messages .</h2>}
 			<input type="file" onChange={e => setFiles(e.target.files)} />
-			<button className="btn btn-warning mt-3">Upload</button>
+			<button className="btn btn-warning mt-3" onClick={() => uploadImage()}>
+				Upload
+			</button>
 		</div>
 	);
 };
