@@ -29,4 +29,9 @@ export const languageOptions = [
 	{ value: "German", label: "German" }
 ];
 
-export const cityOpitoons = [{ valeu: "", label: "", lat: "", lng: "" }];
+export const cityOptions = [
+	{ valeu: "Madrid", label: "Madrid" },
+	{ valeu: "Barcelona", label: "Barcelona" },
+	{ valeu: "Malaga", label: "Malaga" },
+	{ valeu: "Valencia", label: "Valencia" }
+];

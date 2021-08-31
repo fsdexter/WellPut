@@ -377,8 +377,17 @@ def handle_seed_user_data():
 @api.route('/search_room', methods=['POST'])
 def search_room():
     body_request = request.get_json()
-    queries = [X.y == 'a']
-    if b:
-        queries.append(X.z == 'b')
-        q.filter(*queries)
+    print(body_request)
+    queries = []
+    if body_request["country"]:
+        queries.append(Room.country == body_request["country"])
+    if body_request["typeBed"]:
+        queries.append(Room.type_bed == body_request["typeBed"])
+#     if body_request["kye del flux"]:
+#         for
+#        queries.append(Room.type_bed == body_request["key"])
+    
+    search_filter = Room.query.filter(*queries).all()
+    response = list(map(lambda room: room.serialize(),search_filter))
+    print(response)
     return "OK",200

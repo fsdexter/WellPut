@@ -13,10 +13,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			rating: [],
 			bedType: [],
 			city: [],
-			money: [],
+			money: {},
+			interests: [],
 			tenanciesRoom: [],
 			room: {},
 			myLocalStore: {}
+
 		},
 		actions: {
 			getLocalStore: () => {
@@ -194,7 +196,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setMoney: e => {
 				const store = getStore();
-				setStore({ ...store.money, [e.target.name]: e.target.value });
+				setStore({ money: e });
+			},
+			setCity: c => {
+				const store = getStore();
+				setStore({ city: c });
+			},
+			setInterests: i => {
+				const store = getStore();
+				setStore({ interests: i });
 			},
 			searchRoom: () => {
 				const store = getStore();
@@ -209,7 +219,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						rating: store.rating,
 						bedType: store.bedType,
 						city: store.city,
-						money: store.money
+						money: store.money,
+						country: "Spain",
+						interests: store.interests
 					})
 				})
 					.then(res => res.json())
