@@ -34,6 +34,7 @@ export const Home = () => {
 			})
 		});
 		console.log("addrtype ----->>>> ", formValue);
+		actions.setInterests(formValue);
 	};
 	const handleCity = e => {
 		setCity(e.target.value);
