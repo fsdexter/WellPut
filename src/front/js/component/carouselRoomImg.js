@@ -21,8 +21,8 @@ const priceExple = 450;
 
 export const CarouselRoomImg = props => {
 	const { store, actions } = useContext(Context);
-	const listRooms = store.rooms.map((room, index) => {
-		return <li key={index}>{room.title}</li>;
+	let listRooms = store.rooms.map((item, index) => {
+		return <li key={index}>{console.log(item)}</li>;
 	});
 
 	let { room_id } = useParams();
