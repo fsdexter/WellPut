@@ -21,13 +21,14 @@ const priceExple = 450;
 
 export const CarouselRoomImg = props => {
 	const { store, actions } = useContext(Context);
-	/*const listRooms = store.rooms.map((item, index) => {
-		return <li key={index}>{item.title}</li>;
-	});*/
+	const listRooms = store.rooms.map((room, index) => {
+		return <li key={index}>{room.title}</li>;
+	});
 
 	let { room_id } = useParams();
 
 	console.log("room id desde el componente del carrusel ---- ", room_id);
+	console.log(store.rooms);
 
 	useEffect(() => {
 		//actions.getDetailsRoom(room_id);
@@ -44,7 +45,7 @@ export const CarouselRoomImg = props => {
 					<div className="carousel-item  active ">
 						<img className="d-block w-100 caro_pic_fix" src={roomDetails1} alt="First slide" />
 						<div className="carousel-caption">
-							<h4 className="maybeWorks">{JSON.parse(localStorage.getItem("room")).title} </h4>
+							<h4 className="maybeWorks">{props.title} </h4>
 							<div className={props.isDetailRoom ? "row rowCustom d-flex justify-content-center" : "row"}>
 								<div className={props.isDetailRoom ? "caroPriceCustom" : "caroPrice"}>
 									<h2>€{priceExple}</h2>
