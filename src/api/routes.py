@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import cloudinary;
 import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedData, Room, City, Expense, Feature, Review, Tenancy
+from api.models import db, User, SeedData, Room, City, Expense, Feature, Review, Tenancy, Characteristic, CharacteristicUser, Language, SpokenLanguages
 #from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
@@ -236,7 +236,7 @@ def edit_profile(user_id):
     
     for param in body_request:
         user_to_edit[param] = body_request[param]
-        
+   
     new_user = User(
         avatar_url = user_to_edit["avatar_url"],
         birthday = user_to_edit["birthday"],
@@ -244,6 +244,7 @@ def edit_profile(user_id):
         description = user_to_edit["description"],
         email = user_to_edit["email"],
         gender = user_to_edit["gender"],
+        occupation = user_to_edit["occupation"],
         id = user_to_edit["id"],
         last_name = user_to_edit["last_name"],
         name = user_to_edit["name"],
@@ -253,7 +254,31 @@ def edit_profile(user_id):
     
     db.session.add(new_user)
     db.session.commit()
-     
+    
+    for interest in user_to_edit["interests"]:
+        interest_front = Characteristic.query.filter(Characteristic.name == interest).first()
+        user_interest = interest_front.serialize()
+        
+        new_characteritic_user = CharacteristicUser(
+            user_id = user_to_edit["id"],
+            characteristic_id = user_interest["id"]
+        )
+        
+        db.session.add(new_characteritic_user)
+        db.session.commit()
+        
+    for language in user_to_edit["languages"]:
+        language_front = Language.query.filter(Language.name == language).first()
+        user_language = language_front.serialize()
+        
+        new_language_user = SpokenLanguages(
+            user_id = user_to_edit["id"],
+            language_id = user_language["id"]
+        )
+        
+        db.session.add(new_language_user)
+        db.session.commit()
+    
     return jsonify(user_to_edit), 200
 
 @api.route('/new_announcement', methods=['POST'])

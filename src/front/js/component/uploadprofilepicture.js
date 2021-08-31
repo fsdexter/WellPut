@@ -36,11 +36,11 @@ export const UserProfileForm = () => {
 			.catch(error => console.error("ERRORRRRRR!!!", error));
 	};
 	return (
-		<form onSubmit={uploadImage} className="d-flex flex-column">
+		<div onSubmit={uploadImage} className="d-flex flex-column">
 			<img src={perfil} className="card-img-top roundShape imgperfil" alt="Card image cap" />
 			{avatar_url && <h2>You Have {unreadMessages.length} unread Messages .</h2>}
 			<input type="file" onChange={e => setFiles(e.target.files)} />
 			<button className="btn btn-warning mt-3">Upload</button>
-		</form>
+		</div>
 	);
 };

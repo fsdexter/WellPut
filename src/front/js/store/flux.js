@@ -129,6 +129,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			/////////////////////////////////////////edit user
 			editProfile: async (userValues, user_id) => {
+				console.log("userValues - ", userValues, "user_id --- ", user_id);
 				try {
 					const store = getStore();
 
