@@ -73,7 +73,7 @@ export const EditProfile = () => {
 			<form className="container col-11 detallefondblackEditarPerfil" onSubmit={handleSubmit}>
 				<div className="row d-flex justify-content-around">
 					<div className="col-7 d-flex flex-column" id="myContainerFormInputs">
-						<div className="d-flex justify-content-around mt-3">
+						<div className="d-flex justify-content-around mt-5">
 							<h3 className="col-3">Name * :</h3>
 							<input value={formValue.name} name="name" onChange={inputHandelChange} className="col-6" />
 						</div>
@@ -142,7 +142,7 @@ export const EditProfile = () => {
 							</div>
 						</div>
 
-						<div className="row no-gutters d-flex justify-content-between mt-3 mb-4">
+						<div className="row no-gutters d-flex justify-content-between mt-3 mb-2 ">
 							<div className="col-5 d-flex justify-content-around mt-3 ml-4">
 								<h3 className="col-5">Gender :</h3>
 								<div className="col-4 d-flex justify-content-between">
@@ -198,28 +198,26 @@ export const EditProfile = () => {
 							</div>
 						</div>
 					</div>
-					<div className="col-3  justify-content-center" id="detalleIMG">
-						<img className="card-img-top roundShape imgperfil " src={perfil} alt="Card image cap" />
-						<div className="d-flex justify-content-around">
-							<button className="btn btn-warning">Upload</button>
-							<button type="submit" className="btn btn-warning">
-								Save
-							</button>
+					<div className="col-4 d-flex justify-content-around detalleIMG">
+						<div className="row col-12">
+							<UserProfileForm />
 						</div>
 					</div>
 				</div>
 
-				<br />
-				<div className=" detalle" style={{ height: "16rem" }}>
+				<div className="row d-flex justify-content-center detalleIMG mt-5 pb-5">
 					<label className="textoeditusu">Tell us about you :</label>
-					<br />
 					<textarea
-						className="form-control"
+						className="form-control col-11"
 						id="exampleFormControlTextarea1"
 						rows="3"
 						name="description"
 						onChange={inputHandelChange}
 					/>
+
+					<button type="submit" className="col-11 btn btn-warning mt-3 pt-3 pb-3" id="btnSubmitEditarPerfil">
+						Save
+					</button>
 				</div>
 			</form>
 		</div>
