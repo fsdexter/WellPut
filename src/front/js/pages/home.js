@@ -133,10 +133,16 @@ export const Home = () => {
 					</div>
 				</div>
 				<div className="col-6 ml-4 mt-3">
-					<div>
+					<div className="carHome">
 						<CarouselRoomImg />
+					</div>
+					<div className="carHome">
 						<CarouselRoomImg2 />
+					</div>
+					<div className="carHome">
 						<CarouselRoomImg3 />
+					</div>
+					<div className="carHome">
 						<CarouselRoomImg4 />
 					</div>
 				</div>
