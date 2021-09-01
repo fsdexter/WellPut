@@ -411,7 +411,15 @@ def search_room():
         queries.append(Room.country == body_request["country"])
     if body_request["typeBed"]:
         queries.append(Room.type_bed == body_request["typeBed"])
-#     if body_request["kye del flux"]:
+    if body_request["city"]:
+        queries.append(Room.city == body_request["city"])
+#   
+        roomies: store.roomies,
+		filters: store.filters,
+		rating: store.rating,
+		money: store.money,
+		interests: store.interests
+#   if body_request["kye del flux"]:
 #         for
 #        queries.append(Room.type_bed == body_request["key"])
     

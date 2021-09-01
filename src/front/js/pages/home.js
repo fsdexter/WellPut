@@ -157,6 +157,12 @@ export const Home = () => {
 							<FilterBed />
 						</div>
 					</div>
+					<button
+						onClick={() => {
+							actions.searchRoom();
+						}}>
+						Search
+					</button>
 				</div>
 				<div className="col-6 ml-4 mt-3">
 					<div>
@@ -166,12 +172,6 @@ export const Home = () => {
 						<CarouselRoomImg4 />
 					</div>
 				</div>
-				<button
-					onClick={() => {
-						actions.searchRoom();
-					}}>
-					Search
-				</button>
 			</div>
 			<Footer />
 		</div>
