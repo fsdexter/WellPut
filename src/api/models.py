@@ -222,7 +222,9 @@ class Review(db.Model):
     comment = db.Column(db.String(220))
     rating = db.Column(db.Integer)
     date = db.Column(db.Date)
-    
+    room_id=db.Column(db.Integer, db.ForeignKey('room.id'))
+    room = db.relationship("Room", back_populates="reviews")
+
     tenancy_id = db.Column(db.Integer, db.ForeignKey('tenancy.id'))
     tenancy = db.relationship("Tenancy", back_populates="reviews")
 
@@ -255,14 +257,13 @@ class Room (db.Model):
     
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="rooms")
-    
+    reviews = db.relationship("Review", back_populates="room")
     tenancies = db.relationship("Tenancy", back_populates="room")
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="rooms")
-
     room_archive = db.relationship("RoomArchive", back_populates="room")
-
+    
     expense = db.relationship("Expense", secondary="expenses_room")
     feature = db.relationship("Feature", secondary="features_room")
     
