@@ -34,30 +34,31 @@ export const CarouselRoomImg = props => {
 
 	const slider = (
 		<Link
-			className="carHome"
 			onClick={() => {
 				localStorage.setItem("details", JSON.stringify(props.room));
 			}}
 			to="/detailedView">
-			<div
-				className={
-					props.isDetailRoom ? "carousel-inner d-flex caroShapeCustom" : "carousel-inner d-flex caroShape"
-				}>
-				<div className="carousel-item  active ">
-					<img className="d-block w-100 caro_pic_fix" src={roomDetails1} alt="First slide" />
-					<div className="carousel-caption">
-						<h4 className="maybeWorks">{props.room.title} </h4>
-						<div className={props.isDetailRoom ? "row rowCustom d-flex justify-content-center" : "row"}>
-							<div className={props.isDetailRoom ? "caroPriceCustom" : "caroPrice"}>
-								<h2>€{props.room.price}</h2>
-							</div>
-							<div className={props.isDetailRoom ? "starCaroCustom" : "starCaro"}>
-								<RatingStatic />
-							</div>
-							<div className={props.isDetailRoom ? "heartButtonCustom" : "heartButton"}>
-								<button className="heartButtonFix">
-									<i className="far fa-heart fa-2x" />
-								</button>
+			<div className="carHome">
+				<div
+					className={
+						props.isDetailRoom ? "carousel-inner d-flex caroShapeCustom" : "carousel-inner d-flex caroShape"
+					}>
+					<div className="carousel-item  active ">
+						<img className="d-block w-100 caro_pic_fix" src={roomDetails1} alt="First slide" />
+						<div className="carousel-caption">
+							<h4 className="maybeWorks">{props.room.title} </h4>
+							<div className={props.isDetailRoom ? "row rowCustom d-flex justify-content-center" : "row"}>
+								<div className={props.isDetailRoom ? "caroPriceCustom" : "caroPrice"}>
+									<h2>€{props.room.price}</h2>
+								</div>
+								<div className={props.isDetailRoom ? "starCaroCustom" : "starCaro"}>
+									<RatingStatic />
+								</div>
+								<div className={props.isDetailRoom ? "heartButtonCustom" : "heartButton"}>
+									<button className="heartButtonFix">
+										<i className="far fa-heart fa-2x" />
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
