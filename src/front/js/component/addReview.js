@@ -1,6 +1,5 @@
 import React, { useState, useContext, useRef } from "react";
 import { Context } from "../store/appContext";
-import { useParams } from "react-router-dom";
 import { Rating } from "../component/rating";
 
 import "../../styles/addReview.scss";
@@ -10,9 +9,7 @@ export const AddReview = () => {
 
 	const [formValue, setFormValue] = useState({
 		comment: "",
-		rating: "",
-		room_id="",
-		user=""
+		rating: ""
 	});
 	/////////////
 	const inputHandelChange = e => {
@@ -25,9 +22,12 @@ export const AddReview = () => {
 	const closeModalLogin = () => {
 		closeBtn.current.click();
 	};
-
+	///////////////////////ç
+	const handelRating = () => {
+		setFormValue({ ...formValue, rating: store.rating });
+	};
 	const reviewSubmit = () => {
-		actions.addReview(formValue, 1, 1); /// por ahora se le pasa como user 1 , room id 1
+		actions.addReview(formValue); /// por ahora se le pasa como user 1 , room id 1
 		closeModalLogin();
 	};
 
@@ -60,7 +60,7 @@ export const AddReview = () => {
 						<div className="onCommentStarsReview p-3 d-flex flex-column">
 							<h4 className="text text-white">How many stars do you give this experience? *</h4>
 							<div className="mt-3 mb-2">
-								<Rating />
+								<Rating click={handelRating} />
 							</div>
 							<button className="btn btnYellow mt-4" onClick={() => reviewSubmit()}>
 								Publish

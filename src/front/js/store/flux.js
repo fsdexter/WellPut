@@ -160,7 +160,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setRating: s => {
 				const store = getStore();
-				setStore({ rating: [s] });
+				setStore({ rating: s });
 			},
 			setRoomies: r => {
 				const store = getStore();
@@ -221,10 +221,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			/////////////////////AÑADIR REVIEW /////////////////////////////////////
-			addReview: async (formValue, user, room_id) => {
-				console.log("hasta aqui llego", formValue, user, room_id);
+			addReview: async formValue => {
+				console.log("pasa los datos pero no entra al if", formValue);
 				const store = getStore();
-
+				formValue["user"] = JSON.parse(localStorage.getItem("user"))["user"]["id"];
+				formValue["room_id"] = JSON.parse(localStorage.getItem("room")).id;
 				const postreview = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
@@ -233,17 +234,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews`, postreview);
-					if (response.status >= 400) {
+					console.log("entro a try", formValue);
+					if (response.status >= 300) {
 						const errorMsg = "Error saving comment";
 						throw new Error(errorMsg);
 					} else {
 						const newStore = await response.json();
-						setStore({ review: newStore });
+						setStore({ review: newStore }); ///aqui lo paso pero no guarda
 						localStorage.setItem("review", JSON.stringify(store.review));
-						console.log("hasta aqui llega", review);
+						alert("thank you for your comment");
 					}
-				} catch (error) {
-					return error.message;
+				} catch (errorMsg) {
+					return errorMsg.message;
 				}
 			},
 
