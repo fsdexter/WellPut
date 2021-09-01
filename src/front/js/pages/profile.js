@@ -17,7 +17,7 @@ export const Profile = () => {
 		actions.getUser(
 			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
 		);
-	}, []);
+	});
 
 	function handleSubmit() {
 		history.push(

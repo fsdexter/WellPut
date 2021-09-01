@@ -28,7 +28,11 @@ def handle_upload(user_id):
         #result = cloudinary.uploader.upload(request.files[0])
         #user1 = User.query.filter_by(user_id="user").first()
         user1 = User.query.get(user_id)
-        user1["avatar_url"] = result['secure_url']     
+        
+        print(user1, user1.serialize())
+        
+        #user1["avatar_url"] = result['secure_url']  
+        user1.avatar_url = result['secure_url']    
        
         db.session.add(user1)
         db.session.commit()
