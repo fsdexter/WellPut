@@ -9,6 +9,8 @@ import addPic from "../../img/addPic.png";
 import { useHistory } from "react-router-dom";
 export const NewAnnouncement = () => {
 	const { store, actions } = useContext(Context);
+	const [city, setCity] = useState();
+	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
 	const history = useHistory();
 	const [move, setMove] = useState("");
 	const [roomData, setRoomData] = useState({
@@ -59,6 +61,23 @@ export const NewAnnouncement = () => {
 		} else if (item == "noBed") {
 			//	setRoomData({ ...roomData, singleBed: "", doubleBed: "", sofaBed: "", noBed: item });
 			setRoomData({ ...roomData, type_bed: item });
+		}
+	};
+	const handleCity = e => {
+		setCity(e.target.value);
+		//actions.setCity(e.target.value);
+		if (city != undefined) {
+			if (city.toLowerCase().trim() === "madri") {
+				setCenter({ lat: 40.416775, lng: -3.70379 });
+			} else if (city.toLowerCase() === "barcelon") {
+				setCenter({ lat: 41.385063, lng: 2.173404 });
+			} else if (city.toLowerCase() === "malag") {
+				setCenter({ lat: 36.721275, lng: -4.421399 });
+			} else if (city.toLowerCase().trim() === "valenci") {
+				setCenter({ lat: 39.47024, lng: -0.375 });
+			} else {
+				setCenter({ lat: 40.416775, lng: -3.70379 });
+			}
 		}
 	};
 	/*function functionTest() {
@@ -175,7 +194,7 @@ export const NewAnnouncement = () => {
 								type="text"
 								className="form-control roundShape"
 								name="city"
-								onChange={handleRoomData}
+								onChange={(handleRoomData, handleCity)}
 							/>
 							<input
 								type="text"
@@ -188,11 +207,7 @@ export const NewAnnouncement = () => {
 						<div className="col-3" />
 					</div>
 					<center>
-						<MyMap
-							center={{ lat: 40.416775, lng: -3.70379 }}
-							style={{ width: "500px", height: "350px" }}
-							zoom={10}
-						/>
+						<MyMap center={center} style={{ width: "500px", height: "350px" }} zoom={10} />
 					</center>
 					<div className="row">
 						<div className="col-10" />
