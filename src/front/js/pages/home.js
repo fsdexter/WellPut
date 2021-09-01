@@ -10,7 +10,7 @@ import { FilterOcc } from "../component/filterOcc";
 import { FilterFea } from "../component/filterFea";
 import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
-import { interestsOptions, languageOptions } from "../constants";
+import { interestsOptions, languageOptions, cityOptions } from "../constants";
 
 import { Link } from "react-router-dom";
 import MyMap from "../component/mapEngine";
@@ -19,10 +19,13 @@ import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const [city, setCity] = useState("");
-	let listRooms = store.rooms.map((item, index) => {
-		return <li key={index}>{item}</li>;
-	});
+  
+	//let listRooms = store.rooms.map((item, index) => {
+		//return <li key={index}>{item}</li>;
+	//});
+
+	const [city, setCity] = useState();
+	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
 
 	const [formValue, setFormValue] = useState({
 		interests: ""
@@ -36,7 +39,31 @@ export const Home = () => {
 			})
 		});
 		console.log("addrtype ----->>>> ", formValue);
+		actions.setInterests(formValue);
 	};
+	const handleCity = e => {
+		setCity(e.target.value);
+		actions.setCity(e.target.value);
+		if (city != undefined) {
+			if (city.toLowerCase().trim() === "madri") {
+				setCenter({ lat: 40.416775, lng: -3.70379 });
+			} else if (city.toLowerCase() === "barcelon") {
+				setCenter({ lat: 41.385063, lng: 2.173404 });
+			} else if (city.toLowerCase() === "malag") {
+				setCenter({ lat: 36.721275, lng: -4.421399 });
+			} else if (city.toLowerCase().trim() === "valenci") {
+				setCenter({ lat: 39.47024, lng: -0.375 });
+			} else {
+				setCenter({ lat: 40.416775, lng: -3.70379 });
+			}
+		}
+	};
+	// const cordenates = {
+	// Madri = {lat: 40.416775, lng: -3.70379 };
+	// Barcelona = {lat: 41.385063, lng: 2.173404 }:
+	// malaga = {lat: 36.721275, lng: -4.421399}:
+	// valencia = {lat: 36.721275, lng: -4.421399}:
+	// };
 
 	return (
 		<div className="container-fluid">
@@ -68,15 +95,16 @@ export const Home = () => {
 								<input
 									type="text"
 									className="form-control roundShape"
-									placeholder="write a city..."
-									onChange={event => {}}
+									onChange={e => {
+										handleCity(e);
+									}}
 								/>
 							</div>
 						</form>
 					</div>
 					<br />
 					<center>
-						<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "270px", height: "150px" }} />
+						<MyMap center={center} style={{ width: "270px", height: "150px" }} zoom={8} />
 					</center>
 					<br />
 					<div>

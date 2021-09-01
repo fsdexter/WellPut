@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { Context } from "../store/appContext";
 
 import { RecoverPassword } from "./recoverPassword";
@@ -13,7 +13,9 @@ export const Login = () => {
 		email: "",
 		password: ""
 	});
-
+	useEffect(() => {
+		// actions.getUser(JSON.parse(localStorage.getItem("user")).user.id);
+	}, []);
 	const [errorMsg, setErrorMsg] = useState(null);
 
 	const inputHandelChange = e => {
@@ -28,6 +30,7 @@ export const Login = () => {
 		e.preventDefault();
 		// login function
 		let loginError = await actions.login(formValue);
+		actions.getLocalStore();
 
 		if (loginError) {
 			setErrorMsg(loginError);

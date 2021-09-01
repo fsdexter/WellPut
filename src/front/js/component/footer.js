@@ -17,7 +17,11 @@ export const Footer = () => (
 				</p>
 			</div>
 			<div className="col-3 mt-1 mb-1 footMap">
-				<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "330px", height: "120px" }} />
+				<MyMap
+					center={{ lat: 40.416775, lng: -3.70379 }}
+					style={{ width: "330px", height: "120px" }}
+					zoom={10}
+				/>
 			</div>
 		</div>
 	</footer>

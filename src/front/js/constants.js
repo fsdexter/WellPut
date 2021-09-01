@@ -19,14 +19,19 @@ export const interestsOptions = [
 export const languageOptions = [
 	{ value: "Spanish", label: "Spanish" },
 	{ value: "English", label: "English" },
-	{ value: "Chinese", label: "Chinese" },
-	{ value: "Hindi", label: "Hindi" },
+	//{ value: "Chinese", label: "Chinese" },
+	//{ value: "Hindi", label: "Hindi" },
 	{ value: "French", label: "French" },
-	{ value: "Arab", label: "Arab" },
-	{ value: "Russian", label: "Russian" },
+	//{ value: "Arab", label: "Arab" },
+	//{ value: "Russian", label: "Russian" },
 	{ value: "Portuguese", label: "Portuguese" },
-	{ value: "Bengali", label: "Bengali" },
+	//{ value: "Bengali", label: "Bengali" },
 	{ value: "German", label: "German" }
 ];
 
-export const cityOpitoons = [{ valeu: "", label: "", lat: "", lng: "" }];
+export const cityOptions = [
+	{ valeu: "Madrid", label: "Madrid" },
+	{ valeu: "Barcelona", label: "Barcelona" },
+	{ valeu: "Malaga", label: "Malaga" },
+	{ valeu: "Valencia", label: "Valencia" }
+];
