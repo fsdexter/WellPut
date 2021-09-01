@@ -6,10 +6,10 @@ import { FilterExp } from "../component/filterExp";
 import doubleBlack from "../../img/doubleBlack.png";
 import bedsofaBlack from "../../img/bedsofaBlack.png";
 import addPic from "../../img/addPic.png";
-
+import { useHistory } from "react-router-dom";
 export const NewAnnouncement = () => {
 	const { store, actions } = useContext(Context);
-
+	const history = useHistory();
 	const [move, setMove] = useState("");
 	const [roomData, setRoomData] = useState({
 		city: "",
@@ -548,7 +548,10 @@ export const NewAnnouncement = () => {
 								className="btn btn-warning mb-5 ml-5"
 								data-toggle="tab"
 								href="#previewTab"
-								onClick={() => actions.postNewAnnouncement(roomData)}>
+								onClick={() => {
+									actions.postNewAnnouncement(roomData);
+									history.push(`/`);
+								}}>
 								Upload
 							</button>
 						</div>
