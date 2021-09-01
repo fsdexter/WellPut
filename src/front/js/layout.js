@@ -27,16 +27,16 @@ const Layout = () => {
 						<Route exact path="/">
 							<Home />
 						</Route>
+						<Route exact path="/home/">
+							<Home />
+						</Route>
 						<Route exact path="/detailedView">
 							<DetailedView />
 						</Route>
-						{/* <Route exact path="/edit_profile/:user_id">
-							<EditProfile />
-						</Route> */}
-						<Route exact path={`/edit_profile`}>
+						<Route exact path="/edit_profile/:user_id">
 							<EditProfile />
 						</Route>
-						<Route exact path="/profile">
+						<Route exact path="/profile/:user_id">
 							<Profile />
 						</Route>
 						<Route exact path="/announcements">
@@ -48,6 +48,9 @@ const Layout = () => {
 						<Route exact path="/favorites">
 							<Favorites />
 						</Route>
+						{/* <Route exact path="/favorites:user_id">
+							<Favorites />
+						</Route> */}
 						<Route exact path="/reviews/:room_id">
 							<Reviews />
 						</Route>

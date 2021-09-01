@@ -23,9 +23,11 @@ class User(db.Model):
     last_name = db.Column(db.String(120), nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
-    birthday = db.Column(db.Date, nullable=True)
+    #birthday = db.Column(db.Date, nullable=True)
+    birthday = db.Column(db.String(120), nullable=True)
     phone = db.Column(db.String(120), nullable=True)
     gender = db.Column(db.String(120), nullable=True)
+    occupation = db.Column(db.String(120), nullable=True)
     description = db.Column(db.String(220), nullable=True)
     avatar_url = db.Column(db.String(220), unique=False, nullable=True)
     
@@ -53,6 +55,7 @@ class User(db.Model):
             "birthday": self.birthday,
             "phone": self.phone,
             "gender": self.gender,
+            "occupation": self.occupation,
             "description": self.description,
             "avatar_url": self.avatar_url,
             "city_id": self.city_id,
@@ -448,11 +451,20 @@ class SeedData:
         self.first_review = None
         self.second_review = None
         self.third_review = None
-        self.first_characteristic = None
-        self.second_characteristic = None
+        # self.first_characteristic = None
+        # self.second_characteristic = None
         self.third_characteristic = None
         self.fourth_characteristic = None
         self.fifth_characteristic = None
+        self.sixth_characteristic = None
+        self.seventh_characteristic = None
+        self.eigth_characteristic = None
+        self.nineth_characteristic = None
+        self.tenth_characteristic = None
+        self.eleventh_characteristic = None
+        self.twelfth_characteristic = None
+        self.thirteenth_characteristic = None
+        self.fourteenth_characteristic = None
         self.first_characteristicUser = None 
         self.second_characteristicUser = None
         self.third_characteristicUser = None 
@@ -461,6 +473,8 @@ class SeedData:
         self.first_language = None
         self.second_language = None
         self.third_language = None
+        self.fouth_language = None
+        self.fifth_language = None
         self.first_spokenLanguages = None
         self.second_spokenLanguages = None
         self.third_spokenLanguages = None
@@ -744,32 +758,77 @@ class SeedData:
 #  Characteristic
 #------------------------
     def create_seed_characteristic(self):
-            self.first_characteristic = Characteristic(
-                name = "worker",
-                kind = "occupation"
-            )
-            self.second_characteristic = Characteristic(
-                name = "student",
-                kind = "occupation"
-            )
+            # self.first_characteristic = Characteristic(
+            #     name = "worker",
+            #     kind = "occupation"
+            # )
+            # self.second_characteristic = Characteristic(
+            #     name = "student",
+            #     kind = "occupation"
+            # )
             self.third_characteristic = Characteristic(
-                name = "animal lover",
+                name = "Sporty",
                 kind = "interest"
             )
             self.fourth_characteristic = Characteristic(
-                name = "dancer",
+                name = "Dancer",
                 kind = "interest"
             )
             self.fifth_characteristic = Characteristic(
-                name = "vegan",
+                name = "Vegan",
+                kind = "interest"
+            )
+            self.sixth_characteristic = Characteristic(
+                name = "Sociable",
+                kind = "interest"
+            )
+            self.seventh_characteristic = Characteristic(
+                name = "Musician",
+                kind = "interest"
+            )
+            self.eigth_characteristic = Characteristic(
+                name = "Reader",
+                kind = "interest"
+            )
+            self.nineth_characteristic = Characteristic(
+                name = "Vegetarian",
+                kind = "interest"
+            )
+            self.tenth_characteristic = Characteristic(
+                name = "Animal Lover",
+                kind = "interest"
+            )
+            self.eleventh_characteristic = Characteristic(
+                name = "Movies",
+                kind = "interest"
+            )
+            self.twelfth_characteristic = Characteristic(
+                name = "Traveler",
+                kind = "interest"
+            )
+            self.thirteenth_characteristic = Characteristic(
+                name = "Partying",
+                kind = "interest"
+            )
+            self.fourteenth_characteristic = Characteristic(
+                name = "Gay Friendly",
                 kind = "interest"
             )
             
-            db.session.add(self.first_characteristic)
-            db.session.add(self.second_characteristic)
+            # db.session.add(self.first_characteristic)
+            # db.session.add(self.second_characteristic)
             db.session.add(self.third_characteristic)
             db.session.add(self.fourth_characteristic)
             db.session.add(self.fifth_characteristic)
+            db.session.add(self.sixth_characteristic)
+            db.session.add(self.seventh_characteristic)
+            db.session.add(self.eigth_characteristic)
+            db.session.add(self.nineth_characteristic)
+            db.session.add(self.tenth_characteristic)
+            db.session.add(self.eleventh_characteristic)
+            db.session.add(self.twelfth_characteristic)
+            db.session.add(self.thirteenth_characteristic)
+            db.session.add(self.fourteenth_characteristic)
             db.session.commit()  
 
 #------------------------
@@ -778,11 +837,11 @@ class SeedData:
     def create_seed_characteristicUser(self):
         self.first_characteristicUser = CharacteristicUser(
             user_id = self.first_user.id,
-            characteristic_id = self.first_characteristic.id
+            characteristic_id = self.sixth_characteristic.id
         )
         self.second_characteristicUser = CharacteristicUser(
             user_id = self.second_user.id,
-            characteristic_id = self.second_characteristic.id
+            characteristic_id = self.seventh_characteristic.id
         )
         self.third_characteristicUser = CharacteristicUser(
             user_id = self.first_user.id,
@@ -820,10 +879,20 @@ class SeedData:
             name = "French",
             locale = "fr"
         )
+        self.fouth_language = Language(
+            name = "Portuguese",
+            locale = "pt"
+        )
+        self.fifth_language = Language(
+            name = "German",
+            locale = "ge"
+        )
         
         db.session.add(self.first_language)
         db.session.add(self.second_language)
         db.session.add(self.third_language)
+        db.session.add(self.fouth_language)
+        db.session.add(self.fifth_language)
         db.session.commit() 
 
 #------------------------

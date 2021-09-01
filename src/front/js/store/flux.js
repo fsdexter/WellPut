@@ -13,12 +13,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 			rating: [],
 			bedType: [],
 			city: [],
-			money: [],
+			money: {},
+			interests: [],
 			tenanciesRoom: [],
 			room: {},
-			review: {}
+			review: {},
+			myLocalStore: {}
 		},
 		actions: {
+			getLocalStore: () => {
+				const keys = Object.keys(localStorage);
+				const tmpStore = {};
+
+				keys.forEach(paramName => {
+					// "loglevel:webpack-dev-server" es una propiedad del LocalStorage, si se deja, revienta todo
+					if (paramName !== "loglevel:webpack-dev-server") {
+						const paramValue = JSON.parse(localStorage.getItem(paramName));
+						tmpStore[paramName] = paramValue;
+
+						if (paramValue) {
+							setStore({ myLocalStore: tmpStore });
+						}
+					}
+				});
+			},
 			signUp: async userValues => {
 				const store = getStore();
 
@@ -81,7 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			logOut: () => {
-				setStore({ user: null });
+				setStore({ user: null, myLocalStore: {} });
 				localStorage.clear();
 			},
 			getRooms: async () => {
@@ -96,30 +114,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return error.message;
 				}
 			},
+
+			////////////////////////getuser
 			getUser: async user_id => {
+				const store = getStore();
+
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/profile/${user_id}`);
 					const user = await response.json();
 					setStore({ user: user });
-					localStorage.setItem(JSON.stringify(user));
+					localStorage.setItem("user", JSON.stringify(store.user));
 				} catch (error) {
 					return error.message;
 				}
 			},
-			editProfile: async userValues => {
-				console.log("SE LLAMÓ A LA FUNCIÓN DE EDITAR PERFIL");
 
-				const store = getStore();
-
-				const requestOptions = {
-					method: "PATCH",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(userValues),
-					redirect: "follow"
-				};
-
+			/////////////////////////////////////////edit user
+			editProfile: async (userValues, user_id) => {
 				try {
+					const store = getStore();
+
+					const requestOptions = {
+						method: "PATCH",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(userValues),
+						redirect: "follow"
+					};
+
 					const response = await fetch(`${API_BASE_URL}/api/edit_profile/${user_id}`, requestOptions);
+
+					console.log("holaaaaaaaaaa -- ", response);
 
 					if (response.status >= 400) {
 						const errorMsg = "Error during the edition process";
@@ -129,7 +153,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ user: newStore });
 						localStorage.setItem("user", JSON.stringify(store.user));
 
-						console.log("USUARIO EDITADO");
+						console.log("USUARIO EDITADO ---- ", user);
 					}
 				} catch (error) {
 					return error.message;
@@ -172,7 +196,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setMoney: e => {
 				const store = getStore();
-				setStore({ ...store.money, [e.target.name]: e.target.value });
+				setStore({ money: e });
+			},
+			setCity: c => {
+				const store = getStore();
+				setStore({ city: c });
+			},
+			setInterests: i => {
+				const store = getStore();
+				setStore({ interests: i });
 			},
 			searchRoom: () => {
 				const store = getStore();
@@ -187,7 +219,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						rating: store.rating,
 						bedType: store.bedType,
 						city: store.city,
-						money: store.money
+						money: store.money,
+						country: "Spain",
+						interests: store.interests
 					})
 				})
 					.then(res => res.json())

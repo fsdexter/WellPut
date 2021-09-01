@@ -1,10 +1,8 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-import cloudinary;
-import cloudinary.uploader;
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedData, Room, City, Expense, Feature, Review, Tenancy
+from api.models import db, User, SeedData, Room, City, Expense, Feature, Review, Tenancy, Characteristic, CharacteristicUser, Language, SpokenLanguages
 #from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
@@ -14,26 +12,53 @@ from flask_jwt_extended import jwt_required
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from datetime import date
+import cloudinary;
+import cloudinary.uploader
 
 api = Blueprint('api', __name__)
+# ----------- Upload Photo User ---------------------------------
+@api.route('/user/<int:user_id>/image', methods=['POST'])
+def handle_upload(user_id):
+    
+    print("SE LLAMÓ A LA FUNCIÓN DE SUBIR FOTO???")
+    
+    if 'avatar_url' in request.files:
+        result = cloudinary.uploader.upload(request.files['avatar_url'])
+        #result = cloudinary.uploader.upload(request.files[0])
+        #user1 = User.query.filter_by(user_id="user").first()
+        user1 = User.query.get(user_id)
+        user1["avatar_url"] = result['secure_url']     
+       
+        db.session.add(user1)
+        db.session.commit()
+
+        return jsonify(user1.serialize()), 200
+    else:
+        raise APIException('Missing profile_image on the FormData')
+
+#________________________________________________________________________
 
 @api.route('/sign_up', methods=['POST'])
 def sign_up_user():
     body_request = request.get_json()
     email_request = body_request.get("email", None)
     name_request = body_request.get("name", None)
+    last_name_request = body_request.get("last_name", None)
     password_request = body_request.get("password", None)
     
     new_user = User(
         email = email_request, 
-        name = name_request, 
+        name = name_request,
+        last_name = last_name_request, 
         password = generate_password_hash(password_request, "sha256")
         )
     
     db.session.add(new_user)
     db.session.commit()
     
-    return jsonify(body_request), 200
+    new_user_DB = User.query.filter(User.email == email_request).first()
+    
+    return jsonify(new_user_DB.serialize()), 200
 
 @api.route('/login', methods=['POST'])
 def login_user():
@@ -213,7 +238,7 @@ def edit_profile(user_id):
     
     for param in body_request:
         user_to_edit[param] = body_request[param]
-        
+   
     new_user = User(
         avatar_url = user_to_edit["avatar_url"],
         birthday = user_to_edit["birthday"],
@@ -221,6 +246,7 @@ def edit_profile(user_id):
         description = user_to_edit["description"],
         email = user_to_edit["email"],
         gender = user_to_edit["gender"],
+        occupation = user_to_edit["occupation"],
         id = user_to_edit["id"],
         last_name = user_to_edit["last_name"],
         name = user_to_edit["name"],
@@ -230,7 +256,31 @@ def edit_profile(user_id):
     
     db.session.add(new_user)
     db.session.commit()
-     
+    
+    for interest in user_to_edit["interests"]:
+        interest_front = Characteristic.query.filter(Characteristic.name == interest).first()
+        user_interest = interest_front.serialize()
+        
+        new_characteritic_user = CharacteristicUser(
+            user_id = user_to_edit["id"],
+            characteristic_id = user_interest["id"]
+        )
+        
+        db.session.add(new_characteritic_user)
+        db.session.commit()
+        
+    for language in user_to_edit["languages"]:
+        language_front = Language.query.filter(Language.name == language).first()
+        user_language = language_front.serialize()
+        
+        new_language_user = SpokenLanguages(
+            user_id = user_to_edit["id"],
+            language_id = user_language["id"]
+        )
+        
+        db.session.add(new_language_user)
+        db.session.commit()
+    
     return jsonify(user_to_edit), 200
 
 @api.route('/new_announcement', methods=['POST'])
@@ -253,11 +303,7 @@ def create_announcement():
     expElectricity_request = body_request.get("expElectricity", None)
     expWater_request = body_request.get("expWater", None)
     type_bed_request = body_request.get("type_bed", None)
-    # singleBed_request = body_request.get("singleBed", None)
-    # doubleBed_request = body_request.get("doubleBed", None)
-    # sofaBed_request = body_request.get("sofaBed", None)
-    # noBed_request = body_request.get("noBed", None)
-
+    
     city_room= City(
         name = city_request
     )
@@ -293,10 +339,6 @@ def create_announcement():
         description = description_request,
         price = price_request,
         deposit = deposit_request,
-        # facingTheStreet = facingTheStreet_request,
-        # furnishedRoom = furnishedRoom_request,
-        # suiteRoom = suiteRoom_request,
-        # sharedRoom = sharedRoom_request,
         type_bed = type_bed_request
         )
     
@@ -333,9 +375,7 @@ def reviewendp():
 @api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) 
 def get_reviews_room(room_id):
     
-    #tenancy_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).first()
     tenancies_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).all()
-    print("TENANCIES ???? --- ", tenancies_room_selected)
     
     tenancies_list = []
     
@@ -350,19 +390,9 @@ def get_reviews_room(room_id):
             reviews_list.append(review_res)
             
         tenancy_users = User.query.filter(User.id == tenancy_room_selected.user_id).all()
-        print("ID USUARIO --- ", tenancy_users)
        
         for user in tenancy_users:
             tenancy_user = user.serialize()
-            print("USUARIO ??? -- ", tenancy_user)
-        
-        # print("USUARIOS ---- ", users)
-        # user_tenancy = []
-        
-        # for user in users:
-        #     print("USUARIO --- ", user)
-        #     user_tenancy.append(user)
-        
         
         room = Room.query.filter(Room.id == Tenancy.room_id).first()
         room_tenancy = [room.serialize()]
@@ -375,25 +405,6 @@ def get_reviews_room(room_id):
         
     return jsonify(tenancies_list), 200  
     
-    # tenancy_reviews = tenancy_room_selected.reviews
-    # tenancy = tenancy_room_selected.serialize()
-    # reviews_list = []
-    
-    # for review in tenancy_reviews:
-    #     review_res = review.serialize()
-    #     reviews_list.append(review_res)
-        
-    # user = User.query.filter(User.id == Tenancy.user_id).first()
-    # user_tenancy = [user.serialize()]
-    
-    # room = Room.query.filter(Room.id == Tenancy.room_id).first()
-    # room_tenancy = [room.serialize()]
-    
-    # tenancy['reviews'] = reviews_list
-    # tenancy['user'] = user_tenancy
-    # tenancy['room'] = room_tenancy
-    
-    # return jsonify([tenancy]), 200  
 
 # -------------------------- SEED -------------------------
 
@@ -408,8 +419,31 @@ def handle_seed_user_data():
 @api.route('/search_room', methods=['POST'])
 def search_room():
     body_request = request.get_json()
-    queries = [X.y == 'a']
-    if b:
-        queries.append(X.z == 'b')
-        q.filter(*queries)
+    print(body_request)
+    queries = []
+    if body_request["country"]:
+        queries.append(Room.country == body_request["country"])
+    if body_request["typeBed"]:
+        queries.append(Room.type_bed == body_request["typeBed"])
+    if body_request["city"]:
+        queries.append(Room.city == body_request["city"])
+    if body_request["roomies"]:
+        print(roomies)
+    if body_request["filters"]:
+        print(filters)
+    if body_request["rating"]:
+        print(rating)
+    if body_request["money"]:
+        print(money)
+    if body_request["interests"]:
+        print(interests)
+#   
+
+#   if body_request["kye del flux"]:
+#         for
+#        queries.append(Room.type_bed == body_request["key"])
+    
+    search_filter = Room.query.filter(*queries).all()
+    response = list(map(lambda room: room.serialize(),search_filter))
+    print(response)
     return "OK",200
