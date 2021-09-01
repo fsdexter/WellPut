@@ -19,9 +19,9 @@ import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-  
+
 	//let listRooms = store.rooms.map((item, index) => {
-		//return <li key={index}>{item}</li>;
+	//return <li key={index}>{item}</li>;
 	//});
 
 	const [city, setCity] = useState();

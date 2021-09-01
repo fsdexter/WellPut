@@ -9,7 +9,6 @@ import { useParams } from "react-router-dom";
 import { interestsOptions, languageOptions } from "../constants";
 
 export const EditProfile = () => {
-	const userParse = JSON.parse(localStorage.getItem("user")).user;
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
 	const { user_id } = useParams();
