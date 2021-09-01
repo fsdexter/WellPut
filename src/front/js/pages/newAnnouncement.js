@@ -188,7 +188,11 @@ export const NewAnnouncement = () => {
 						<div className="col-3" />
 					</div>
 					<center>
-						<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "500px", height: "350px" }} />
+						<MyMap
+							center={{ lat: 40.416775, lng: -3.70379 }}
+							style={{ width: "500px", height: "350px" }}
+							zoom={10}
+						/>
 					</center>
 					<div className="row">
 						<div className="col-10" />
