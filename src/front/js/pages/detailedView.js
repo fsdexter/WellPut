@@ -17,7 +17,7 @@ export const DetailedView = () => {
 	return (
 		<div className="d-flex flex-column">
 			<div id="imgsCarouselDetailRoom">
-				<CarouselRoomImg room={details} />
+				<CarouselRoomImg room={details} isDetailRoom={true} />
 			</div>
 
 			<div className="row d-flex flex-column mb-3">
