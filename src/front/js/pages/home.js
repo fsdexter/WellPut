@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 
 import "../../styles/home.scss";
@@ -26,7 +26,6 @@ export const Home = () => {
 
 	const [city, setCity] = useState();
 	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
-
 	const [formValue, setFormValue] = useState({
 		interests: ""
 	});
