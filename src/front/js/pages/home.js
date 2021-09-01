@@ -19,6 +19,11 @@ import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+  
+	//let listRooms = store.rooms.map((item, index) => {
+		//return <li key={index}>{item}</li>;
+	//});
+
 	const [city, setCity] = useState();
 	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
 
@@ -159,12 +164,28 @@ export const Home = () => {
 					</div>
 				</div>
 				<div className="col-6 ml-4 mt-3">
-					<div>
-						<CarouselRoomImg />
-						<CarouselRoomImg2 />
-						<CarouselRoomImg3 />
-						<CarouselRoomImg4 />
+					{/* {store.rooms.map(room => {
+						return (
+							<div key={room.id} className="carHome">
+								<CarouselRoomImg title={room.title} price={room.price} />
+							</div>
+						);
+					})} */}
+					<div id="carouselOne" className="carousel slide" data-ride="carousel" data-interval="false">
+						{store.rooms.map(room => {
+							return <CarouselRoomImg key={room.id} room={room} />;
+						})}
 					</div>
+
+					{/* <div className="carHome">
+						<CarouselRoomImg2 />
+					</div>*/}
+					{/* <div className="carHome">
+						<CarouselRoomImg />
+					</div> */}
+					{/* <div className="carHome">
+						<CarouselRoomImg4 />
+					</div>  */}
 				</div>
 				<button
 					onClick={() => {

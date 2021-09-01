@@ -13,21 +13,17 @@ import "../../styles/detailedView.scss";
 
 export const DetailedView = () => {
 	const { store, actions } = useContext(Context);
-
+	const details = JSON.parse(localStorage.getItem("details"));
 	return (
 		<div className="d-flex flex-column">
 			<div id="imgsCarouselDetailRoom">
-				<CarouselRoomImg isDetailRoom={true} />
+				<CarouselRoomImg room={details} isDetailRoom={true} />
 			</div>
 
 			<div className="row d-flex flex-column mb-3">
 				<div className="col-9" id="idescriptionRoomDetail">
 					<h5 className="font-weight-bolder"> Description</h5>
-					<p>
-						Exterior room with double bed and private bathroom in the Salamanca district, very bright, fully
-						equipped and with all the comforts. Young and calm environment, NO SMOKING, NO COUPLES.
-						Unbeatable location near the metro, bus and other local shops.
-					</p>
+					<p>{details.description}</p>
 				</div>
 			</div>
 
