@@ -136,23 +136,28 @@ export const Home = () => {
 					</div>
 				</div>
 				<div className="col-6 ml-4 mt-3">
-					{store.rooms.map(room => {
+					{/* {store.rooms.map(room => {
 						return (
 							<div key={room.id} className="carHome">
 								<CarouselRoomImg title={room.title} price={room.price} />
 							</div>
 						);
-					})}
+					})} */}
+					<div id="carouselOne" className="carousel slide" data-ride="carousel" data-interval="false">
+						{store.rooms.map(room => {
+							return <CarouselRoomImg key={room.id} room={room} />;
+						})}
+					</div>
 
 					{/* <div className="carHome">
 						<CarouselRoomImg2 />
-					</div>
-					<div className="carHome">
-						<CarouselRoomImg3 />
-					</div>
-					<div className="carHome">
-						<CarouselRoomImg4 />
+					</div>*/}
+					{/* <div className="carHome">
+						<CarouselRoomImg />
 					</div> */}
+					{/* <div className="carHome">
+						<CarouselRoomImg4 />
+					</div>  */}
 				</div>
 				<button
 					onClick={() => {
