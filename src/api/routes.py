@@ -179,7 +179,43 @@ def get_rooms():
     rooms_list_in_DB = Room.query.all()
     
     for room in rooms_list_in_DB:
-        rooms_list.append(room.serialize())
+        room_room_archive = room.room_archive
+        room_data = room.serialize()
+        room_detail_room_archives = []
+        
+        for room_archive in room_room_archive:
+            room_archive_res = room_archive.serialize()
+            room_detail_room_archives.append(room_archive_res)
+        
+        tenancies_room = room.tenancies
+        room = room.serialize()
+        
+        for tenancy in tenancies_room:
+            tenancy_res = tenancy.serialize()
+            
+            tenancies_data_room = Tenancy.query.filter(Tenancy.room_id == tenancy_res['room_id']).all()
+            tenancies_data_list = []
+            
+            for tenancy_data_room in tenancies_data_room:
+                tenancy_reviews = tenancy_data_room.reviews
+                tenancy_data = tenancy_data_room.serialize()
+                tenancies_data_list.append(tenancy_data)
+                
+                reviews_list = []
+                
+                for review in tenancy_reviews:
+                    review_res = review.serialize()
+                    reviews_list.append(review_res)
+                    
+                # To get the reviews inside the room details
+                tenancy_data['reviews'] = reviews_list
+        
+        
+        room_data['room_archives'] = room_detail_room_archives
+        room_data['tenancies'] = tenancies_data_list
+        
+        # To get the rooms list with all rooms details in the home
+        rooms_list.append(room_data)
     
     return jsonify(rooms_list), 200
 
@@ -360,21 +396,13 @@ def create_announcement():
 
     return jsonify(body_request), 200
 
-
-
 @api.route('/tenancy_room_reviews', methods=['POST'])
 def reviewendp():
     body_request = request.get_json()
-    
-    print(body_request) 
     review=Review(comment=body_request["comment"], rating=body_request["rating"], date=date.today(), room_id=body_request["room_id"], tenancy_id=body_request["user"])
     db.session.add(review)
     db.session.commit()
     return jsonify({"review": review.serialize()}), 200
-
-
-
-
 
 @api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) 
 def get_reviews_room(room_id):

@@ -210,8 +210,8 @@ class Tenancy(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            #"user_id": self.user_id, --->> LOS DATOS SALEN DIRECTOS EN LA TENANCY
-            #"room_id": self.room_id
+            "user_id": self.user_id,
+            "room_id": self.room_id
         } 
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -448,6 +448,7 @@ class SeedData:
         self.first_tenancy = None
         self.second_tenancy = None
         self.third_tenancy = None
+        self.fourth_tenancy = None
         self.first_review = None
         self.second_review = None
         self.third_review = None
@@ -719,9 +720,15 @@ class SeedData:
             room_id = self.first_room.id
         )
         
+        self.fourth_tenancy = Tenancy(
+            user_id = self.fourth_user.id,
+            room_id = self.second_room.id
+        )
+        
         db.session.add(self.first_tenancy)
         db.session.add(self.second_tenancy)
         db.session.add(self.third_tenancy)
+        db.session.add(self.fourth_tenancy)
         db.session.commit()
 
 #------------------------
