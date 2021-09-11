@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { SignUp } from "./signUp";
 import { Login } from "./login";
 
-import logo from "../../img/logo.png";
+import logo from "../../img/WPlogo.png";
 import "../../styles/navbar.scss";
 
 export const Navbar = () => {
@@ -33,18 +33,18 @@ export const Navbar = () => {
 	};
 
 	return (
-		<nav className="navbar navbar-expand-lg navbar-light bg-white no-gutters">
+		<nav className="navbar navbar-expand-lg navbar-light bg-white no-gutters" id="myNab">
 			<div
-				className={isActive === "home" ? "col-2 my-active" : "col-2"}
+				className={isActive === "home" ? "col-2 my-active bg-danger" : "col-2"}
 				onClick={() => changeElementNavbarActive("home")}>
 				<Link to="/">
 					<img src={logo} id="logo" />
 				</Link>
 			</div>
-			<div className="col-10" id="brown">
+			<div className="col-10">
 				{/*store.myLocalStore.user ? (*/}
 				{store.myLocalStore.user ? (
-					<div className="col-12 d-flex justify-content-between" id="yellow">
+					<div className="col-12 d-flex justify-content-around">
 						<span
 							className={
 								isActive === "profile"
@@ -100,7 +100,7 @@ export const Navbar = () => {
 						</Link>
 					</div>
 				) : (
-					<div className="col-12 d-flex justify-content-end" id="yellow">
+					<div className="col-12 d-flex justify-content-end">
 						<button
 							type="button"
 							className="navbar-brand mb-0 mr-2 btn btn-navb"
