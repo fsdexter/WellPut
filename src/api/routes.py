@@ -182,22 +182,35 @@ def get_rooms():
         for room_archive in room_room_archive:
             room_archive_res = room_archive.serialize()
             room_detail_room_archives.append(room_archive_res)
-            print("room_detail_room_archives 1 : ", room_detail_room_archives)
         
         tenancies_room = room.tenancies
         room = room.serialize()
-        tenancies_list = []
         
         for tenancy in tenancies_room:
             tenancy_res = tenancy.serialize()
-            tenancies_list.append(tenancy_res)
             
+            tenancies_data_room = Tenancy.query.filter(Tenancy.room_id == tenancy_res['room_id']).all()
+            tenancies_data_list = []
             
+            for tenancy_data_room in tenancies_data_room:
+                tenancy_reviews = tenancy_data_room.reviews
+                tenancy_data = tenancy_data_room.serialize()
+                tenancies_data_list.append(tenancy_data)
+                
+                reviews_list = []
+                
+                for review in tenancy_reviews:
+                    review_res = review.serialize()
+                    reviews_list.append(review_res)
+                    
+                # To get the reviews inside the room details
+                tenancy_data['reviews'] = reviews_list
         
         
         room_data['room_archives'] = room_detail_room_archives
-        room_data['tenancies'] = tenancies_list
+        room_data['tenancies'] = tenancies_data_list
         
+        # To get the rooms list with all rooms details in the home
         rooms_list.append(room_data)
     
     return jsonify(rooms_list), 200
