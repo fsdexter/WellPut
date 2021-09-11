@@ -4,7 +4,7 @@ import "../../styles/footer.scss";
 
 export const Footer = () => (
 	<footer>
-		<div className="row divfooter">
+		<div className="row divfooter mt-5">
 			<div className="col">
 				<h4 className="footerTitle">- Made by Genesis</h4>
 			</div>

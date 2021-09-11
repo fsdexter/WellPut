@@ -13,17 +13,16 @@ export const PriceInput = () => {
 		//"[e.target.name]" is the name of form inputs
 		setMoney({ ...money, [e.target.name]: e.target.value });
 		actions.setMoney({ ...money, [e.target.name]: e.target.value });
-		console.log("money ----->>>> ", money);
 	};
 
 	return (
 		<form>
-			<div className="border border-warning pt-2">
+			<div className="border border-warning pt-4 pb-4">
 				<div className="row">
 					<div className="col-4 ">
 						<h3 className="ml-4">Price</h3>
 					</div>
-					<div className="col-3">
+					<div className="col-3 ml-4">
 						<input
 							type="text"
 							className="form-control"
@@ -47,7 +46,7 @@ export const PriceInput = () => {
 					<div className="col-4 ">
 						<h3 className="ml-4">Deposit</h3>
 					</div>
-					<div className="col-3">
+					<div className="col-3 ml-4">
 						<input
 							type="text"
 							className="form-control"

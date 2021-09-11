@@ -83,14 +83,14 @@ export const Home = () => {
 
 			<div className="row">
 				<div className="col-md-4 pl-5 mt-3 pr-5 mb-2 bg-secondary text-white filter">
-					<h1 className="mt-3 texto_yellow">Search a room</h1>
+					<h1 className="mt-5 texto_yellow">Search a room</h1>
 					<br />
 					<div className="row">
 						<div className="col-3">
 							<h3 className="ml-5 pt-3">City</h3>
 						</div>
 						<form>
-							<div className=" ml-3 pt-3">
+							<div className="col-12 ml-3 pt-3">
 								<input
 									type="text"
 									className="form-control roundShape"
@@ -103,37 +103,38 @@ export const Home = () => {
 					</div>
 					<br />
 					<center>
-						<MyMap center={center} style={{ width: "270px", height: "150px" }} zoom={8} />
+						<MyMap center={center} style={{ width: "500px", height: "150px" }} zoom={8} />
 					</center>
 					<br />
 					<div>
 						<PriceInput />
 						<br />
-						<div className="border border-warning">
+						<div className="border border-warning pb-3">
 							<FilterExp />
 						</div>
 						<br />
-						<div className="border border-warning pt-3">
+						<div className="border border-warning pt-4 pb-4">
 							<div className="row">
-								<div className="col">
+								<div className="col-4">
 									<h3 className="ml-4">Rating</h3>
 								</div>
-								<div className=" col-6 d-flex ratings">
+								<div className="col-6 ml-5 ratings">
 									<Rating />
 								</div>
 							</div>
 						</div>
-						<br />
-						<div className="border border-warning pt-3">
+						{/*<br />
+						<div className="border border-warning pt-4 pb-4">
 							<div className="row">
-								<div className="col">
+								<div className="col-4">
 									<h3 className="ml-4">Roomies</h3>
 								</div>
-								<div className="col-6 mb-3 pl-5">
+								<div className="col-6 mb-3 pl-5 ml-5">
 									<Counter />
 								</div>
 							</div>
-						</div>
+						</div>{" "}
+						*/}
 						<br />
 						<div className="border border-warning pt-5">
 							<FilterOcc />
@@ -141,10 +142,10 @@ export const Home = () => {
 						<br />
 						<div className="border border-warning pt-5">
 							<div className="row ">
-								<div className="col-4 mb-5 ">
+								<div className="col-4 mb-5">
 									<h3 className="ml-4">Interests</h3>
 								</div>
-								<div className="col-8">
+								<div className="col-6 ml-5">
 									<AnimatedMulti
 										options={interestsOptions}
 										change={f => handleAddrTypeChange(f, "interests")}
@@ -153,19 +154,20 @@ export const Home = () => {
 							</div>
 						</div>
 						<br />
-						<div className="border border-warning pt-2">
+						<div className="border border-warning pt-4 pb-4">
 							<FilterFea />
 						</div>
 						<br />
-						<div className="border border-warning pt-2">
+						<div className="border border-warning pt-4 pb-4">
 							<FilterBed />
 						</div>
 					</div>
 					<button
+						className="btn btnYellow btn-lg btn-block mt-4 mb-4"
 						onClick={() => {
 							actions.searchRoom();
 						}}>
-						Search
+						Apply filters
 					</button>
 				</div>
 				<div className="col-6 ml-4 mt-3">

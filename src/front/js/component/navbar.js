@@ -35,7 +35,7 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-white no-gutters" id="myNab">
 			<div
-				className={isActive === "home" ? "col-2 my-active bg-danger" : "col-2"}
+				className={isActive === "home" ? "col-2 my-active" : "col-2"}
 				onClick={() => changeElementNavbarActive("home")}>
 				<Link to="/">
 					<img src={logo} id="logo" />
