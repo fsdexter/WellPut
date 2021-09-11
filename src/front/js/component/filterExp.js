@@ -12,7 +12,7 @@ export const FilterExp = () => {
 					included
 				</h3>
 			</div>
-			<div className="form-check form-check-inline col-3 mb-3 pl-5 ">
+			<div className="form-check form-check-inline col-3 mb-3 pl-5">
 				<input
 					className=" form-check-input"
 					type="checkbox"

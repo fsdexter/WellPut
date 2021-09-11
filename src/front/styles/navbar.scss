@@ -1,8 +1,12 @@
+#myNab{
+    padding: 0%;
+    font-weight: 700;
+    height: 15%;
+}
 
 #logo{
-    width: 65%;
-    height: 50%;
-    margin-left: 2rem;
+    width: 80%;
+    margin-left: 5.5rem;
 }
 #brown{
     background-color:#4C4535;
@@ -13,7 +17,7 @@
 }
 
 .btn-navb:hover{
-    color: white!important;
+    color: #f7c606!important;
     text-decoration: overline;
     border-color:none!important;
 }
@@ -24,5 +28,5 @@
 
 .my-active{
     background-color: none !important;
-    color: #d63c16 !important;
+    color:  #f7c606 !important;
 }
