@@ -174,17 +174,19 @@ def get_rooms():
     rooms_list = []
     rooms_list_in_DB = Room.query.all()
     
-    for room_detail in rooms_list_in_DB:
-        room_archive_room = room_detail.room_archive
-        room = room_detail.serialize()
-        room_archives = []
+    for room in rooms_list_in_DB:
+        room_room_archive = room.room_archive
+        room_data = room.serialize()
+        room_detail_room_archives = []
         
-        for room_archive in room_archive_room:
+        for room_archive in room_room_archive:
             room_archive_res = room_archive.serialize()
-            room_archives.append(room_archive_res)
+            room_detail_room_archives.append(room_archive_res)
+            print("room_detail_room_archives 1 : ", room_detail_room_archives)
         
-            room['room_archives'] = room_archives
-        rooms_list.append(room.serialize())
+        room_data['room_archives'] = room_detail_room_archives
+        
+        rooms_list.append(room_data)
     
     return jsonify(rooms_list), 200
 
