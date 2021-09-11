@@ -184,7 +184,19 @@ def get_rooms():
             room_detail_room_archives.append(room_archive_res)
             print("room_detail_room_archives 1 : ", room_detail_room_archives)
         
+        tenancies_room = room.tenancies
+        room = room.serialize()
+        tenancies_list = []
+        
+        for tenancy in tenancies_room:
+            tenancy_res = tenancy.serialize()
+            tenancies_list.append(tenancy_res)
+            
+            
+        
+        
         room_data['room_archives'] = room_detail_room_archives
+        room_data['tenancies'] = tenancies_list
         
         rooms_list.append(room_data)
     
@@ -367,21 +379,13 @@ def create_announcement():
 
     return jsonify(body_request), 200
 
-
-
 @api.route('/tenancy_room_reviews', methods=['POST'])
 def reviewendp():
     body_request = request.get_json()
-    
-    print(body_request) 
     review=Review(comment=body_request["comment"], rating=body_request["rating"], date=date.today(), room_id=body_request["room_id"], tenancy_id=body_request["user"])
     db.session.add(review)
     db.session.commit()
     return jsonify({"review": review.serialize()}), 200
-
-
-
-
 
 @api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) 
 def get_reviews_room(room_id):
