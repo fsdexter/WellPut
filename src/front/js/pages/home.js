@@ -65,7 +65,7 @@ export const Home = () => {
 	// };
 
 	return (
-		<div className="container-fluid">
+		<div className="container-fluid" id="myContainerHome">
 			<div style={{ height: "400px" }}>
 				<div className="row pic m-auto">
 					<div className="rectangle">
