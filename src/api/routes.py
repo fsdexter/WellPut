@@ -225,11 +225,28 @@ def get_single_room(room_id):
     
     tenancies_room = room_selected.tenancies
     room = room_selected.serialize()
-    tenancies_list = []
+    #tenancies_list = []
     
     for tenancy in tenancies_room:
         tenancy_res = tenancy.serialize()
-        tenancies_list.append(tenancy_res)
+        #tenancies_list.append(tenancy_res)
+        
+        tenancies_data_room = Tenancy.query.filter(Tenancy.room_id == tenancy_res['room_id']).all()
+        tenancies_data_list = []
+        
+        for tenancy_data_room in tenancies_data_room:
+            tenancy_reviews = tenancy_data_room.reviews
+            tenancy_data = tenancy_data_room.serialize()
+            tenancies_data_list.append(tenancy_data)
+            reviews_list = []
+            
+            for review in tenancy_reviews:
+                review_res = review.serialize()
+                reviews_list.append(review_res)
+            
+            # To get the reviews inside the room details
+            tenancy_data['reviews'] = reviews_list
+            
         
     room_archive_room = room_selected.room_archive
     room = room_selected.serialize()
@@ -258,7 +275,8 @@ def get_single_room(room_id):
     city = City.query.filter(City.id == Room.city_id).first()
     city_room = [city.serialize()]
     
-    room['tenancies'] = tenancies_list
+    room['tenancies'] = tenancies_data_list
+    #room['tenancies'] = tenancies_list
     room['room_archives'] = room_archives
     room['expensives'] = expensives
     room['features'] = features
