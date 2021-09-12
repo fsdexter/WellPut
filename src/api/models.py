@@ -442,6 +442,9 @@ class SeedData:
         self.second_room = None
         self.third_room = None
         self.fourth_room = None
+        self.fifth_room = None
+        self.sixth_room = None
+        self.seventh_room = None
         self.first_favorites = None # --->>> una habitación muchos favoritos
         self.second_favorites = None
         self.third_favorites = None
@@ -496,6 +499,9 @@ class SeedData:
         self.sixth_roomArchive = None
         self.seventh_roomArchive = None
         self.eighth_roomArchive = None
+        self.ninth_roomArchive = None
+        self.tenth_roomArchive = None
+        self.eleventh_roomArchive = None
         self.first_feature = None
         self.second_feature = None
         self.third_feature = None
@@ -670,11 +676,59 @@ class SeedData:
             user_id = self.first_user.id,
             #favorites_id = None
         )
+        
+        self.fifth_room = Room( 
+            description = "Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
+            address= "Avenida del Aeropuerto 10",
+            country = "Spain",
+            price = "300",
+            deposit = "100",
+            title = "Hermosa habitación amueblada.",
+            type_bed = "double",
+            lat = 33.4329,
+            lng = -4.642371,
+            city_id = self.first_city.id,
+            user_id = self.fifth_user.id,
+            #favorites_id = None
+        )
+        
+        self.sixth_room = Room( 
+            description = "Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
+            address= "Avenida del Aeropuerto 10",
+            country = "Spain",
+            price = "500",
+            deposit = "500",
+            title = "Hermosa habitación amueblada.",
+            type_bed = "double",
+            lat = 33.4329,
+            lng = -4.642371,
+            city_id = self.first_city.id,
+            user_id = self.fifth_user.id,
+            #favorites_id = None
+        )
+        
+        self.seventh_room = Room( 
+            description = "Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
+            address= "Avenida del Aeropuerto 10",
+            country = "Spain",
+            price = "500",
+            deposit = "500",
+            title = "Hermosa habitación amueblada.",
+            type_bed = "double",
+            lat = 33.4329,
+            lng = -4.642371,
+            city_id = self.first_city.id,
+            user_id = self.fifth_user.id,
+            #favorites_id = None
+        )
 
         db.session.add(self.first_room)
         db.session.add(self.second_room)
         db.session.add(self.third_room)
         db.session.add(self.fourth_room)
+        db.session.add(self.fifth_room)
+        db.session.add(self.sixth_room)
+        db.session.add(self.seventh_room)
         db.session.commit()
         
 #------------------------
@@ -984,7 +1038,7 @@ class SeedData:
 #------------------------
     def create_seed_roomArchive(self):
         self.first_roomArchive = RoomArchive(
-            url = "https://archzine.es/wp-content/uploads/2019/12/blanco-y-gris-decoracion-dormitorios-como-decorar-una-habitacion-peque%C3%B1a-guirnalda-de-bombillas-alfombra-color-gris.jpg",
+            url = "https://www.elmueble.com/medio/2021/02/17/00528735_045f0680_1500x2000.jpg",
             room_id = self.first_room.id
         )
         self.second_roomArchive = RoomArchive(
@@ -1016,6 +1070,19 @@ class SeedData:
             room_id = self.second_room.id
         )
         
+        self.ninth_roomArchive = RoomArchive(
+            url = "https://www.hola.com/imagenes/decoracion/20200220161121/iluminacion-habitaciones-juveniles/0-786-452/luz-teens-6a-a.jpg",
+            room_id = self.fifth_room.id
+        )
+        self.tenth_roomArchive = RoomArchive(
+            url = "https://cafeversatil.com/nuestroshijos/wp-content/uploads/2019/11/01-2-768x576.jpg",
+            room_id = self.sixth_room.id
+        )
+        self.eleventh_roomArchive = RoomArchive(
+            url = "https://www.elmueble.com/medio/2017/12/11/00438564_o_c70b69b2_1335x2000.jpg",
+            room_id = self.seventh_room.id
+        )
+        
         db.session.add(self.first_roomArchive)
         db.session.add(self.second_roomArchive)
         db.session.add(self.third_roomArchive)
@@ -1024,6 +1091,9 @@ class SeedData:
         db.session.add(self.sixth_roomArchive)
         db.session.add(self.seventh_roomArchive)
         db.session.add(self.eighth_roomArchive)
+        db.session.add(self.ninth_roomArchive)
+        db.session.add(self.tenth_roomArchive)
+        db.session.add(self.eleventh_roomArchive)
         db.session.commit() 
         
 #------------------------

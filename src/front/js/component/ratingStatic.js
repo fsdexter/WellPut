@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-const ratingValue = 3;
+export const RatingStatic = props => {
+	const ratingValue = props.rating;
 
-export const RatingStatic = () => {
 	if (ratingValue === 0)
 		return (
 			<div>
@@ -63,4 +64,8 @@ export const RatingStatic = () => {
 				<div className="fa fa-star checked fa-2x" />
 			</div>
 		);
+};
+
+RatingStatic.propTypes = {
+	rating: PropTypes.number
 };
