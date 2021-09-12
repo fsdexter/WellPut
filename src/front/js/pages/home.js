@@ -82,7 +82,7 @@ export const Home = () => {
 			</div>
 
 			<div className="row">
-				<div className="col-md-4 pl-5 mt-3 pr-5 mb-2 bg-secondary text-white filter">
+				<div className="col-md-4 pl-5 mt-5 mr-3 pr-5 mb-4 bg-secondary text-white filter">
 					<h1 className="mt-5 texto_yellow">Search a room</h1>
 					<br />
 					<div className="row">
@@ -170,7 +170,7 @@ export const Home = () => {
 						Apply filters
 					</button>
 				</div>
-				<div className="col-6 ml-4 mt-3">
+				<div className="col-6 ml-5 mt-5">
 					{/* {store.rooms.map(room => {
 						return (
 							<div key={room.id} className="carHome">
