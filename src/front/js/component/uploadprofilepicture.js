@@ -14,8 +14,6 @@ export const UserProfileForm = () => {
 	const uploadImage = () => {
 		//evt.preventDefault();
 
-		console.log("ESTAMOS INTENTANDO SUBIR UNA FOTO");
-
 		// we are about to send this to the backend.
 		console.log("This are the files", files);
 		let body = new FormData();
@@ -27,8 +25,6 @@ export const UserProfileForm = () => {
 		const currentUserId =
 			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id;
 
-		console.log("currentUserId -- ", currentUserId);
-
 		fetch(`${API_BASE_URL}/api/user/${currentUserId}/image`, options)
 			.then(resp => resp.json())
 			.then(data => {
@@ -37,8 +33,6 @@ export const UserProfileForm = () => {
 				setAvatarUrl(data.avatar_url);
 
 				//history.push(`/edit_profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
-
-				console.log("SE SUBIÓ LA FOTO !!!!!!!!!!! ");
 			})
 			.catch(error => console.error("ERRORRRRRR!!!", error));
 	};
