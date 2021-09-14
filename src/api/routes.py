@@ -361,7 +361,10 @@ def create_announcement():
     expElectricity_request = body_request.get("expElectricity", None)
     expWater_request = body_request.get("expWater", None)
     type_bed_request = body_request.get("type_bed", None)
-    
+    #agregando foto de room
+    room_cloudinary = cloudinary.uploader.upload(body_request.get("room_url"), folder = "agile_monkeys")
+    room_image_url_request = room_image_url["secure_url"]
+
     city_room= City(
         name = city_request
     )
@@ -397,7 +400,8 @@ def create_announcement():
         description = description_request,
         price = price_request,
         deposit = deposit_request,
-        type_bed = type_bed_request
+        type_bed = type_bed_request,
+        room_image_url = room_image_url_request 
         )
     
     db.session.add(city_room)
