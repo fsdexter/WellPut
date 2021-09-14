@@ -13,7 +13,14 @@ import { RatingStatic } from "./ratingStatic";
 import "../../styles/detailedView.scss";
 
 export const CarouselRoomImg = props => {
-	console.log(props.room);
+	let room_reviews = props.room.tenancies.map(tenancy => tenancy.reviews.map(review => review));
+
+	let averageRating = Math.round(
+		room_reviews.reduce(
+			(accumulator, currentValue) => (currentValue[0] ? currentValue[0].rating + accumulator : accumulator),
+			0
+		) / room_reviews.length
+	);
 
 	const slider = (
 		<Link
@@ -44,32 +51,23 @@ export const CarouselRoomImg = props => {
 									<h2>{props.room.price} €</h2>
 								</div>
 
-								{props.room.tenancies.map(tenancy =>
-									tenancy.reviews.map(review => {
-										return (
-											//NO LO ESTÁ HACIENDO PARA CADA HABITACIÓN
-											<div key={review.id}>
-												<div
-													className={
-														props.isDetailRoom
-															? "starCaroCustom d-flex justify-content-around"
-															: "starCaro d-flex justify-content-around"
-													}>
-													<RatingStatic rating={review.rating} />
-													<button className="heartButtonFix ml-5">
-														<i className="far fa-heart fa-2x" />
-													</button>
-												</div>
+								{props.room.tenancies.map(tenancy => {
+									return (
+										<div key={tenancy.id}>
+											<div
+												className={
+													props.isDetailRoom
+														? "starCaroCustom d-flex justify-content-around"
+														: "starCaro d-flex justify-content-around"
+												}>
+												<RatingStatic rating={averageRating} />
+												<button className="heartButtonFix ml-5 pr-5 pl-5">
+													<i className="far fa-heart fa-2x" />
+												</button>
 											</div>
-										);
-									})
-								)}
-
-								<div className={props.isDetailRoom ? "heartButtonCustom" : "heartButton"}>
-									<button className="heartButtonFix">
-										<i className="far fa-heart fa-2x" />
-									</button>
-								</div>
+										</div>
+									);
+								})}
 							</div>
 						</div>
 					</div>
