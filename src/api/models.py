@@ -254,7 +254,7 @@ class Room (db.Model):
     type_bed = db.Column(db.String(50))
     lat = db.Column(db.Float(15))
     lng = db.Column(db.Float(15))
-    room_image_url = db.Column(db.String(255), unique=False, nullable=True)
+    # room_image_url = db.Column(db.String(255), unique=False, nullable=True)
 
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="rooms")

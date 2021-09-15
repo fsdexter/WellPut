@@ -7,7 +7,24 @@ import doubleBlack from "../../img/doubleBlack.png";
 import bedsofaBlack from "../../img/bedsofaBlack.png";
 import addPic from "../../img/addPic.png";
 import { useHistory } from "react-router-dom";
+import { API_BASE_URL } from "../constants";
 export const NewAnnouncement = () => {
+	const uploadImage = evt => {
+		evt.preventDefault();
+		console.log("this are the files", files);
+		let body = new FormData();
+		body.append("profile_image", files[0]);
+		const options = {
+			body,
+			method: "POST"
+		};
+		fetch(API_BASE_URL + "/api/upload", options)
+			.then(resp => resp.json())
+			.then(data => console.log("success!!", data))
+			.catch(error => console.log("errorrr", error));
+	};
+	const [files, setFiles] = useState(null);
+
 	const { store, actions } = useContext(Context);
 	const [city, setCity] = useState();
 	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
@@ -509,7 +526,17 @@ export const NewAnnouncement = () => {
 
 				<div className="tab-pane fade" id="picsTab" role="tabpanel" aria-labelledby="picsTab-tab">
 					<div className="row">
+						{/* -------------------------------------------------------------------						 */}
+						{/* acá empiezo a meter mano */}
 						<div className="col-3 text-center">
+							<form onSubmit={uploadImage}>
+								<input type="file" onChange={e => setFiles(e.target.files)} />
+								<button>Upload picture</button>
+							</form>
+						</div>
+						{/* acá termino de meter mano */}
+						{/* -------------------------------------------------------------------	
+						{/* <div className="col-3 text-center">
 							{" "}
 							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
 								<img className="card-img-top" src="..." alt="" />
@@ -519,8 +546,9 @@ export const NewAnnouncement = () => {
 									Upload image
 								</a>
 							</div>
-						</div>
-						<div className="col-3 text-center">
+						</div> */}
+
+						{/* <div className="col-3 text-center">
 							{" "}
 							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
 								<img className="card-img-top" src="..." alt="" />
@@ -530,8 +558,8 @@ export const NewAnnouncement = () => {
 									Upload image
 								</a>
 							</div>
-						</div>
-						<div className="col-3 text-center">
+						</div> */}
+						{/* <div className="col-3 text-center">
 							{" "}
 							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
 								<img className="card-img-top" src="..." alt="" />
@@ -541,8 +569,8 @@ export const NewAnnouncement = () => {
 									Upload image
 								</a>
 							</div>
-						</div>
-						<div className="col-3 text-center">
+						</div> */}
+						{/* <div className="col-3 text-center">
 							{" "}
 							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
 								<img className="card-img-top" src="..." alt="" />
@@ -552,7 +580,18 @@ export const NewAnnouncement = () => {
 									Upload image
 								</a>
 							</div>
-						</div>
+						</div> */}
+						{/* <div className="col-3 text-center">
+							{" "}
+							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
+								<img className="card-img-top" src="..." alt="" />
+							</div>
+							<div className="card-body">
+								<a href="#" className="btn btn-primary">
+									Upload image
+								</a>
+							</div>
+						</div> */}
 					</div>
 					<br />
 					<div className="row">
@@ -567,7 +606,7 @@ export const NewAnnouncement = () => {
 									actions.postNewAnnouncement(roomData);
 									history.push(`/`);
 								}}>
-								Upload
+								Upload room
 							</button>
 						</div>
 					</div>

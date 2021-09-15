@@ -341,6 +341,14 @@ def edit_profile(user_id):
     
     return jsonify(user_to_edit), 200
 
+    # -------------------------- TEST -------------------------
+@api.route('/upload', methods=['POST'])
+def handle_pic ():
+      
+        result = cloudinary.uploader.upload(request.files["profile_image"])
+        return jsonify("all good so far"), 200
+    # -------------------------- TEST -------------------------
+
 @api.route('/new_announcement', methods=['POST'])
 def create_announcement():
     body_request = request.get_json()
@@ -362,8 +370,8 @@ def create_announcement():
     expWater_request = body_request.get("expWater", None)
     type_bed_request = body_request.get("type_bed", None)
     #agregando foto de room
-    room_cloudinary = cloudinary.uploader.upload(body_request.get("room_url"), folder = "agile_monkeys")
-    room_image_url_request = room_image_url["secure_url"]
+    # room_cloudinary = cloudinary.uploader.upload(body_request.get("room_url"), folder = "agile_monkeys")
+    # room_image_url_request = room_image_url["secure_url"]
 
     city_room= City(
         name = city_request
@@ -401,7 +409,7 @@ def create_announcement():
         price = price_request,
         deposit = deposit_request,
         type_bed = type_bed_request,
-        room_image_url = room_image_url_request 
+        # room_image_url = room_image_url_request 
         )
     
     db.session.add(city_room)
