@@ -9,20 +9,6 @@ import addPic from "../../img/addPic.png";
 import { useHistory } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 export const NewAnnouncement = () => {
-	const uploadImage = evt => {
-		evt.preventDefault();
-		console.log("this are the files", files);
-		let body = new FormData();
-		body.append("profile_image", files[0]);
-		const options = {
-			body,
-			method: "POST"
-		};
-		fetch(API_BASE_URL + "/api/upload", options)
-			.then(resp => resp.json())
-			.then(data => console.log("success!!", data))
-			.catch(error => console.log("errorrr", error));
-	};
 	const [files, setFiles] = useState(null);
 
 	const { store, actions } = useContext(Context);
@@ -49,7 +35,8 @@ export const NewAnnouncement = () => {
 		// doubleBed: "",
 		// sofaBed: "",
 		// noBed: ""
-		type_bed: ""
+		type_bed: "",
+		room_url: ""
 	});
 	const handleRoomData = e => {
 		const { name, value } = e.target;
@@ -96,6 +83,23 @@ export const NewAnnouncement = () => {
 				setCenter({ lat: 40.416775, lng: -3.70379 });
 			}
 		}
+	};
+	const uploadImage = evt => {
+		evt.preventDefault();
+		console.log("this are the files", files);
+		let body = new FormData();
+		body.append("profile_image", files[0]);
+		const options = {
+			body,
+			method: "POST"
+		};
+		fetch(API_BASE_URL + "/api/upload", options)
+			.then(resp => resp.json())
+			.then(data => {
+				console.log("success!!", data);
+				setRoomData(prevState => ({ ...prevState, room_url: data.url }));
+			})
+			.catch(error => console.log("errorrr", error));
 	};
 	/*function functionTest() {
 		if (document.getElementById("checkWifi").checked) {
@@ -603,6 +607,7 @@ export const NewAnnouncement = () => {
 								data-toggle="tab"
 								href="#previewTab"
 								onClick={() => {
+									console.log(roomData);
 									actions.postNewAnnouncement(roomData);
 									history.push(`/`);
 								}}>

@@ -346,7 +346,8 @@ def edit_profile(user_id):
 def handle_pic ():
       
         result = cloudinary.uploader.upload(request.files["profile_image"])
-        return jsonify("all good so far"), 200
+        print(result["url"])
+        return jsonify({"url":result["url"]} ), 200
     # -------------------------- TEST -------------------------
 
 @api.route('/new_announcement', methods=['POST'])
@@ -369,6 +370,7 @@ def create_announcement():
     expElectricity_request = body_request.get("expElectricity", None)
     expWater_request = body_request.get("expWater", None)
     type_bed_request = body_request.get("type_bed", None)
+    room_url_request = body_request.get("room_url", None)
     #agregando foto de room
     # room_cloudinary = cloudinary.uploader.upload(body_request.get("room_url"), folder = "agile_monkeys")
     # room_image_url_request = room_image_url["secure_url"]
@@ -409,6 +411,7 @@ def create_announcement():
         price = price_request,
         deposit = deposit_request,
         type_bed = type_bed_request,
+        room_url =  room_url_request
         # room_image_url = room_image_url_request 
         )
     

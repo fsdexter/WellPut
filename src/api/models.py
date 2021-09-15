@@ -254,6 +254,7 @@ class Room (db.Model):
     type_bed = db.Column(db.String(50))
     lat = db.Column(db.Float(15))
     lng = db.Column(db.Float(15))
+    room_url = db.Column(db.String(450))
     # room_image_url = db.Column(db.String(255), unique=False, nullable=True)
 
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
@@ -290,6 +291,7 @@ class Room (db.Model):
             "type_bed": self.type_bed,
             "lat": self.lat,
             "lng": self.lng,
+            "room_url":self.room_url,
             #"city_id": self.city_id, -->> No hace falta pq en su método GET ya aparece la ciudad
             "user_id": self.user_id,
             #"favorites_id": self.favorites_id,
