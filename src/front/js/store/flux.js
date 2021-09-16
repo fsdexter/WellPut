@@ -129,6 +129,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			getOwner: async user_id => {
+				const store = getStore();
+
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/profile/${user_id}`);
+					const owner = await response.json();
+					setStore({ owner: owner });
+					localStorage.setItem("owner", JSON.stringify(store.owner));
+				} catch (error) {
+					return error.message;
+				}
+			},
+
 			/////////////////////////////////////////edit user
 			editProfile: async (userValues, user_id) => {
 				try {

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { OwnerResume } from "../component/ownerResume";
 import { ReviewsResume } from "../component/reviewsResumen";
@@ -13,18 +14,14 @@ import "../../styles/detailedView.scss";
 
 export const DetailedView = () => {
 	const { store, actions } = useContext(Context);
-	const details = JSON.parse(localStorage.getItem("room"));
-	let owner;
+	let { room_id } = useParams();
+	const details = JSON.parse(localStorage.getItem("room")) || JSON.parse(localStorage.getItem("details")); // Se coge room o details del localStore, porque, no sé qué pasa que aveces existe uno y aveces existe el otro
 
 	useEffect(() => {
-		actions.getDetailsRoom(1);
-		//actions.getUser(details.user_id);
+		actions.getDetailsRoom(details.id);
 	}, []);
 
-	console.log("details.user_id : ", details.user_id);
-	console.log("Owner : ", actions.getUser(details.user_id));
-
-	return (
+	return details ? (
 		<div className="d-flex flex-column">
 			<div id="imgsCarouselDetailRoom">
 				<CarouselRoomImg room={details} isDetailRoom={true} />
@@ -39,7 +36,7 @@ export const DetailedView = () => {
 
 			<div className="row" id="containerDetailDetail">
 				<div className="col-2" id="oRBox">
-					<OwnerResume />
+					<OwnerResume ownerId={details.user_id} />
 				</div>
 
 				<div className="col-9 d-flex justify-content-around" id="detailsDetails">
@@ -80,6 +77,10 @@ export const DetailedView = () => {
 					</div>
 				</div>
 			</div>
+		</div>
+	) : (
+		<div className="text-center text-warning mt-5">
+			<i className="fas fa-spinner fa-pulse fa-6x" />
 		</div>
 	);
 };
