@@ -532,13 +532,27 @@ export const NewAnnouncement = () => {
 					<div className="row">
 						{/* -------------------------------------------------------------------						 */}
 						{/* acá empiezo a meter mano */}
-						<div className="col text-center">
-							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
-								<form onSubmit={uploadImage}>
-									<input className="fixNewBtn" type="file" onChange={e => setFiles(e.target.files)} />
-									<button className="btn btn-primary">Upload picture</button>
-								</form>
-							</div>
+						<div className="col-8 fixNewBtn text-center">
+							<div className="mx-auto card addPic mb-5"></div>
+							<form onSubmit={uploadImage}>
+								<input type="file" onChange={e => setFiles(e.target.files)} />
+								<br />
+								<button className="btn btn-primary mt-4">Upload picture</button>
+							</form>
+						</div>
+						<div className="col-4">
+							<button
+								type="button"
+								className="btn btn-warning lastBtn"
+								data-toggle="tab"
+								href="#previewTab"
+								onClick={() => {
+									console.log(roomData);
+									actions.postNewAnnouncement(roomData);
+									history.push(`/`);
+								}}>
+								Upload room
+							</button>
 						</div>
 						{/* acá termino de meter mano */}
 						{/* -------------------------------------------------------------------	
@@ -601,21 +615,8 @@ export const NewAnnouncement = () => {
 					</div>
 					<br />
 					<div className="row">
-						<div className="col-10" />
-						<div className="col-2">
-							<button
-								type="button"
-								className="btn btn-warning mb-5 ml-5"
-								data-toggle="tab"
-								href="#previewTab"
-								onClick={() => {
-									console.log(roomData);
-									actions.postNewAnnouncement(roomData);
-									history.push(`/`);
-								}}>
-								Upload room
-							</button>
-						</div>
+						<div className="col-8" />
+						<div className="col-4"></div>
 					</div>
 				</div>
 				{/*<div className="tab-pane fade" id="previewTab" role="tabpanel" aria-labelledby="previewTab-tab">
