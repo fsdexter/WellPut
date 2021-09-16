@@ -633,6 +633,7 @@ class SeedData:
             city_id = self.first_city.id,
             user_id = self.first_user.id,
             #favorites_id = self.first_favorites.id
+            room_url = "https://media.revistaad.es/photos/60c2294bb4a53607d5b4669f/4:3/w_1568,h_1176,c_limit/231620.jpg"
         )
 
         self.second_room = Room( 
@@ -647,7 +648,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
-            #favorites_id = self.first_favorites.id
+            #favorites_id = self.first_favorites.id,
+            room_url = "https://i.pinimg.com/originals/a2/04/d3/a204d395e71329a6769d097575490b7a.jpg"
         )
 
         self.third_room = Room( 
@@ -662,7 +664,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
-            #favorites_id = None
+            #favorites_id = None,
+            room_url = "https://casaydiseno.com/wp-content/uploads/2016/08/dormitorios-con-encanto-decoracion-pequeno-comodo.jpg"
         )
 
         self.fourth_room = Room( 
@@ -677,7 +680,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
-            #favorites_id = None
+            #favorites_id = None,
+            room_url = "https://i.pinimg.com/originals/5e/52/d4/5e52d4a5b28b76cbc6a73b5b0f43f42d.jpg"
         )
         
         self.fifth_room = Room( 
@@ -692,7 +696,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.fifth_user.id,
-            #favorites_id = None
+            #favorites_id = None,
+            room_url = "https://www.hola.com/imagenes/decoracion/20200220161121/iluminacion-habitaciones-juveniles/0-786-452/luz-teens-6a-a.jpg"
         )
         
         self.sixth_room = Room( 
@@ -707,7 +712,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.fifth_user.id,
-            #favorites_id = None
+            #favorites_id = None,
+            room_url = "https://cafeversatil.com/nuestroshijos/wp-content/uploads/2019/11/01-2-768x576.jpg"   
         )
         
         self.seventh_room = Room( 
@@ -722,7 +728,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.fifth_user.id,
-            #favorites_id = None
+            #favorites_id = None,
+            room_url = "https://i.pinimg.com/736x/72/1a/8c/721a8c00c5e682403d13aa15d2168c79.jpg"
         )
 
         db.session.add(self.first_room)

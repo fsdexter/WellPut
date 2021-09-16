@@ -178,6 +178,8 @@ def get_rooms():
     rooms_list = []
     rooms_list_in_DB = Room.query.all()
     
+    tenancies_data_list = []
+    
     for room in rooms_list_in_DB:
         room_room_archive = room.room_archive
         room_data = room.serialize()
@@ -194,7 +196,7 @@ def get_rooms():
             tenancy_res = tenancy.serialize()
             
             tenancies_data_room = Tenancy.query.filter(Tenancy.room_id == tenancy_res['room_id']).all()
-            tenancies_data_list = []
+           
             
             for tenancy_data_room in tenancies_data_room:
                 tenancy_reviews = tenancy_data_room.reviews
