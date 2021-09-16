@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
@@ -13,7 +13,17 @@ import "../../styles/detailedView.scss";
 
 export const DetailedView = () => {
 	const { store, actions } = useContext(Context);
-	const details = JSON.parse(localStorage.getItem("details"));
+	const details = JSON.parse(localStorage.getItem("room"));
+	let owner;
+
+	useEffect(() => {
+		actions.getDetailsRoom(1);
+		//actions.getUser(details.user_id);
+	}, []);
+
+	console.log("details.user_id : ", details.user_id);
+	console.log("Owner : ", actions.getUser(details.user_id));
+
 	return (
 		<div className="d-flex flex-column">
 			<div id="imgsCarouselDetailRoom">

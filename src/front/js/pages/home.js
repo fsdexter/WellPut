@@ -171,28 +171,15 @@ export const Home = () => {
 					</button>
 				</div>
 				<div className="col-6 ml-5 mt-5">
-					{/* {store.rooms.map(room => {
-						return (
-							<div key={room.id} className="carHome">
-								<CarouselRoomImg title={room.title} price={room.price} />
-							</div>
-						);
-					})} */}
 					<div id="carouselOne" className="carousel slide" data-ride="carousel" data-interval="false">
 						{store.rooms.map(room => {
-							return <CarouselRoomImg key={room.id} room={room} />;
+							return (
+								<div key={room.id}>
+									<CarouselRoomImg room={room} />;
+								</div>
+							);
 						})}
 					</div>
-
-					{/* <div className="carHome">
-						<CarouselRoomImg2 />
-					</div>*/}
-					{/* <div className="carHome">
-						<CarouselRoomImg />
-					</div> */}
-					{/* <div className="carHome">
-						<CarouselRoomImg4 />
-					</div>  */}
 				</div>
 			</div>
 			<Footer />
