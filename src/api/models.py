@@ -254,7 +254,9 @@ class Room (db.Model):
     type_bed = db.Column(db.String(50))
     lat = db.Column(db.Float(15))
     lng = db.Column(db.Float(15))
-    
+    room_url = db.Column(db.String(450))
+    # room_image_url = db.Column(db.String(255), unique=False, nullable=True)
+
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="rooms")
     reviews = db.relationship("Review", back_populates="room")
@@ -289,6 +291,7 @@ class Room (db.Model):
             "type_bed": self.type_bed,
             "lat": self.lat,
             "lng": self.lng,
+            "room_url":self.room_url,
             #"city_id": self.city_id, -->> No hace falta pq en su método GET ya aparece la ciudad
             "user_id": self.user_id,
             #"favorites_id": self.favorites_id,
@@ -630,6 +633,7 @@ class SeedData:
             city_id = self.first_city.id,
             user_id = self.first_user.id,
             #favorites_id = self.first_favorites.id
+            room_url = "https://media.revistaad.es/photos/60c2294bb4a53607d5b4669f/4:3/w_1568,h_1176,c_limit/231620.jpg"
         )
 
         self.second_room = Room( 
@@ -644,7 +648,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
-            #favorites_id = self.first_favorites.id
+            #favorites_id = self.first_favorites.id,
+            room_url = "https://i.pinimg.com/originals/a2/04/d3/a204d395e71329a6769d097575490b7a.jpg"
         )
 
         self.third_room = Room( 
@@ -659,7 +664,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
-            #favorites_id = None
+            #favorites_id = None,
+            room_url = "https://casaydiseno.com/wp-content/uploads/2016/08/dormitorios-con-encanto-decoracion-pequeno-comodo.jpg"
         )
 
         self.fourth_room = Room( 
@@ -674,7 +680,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
-            #favorites_id = None
+            #favorites_id = None,
+            room_url = "https://i.pinimg.com/originals/5e/52/d4/5e52d4a5b28b76cbc6a73b5b0f43f42d.jpg"
         )
         
         self.fifth_room = Room( 
@@ -689,7 +696,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.fifth_user.id,
-            #favorites_id = None
+            #favorites_id = None,
+            room_url = "https://www.hola.com/imagenes/decoracion/20200220161121/iluminacion-habitaciones-juveniles/0-786-452/luz-teens-6a-a.jpg"
         )
         
         self.sixth_room = Room( 
@@ -704,7 +712,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.fifth_user.id,
-            #favorites_id = None
+            #favorites_id = None,
+            room_url = "https://cafeversatil.com/nuestroshijos/wp-content/uploads/2019/11/01-2-768x576.jpg"   
         )
         
         self.seventh_room = Room( 
@@ -719,7 +728,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.fifth_user.id,
-            #favorites_id = None
+            #favorites_id = None,
+            room_url = "https://i.pinimg.com/736x/72/1a/8c/721a8c00c5e682403d13aa15d2168c79.jpg"
         )
 
         db.session.add(self.first_room)

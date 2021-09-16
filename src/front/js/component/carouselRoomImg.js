@@ -34,16 +34,7 @@ export const CarouselRoomImg = props => {
 						props.isDetailRoom ? "carousel-inner d-flex caroShapeCustom" : "carousel-inner d-flex caroShape"
 					}>
 					<div className="carousel-item active ">
-						{props.room.room_archives.map(picture => {
-							return (
-								<img
-									key={picture.id}
-									className="d-block w-100 caro_pic_fix"
-									src={picture.url}
-									alt="picture slide"
-								/>
-							);
-						})}
+						<img className="d-block w-100 caro_pic_fix" src={props.room.room_url} />;
 						<div className="carousel-caption">
 							<h4 className="maybeWorks">{props.room.title} </h4>
 							<div className={props.isDetailRoom ? "row rowCustom d-flex justify-content-center" : "row"}>

@@ -7,7 +7,10 @@ import doubleBlack from "../../img/doubleBlack.png";
 import bedsofaBlack from "../../img/bedsofaBlack.png";
 import addPic from "../../img/addPic.png";
 import { useHistory } from "react-router-dom";
+import { API_BASE_URL } from "../constants";
 export const NewAnnouncement = () => {
+	const [files, setFiles] = useState(null);
+
 	const { store, actions } = useContext(Context);
 	const [city, setCity] = useState();
 	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
@@ -32,7 +35,8 @@ export const NewAnnouncement = () => {
 		// doubleBed: "",
 		// sofaBed: "",
 		// noBed: ""
-		type_bed: ""
+		type_bed: "",
+		room_url: ""
 	});
 	const handleRoomData = e => {
 		const { name, value } = e.target;
@@ -79,6 +83,23 @@ export const NewAnnouncement = () => {
 				setCenter({ lat: 40.416775, lng: -3.70379 });
 			}
 		}
+	};
+	const uploadImage = evt => {
+		evt.preventDefault();
+		console.log("this are the files", files);
+		let body = new FormData();
+		body.append("profile_image", files[0]);
+		const options = {
+			body,
+			method: "POST"
+		};
+		fetch(API_BASE_URL + "/api/upload", options)
+			.then(resp => resp.json())
+			.then(data => {
+				console.log("success!!", data);
+				setRoomData(prevState => ({ ...prevState, room_url: data.url }));
+			})
+			.catch(error => console.log("errorrr", error));
 	};
 	/*function functionTest() {
 		if (document.getElementById("checkWifi").checked) {
@@ -509,67 +530,93 @@ export const NewAnnouncement = () => {
 
 				<div className="tab-pane fade" id="picsTab" role="tabpanel" aria-labelledby="picsTab-tab">
 					<div className="row">
-						<div className="col-3 text-center">
-							{" "}
-							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
-								<img className="card-img-top" src="..." alt="" />
-							</div>
-							<div className="card-body">
-								<a href="#" className="btn btn-primary">
-									Upload image
-								</a>
-							</div>
+						{/* -------------------------------------------------------------------						 */}
+						{/* acá empiezo a meter mano */}
+						<div className="col-8 fixNewBtn text-center">
+							<div className="mx-auto card addPic mb-5"></div>
+							<form onSubmit={uploadImage}>
+								<input type="file" onChange={e => setFiles(e.target.files)} />
+								<br />
+								<button className="btn btn-primary mt-4">Upload picture</button>
+							</form>
 						</div>
-						<div className="col-3 text-center">
-							{" "}
-							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
-								<img className="card-img-top" src="..." alt="" />
-							</div>
-							<div className="card-body">
-								<a href="#" className="btn btn-primary">
-									Upload image
-								</a>
-							</div>
-						</div>
-						<div className="col-3 text-center">
-							{" "}
-							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
-								<img className="card-img-top" src="..." alt="" />
-							</div>
-							<div className="card-body">
-								<a href="#" className="btn btn-primary">
-									Upload image
-								</a>
-							</div>
-						</div>
-						<div className="col-3 text-center">
-							{" "}
-							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
-								<img className="card-img-top" src="..." alt="" />
-							</div>
-							<div className="card-body">
-								<a href="#" className="btn btn-primary">
-									Upload image
-								</a>
-							</div>
-						</div>
-					</div>
-					<br />
-					<div className="row">
-						<div className="col-10" />
-						<div className="col-2">
+						<div className="col-4">
 							<button
 								type="button"
-								className="btn btn-warning mb-5 ml-5"
+								className="btn btn-warning lastBtn"
 								data-toggle="tab"
 								href="#previewTab"
 								onClick={() => {
+									console.log(roomData);
 									actions.postNewAnnouncement(roomData);
 									history.push(`/`);
 								}}>
-								Upload
+								Upload room
 							</button>
 						</div>
+						{/* acá termino de meter mano */}
+						{/* -------------------------------------------------------------------	
+						{/* <div className="col-3 text-center">
+							{" "}
+							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
+								<img className="card-img-top" src="..." alt="" />
+							</div>
+							<div className="card-body">
+								<a href="#" className="btn btn-primary">
+									Upload image
+								</a>
+							</div>
+						</div> */}
+
+						{/* <div className="col-3 text-center">
+							{" "}
+							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
+								<img className="card-img-top" src="..." alt="" />
+							</div>
+							<div className="card-body">
+								<a href="#" className="btn btn-primary">
+									Upload image
+								</a>
+							</div>
+						</div> */}
+						{/* <div className="col-3 text-center">
+							{" "}
+							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
+								<img className="card-img-top" src="..." alt="" />
+							</div>
+							<div className="card-body">
+								<a href="#" className="btn btn-primary">
+									Upload image
+								</a>
+							</div>
+						</div> */}
+						{/* <div className="col-3 text-center">
+							{" "}
+							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
+								<img className="card-img-top" src="..." alt="" />
+							</div>
+							<div className="card-body">
+								<a href="#" className="btn btn-primary">
+									Upload image
+								</a>
+							</div>
+						</div> */}
+						{/* <div className="col-3 text-center">
+							{" "}
+							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
+								<img className="card-img-top" src="..." alt="" />
+							</div>
+							<div className="card-body">
+								<a href="#" className="btn btn-primary">
+									Upload image
+								</a>
+							</div>
+						</div> */}
+					</div>
+					<br />
+					<div className="row">
+						<div className="col-8" />
+						<div className="col-4"></div>
 					</div>
 				</div>
 				{/*<div className="tab-pane fade" id="previewTab" role="tabpanel" aria-labelledby="previewTab-tab">

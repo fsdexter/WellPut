@@ -178,6 +178,8 @@ def get_rooms():
     rooms_list = []
     rooms_list_in_DB = Room.query.all()
     
+    tenancies_data_list = []
+    
     for room in rooms_list_in_DB:
         room_room_archive = room.room_archive
         room_data = room.serialize()
@@ -194,7 +196,7 @@ def get_rooms():
             tenancy_res = tenancy.serialize()
             
             tenancies_data_room = Tenancy.query.filter(Tenancy.room_id == tenancy_res['room_id']).all()
-            tenancies_data_list = []
+           
             
             for tenancy_data_room in tenancies_data_room:
                 tenancy_reviews = tenancy_data_room.reviews
@@ -341,6 +343,15 @@ def edit_profile(user_id):
     
     return jsonify(user_to_edit), 200
 
+    # -------------------------- TEST -------------------------
+@api.route('/upload', methods=['POST'])
+def handle_pic ():
+      
+        result = cloudinary.uploader.upload(request.files["profile_image"])
+        print(result["url"])
+        return jsonify({"url":result["url"]} ), 200
+    # -------------------------- TEST -------------------------
+
 @api.route('/new_announcement', methods=['POST'])
 def create_announcement():
     body_request = request.get_json()
@@ -361,7 +372,11 @@ def create_announcement():
     expElectricity_request = body_request.get("expElectricity", None)
     expWater_request = body_request.get("expWater", None)
     type_bed_request = body_request.get("type_bed", None)
-    
+    room_url_request = body_request.get("room_url", None)
+    #agregando foto de room
+    # room_cloudinary = cloudinary.uploader.upload(body_request.get("room_url"), folder = "agile_monkeys")
+    # room_image_url_request = room_image_url["secure_url"]
+
     city_room= City(
         name = city_request
     )
@@ -397,7 +412,9 @@ def create_announcement():
         description = description_request,
         price = price_request,
         deposit = deposit_request,
-        type_bed = type_bed_request
+        type_bed = type_bed_request,
+        room_url =  room_url_request
+        # room_image_url = room_image_url_request 
         )
     
     db.session.add(city_room)
