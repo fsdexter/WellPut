@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { OwnerResume } from "../component/ownerResume";
 import { ReviewsResume } from "../component/reviewsResumen";
 import { CarouselRoomImg } from "../component/carouselRoomImg";
+import { RatingStatic } from "../component/ratingStatic";
 
 import rommie1 from "../../img/Becker.jpg";
 import rommie2 from "../../img/adriana.jpg";
@@ -18,13 +19,35 @@ export const DetailedView = () => {
 	const details = JSON.parse(localStorage.getItem("room")) || JSON.parse(localStorage.getItem("details")); // Se coge room o details del localStore, porque, no sé qué pasa que aveces existe uno y aveces existe el otro
 
 	useEffect(() => {
-		actions.getDetailsRoom(details.id);
+		actions.getDetailsRoom(room_id);
 	}, []);
+
+	let room_reviews = details.tenancies.map(tenancy => tenancy.reviews.map(review => review));
+	let averageRating = Math.round(
+		room_reviews.reduce(
+			(accumulator, currentValue) => (currentValue[0] ? currentValue[0].rating + accumulator : accumulator),
+			0
+		) / room_reviews.length
+	);
 
 	return details ? (
 		<div className="d-flex flex-column">
-			<div id="imgsCarouselDetailRoom">
-				<CarouselRoomImg room={details} isDetailRoom={true} />
+			<div className="carousel-item active">
+				<img className="d-block w-100 ddetai-img-room" src={details.room_url} />;
+				<div className="carousel-caption ">
+					<h4 className="maybeWorks mt-3">{details.title} </h4>
+					<div className="row rowCustom d-flex justify-content-center">
+						<div className="caroPriceCustom mb-3">
+							<h2>{details.price} €</h2>
+						</div>
+						<div className="starCaroCustom d-flex justify-content-around mb-3">
+							<RatingStatic rating={averageRating} />
+							<button className="heartButtonFix ml-5 pr-5 pl-5">
+								<i className="far fa-heart fa-2x" />
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div className="row d-flex flex-column mb-3">

@@ -27,7 +27,7 @@ export const CarouselRoomImg = props => {
 			onClick={() => {
 				localStorage.setItem("details", JSON.stringify(props.room));
 			}}
-			to={`/detailedView/${props.room.id}`}>
+			to={`/detailedView/${props.room}`}>
 			<div className="carHome">
 				<div
 					className={
