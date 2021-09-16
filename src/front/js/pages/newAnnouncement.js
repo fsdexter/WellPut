@@ -532,11 +532,13 @@ export const NewAnnouncement = () => {
 					<div className="row">
 						{/* -------------------------------------------------------------------						 */}
 						{/* acá empiezo a meter mano */}
-						<div className="col-3 text-center">
-							<form onSubmit={uploadImage}>
-								<input type="file" onChange={e => setFiles(e.target.files)} />
-								<button>Upload picture</button>
-							</form>
+						<div className="col text-center">
+							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
+								<form onSubmit={uploadImage}>
+									<input className="fixNewBtn" type="file" onChange={e => setFiles(e.target.files)} />
+									<button className="btn btn-primary">Upload picture</button>
+								</form>
+							</div>
 						</div>
 						{/* acá termino de meter mano */}
 						{/* -------------------------------------------------------------------	
