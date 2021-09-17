@@ -272,9 +272,6 @@ class Room (db.Model):
     # Relación de 1 Room muchos Favorites
     favorites = db.relationship("Favorites", back_populates="room")
    
-    # Relación de 1 Favorites muchas Rooms
-    # favorites_id = db.Column(db.Integer, db.ForeignKey('favorites.id'))
-    # favorites = db.relationship("Favorites", back_populates="room")
     
     def __repr__(self):
         return '<Room %r>' % self.title
@@ -292,9 +289,13 @@ class Room (db.Model):
             "lat": self.lat,
             "lng": self.lng,
             "room_url":self.room_url,
-            #"city_id": self.city_id, -->> No hace falta pq en su método GET ya aparece la ciudad
             "user_id": self.user_id,
-            #"favorites_id": self.favorites_id,
+            "tenancies": list(map(lambda tenancy: tenancy.serialize(), self.tenancies)),
+            "room_archive": list(map(lambda imagen: imagen.serialize(), self.room_archive)),
+            "expense": list(map(lambda expen: expen.serialize(), self.expense)),
+            "feature": list(map(lambda feat: feat.serialize(), self.feature)),
+            "favorites": list(map(lambda favorite: favorite.serialize(), self.favorites)),
+            "reviews": list(map(lambda review: review.serialize(), self.reviews))
         }
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -638,32 +639,32 @@ class SeedData:
 
         self.second_room = Room( 
             description = "I have very nice and clean double room for rent in 3 bed room sharing house at bilton road Perivale .This house is only 5 minutes away from Perivale tube station and Alperton is well.Supermarket Sainsbury and Tesco are 5 to 7 minute walking distance.A big shop londis and 297 bus stop are about 2 minutes walking distance from home. All bills are including with free WiFi No deposit required For single lady",
-            address = "Bastero 6",
+            address = "Bastero 26",
             country = "Spain",
             price = "400",
             deposit = "400",
             title = "Moder and Unique Room",
             type_bed = "single",
-            lat = 33.4329,
+            lat = 36.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
-            user_id = self.first_user.id,
+            user_id = self.second_user.id,
             #favorites_id = self.first_favorites.id,
             room_url = "https://i.pinimg.com/originals/a2/04/d3/a204d395e71329a6769d097575490b7a.jpg"
         )
 
         self.third_room = Room( 
             description = "This house has 5 bedrooms, 1 toilet and 1 washroom,1 Kitchen 1 quite and clean male tenant is currently living JUST 2 WEEKS OF DEPOSITS ROOM RENT : 550PCM Walthamstow Amazing Double room at Zone 3, E17 9QG Amenities: ✔ 💡Electric Bill ✔ 💧Water Bill ✔ 🌐High Speed Internet/Wifi ✔ 🛠️Repairs ✔ Council Tax Included ✔ *All bills included Advantages of these Rooms: ✔ 🚅Tubes (24/7) ✔ 🚌Bus Stations (24/7) ✔ 🍽️Restaurants/🥂Pub ✔ 📒Universities ✔ ⚕️Hospital/Pharmacy ✔ 💱Banks ✔ 🛍️Shops/Markets ✔ 🏞️Parks ✔ 🏞️Main Road/Street ** REFERENCES ARE REQUIRED** To arrange a viewing, please send me a message specifying your best date of move in and phone number",
-            address = "Bastero 6",
+            address = "Catellán 8",
             country = "Spain",
             price = "500",
             deposit = "500",
             title = "Amazing Double Room",
             type_bed ="double",
-            lat = 33.4329,
+            lat = 23.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
-            user_id = self.first_user.id,
+            user_id = self.third_user.id,
             #favorites_id = None,
             room_url = "https://casaydiseno.com/wp-content/uploads/2016/08/dormitorios-con-encanto-decoracion-pequeno-comodo.jpg"
         )
@@ -803,21 +804,24 @@ class SeedData:
             comment = "The neighborhood is great, it is well connected by public transport, the metro is 5 minutes away and there are many nice areas to hang out.",
             rating = 4,
             date = "01/01/2021",
-            tenancy_id = self.first_tenancy.id
+            tenancy_id = self.first_tenancy.id,
+            room_id = self.fifth_room.id
         )
 
         self.second_review = Review( 
             comment = "The area of the flat has a lot of night life. It is amazing!",
             rating = 5,
             date = "02/05/2021",
-            tenancy_id = self.second_tenancy.id
+            tenancy_id = self.second_tenancy.id,
+            room_id = self.fifth_room.id
         )
 
         self.third_review = Review( 
             comment = "The area has many vegan and garden produce stores. I loved that !!",
             rating = 3,
             date = "01/06/2021",
-            tenancy_id = self.third_tenancy.id
+            tenancy_id = self.third_tenancy.id,
+            room_id = self.fifth_room.id
         )
 
         db.session.add(self.first_review)

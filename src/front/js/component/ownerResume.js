@@ -10,10 +10,10 @@ export const OwnerResume = props => {
 	const { store, actions } = useContext(Context);
 
 	useEffect(() => {
-		actions.getOwner(props.ownerId);
+		actions.getUser(props.ownerId);
 	}, []);
 
-	let owner = JSON.parse(localStorage.getItem("owner"));
+	let owner = JSON.parse(localStorage.getItem("user"));
 
 	return owner ? (
 		<div className="d-flex flex-column">

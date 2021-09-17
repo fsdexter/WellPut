@@ -106,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 
 				try {
-					const response = await fetch(`${API_BASE_URL}/api/`);
+					const response = await fetch(`${API_BASE_URL}/api/rooms`);
 					const roomsList = await response.json();
 					setStore({ rooms: roomsList });
 					localStorage.setItem("rooms", JSON.stringify(store.rooms));
