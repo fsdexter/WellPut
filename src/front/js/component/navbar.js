@@ -42,7 +42,6 @@ export const Navbar = () => {
 				</Link>
 			</div>
 			<div className="col-10">
-				{/*store.myLocalStore.user ? (*/}
 				{store.myLocalStore.user ? (
 					<div className="col-12 d-flex justify-content-around">
 						<span

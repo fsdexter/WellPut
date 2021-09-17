@@ -30,6 +30,8 @@ export const DetailedView = () => {
 			const response = await fetch(`${API_BASE_URL}/api/detailed_room/${room_id}`);
 			const room = await response.json();
 			setDetails(room);
+
+			// Calcular la media de los ratings
 			let room_reviews = room.reviews.map(review => review.rating);
 			setAverageRating(
 				Math.round(
@@ -43,6 +45,8 @@ export const DetailedView = () => {
 			return error.message;
 		}
 	};
+
+	console.log(details);
 
 	return details ? (
 		<div className="d-flex flex-column">

@@ -11,11 +11,10 @@ export const ReviewsResume = () => {
 	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
 
-	//console.log("id de la habitación Resumen review --- ", room_id);
+	console.log("id de la habitación Resumen review --- ", room_id);
 
 	useEffect(() => {
-		//actions.getTenancies(room_id);
-		actions.getTenancies(1);
+		actions.getTenancies(room_id);
 	}, []);
 
 	return (
