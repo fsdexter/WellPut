@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import PropTypes from "prop-types";
 
 export function Rating(props) {
 	const { store, actions } = useContext(Context);
@@ -27,9 +26,6 @@ export function Rating(props) {
 		</div>
 	);
 }
-Rating.propTypes = {
-	click: PropTypes.func
-};
 
 // export function Rating() {
 // 	const [switchColor, setSwitchColor] = useState("unchecked");
