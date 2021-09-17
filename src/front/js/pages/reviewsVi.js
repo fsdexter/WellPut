@@ -13,8 +13,8 @@ export const Reviews = () => {
 	console.log("room_id en comentarios : ", room_id);
 
 	useEffect(() => {
-		//actions.getTenancies(room_id);
-		actions.getTenancies(1);
+		actions.getTenancies(room_id);
+		//actions.getTenancies(1);
 	}, []);
 
 	return (

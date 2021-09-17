@@ -42,7 +42,6 @@ export const Navbar = () => {
 				</Link>
 			</div>
 			<div className="col-10">
-				{/*store.myLocalStore.user ? (*/}
 				{store.myLocalStore.user ? (
 					<div className="col-12 d-flex justify-content-around">
 						<span
@@ -53,6 +52,7 @@ export const Navbar = () => {
 							}
 							onClick={() => {
 								changeElementNavbarActive("profile");
+								console.log(JSON.parse(localStorage.getItem("user")));
 								history.push(`/profile/${JSON.parse(localStorage.getItem("user")).id}`);
 							}}>
 							Profile

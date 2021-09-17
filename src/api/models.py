@@ -245,7 +245,7 @@ class Review(db.Model):
 #------------------------------------------------------------------------------------------------------------------------------
 class Room (db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(280))
+    description = db.Column(db.String(8000))
     address = db.Column(db.String(220))
     country = db.Column(db.String(120))
     price = db.Column(db.String(50))
@@ -272,9 +272,6 @@ class Room (db.Model):
     # Relación de 1 Room muchos Favorites
     favorites = db.relationship("Favorites", back_populates="room")
    
-    # Relación de 1 Favorites muchas Rooms
-    # favorites_id = db.Column(db.Integer, db.ForeignKey('favorites.id'))
-    # favorites = db.relationship("Favorites", back_populates="room")
     
     def __repr__(self):
         return '<Room %r>' % self.title
@@ -292,9 +289,13 @@ class Room (db.Model):
             "lat": self.lat,
             "lng": self.lng,
             "room_url":self.room_url,
-            #"city_id": self.city_id, -->> No hace falta pq en su método GET ya aparece la ciudad
             "user_id": self.user_id,
-            #"favorites_id": self.favorites_id,
+            "tenancies": list(map(lambda tenancy: tenancy.serialize(), self.tenancies)),
+            "room_archive": list(map(lambda imagen: imagen.serialize(), self.room_archive)),
+            "expense": list(map(lambda expen: expen.serialize(), self.expense)),
+            "feature": list(map(lambda feat: feat.serialize(), self.feature)),
+            "favorites": list(map(lambda favorite: favorite.serialize(), self.favorites)),
+            "reviews": list(map(lambda review: review.serialize(), self.reviews))
         }
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -621,12 +622,12 @@ class SeedData:
 #------------------------
     def create_seed_room(self):
         self.first_room = Room( 
-            description = "Cras ac fermentum neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+            description = "A premium large double room has become available in our very sought Boutique House share. 5 min walk from Forest Gate Station and 5-10min train journey to Westfield Shopping Centre + the Olympic Park! This premium space large double room is filled with luxury including a large wardrobe, chest of drawers, bedside table, a large desk and many more. This room also includes private garden access directly from the room and lets in a lot of natural light. The house includes a beautifully renovated open space kitchen lounge and many facilities. All tenants are warm and friendly professionals Local amenities: - Cafe's, shops, pubs - Huge range of parks - Westfield Shopping Centre: 3 min train journey (Including all types of shops from supermarkets to renowned luxury fashion brands and amazing restaurants). + Easy connections to Central London areas. * VERY generously sized premium double room * Professional House share * Washing machine * Large fridge with plenty of space * Large jacuzzi bath * 2 Bathrooms Rent will include: * Council Tax * Fortnightly cleaner * Electricity bill * Gas bill * Water rates * Super-fast broadband The professionals in the house will be looking for a tidy, sociable person to join their new home, and we are looking for someone who will pay their rent on time and treat the house as their home :) This is a friendly, respectful and tidy home for professionals to relax and enjoy. We take pride in serving our tenants and strive to be responsive to any needs that arise in our properties. Contact us for testimonials.",
             address = "Bastero 6",
             country = "Spain",
             price = "450",
             deposit = "450",
-            title = "Habitacion en casa moderna.",
+            title = "Exquisite Large Double Room in Prime Location",
             type_bed = "single",
             lat = 33.4329,
             lng = -4.642371,
@@ -637,44 +638,44 @@ class SeedData:
         )
 
         self.second_room = Room( 
-            description = "Vestibulum auctor purus in leo laoreet, ac aliquam sem tincidunt. Vivamus eleifend magna a leo pulvinar.",
-            address = "Bastero 6",
+            description = "I have very nice and clean double room for rent in 3 bed room sharing house at bilton road Perivale .This house is only 5 minutes away from Perivale tube station and Alperton is well.Supermarket Sainsbury and Tesco are 5 to 7 minute walking distance.A big shop londis and 297 bus stop are about 2 minutes walking distance from home. All bills are including with free WiFi No deposit required For single lady",
+            address = "Bastero 26",
             country = "Spain",
             price = "400",
             deposit = "400",
-            title = "Habitacion pequeña y luminosa.",
+            title = "Moder and Unique Room",
             type_bed = "single",
-            lat = 33.4329,
+            lat = 36.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
-            user_id = self.first_user.id,
+            user_id = self.second_user.id,
             #favorites_id = self.first_favorites.id,
             room_url = "https://i.pinimg.com/originals/a2/04/d3/a204d395e71329a6769d097575490b7a.jpg"
         )
 
         self.third_room = Room( 
-            description = "Aliquam sit amet interdum lacus. Proin finibus vehicula sagittis.",
-            address = "Bastero 6",
+            description = "This house has 5 bedrooms, 1 toilet and 1 washroom,1 Kitchen 1 quite and clean male tenant is currently living JUST 2 WEEKS OF DEPOSITS ROOM RENT : 550PCM Walthamstow Amazing Double room at Zone 3, E17 9QG Amenities: ✔ 💡Electric Bill ✔ 💧Water Bill ✔ 🌐High Speed Internet/Wifi ✔ 🛠️Repairs ✔ Council Tax Included ✔ *All bills included Advantages of these Rooms: ✔ 🚅Tubes (24/7) ✔ 🚌Bus Stations (24/7) ✔ 🍽️Restaurants/🥂Pub ✔ 📒Universities ✔ ⚕️Hospital/Pharmacy ✔ 💱Banks ✔ 🛍️Shops/Markets ✔ 🏞️Parks ✔ 🏞️Main Road/Street ** REFERENCES ARE REQUIRED** To arrange a viewing, please send me a message specifying your best date of move in and phone number",
+            address = "Catellán 8",
             country = "Spain",
             price = "500",
             deposit = "500",
-            title = "Habitacion suite con cama grande.",
+            title = "Amazing Double Room",
             type_bed ="double",
-            lat = 33.4329,
+            lat = 23.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
-            user_id = self.first_user.id,
+            user_id = self.third_user.id,
             #favorites_id = None,
             room_url = "https://casaydiseno.com/wp-content/uploads/2016/08/dormitorios-con-encanto-decoracion-pequeno-comodo.jpg"
         )
 
         self.fourth_room = Room( 
-            description = "Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
+            description = "Big bright room to rent, must be paid on time all bills included no smokers and drinking must be done outdoors i expect the noise levels down after 10 and i do not accept guests coming over every day lastly i expect you to clean after yourself since i live here too i will get curtains and a wardrobe before you move in.The cloud above the bed can be removed if you would like i can provide bedsheets pillows and blankets which are new but if you would like to bring your own thats fine too the shower water pressure isnt the greatest but thats about it if you need anything or have any questions let me know the walls and ceiling are freshly painted and everything is bleached down",
             address= "Bastero 6",
             country = "Spain",
             price = "500",
             deposit = "500",
-            title = "Hermosa habitación amueblada.",
+            title = "Lovely Clean Room",
             type_bed = "double",
             lat = 33.4329,
             lng = -4.642371,
@@ -685,12 +686,12 @@ class SeedData:
         )
         
         self.fifth_room = Room( 
-            description = "Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
+            description = "Charming Double Bedroom available in this well kept house from the second week of August. The house consists of two full bathrooms, 5 flatmates and a spacious open plan kitchen with a private garden. The house is located on a residential, quiet road with super easy access to Gipsy Hill station (3 mins walk). We consider single professionals or students with UK based guarantors. Get in touch in order to get some more details.",
             address= "Avenida del Aeropuerto 10",
             country = "Spain",
             price = "300",
             deposit = "100",
-            title = "Hermosa habitación amueblada.",
+            title = "Beautiful Room",
             type_bed = "double",
             lat = 33.4329,
             lng = -4.642371,
@@ -701,12 +702,12 @@ class SeedData:
         )
         
         self.sixth_room = Room( 
-            description = "Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
+            description = "Friendly atmosphere. Is not just a house is a home! Come and ser for yourself, you’ll love it. Very closely to trains stations and big Tesco, Sainsbury’s and Lidl!!",
             address= "Avenida del Aeropuerto 10",
             country = "Spain",
             price = "500",
             deposit = "500",
-            title = "Hermosa habitación amueblada.",
+            title = "Moder Room",
             type_bed = "double",
             lat = 33.4329,
             lng = -4.642371,
@@ -717,7 +718,7 @@ class SeedData:
         )
         
         self.seventh_room = Room( 
-            description = "Ut non lectus quis libero ultricies luctus sed eget justo. Nunc molestie finibus vulputate. Aliquam erat volutpat.Ut non lectus quis libero.",
+            description = "Super spacious double room to rent in Avenida del Aeropuerto 10. We are looking for a quiet, tidy and friendly people to share the flat. Flat with separate toilet and bathroom and cozy kitchen. Couples 500€",
             address= "Avenida del Aeropuerto 10",
             country = "Spain",
             price = "500",
@@ -803,21 +804,24 @@ class SeedData:
             comment = "The neighborhood is great, it is well connected by public transport, the metro is 5 minutes away and there are many nice areas to hang out.",
             rating = 4,
             date = "01/01/2021",
-            tenancy_id = self.first_tenancy.id
+            tenancy_id = self.first_tenancy.id,
+            room_id = self.fifth_room.id
         )
 
         self.second_review = Review( 
             comment = "The area of the flat has a lot of night life. It is amazing!",
             rating = 5,
             date = "02/05/2021",
-            tenancy_id = self.second_tenancy.id
+            tenancy_id = self.second_tenancy.id,
+            room_id = self.fifth_room.id
         )
 
         self.third_review = Review( 
             comment = "The area has many vegan and garden produce stores. I loved that !!",
             rating = 3,
             date = "01/06/2021",
-            tenancy_id = self.third_tenancy.id
+            tenancy_id = self.third_tenancy.id,
+            room_id = self.fifth_room.id
         )
 
         db.session.add(self.first_review)
@@ -967,7 +971,7 @@ class SeedData:
         db.session.commit() 
 
 #------------------------
-#  SpokenLanguages   ----->>>>> DA ERROR CON EL ID DEL IDIOMA
+#  SpokenLanguages 
 #------------------------
     def create_seed_spokenLanguages(self):
         self.first_spokenLanguages = SpokenLanguages(
@@ -1161,7 +1165,6 @@ class SeedData:
         self.create_seed_country()
         self.create_seed_city()
         self.create_seed_user()
-        #self.create_seed_favorites() ----->>> Cuando es 1 favorito muchas habitaciones
         self.create_seed_room()
         self.create_seed_favorites() # ---->>> 1 habitación muchos favoritos
         self.create_seed_tenancy()
@@ -1176,27 +1179,3 @@ class SeedData:
         self.create_seed_feature()
         self.create_seed_featuresRoom()
        
-        
-    
-
-#------------------------------------------------------------------------------------------------------------------------------
-# Comments:
-'''
-1. Create 5 fake users  
-    1.1 One owner.
-    1.2 Three roomates.
-    1.3 One searching.
-2. Create 4 fake rooms.
-    2.1 Three roomates(1.2) are living here.
-
-3. Creation order
-    3.1 Create users.
-    3.2 Create Rooms.
-    3.3 Create associations between em.
-    
-    '''
-
-
-
-
-#------------------------------------------------------------------------------------------------------------------------------

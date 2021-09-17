@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 export const RatingStatic = props => {
 	const ratingValue = props.rating;
 
+	console.log("ratingValue : ", ratingValue);
+
 	switch (ratingValue) {
-		case 0:
+		case NaN:
 			return (
 				<div>
 					<div className="fa fa-star unchecked fa-2x" />

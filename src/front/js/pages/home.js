@@ -20,24 +20,18 @@ import { Footer } from "../component/footer";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
-	//let listRooms = store.rooms.map((item, index) => {
-	//return <li key={index}>{item}</li>;
-	//});
-
 	const [city, setCity] = useState();
 	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
 	const [formValue, setFormValue] = useState({
 		interests: ""
 	});
 	const handleAddrTypeChange = (f, key) => {
-		console.log(f, key, "<-----");
 		setFormValue({
 			...formValue,
 			[key]: f.map(item => {
 				return item.value;
 			})
 		});
-		console.log("addrtype ----->>>> ", formValue);
 		actions.setInterests(formValue);
 	};
 	const handleCity = e => {
@@ -57,12 +51,6 @@ export const Home = () => {
 			}
 		}
 	};
-	// const cordenates = {
-	// Madri = {lat: 40.416775, lng: -3.70379 };
-	// Barcelona = {lat: 41.385063, lng: 2.173404 }:
-	// malaga = {lat: 36.721275, lng: -4.421399}:
-	// valencia = {lat: 36.721275, lng: -4.421399}:
-	// };
 
 	return (
 		<div className="container-fluid" id="myContainerHome">
@@ -171,28 +159,21 @@ export const Home = () => {
 					</button>
 				</div>
 				<div className="col-6 ml-5 mt-5">
-					{/* {store.rooms.map(room => {
-						return (
-							<div key={room.id} className="carHome">
-								<CarouselRoomImg title={room.title} price={room.price} />
-							</div>
-						);
-					})} */}
 					<div id="carouselOne" className="carousel slide" data-ride="carousel" data-interval="false">
-						{store.rooms.map(room => {
-							return <CarouselRoomImg key={room.id} room={room} />;
-						})}
+						{store.rooms ? (
+							store.rooms.map(room => {
+								return (
+									<div key={room.id}>
+										<CarouselRoomImg room={room} />;
+									</div>
+								);
+							})
+						) : (
+							<div className="text-center text-warning mt-5">
+								<i className="fas fa-spinner fa-pulse fa-6x" />
+							</div>
+						)}
 					</div>
-
-					{/* <div className="carHome">
-						<CarouselRoomImg2 />
-					</div>*/}
-					{/* <div className="carHome">
-						<CarouselRoomImg />
-					</div> */}
-					{/* <div className="carHome">
-						<CarouselRoomImg4 />
-					</div>  */}
 				</div>
 			</div>
 			<Footer />

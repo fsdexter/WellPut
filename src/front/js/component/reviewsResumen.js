@@ -14,8 +14,7 @@ export const ReviewsResume = () => {
 	console.log("id de la habitación Resumen review --- ", room_id);
 
 	useEffect(() => {
-		//actions.getTenancies(room_id);
-		actions.getTenancies(1);
+		actions.getTenancies(room_id);
 	}, []);
 
 	return (

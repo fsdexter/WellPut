@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { API_BASE_URL } from "../constants";
 
 import { OwnerResume } from "../component/ownerResume";
 import { ReviewsResume } from "../component/reviewsResumen";
 import { CarouselRoomImg } from "../component/carouselRoomImg";
+import { RatingStatic } from "../component/ratingStatic";
 
 import rommie1 from "../../img/Becker.jpg";
 import rommie2 from "../../img/adriana.jpg";
@@ -13,11 +16,56 @@ import "../../styles/detailedView.scss";
 
 export const DetailedView = () => {
 	const { store, actions } = useContext(Context);
-	const details = JSON.parse(localStorage.getItem("details"));
-	return (
+	let { room_id } = useParams();
+	const [details, setDetails] = useState();
+
+	const [averageRating, setAverageRating] = useState();
+
+	useEffect(() => {
+		getDetailsRoom();
+	}, []);
+
+	const getDetailsRoom = async () => {
+		try {
+			const response = await fetch(`${API_BASE_URL}/api/detailed_room/${room_id}`);
+			const room = await response.json();
+			setDetails(room);
+
+			// Calcular la media de los ratings
+			let room_reviews = room.reviews.map(review => review.rating);
+			setAverageRating(
+				Math.round(
+					room_reviews.reduce(
+						(accumulator, currentValue) => (currentValue ? currentValue + accumulator : accumulator),
+						0
+					) / room_reviews.length
+				)
+			);
+		} catch (error) {
+			return error.message;
+		}
+	};
+
+	console.log(details);
+
+	return details ? (
 		<div className="d-flex flex-column">
-			<div id="imgsCarouselDetailRoom">
-				<CarouselRoomImg room={details} isDetailRoom={true} />
+			<div className="carousel-item active">
+				<img className="d-block w-100 ddetai-img-room" src={details.room_url} />;
+				<div className="carousel-caption ">
+					<h4 className="maybeWorks mt-3">{details.title} </h4>
+					<div className="row rowCustom d-flex justify-content-center">
+						<div className="caroPriceCustom mb-3">
+							<h2>{details.price} €</h2>
+						</div>
+						<div className="starCaroCustom d-flex justify-content-around mb-3">
+							<RatingStatic rating={averageRating} />
+							<button className="heartButtonFix ml-5 pr-5 pl-5">
+								<i className="far fa-heart fa-2x" />
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div className="row d-flex flex-column mb-3">
@@ -29,7 +77,7 @@ export const DetailedView = () => {
 
 			<div className="row" id="containerDetailDetail">
 				<div className="col-2" id="oRBox">
-					<OwnerResume />
+					<OwnerResume ownerId={details.user_id} />
 				</div>
 
 				<div className="col-9 d-flex justify-content-around" id="detailsDetails">
@@ -70,6 +118,10 @@ export const DetailedView = () => {
 					</div>
 				</div>
 			</div>
+		</div>
+	) : (
+		<div className="text-center text-warning mt-5">
+			<i className="fas fa-spinner fa-pulse fa-6x" />
 		</div>
 	);
 };

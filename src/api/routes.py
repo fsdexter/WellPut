@@ -173,118 +173,16 @@ def get_single_user(user_id):
  
     return jsonify(user), 200
 
-@api.route('/', methods=['GET']) # ALL ROOMS LIST
+@api.route('/rooms', methods=['GET']) # ALL ROOMS LIST
 def get_rooms():
-    rooms_list = []
-    rooms_list_in_DB = Room.query.all()
-    
-    tenancies_data_list = []
-    
-    for room in rooms_list_in_DB:
-        room_room_archive = room.room_archive
-        room_data = room.serialize()
-        room_detail_room_archives = []
-        
-        for room_archive in room_room_archive:
-            room_archive_res = room_archive.serialize()
-            room_detail_room_archives.append(room_archive_res)
-        
-        tenancies_room = room.tenancies
-        room = room.serialize()
-        
-        for tenancy in tenancies_room:
-            tenancy_res = tenancy.serialize()
-            
-            tenancies_data_room = Tenancy.query.filter(Tenancy.room_id == tenancy_res['room_id']).all()
-           
-            
-            for tenancy_data_room in tenancies_data_room:
-                tenancy_reviews = tenancy_data_room.reviews
-                tenancy_data = tenancy_data_room.serialize()
-                tenancies_data_list.append(tenancy_data)
-                
-                reviews_list = []
-                
-                for review in tenancy_reviews:
-                    review_res = review.serialize()
-                    reviews_list.append(review_res)
-                    
-                # To get the reviews inside the room details
-                tenancy_data['reviews'] = reviews_list
-        
-        
-        room_data['room_archives'] = room_detail_room_archives
-        room_data['tenancies'] = tenancies_data_list
-        
-        # To get the rooms list with all rooms details in the home
-        rooms_list.append(room_data)
-    
-    return jsonify(rooms_list), 200
-
+    rooms = Room.query.all()
+    return jsonify(list(map(lambda room: room.serialize(), rooms)))
+       
 @api.route('/detailed_room/<int:room_id>', methods=['GET'])
 def get_single_room(room_id):
     room_selected = Room.query.get(room_id)
+    return jsonify(room_selected.serialize())
     
-    tenancies_room = room_selected.tenancies
-    room = room_selected.serialize()
-    #tenancies_list = []
-    
-    for tenancy in tenancies_room:
-        tenancy_res = tenancy.serialize()
-        #tenancies_list.append(tenancy_res)
-        
-        tenancies_data_room = Tenancy.query.filter(Tenancy.room_id == tenancy_res['room_id']).all()
-        tenancies_data_list = []
-        
-        for tenancy_data_room in tenancies_data_room:
-            tenancy_reviews = tenancy_data_room.reviews
-            tenancy_data = tenancy_data_room.serialize()
-            tenancies_data_list.append(tenancy_data)
-            reviews_list = []
-            
-            for review in tenancy_reviews:
-                review_res = review.serialize()
-                reviews_list.append(review_res)
-            
-            # To get the reviews inside the room details
-            tenancy_data['reviews'] = reviews_list
-            
-        
-    room_archive_room = room_selected.room_archive
-    room = room_selected.serialize()
-    room_archives = []
-    
-    for room_archive in room_archive_room:
-        room_archive_res = room_archive.serialize()
-        room_archives.append(room_archive_res)
-    
-    expense_room = room_selected.expense
-    room = room_selected.serialize()
-    expensives = []
-    
-    for expensive in expense_room:
-        expensive_res = expensive.serialize()
-        expensives.append(expensive_res)
-    
-    feature_room = room_selected.feature
-    room = room_selected.serialize()
-    features = []
-    
-    for feature in feature_room:
-        feature_res = feature.serialize()
-        features.append(feature_res)
-    
-    city = City.query.filter(City.id == Room.city_id).first()
-    city_room = [city.serialize()]
-    
-    room['tenancies'] = tenancies_data_list
-    #room['tenancies'] = tenancies_list
-    room['room_archives'] = room_archives
-    room['expensives'] = expensives
-    room['features'] = features
-    room['city'] = city_room
-    
-    return jsonify(room), 200
 
 
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # FUNCIONA !!!!

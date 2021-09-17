@@ -60,14 +60,13 @@ export const Profile = () => {
 										{JSON.parse(localStorage.getItem("user")).user?.last_name ||
 											JSON.parse(localStorage.getItem("user")).last_name}
 									</h1>
-									<div className="d-flex align-items-center ml-3">
-										{/** LAS ESTRELLAS PROCEDDEN DE LAS REVIEWS */}
+									{/* <div className="d-flex align-items-center ml-3">
 										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
 										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
 										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
 										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
 										<i className="fa fa-star start fa-lg" aria-hidden="true" />
-									</div>
+									</div> */}
 								</div>
 
 								<div className="col-12 detallefondblack" id="presentationUser">

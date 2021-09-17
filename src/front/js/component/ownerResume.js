@@ -1,28 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import ownerImg from "../../img/women.jpg";
 import "../../styles/detailedView.scss";
 
-export const OwnerResume = () => {
+export const OwnerResume = props => {
 	const { store, actions } = useContext(Context);
 
-	return (
+	useEffect(() => {
+		actions.getUser(props.ownerId);
+	}, []);
+
+	let owner = JSON.parse(localStorage.getItem("user"));
+
+	return owner ? (
 		<div className="d-flex flex-column">
 			<div className="row d-flex justify-content-end">
-				<img src={ownerImg} className="col-10" id="ownerIMG" />
+				<img src={owner.avatar_url} className="col-10" id="ownerIMG" />
 			</div>
 			<div className="row d-flex justify-content-end">
 				<div className="col-10 d-flex flex-column p-1 mt-2 ownRes ">
 					<div className="text-center" id="owneReContainer">
-						<p className="text-white p-3">Cheerful, sociable and animal-loving girl</p>
-						<Link to="/profile">
-							<button className="btn mb-5 btnYeOwnR">Know more about Mía</button>
+						<p className="text-white p-3">{owner.description}</p>
+						<Link to={`/profile/${props.ownerId}`}>
+							<button className="btn mb-5 btnYeOwnR">Know more about {owner.name}</button>
 						</Link>
 					</div>
 				</div>
 			</div>
 		</div>
+	) : (
+		<div className="text-center text-warning mt-5">
+			<i className="fas fa-spinner fa-pulse fa-6x" />
+		</div>
 	);
+};
+
+OwnerResume.propTypes = {
+	ownerId: PropTypes.number
 };

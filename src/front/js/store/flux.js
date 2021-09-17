@@ -80,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					} else {
 						const newStore = await response.json();
 						setStore({ user: newStore });
-						localStorage.setItem("user", JSON.stringify(store.user));
+						localStorage.setItem("user", JSON.stringify(newStore.user));
 					}
 				} catch (error) {
 					return error.message;
@@ -106,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 
 				try {
-					const response = await fetch(`${API_BASE_URL}/api/`);
+					const response = await fetch(`${API_BASE_URL}/api/rooms`);
 					const roomsList = await response.json();
 					setStore({ rooms: roomsList });
 					localStorage.setItem("rooms", JSON.stringify(store.rooms));
@@ -124,6 +124,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const user = await response.json();
 					setStore({ user: user });
 					localStorage.setItem("user", JSON.stringify(store.user));
+				} catch (error) {
+					return error.message;
+				}
+			},
+
+			getOwner: async user_id => {
+				const store = getStore();
+
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/profile/${user_id}`);
+					const owner = await response.json();
+					setStore({ owner: owner });
+					localStorage.setItem("owner", JSON.stringify(store.owner));
 				} catch (error) {
 					return error.message;
 				}
@@ -281,9 +294,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// .then(res => res.json())
-			// .then(data => console.log(data, "response addReview"));
-
 			//////////////////////////////////////////////////////////º
 
 			getDetailsRoom: async room_id => {
@@ -292,9 +302,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/detailed_room/${room_id}`);
 					const room = await response.json();
-
 					setStore({ room: room });
-					localStorage.setItem("room", JSON.stringify(store.room));
 				} catch (error) {
 					return error.message;
 				}
