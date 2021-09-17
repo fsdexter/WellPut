@@ -22,15 +22,12 @@ export const CarouselRoomImg = props => {
 			0
 		) / room_reviews.length
 	);
-
-	console.log("Number.isNaN(averageRating) : ", !Number.isNaN(averageRating));
-
 	const slider = (
 		<Link
 			onClick={() => {
 				localStorage.setItem("details", JSON.stringify(props.room));
 			}}
-			to={`/detailedView/${props.room}`}>
+			to={`/detailedView/${props.room.id}`}>
 			<div className="carHome">
 				<div className="carousel-inner d-flex caroShape">
 					<div className="carousel-item active ">

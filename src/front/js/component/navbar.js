@@ -53,6 +53,7 @@ export const Navbar = () => {
 							}
 							onClick={() => {
 								changeElementNavbarActive("profile");
+								console.log(JSON.parse(localStorage.getItem("user")));
 								history.push(`/profile/${JSON.parse(localStorage.getItem("user")).id}`);
 							}}>
 							Profile

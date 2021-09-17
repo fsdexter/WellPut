@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { API_BASE_URL } from "../constants";
 
 import { OwnerResume } from "../component/ownerResume";
 import { ReviewsResume } from "../component/reviewsResumen";
@@ -16,19 +17,32 @@ import "../../styles/detailedView.scss";
 export const DetailedView = () => {
 	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
-	const details = JSON.parse(localStorage.getItem("room")) || JSON.parse(localStorage.getItem("details")); // Se coge room o details del localStore, porque, no sé qué pasa que aveces existe uno y aveces existe el otro
+	const [details, setDetails] = useState();
+
+	const [averageRating, setAverageRating] = useState();
 
 	useEffect(() => {
-		actions.getDetailsRoom(room_id);
+		getDetailsRoom();
 	}, []);
 
-	let room_reviews = details.tenancies.map(tenancy => tenancy.reviews.map(review => review));
-	let averageRating = Math.round(
-		room_reviews.reduce(
-			(accumulator, currentValue) => (currentValue[0] ? currentValue[0].rating + accumulator : accumulator),
-			0
-		) / room_reviews.length
-	);
+	const getDetailsRoom = async () => {
+		try {
+			const response = await fetch(`${API_BASE_URL}/api/detailed_room/${room_id}`);
+			const room = await response.json();
+			setDetails(room);
+			let room_reviews = room.reviews.map(review => review.rating);
+			setAverageRating(
+				Math.round(
+					room_reviews.reduce(
+						(accumulator, currentValue) => (currentValue ? currentValue + accumulator : accumulator),
+						0
+					) / room_reviews.length
+				)
+			);
+		} catch (error) {
+			return error.message;
+		}
+	};
 
 	return details ? (
 		<div className="d-flex flex-column">

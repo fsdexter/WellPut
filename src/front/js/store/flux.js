@@ -80,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					} else {
 						const newStore = await response.json();
 						setStore({ user: newStore });
-						localStorage.setItem("user", JSON.stringify(store.user));
+						localStorage.setItem("user", JSON.stringify(newStore.user));
 					}
 				} catch (error) {
 					return error.message;
@@ -294,9 +294,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// .then(res => res.json())
-			// .then(data => console.log(data, "response addReview"));
-
 			//////////////////////////////////////////////////////////º
 
 			getDetailsRoom: async room_id => {
@@ -305,9 +302,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/detailed_room/${room_id}`);
 					const room = await response.json();
-
 					setStore({ room: room });
-					localStorage.setItem("room", JSON.stringify(store.room));
 				} catch (error) {
 					return error.message;
 				}
