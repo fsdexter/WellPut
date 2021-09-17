@@ -82,10 +82,10 @@ export const Profile = () => {
 										  })
 										: "My house"}
 
-									<h3>
+									<h4>
 										{JSON.parse(localStorage.getItem("user")).user?.description ||
 											JSON.parse(localStorage.getItem("user")).description}
-									</h3>
+									</h4>
 								</div>
 							</div>
 						</div>
@@ -176,7 +176,7 @@ export const Profile = () => {
 										  })
 										: "My house"}
 
-									<h3>{JSON.parse(localStorage.getItem("owner")).description}</h3>
+									<h4>{JSON.parse(localStorage.getItem("owner")).description}</h4>
 								</div>
 							</div>
 						</div>
