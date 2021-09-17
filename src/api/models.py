@@ -228,7 +228,8 @@ class Review(db.Model):
             "id": self.id,
             "comment": self.comment,
             "rating": self.rating,
-            "date": self.date
+            "date": self.date,
+            "tenancy_id": self.tenancy_id
         }  
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -542,7 +543,7 @@ class SeedData:
             birthday = "01/01/1980",
             phone = "666362969",
             gender = "male",
-            description = "ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+            description = "Sportsman, adventurer and super sociable boy.I love meeting people and visiting new places",
             avatar_url = "https://d1bvpoagx8hqbg.cloudfront.net/259/b59e40d45c7460cb65467d2000705086.jpg",
             city_id = self.first_city.id
         ) 
@@ -555,7 +556,7 @@ class SeedData:
             birthday = "01/01/1982",
             phone = "666362970",
             gender = "female",
-            description = "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+            description = "I am a sociable girl, I love to dance and read",
             avatar_url = "https://img.europapress.es/fotoweb/fotonoticia_20200907131946_420.jpg",
             city_id = self.first_city.id
         )
@@ -568,7 +569,7 @@ class SeedData:
             birthday = "01/01/1985",
             phone = "666362978",
             gender = "female",
-            description = "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
+            description = "I am super chefs, I love animals and swimming",
             avatar_url = "https://img.europapress.es/fotoweb/fotonoticia_20180118120033_420.jpg",
             city_id = self.first_city.id
         )
@@ -581,7 +582,7 @@ class SeedData:
             birthday = "01/01/1990",
             phone = "666362980",
             gender = "male",
-            description =  "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio.",
+            description =  "I love food, nice people and good music",
             avatar_url = "https://i.pinimg.com/474x/98/04/af/9804afb070c93c2260c8de5505651e7e.jpg",
             city_id = self.first_city.id
         )
@@ -594,7 +595,7 @@ class SeedData:
             birthday = "01/01/1992",
             phone = "666362986",
             gender = "male",
-            description = "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates.",
+            description = "I am a quiet guy. I like to stay at home reading or watching a good good movie.",
             avatar_url = "https://media.istockphoto.com/photos/teenage-boy-with-glasses-sitting-outside-picture-id1175540541?k=6&m=1175540541&s=612x612&w=0&h=1KwTZmQz7E6iMcB4vGYOfLYSWz62qtR7GdaUrI7-Jjw=",
             city_id = self.first_city.id
         )

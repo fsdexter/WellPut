@@ -253,14 +253,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			///////////////////////////////////get Tenancy
 			getTenancies: async room_id => {
-				const store = getStore();
-
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews/${room_id}`);
 					const tenanciesRoom = await response.json();
 
 					setStore({ tenanciesRoom: tenanciesRoom });
-					localStorage.setItem("tenanciesRoom", JSON.stringify(store.tenanciesRoom));
+					localStorage.setItem("tenanciesRoom", JSON.stringify(tenanciesRoom));
 				} catch (error) {
 					return error.message;
 				}
