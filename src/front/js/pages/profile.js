@@ -14,9 +14,13 @@ export const Profile = () => {
 	let { user_id } = useParams();
 
 	useEffect(() => {
-		actions.getUser(
-			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
-		);
+		if (JSON.parse(localStorage.getItem("user"))) {
+			actions.getUser(
+				JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+			);
+		} else if (JSON.parse(localStorage.getItem("owner"))) {
+			actions.getOwner(JSON.parse(localStorage.getItem("owner")).id);
+		}
 	});
 
 	function handleSubmit() {
@@ -32,7 +36,7 @@ export const Profile = () => {
 	return (
 		<div className="picturefond col-12 d-flex justify-content-center text-white">
 			<div className="container col-10 detallefondblack">
-				{store.user || localStorage.getItem("user") ? (
+				{localStorage.getItem("user") ? (
 					<>
 						<div
 							className="row"
@@ -60,13 +64,6 @@ export const Profile = () => {
 										{JSON.parse(localStorage.getItem("user")).user?.last_name ||
 											JSON.parse(localStorage.getItem("user")).last_name}
 									</h1>
-									{/* <div className="d-flex align-items-center ml-3">
-										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
-										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
-										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
-										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
-										<i className="fa fa-star start fa-lg" aria-hidden="true" />
-									</div> */}
 								</div>
 
 								<div className="col-12 detallefondblack" id="presentationUser">
@@ -146,7 +143,93 @@ export const Profile = () => {
 							</div>
 						</div>
 					</>
-				) : null}
+				) : JSON.parse(localStorage.getItem("owner")) ? (
+					<>
+						<div className="row" key={JSON.parse(localStorage.getItem("owner")).id}>
+							<img
+								className="card-img-top roundShape col-4"
+								src={
+									JSON.parse(localStorage.getItem("owner")).avatar_url
+										? JSON.parse(localStorage.getItem("owner")).avatar_url
+										: avatar
+								}
+								alt="Card image cap"
+							/>
+
+							<div className="col-8 text-white">
+								<div className="row">
+									<h1 className="textwhhite ml-5">
+										{JSON.parse(localStorage.getItem("owner")).name}{" "}
+										{JSON.parse(localStorage.getItem("owner")).last_name}
+									</h1>
+								</div>
+
+								<div className="col-12 detallefondblack " id="presentationUser">
+									{JSON.parse(localStorage.getItem("owner")).city
+										? JSON.parse(localStorage.getItem("owner")).city.map(city => {
+												return (
+													<div className="d-flex mb-5" key={city.id}>
+														<i className="fas fa-map-marker-alt fa-2x text-white mr-4"></i>
+														<h2>{city.name}</h2>
+													</div>
+												);
+										  })
+										: "My house"}
+
+									<h3>{JSON.parse(localStorage.getItem("owner")).description}</h3>
+								</div>
+							</div>
+						</div>
+						<div className="row d-flex justify-content-around">
+							<div className="col-4 contentfondblack">
+								<div className="mb-3">
+									<h3>CONTACT</h3>
+									<div className="d-flex ml-4 align-items-center">
+										<i className="far fa-envelope fa-2x"></i>
+										<h5 className="ml-3 align-self-center">
+											{JSON.parse(localStorage.getItem("owner")).email}
+										</h5>
+									</div>
+								</div>
+								<div className="mt-4">
+									<h3>SPOKEN LANGUAGES</h3>
+									{JSON.parse(localStorage.getItem("owner")).languages
+										? JSON.parse(localStorage.getItem("owner")).languages.map(language => {
+												return (
+													<div
+														key={language.id}
+														className="d-flex ml-4 mt-2 align-items-center">
+														{" "}
+														<i className="far fa-grin-tongue-wink fa-lg"></i>
+														<h5 className="ml-3">{language.name}</h5>
+													</div>
+												);
+										  })
+										: "I can speak... a lot of languages!! "}
+								</div>
+							</div>
+							<div className="col-4 contentfondblack">
+								<h3 className="mb-3">INTEREST</h3>
+								{JSON.parse(localStorage.getItem("owner")).characteristics
+									? JSON.parse(localStorage.getItem("owner")).characteristics.map(characteristic => {
+											return (
+												<div
+													key={characteristic.id}
+													className="d-flex ml-4 mt-2 align-items-center">
+													<i className="far fa-check-circle fa-lg"></i>
+													<h5 className="ml-3 text-capitalize">{characteristic.name}</h5>
+												</div>
+											);
+									  })
+									: "I love do... mmmm I need to think "}
+							</div>
+						</div>
+					</>
+				) : (
+					<div className="text-center text-warning mt-5">
+						<i className="fas fa-spinner fa-pulse fa-6x" />
+					</div>
+				)}
 			</div>
 			<div className="col-1" id="containerOptionsProfile">
 				<div className="col buttonfondblack  d-flex justify-content-center">

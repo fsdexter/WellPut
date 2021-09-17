@@ -7,23 +7,15 @@ from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
-
-
 #------------------------------------------------------------------------------------------------------------------------------
 #  USER
 #------------------------------------------------------------------------------------------------------------------------------
-#characteristic = db.Table('characteristic',
-#    db.Column('characteristic_id', db.Integer, db.ForeignKey('characteristic.id'), primary_key=True),
-#    db.Column('user_id', db.Integer, db.ForeignKey('user_id'), primary_key=True)
-#)
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=True)
     last_name = db.Column(db.String(120), nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
-    #birthday = db.Column(db.Date, nullable=True)
     birthday = db.Column(db.String(120), nullable=True)
     phone = db.Column(db.String(120), nullable=True)
     gender = db.Column(db.String(120), nullable=True)
@@ -236,8 +228,7 @@ class Review(db.Model):
             "id": self.id,
             "comment": self.comment,
             "rating": self.rating,
-            "date": self.date,
-            #"tenancy_id": self.tenancy_id
+            "date": self.date
         }  
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -255,8 +246,6 @@ class Room (db.Model):
     lat = db.Column(db.Float(15))
     lng = db.Column(db.Float(15))
     room_url = db.Column(db.String(450))
-    # room_image_url = db.Column(db.String(255), unique=False, nullable=True)
-
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="rooms")
     reviews = db.relationship("Review", back_populates="room")
@@ -289,7 +278,7 @@ class Room (db.Model):
             "lat": self.lat,
             "lng": self.lng,
             "room_url":self.room_url,
-            "user_id": self.user_id,
+            "owner_id": self.user_id,
             "tenancies": list(map(lambda tenancy: tenancy.serialize(), self.tenancies)),
             "room_archive": list(map(lambda imagen: imagen.serialize(), self.room_archive)),
             "expense": list(map(lambda expen: expen.serialize(), self.expense)),

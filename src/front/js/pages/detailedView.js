@@ -18,7 +18,6 @@ export const DetailedView = () => {
 	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
 	const [details, setDetails] = useState();
-
 	const [averageRating, setAverageRating] = useState();
 
 	useEffect(() => {
@@ -45,8 +44,6 @@ export const DetailedView = () => {
 			return error.message;
 		}
 	};
-
-	console.log(details);
 
 	return details ? (
 		<div className="d-flex flex-column">
@@ -77,7 +74,7 @@ export const DetailedView = () => {
 
 			<div className="row" id="containerDetailDetail">
 				<div className="col-2" id="oRBox">
-					<OwnerResume ownerId={details.user_id} />
+					<OwnerResume ownerId={details.owner_id} />
 				</div>
 
 				<div className="col-9 d-flex justify-content-around" id="detailsDetails">

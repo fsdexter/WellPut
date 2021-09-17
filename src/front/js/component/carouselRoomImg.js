@@ -1,16 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-
-// Librería para el carousel
-import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css?raw";
 import "../../styles/carouselRoomImg.scss";
 import { RatingStatic } from "./ratingStatic";
-
-import "../../styles/detailedView.scss";
 
 export const CarouselRoomImg = props => {
 	//MEDIA EN BACKS
@@ -56,14 +49,6 @@ export const CarouselRoomImg = props => {
 
 	return slider;
 };
-
-// CarouselRoomImg.propTypes = {
-// 	isDetailRoom: PropTypes.bool
-// };
-
-// CarouselRoomImg.defaultProps = {
-// 	isDetailRoom: false
-// };
 
 CarouselRoomImg.propTypes = {
 	room: PropTypes.object

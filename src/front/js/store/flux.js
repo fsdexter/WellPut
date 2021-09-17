@@ -18,7 +18,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			tenanciesRoom: [],
 			room: {},
 			review: {},
-			myLocalStore: {}
+			myLocalStore: {},
+			owner: {}
 		},
 		actions: {
 			getLocalStore: () => {
@@ -128,12 +129,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return error.message;
 				}
 			},
-
-			getOwner: async user_id => {
+			getOwner: async owner_id => {
 				const store = getStore();
 
 				try {
-					const response = await fetch(`${API_BASE_URL}/api/profile/${user_id}`);
+					const response = await fetch(`${API_BASE_URL}/api/profile/${owner_id}`);
 					const owner = await response.json();
 					setStore({ owner: owner });
 					localStorage.setItem("owner", JSON.stringify(store.owner));
