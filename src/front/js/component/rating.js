@@ -21,7 +21,6 @@ export function Rating(props) {
 								}
 								console.log(s);
 								actions.setRating(s);
-								props.click();
 							}}></div>
 					);
 				})}
