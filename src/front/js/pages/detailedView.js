@@ -245,7 +245,7 @@ export const DetailedView = () => {
 						</div>
 					</div>
 					<div className="col-6 reviesRes">
-						<ReviewsResume reviews={details.reviews} roomId={details.id} />
+						<ReviewsResume reviews={details.reviews} roomId={details.id} tenancies={details.tenancies} />
 					</div>
 				</div>
 			</div>

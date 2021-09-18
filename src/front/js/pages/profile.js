@@ -13,6 +13,7 @@ export const Profile = () => {
 	const { store, actions } = useContext(Context);
 	let { user_id } = useParams();
 
+	// Para que haga el get de los datos del usuario nada más cargar la página
 	useEffect(() => {
 		if (JSON.parse(localStorage.getItem("user"))) {
 			actions.getUser(
@@ -21,7 +22,22 @@ export const Profile = () => {
 		} else if (JSON.parse(localStorage.getItem("owner"))) {
 			actions.getOwner(JSON.parse(localStorage.getItem("owner")).id);
 		}
-	});
+	}, []);
+
+	// Para que escuche el cambio en los datos del usuario
+	useEffect(
+		() => {
+			if (JSON.parse(localStorage.getItem("user"))) {
+				actions.getUser(
+					JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+				);
+			} else if (JSON.parse(localStorage.getItem("owner"))) {
+				actions.getOwner(JSON.parse(localStorage.getItem("owner")).id);
+			}
+		},
+		[JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id],
+		JSON.parse(localStorage.getItem("owner")).id
+	);
 
 	function handleSubmit() {
 		history.push(

@@ -9,9 +9,15 @@ import "../../styles/detailedView.scss";
 export const OwnerResume = props => {
 	const { store, actions } = useContext(Context);
 
+	// Para hacer la llamada del owner
 	useEffect(() => {
 		actions.getOwner(props.ownerId);
 	}, []);
+
+	// Para hacer el cambio de owner
+	useEffect(() => {
+		actions.getOwner(props.ownerId);
+	}, [props.ownerId]);
 
 	let owner = JSON.parse(localStorage.getItem("owner"));
 

@@ -20,6 +20,10 @@ import { Footer } from "../component/footer";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
+	useEffect(() => {
+		actions.getRooms();
+	}, []);
+
 	const [city, setCity] = useState();
 	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
 	const [formValue, setFormValue] = useState({

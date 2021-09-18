@@ -12,17 +12,10 @@ export const ReviewsResume = props => {
 	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
 
-	useEffect(() => {
-		actions.getTenancies(props.roomId);
-	}, []);
+	const twoFirstReviews = props.tenancies && [props.tenancies[0], props.tenancies[1]];
 
-	// let renters = JSON.parse(localStorage.getItem("tenanciesRoom"))
-	// 	? JSON.parse(localStorage.getItem("tenanciesRoom")).map(tenancy => tenancy.user)
-	// 	: null;
-
-	// let renter = renters.map(user => user);
-
-	// console.log("renter : ", renter);
+	console.log("TENANCIES por props: ", props.tenancies);
+	console.log("twoFirstReviews", twoFirstReviews);
 
 	return (
 		<div className="text-center mb-1" id="reviwsRC">
@@ -30,7 +23,52 @@ export const ReviewsResume = props => {
 				<div className="row mt-2 pt-2 text-center" id="titleRewsRes">
 					<h5 className="col-12 text-white">Some reviews about this room</h5>
 				</div>
-				{props.reviews ? (
+
+				{props.tenancies.length
+					? twoFirstReviews.map(tenancy => {
+							return (
+								<div key={tenancy.id} className="row mt-1 p-2 d-flex justify-content-around">
+									<div className="col-5 reviResContainer p-3 ">
+										<div className="d-flex justify-content-around">
+											<img src={tenancy.user[0].avatar_url} className="rewImgRe" />;
+											<div className="d-flex flex-column">
+												<p className="text-left ml-2 text-white">
+													{tenancy.reviews[0].comment}
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							);
+					  })
+					: "This room has no reviews yet"}
+
+				{/* {props.tenancies ? (
+					props.tenancies.map(tenancy => {
+						//USANDO LAS TENANCIES POR PROPS
+						tenancy.room_id === room_id ? (
+							<div className="row mt-1 p-2 d-flex justify-content-around">
+								<div className="col-5 reviResContainer p-3 ">
+									<div className="d-flex justify-content-around">
+										<img
+											key={tenancy.user[0].id}
+											src={tenancy.user[0].avatar_url}
+											className="rewImgRe"
+										/>
+										;
+										<div className="d-flex flex-column">
+											<p className="text-left ml-2 text-white">{tenancy.reviews[0].comment}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						) : null;
+					})
+				) : (
+					<p>This room has no reviews yet</p>
+				)} */}
+
+				{/* {props.reviews ? (
 					<div className="row mt-1 p-2 d-flex justify-content-around">
 						<div className="col-5 reviResContainer p-3 ">
 							<div className="d-flex justify-content-around">
@@ -63,7 +101,7 @@ export const ReviewsResume = props => {
 					</div>
 				) : (
 					<p>This room has no reviews yet</p>
-				)}
+				)} */}
 
 				{/* {tenanciesRoom ? (
 					tenanciesRoom.map(tenancy => {
@@ -109,5 +147,6 @@ export const ReviewsResume = props => {
 
 ReviewsResume.propTypes = {
 	reviews: PropTypes.array,
-	roomId: PropTypes.number
+	roomId: PropTypes.number,
+	tenancies: PropTypes.array
 };
