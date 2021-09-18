@@ -71,7 +71,7 @@ export const Home = () => {
 				</div>
 			</div>
 
-			<div className="row">
+			<div className="row mr-0">
 				<div className="col-md-4 pl-5 mt-5 mr-3 pr-5 mb-4 bg-secondary text-white filter">
 					<h1 className="mt-5 texto_yellow">Search a room</h1>
 					<br />

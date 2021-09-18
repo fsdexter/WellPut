@@ -24,20 +24,16 @@ export const Profile = () => {
 		}
 	}, []);
 
-	// Para que escuche el cambio en los datos del usuario
-	useEffect(
-		() => {
-			if (JSON.parse(localStorage.getItem("user"))) {
-				actions.getUser(
-					JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
-				);
-			} else if (JSON.parse(localStorage.getItem("owner"))) {
-				actions.getOwner(JSON.parse(localStorage.getItem("owner")).id);
-			}
-		},
-		[JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id],
-		JSON.parse(localStorage.getItem("owner")).id
-	);
+	// // Para que escuche el cambio en los datos del usuario
+	// useEffect(() => {
+	// 	if (JSON.parse(localStorage.getItem("user"))) {
+	// 		actions.getUser(
+	// 			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+	// 		);
+	// 	} else if (JSON.parse(localStorage.getItem("owner"))) {
+	// 		actions.getOwner(JSON.parse(localStorage.getItem("owner")).id);
+	// 	}
+	// }, [JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id]);
 
 	function handleSubmit() {
 		history.push(

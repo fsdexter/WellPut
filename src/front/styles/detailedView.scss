@@ -3,6 +3,13 @@
     border:1px solid white ;
     margin: .6rem .6rem;
     height: 37vh ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.white-border-min-heigth{
+    min-height: 20rem;
 }
 
 .ddetai-img-room{
@@ -21,7 +28,7 @@
 .reviesRes{
     background-color:#5E554C;
     height: 38vh !important;
-    margin-bottom: 1rem;
+    margin-bottom: 5rem;
 }
 
 .btnYeOwnR{
@@ -31,7 +38,7 @@
     font-weight: 700;
     font-size: 1rem;
     padding: .2rem 1rem;
-    //margin-top: 6rem;
+    margin: 0 1rem;
 }
 
 .btnYeOwnR:hover{
@@ -47,15 +54,12 @@
     width: 20rem;
 }
 
-.reviResContainer{
-    height: 12rem;
-}
-
 .rewImgRe{
     height: 3rem;
+    width: 3rem;
     object-fit: cover;
     object-position: center center;
-    
+    border-radius: 50%; 
 }
 
 #reviwsRC{
@@ -68,13 +72,14 @@
 
 #oRBox{
     z-index: 100;
-    top: -97%;
+    top: 62%;
     left: 2%;
+    position: absolute;
 }
 
 #detailsDetails{
-    height: 37vh !important;
-    margin-left: 2rem;
+   // height: 37vh !important;
+    left: 20%;
 }
 
 .roomiesLink{
@@ -92,7 +97,7 @@
     height: 15rem;
     width: 15rem;
     background-size:cover;
-    box-shadow: rgba(0, 0, 0, 0.329) 1px 1px 2px;
+    //box-shadow: rgba(0, 0, 0, 0.329) 1px 1px 2px;
     object-fit: cover;
     object-position: center center;
 }
@@ -116,4 +121,35 @@
 
 #containerDetailDetail{
     height: 30vh !important;
+}
+
+.title-detail-room{
+    background:rgba(0, 0, 0, 0.63);
+    height: 60px;
+   
+    text-align: auto;
+    padding: 20px;
+}
+
+.carousel-caption-details-room{
+    width: 95vw !important;
+    right: 0 !important;
+    left: 1.5rem !important;
+}
+
+.caroPriceCustom{
+    background:rgba(0, 0, 0, 0.73);
+    margin-top: 210px;
+    padding-top: 12px;
+    padding-left: 10px;
+    width: 20vw;
+}
+
+.starCaroCustom{
+    margin-top: 210px;
+    background:rgba(0, 0, 0, 0.73);
+    height: 60px;
+    padding-top: 15px;
+    padding-left: 30px;
+    width: 45vw;
 }

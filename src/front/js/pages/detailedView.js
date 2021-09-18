@@ -6,7 +6,6 @@ import { API_BASE_URL } from "../constants";
 
 import { OwnerResume } from "../component/ownerResume";
 import { ReviewsResume } from "../component/reviewsResumen";
-import { CarouselRoomImg } from "../component/carouselRoomImg";
 import { RatingStatic } from "../component/ratingStatic";
 
 import bedSofa from "../../img/bedsofaBlack.png";
@@ -48,9 +47,9 @@ export const DetailedView = () => {
 	return details ? (
 		<div className="d-flex flex-column">
 			<div className="carousel-item active">
-				<img className="d-block w-100 ddetai-img-room" src={details.room_url} />;
-				<div className="carousel-caption ">
-					<h4 className="maybeWorks mt-3">{details.title} </h4>
+				<img className="d-block w-100 ddetai-img-room" src={details.room_url} />
+				<div className="carousel-caption carousel-caption-details-room">
+					<h4 className="title-detail-room mt-3">{details.title} </h4>
 					<div className="row rowCustom d-flex justify-content-center">
 						<div className="caroPriceCustom mb-3">
 							<h2>{details.price} €</h2>
@@ -65,7 +64,7 @@ export const DetailedView = () => {
 				</div>
 			</div>
 
-			<div className="row d-flex flex-column mb-3">
+			<div className="row d-flex flex-column mb-3 mr-0">
 				<div className="col-9 mt-2" id="idescriptionRoomDetail">
 					<div className="d-flex flex-wrap mb-2 mt-2">
 						<i
@@ -81,7 +80,7 @@ export const DetailedView = () => {
 				</div>
 			</div>
 
-			<div className="row" id="containerDetailDetail">
+			<div className="row mr-0" id="containerDetailDetail">
 				<div className="col-2" id="oRBox">
 					<OwnerResume ownerId={details.owner_id} />
 				</div>
@@ -192,7 +191,7 @@ export const DetailedView = () => {
 								)}
 							</div>
 						</div>
-						<div className="d-flex flex-column">
+						<div className="d-flex flex-column mb-5">
 							<h5 className="font-weight-bolder mt-3">Features</h5>
 							<div className="d-flex flex-wrap mt-2 mb-2">
 								{details.feature ? (
