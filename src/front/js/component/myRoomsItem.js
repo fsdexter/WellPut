@@ -6,26 +6,27 @@ import deleteRoom from "../../img/deleteRoom.png";
 import room from "../../img/room.jpg";
 import Becker from "../../img/Becker.jpg";
 import deleteRoomie from "../../img/deleteRoomie.png";
-
+import PropTypes from "prop-types";
+import { Context } from "../store/appContext";
 const exampleTitle = "Habitación luminosa frente a Sagrada Familia";
 const exampleDescription =
 	"Habitación amueblada y con mucha luz (da al exterior, a un patio abierto), en un piso grande, nuevo y amueblado. Tenemos un balcón grande con sofá que da al parque y el baño es a compartir entre 2 personas.";
 const roomieExample = "Jason Becker Second";
-export const MyRoomsItemActive = () => {
+export const MyRoomsItemActive = props => {
 	return (
 		<div className="row">
 			<div className="third_part mx-auto mt-3 mb-2">
 				<div className="row">
 					<div className="col-6">
 						<h5 className="ml-2 mt-2">
-							<ins className="fontRoom">{exampleTitle}</ins>
+							<p className="fontRoom">{props.room.title}</p>
 						</h5>
-						<p className="ml-2 fontRoom">{exampleDescription}</p>
+						<p className="ml-2 fontRoom">{props.room.description}</p>
 					</div>
 					<div className="col-4 roomItemBar">
 						<a href="#">
 							{" "}
-							<img className="roomItemPic" src={room} href="#" />{" "}
+							<img className="roomItemPic" src={props.room.room_url} href="#" />{" "}
 						</a>
 					</div>
 					<div className="col-2">
@@ -146,4 +147,8 @@ export const MyRoomsItemOccupied = () => {
 			</div>
 		</div>
 	);
+};
+
+MyRoomsItemActive.propTypes = {
+	room: PropTypes.object
 };

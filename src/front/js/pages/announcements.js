@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export const Announcements = () => {
 	const { store, actions } = useContext(Context);
-
+	console.log(store.rooms);
 	return (
 		<div className="container-fluid announcements ">
 			<div className="row">
@@ -74,9 +74,17 @@ export const Announcements = () => {
 						id="activeR"
 						role="tabpanel"
 						aria-labelledby="activeR-tab">
-						<MyRoomsItemActive />
-						<MyRoomsItemActive />
-						<MyRoomsItemActive />
+						{store.rooms ? (
+							store.rooms.map(room => {
+								return (
+									<div key={room.id}>
+										<MyRoomsItemActive room={room} />;
+									</div>
+								);
+							})
+						) : (
+							<div></div>
+						)}
 					</div>
 					<div className="tab-pane fade mb-5" id="inactiveR" role="tabpanel" aria-labelledby="inactiveR-tab">
 						<MyRoomsItemInactive />
