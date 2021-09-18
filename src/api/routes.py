@@ -132,19 +132,23 @@ def get_single_room(room_id):
     room_selected = Room.query.get(room_id)
     room_seralize = room_selected.serialize()
     
-    tenancies = Tenancy.query.filter(Room.id == Tenancy.room_id).all()
-    tenancies_list = []
+    reviews_room = room_selected.reviews
+    reviews_list = []
     
-    for tenancy in tenancies:
+    for review in reviews_room:
+        tenancy_review = review.tenancy
+        
         user = User.query.filter(User.id == Tenancy.user_id).first()
         user_tenancy = [user.serialize()]
         
-        tenancy_resp = tenancy.serialize()
-        tenancy_resp['user'] = user_tenancy
-        tenancies_list.append(tenancy_resp)
-    
-    room_seralize['tenancies'] = tenancies_list
+        tenancy_review_serialize = tenancy_review.serialize()
+        tenancy_review_serialize['user'] = user_tenancy
+        
+        reviews_list.append(tenancy_review_serialize)
+        
+    room_seralize['reviews'] = reviews_list
     return jsonify(room_seralize), 200
+    
     
 
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # FUNCIONA !!!!
