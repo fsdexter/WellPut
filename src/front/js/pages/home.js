@@ -3,18 +3,16 @@ import { Context } from "../store/appContext";
 
 import "../../styles/home.scss";
 import { Rating } from "../component/rating";
-import { Counter } from "../component/counter";
 import { AnimatedMulti } from "../component/multiSelector";
 import { FilterExp } from "../component/filterExp";
 import { FilterOcc } from "../component/filterOcc";
 import { FilterFea } from "../component/filterFea";
 import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
-import { interestsOptions, languageOptions, cityOptions } from "../constants";
+import { interestsOptions } from "../constants";
 
-import { Link } from "react-router-dom";
 import MyMap from "../component/mapEngine";
-import { CarouselRoomImg, CarouselRoomImg2, CarouselRoomImg3, CarouselRoomImg4 } from "../component/carouselRoomImg";
+import { CarouselRoomImg } from "../component/carouselRoomImg";
 import { Footer } from "../component/footer";
 
 export const Home = () => {
@@ -115,18 +113,6 @@ export const Home = () => {
 								</div>
 							</div>
 						</div>
-						{/*<br />
-						<div className="border border-warning pt-4 pb-4">
-							<div className="row">
-								<div className="col-4">
-									<h3 className="ml-4">Roomies</h3>
-								</div>
-								<div className="col-6 mb-3 pl-5 ml-5">
-									<Counter />
-								</div>
-							</div>
-						</div>{" "}
-						*/}
 						<br />
 						<div className="border border-warning pt-5">
 							<FilterOcc />
