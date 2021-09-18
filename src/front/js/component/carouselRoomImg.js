@@ -1,16 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-
-// Librería para el carousel
-import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css?raw";
 import "../../styles/carouselRoomImg.scss";
 import { RatingStatic } from "./ratingStatic";
-
-import "../../styles/detailedView.scss";
 
 export const CarouselRoomImg = props => {
 	//MEDIA EN BACKS
@@ -31,7 +24,15 @@ export const CarouselRoomImg = props => {
 			<div className="carHome">
 				<div className="carousel-inner d-flex caroShape">
 					<div className="carousel-item active ">
-						<img className="d-block w-100 caro_pic_fix" src={props.room.room_url} />;
+						<img
+							className="d-block w-100 caro_pic_fix"
+							src={
+								props.room.room_url
+									? props.room.room_url
+									: "https://img.freepik.com/vector-gratis/plantilla-fondo-interior-dormitorio-dibujos-animados-acogedora-habitacion-moderna-luz-manana_33099-171.jpg?size=626&ext=jpg"
+							}
+						/>
+						;
 						<div className="carousel-caption ">
 							<h4 className="maybeWorks mt-1">{props.room.title} </h4>
 							<div className="row">
@@ -56,14 +57,6 @@ export const CarouselRoomImg = props => {
 
 	return slider;
 };
-
-// CarouselRoomImg.propTypes = {
-// 	isDetailRoom: PropTypes.bool
-// };
-
-// CarouselRoomImg.defaultProps = {
-// 	isDetailRoom: false
-// };
 
 CarouselRoomImg.propTypes = {
 	room: PropTypes.object

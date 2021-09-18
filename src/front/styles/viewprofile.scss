@@ -10,7 +10,9 @@
 .pictureprofile1{
     -ms-flex-item-align: center;
     align-content: center;
-    width: 10px;
+    //width: 10px;
+    width: auto;
+    object-fit: cover;
     height: 9px;
     padding: 1%;
     display: inline;}

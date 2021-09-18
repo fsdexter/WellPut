@@ -4,7 +4,7 @@ import "../../styles/footer.scss";
 
 export const Footer = () => (
 	<footer>
-		<div className="row divfooter mt-5 text-white">
+		<div className="row divfooter mt-5 text-white mr-0">
 			<div className="col-7 d-flex flex-column social-media">
 				<div className="row d-flex justify-content-around">
 					<a target="_blank" rel="noreferrer" href="https://www.instagram.com/" className="a-link-footer">

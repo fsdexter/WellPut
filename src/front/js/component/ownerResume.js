@@ -2,18 +2,24 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../constants";
 
-import ownerImg from "../../img/women.jpg";
 import "../../styles/detailedView.scss";
 
 export const OwnerResume = props => {
 	const { store, actions } = useContext(Context);
 
+	// Para hacer la llamada del owner
 	useEffect(() => {
-		actions.getUser(props.ownerId);
+		actions.getOwner(props.ownerId);
 	}, []);
 
-	let owner = JSON.parse(localStorage.getItem("user"));
+	// Para hacer el cambio de owner
+	useEffect(() => {
+		actions.getOwner(props.ownerId);
+	}, [props.ownerId]);
+
+	let owner = JSON.parse(localStorage.getItem("owner"));
 
 	return owner ? (
 		<div className="d-flex flex-column">
@@ -23,9 +29,9 @@ export const OwnerResume = props => {
 			<div className="row d-flex justify-content-end">
 				<div className="col-10 d-flex flex-column p-1 mt-2 ownRes ">
 					<div className="text-center" id="owneReContainer">
-						<p className="text-white p-3">{owner.description}</p>
-						<Link to={`/profile/${props.ownerId}`}>
-							<button className="btn mb-5 btnYeOwnR">Know more about {owner.name}</button>
+						<p className="text-white p-3 align-self-start">{owner.description}</p>
+						<Link to={`/profile/${owner.id}`}>
+							<button className="btn mb-5 btnYeOwnR align-self-end">Know more about {owner.name}</button>
 						</Link>
 					</div>
 				</div>
