@@ -146,7 +146,7 @@ def get_single_room(room_id):
         
         reviews_list.append(tenancy_review_serialize)
         
-    room_seralize['reviews'] = reviews_list
+    room_seralize['tenancies'] = reviews_list #Realmente se sacan las tenancies, la relación entre usuario, comentario y habitación
     return jsonify(room_seralize), 200
     
     
