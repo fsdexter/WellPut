@@ -24,7 +24,15 @@ export const CarouselRoomImg = props => {
 			<div className="carHome">
 				<div className="carousel-inner d-flex caroShape">
 					<div className="carousel-item active ">
-						<img className="d-block w-100 caro_pic_fix" src={props.room.room_url} />;
+						<img
+							className="d-block w-100 caro_pic_fix"
+							src={
+								props.room.room_url
+									? props.room.room_url
+									: "https://img.freepik.com/vector-gratis/plantilla-fondo-interior-dormitorio-dibujos-animados-acogedora-habitacion-moderna-luz-manana_33099-171.jpg?size=626&ext=jpg"
+							}
+						/>
+						;
 						<div className="carousel-caption ">
 							<h4 className="maybeWorks mt-1">{props.room.title} </h4>
 							<div className="row">

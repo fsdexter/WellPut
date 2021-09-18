@@ -50,7 +50,12 @@ class User(db.Model):
             "occupation": self.occupation,
             "description": self.description,
             "avatar_url": self.avatar_url,
-            "city_id": self.city_id,
+            "city": self.city_id,
+            "tenancies": list(map(lambda tenancy: tenancy.serialize(), self.tenancies)),
+            "rooms": list(map(lambda room: room.serialize(), self.rooms)),
+            "language": list(map(lambda language: language.serialize(), self.language)),
+            "characteristic": list(map(lambda characterist: characterist.serialize(), self.characteristic)),
+            "favorites": list(map(lambda favorite: favorite.serialize(), self.favorites))
         }
         
     # method to check the password and that verify that it is the user password
@@ -82,7 +87,8 @@ class City(db.Model):
             "name": self.name,
             "lat": self.lat,
             "lng": self.lng,
-            "country_id": self.country_id
+            "country_id": self.country_id,
+            "rooms": list(map(lambda room: room.serialize(), self.rooms))
         }
 
 #------------------------------------------------------------------------------------------------------------------------------
@@ -100,7 +106,8 @@ class Country(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "name": self.name
+            "name": self.name,
+            "cities": list(map(lambda city: city.serialize(), self.cities))
         }
 
 #------------------------------------------------------------------------------------------------------------------------------
@@ -203,7 +210,8 @@ class Tenancy(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "room_id": self.room_id
+            "room_id": self.room_id,
+            "reviews": list(map(lambda review: review.serialize(), self.reviews))
         } 
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -280,7 +288,7 @@ class Room (db.Model):
             "lng": self.lng,
             "room_url":self.room_url,
             "owner_id": self.user_id,
-            "tenancies": list(map(lambda tenancy: tenancy.serialize(), self.tenancies)),
+            #"tenancies": list(map(lambda tenancy: tenancy.serialize(), self.tenancies)),
             "room_archive": list(map(lambda imagen: imagen.serialize(), self.room_archive)),
             "expense": list(map(lambda expen: expen.serialize(), self.expense)),
             "feature": list(map(lambda feat: feat.serialize(), self.feature)),
@@ -402,8 +410,6 @@ class Favorites(db.Model):
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
     room = db.relationship("Room", back_populates="favorites")
     
-    # Relación de 1 Favorites muchas Rooms
-   # room = db.relationship("Room", back_populates="favorites")
     
 
     def __repr__(self):
@@ -412,7 +418,7 @@ class Favorites(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            #"user_id": self.user_id, --->>> como salen el los datos del usuario, no haría falta serializarlo
+            "user_id": self.user_id,
             "room_id": self.room_id,
         }  
 
@@ -430,8 +436,9 @@ class SeedData:
         self.fourth_user = None
         self.fifth_user = None
         self.first_city = None
+        self.second_city = None
+        self.third_city = None
         self.first_country = None
-       # self.first_favorites = None --->>> Un favorito muchas habitaciones
         self.first_room = None
         self.second_room = None
         self.third_room = None
@@ -528,7 +535,23 @@ class SeedData:
             country_id = self.first_country.id
         )
         
+        self.second_city = City(
+            name = "Barcelona",
+            lat = 41.406295930261635, 
+            lng = 2.1748621412984614,
+            country_id = self.first_country.id
+        )
+        
+        self.third_city = City(
+            name = "Málaga",
+            lat = 36.726732295907595, 
+            lng = -4.422490437718872,
+            country_id = self.first_country.id
+        )
+        
         db.session.add(self.first_city)
+        db.session.add(self.second_city)
+        db.session.add(self.third_city)
         db.session.commit()
         
 #------------------------
@@ -546,6 +569,7 @@ class SeedData:
             description = "Sportsman, adventurer and super sociable boy.I love meeting people and visiting new places",
             avatar_url = "https://d1bvpoagx8hqbg.cloudfront.net/259/b59e40d45c7460cb65467d2000705086.jpg",
             city_id = self.first_city.id
+            
         ) 
 
         self.second_user = User( 
@@ -623,7 +647,6 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
-            #favorites_id = self.first_favorites.id
             room_url = "https://media.revistaad.es/photos/60c2294bb4a53607d5b4669f/4:3/w_1568,h_1176,c_limit/231620.jpg"
         )
 
@@ -639,7 +662,6 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.second_user.id,
-            #favorites_id = self.first_favorites.id,
             room_url = "https://i.pinimg.com/originals/a2/04/d3/a204d395e71329a6769d097575490b7a.jpg"
         )
 
@@ -655,7 +677,6 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.third_user.id,
-            #favorites_id = None,
             room_url = "https://casaydiseno.com/wp-content/uploads/2016/08/dormitorios-con-encanto-decoracion-pequeno-comodo.jpg"
         )
 
@@ -671,7 +692,6 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
-            #favorites_id = None,
             room_url = "https://i.pinimg.com/originals/5e/52/d4/5e52d4a5b28b76cbc6a73b5b0f43f42d.jpg"
         )
         
@@ -685,9 +705,8 @@ class SeedData:
             type_bed = "double",
             lat = 33.4329,
             lng = -4.642371,
-            city_id = self.first_city.id,
-            user_id = self.fifth_user.id,
-            #favorites_id = None,
+            city_id = self.second_city.id,
+            user_id = self.fourth_user.id,
             room_url = "https://www.hola.com/imagenes/decoracion/20200220161121/iluminacion-habitaciones-juveniles/0-786-452/luz-teens-6a-a.jpg"
         )
         
@@ -701,9 +720,8 @@ class SeedData:
             type_bed = "double",
             lat = 33.4329,
             lng = -4.642371,
-            city_id = self.first_city.id,
-            user_id = self.fifth_user.id,
-            #favorites_id = None,
+            city_id = self.second_city.id,
+            user_id = self.fourth_user.id,
             room_url = "https://cafeversatil.com/nuestroshijos/wp-content/uploads/2019/11/01-2-768x576.jpg"   
         )
         
@@ -717,9 +735,8 @@ class SeedData:
             type_bed = "double",
             lat = 33.4329,
             lng = -4.642371,
-            city_id = self.first_city.id,
+            city_id = self.third_city.id,
             user_id = self.fifth_user.id,
-            #favorites_id = None,
             room_url = "https://i.pinimg.com/736x/72/1a/8c/721a8c00c5e682403d13aa15d2168c79.jpg"
         )
 
