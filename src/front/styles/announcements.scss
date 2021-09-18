@@ -80,6 +80,8 @@ margin-top: 30px;
 .roomItemPic{
     max-width: 500px;
     max-height: 200px;
+    display:block;
+margin:auto;
 }
 
 
@@ -105,5 +107,8 @@ color:black;
 margin-left:75px;
 }
 .fontRoom{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    
 }

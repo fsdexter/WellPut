@@ -17,11 +17,13 @@ export const MyRoomsItemActive = props => {
 		<div className="row">
 			<div className="third_part mx-auto mt-3 mb-2">
 				<div className="row">
-					<div className="col-6">
-						<h5 className="ml-2 mt-2">
-							<p className="fontRoom">{props.room.title}</p>
-						</h5>
+					<div className="col-6 mt-4 ">
+						<div className="ml-2 mb-4">
+							<h5 className="fontRoom">{props.room.title}</h5>
+						</div>
 						<p className="ml-2 fontRoom">{props.room.description}</p>
+						<h5 className="fontRoom ml-2 ">Price: €{props.room.price}</h5>
+						<h5 className="fontRoom ml-2 ">Deposit: €{props.room.deposit}</h5>
 					</div>
 					<div className="col-4 roomItemBar">
 						<a href="#">

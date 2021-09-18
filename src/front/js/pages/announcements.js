@@ -78,7 +78,7 @@ export const Announcements = () => {
 							store.rooms.map(room => {
 								return (
 									<div key={room.id}>
-										<MyRoomsItemActive room={room} />;
+										<MyRoomsItemActive room={room} />
 									</div>
 								);
 							})
