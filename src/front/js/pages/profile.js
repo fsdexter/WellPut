@@ -238,7 +238,7 @@ export const Profile = () => {
 						</div>
 					</>
 				) : (
-					<div className="text-center text-warning mt-5">
+					<div className="text-center text-warning spiner-loading-data">
 						<i className="fas fa-spinner fa-pulse fa-6x" />
 					</div>
 				)}

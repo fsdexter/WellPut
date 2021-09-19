@@ -154,12 +154,12 @@ export const Home = () => {
 							store.rooms.map(room => {
 								return (
 									<div key={room.id}>
-										<CarouselRoomImg room={room} />;
+										<CarouselRoomImg room={room} />
 									</div>
 								);
 							})
 						) : (
-							<div className="text-center text-warning mt-5">
+							<div className="text-center text-warning spiner-loading-data">
 								<i className="fas fa-spinner fa-pulse fa-6x" />
 							</div>
 						)}
