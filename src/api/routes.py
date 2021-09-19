@@ -24,13 +24,7 @@ def handle_upload(user_id):
     
     if 'avatar_url' in request.files:
         result = cloudinary.uploader.upload(request.files['avatar_url'])
-        #result = cloudinary.uploader.upload(request.files[0])
-        #user1 = User.query.filter_by(user_id="user").first()
-        user1 = User.query.get(user_id)
-        
-        print(user1, user1.serialize())
-        
-        #user1["avatar_url"] = result['secure_url']  
+        user1 = User.query.get(user_id) 
         user1.avatar_url = result['secure_url']    
        
         db.session.add(user1)
@@ -138,12 +132,11 @@ def get_single_room(room_id):
     for review in reviews_room:
         tenancy_review = review.tenancy
         
-        user = User.query.filter(User.id == Tenancy.user_id).first()
+        user = User.query.filter(User.id == tenancy_review.user_id).first()
+        
         user_tenancy = [user.serialize()]
-        
         tenancy_review_serialize = tenancy_review.serialize()
-        tenancy_review_serialize['user'] = user_tenancy
-        
+        tenancy_review_serialize['user'] = user_tenancy        
         reviews_list.append(tenancy_review_serialize)
         
     room_seralize['tenancies'] = reviews_list #Realmente se sacan las tenancies, la relación entre usuario, comentario y habitación

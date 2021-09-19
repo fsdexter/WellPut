@@ -154,7 +154,7 @@ export const Home = () => {
 							store.rooms.map(room => {
 								return (
 									<div key={room.id}>
-										<CarouselRoomImg room={room} />;
+										<CarouselRoomImg room={room} />
 									</div>
 								);
 							})
