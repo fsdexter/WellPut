@@ -133,7 +133,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 
 				try {
-					const response = await fetch(`${API_BASE_URL}/api/profile/${owner_id}`);
+					const response = await fetch(`${API_BASE_URL}/api/owner-profile/${owner_id}`);
 					const owner = await response.json();
 					setStore({ owner: owner });
 					localStorage.setItem("owner", JSON.stringify(store.owner));

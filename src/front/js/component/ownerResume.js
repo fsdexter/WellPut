@@ -30,7 +30,7 @@ export const OwnerResume = props => {
 				<div className="col-10 d-flex flex-column p-1 mt-2 ownRes ">
 					<div className="text-center" id="owneReContainer">
 						<p className="text-white p-3 align-self-start">{owner.description}</p>
-						<Link to={`/profile/${owner.id}`}>
+						<Link to={`/owner-profile/${owner.id}`}>
 							<button className="btn mb-5 btnYeOwnR align-self-end">Know more about {owner.name}</button>
 						</Link>
 					</div>

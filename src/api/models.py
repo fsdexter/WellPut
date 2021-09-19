@@ -50,7 +50,7 @@ class User(db.Model):
             "occupation": self.occupation,
             "description": self.description,
             "avatar_url": self.avatar_url,
-            "city": self.city_id,
+            "city_id": self.city_id,
             "tenancies": list(map(lambda tenancy: tenancy.serialize(), self.tenancies)),
             "rooms": list(map(lambda room: room.serialize(), self.rooms)),
             "language": list(map(lambda language: language.serialize(), self.language)),
@@ -286,6 +286,7 @@ class Room (db.Model):
             "type_bed": self.type_bed,
             "lat": self.lat,
             "lng": self.lng,
+            "city_id": self.city_id,
             "room_url":self.room_url,
             "owner_id": self.user_id,
             #"tenancies": list(map(lambda tenancy: tenancy.serialize(), self.tenancies)),
@@ -607,8 +608,8 @@ class SeedData:
             phone = "666362980",
             gender = "male",
             description =  "I love food, nice people and good music",
-            avatar_url = "https://i.pinimg.com/474x/98/04/af/9804afb070c93c2260c8de5505651e7e.jpg",
-            city_id = self.first_city.id
+            avatar_url = "https://media.istockphoto.com/photos/portrait-of-young-man-in-yellow-tshirt-at-backyard-picture-id1180616281?k=20&m=1180616281&s=612x612&w=0&h=ZChvYgG8WCJ1M73lGE8oSyp0TMzWJxS3xRNw7uFwO6w=",
+            city_id = self.second_city.id
         )
 
         self.fifth_user = User( 
@@ -620,8 +621,8 @@ class SeedData:
             phone = "666362986",
             gender = "male",
             description = "I am a quiet guy. I like to stay at home reading or watching a good good movie.",
-            avatar_url = "https://media.istockphoto.com/photos/teenage-boy-with-glasses-sitting-outside-picture-id1175540541?k=6&m=1175540541&s=612x612&w=0&h=1KwTZmQz7E6iMcB4vGYOfLYSWz62qtR7GdaUrI7-Jjw=",
-            city_id = self.first_city.id
+            avatar_url = "https://media.istockphoto.com/photos/portrait-of-a-smiling-student-at-the-city-street-picture-id1147289240?k=20&m=1147289240&s=612x612&w=0&h=sEx-9oXUdDRMqZF0o1viaumUjAud3Lsr9QxWAqrW3ks=",
+            city_id = self.third_city.id
         )
     
         db.session.add(self.first_user)
@@ -667,7 +668,7 @@ class SeedData:
 
         self.third_room = Room( 
             description = "This house has 5 bedrooms, 1 toilet and 1 washroom,1 Kitchen 1 quite and clean male tenant is currently living JUST 2 WEEKS OF DEPOSITS ROOM RENT : 550PCM Walthamstow Amazing Double room at Zone 3, E17 9QG Amenities: ✔ 💡Electric Bill ✔ 💧Water Bill ✔ 🌐High Speed Internet/Wifi ✔ 🛠️Repairs ✔ Council Tax Included ✔ *All bills included Advantages of these Rooms: ✔ 🚅Tubes (24/7) ✔ 🚌Bus Stations (24/7) ✔ 🍽️Restaurants/🥂Pub ✔ 📒Universities ✔ ⚕️Hospital/Pharmacy ✔ 💱Banks ✔ 🛍️Shops/Markets ✔ 🏞️Parks ✔ 🏞️Main Road/Street ** REFERENCES ARE REQUIRED** To arrange a viewing, please send me a message specifying your best date of move in and phone number",
-            address = "Catellán 8",
+            address = "Castellán 8",
             country = "Spain",
             price = "500",
             deposit = "500",
@@ -731,7 +732,7 @@ class SeedData:
             country = "Spain",
             price = "500",
             deposit = "500",
-            title = "Hermosa habitación amueblada.",
+            title = "Spacious and Beautiful Room in Málaga",
             type_bed = "double",
             lat = 33.4329,
             lng = -4.642371,

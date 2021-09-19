@@ -12,12 +12,14 @@
     min-height: 20rem;
 }
 
-.ddetai-img-room{
+.detail-img-room{
     height: 60vh;
     width: auto;
-    object-fit: cover;
+    //object-fit: cover; // rellena el espacio disponible
+    //object-fit: scale-down; // sale la foto completa
+    object-fit: contain; // idem que el primero
+    
 }
-
 
 .ownRes{
     background-color:#5E554C;
