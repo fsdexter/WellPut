@@ -4,18 +4,12 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import review1 from "../../img/review1.png";
-import review2 from "../../img/review2.png";
 import "../../styles/detailedView.scss";
 
 export const ReviewsResume = props => {
 	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
-
 	const twoFirstReviews = props.tenancies && [props.tenancies[0], props.tenancies[1]];
-
-	console.log("TENANCIES por props: ", props.tenancies);
-	console.log("twoFirstReviews", twoFirstReviews);
 
 	return (
 		<div className="text-center mb-1" id="reviwsRC">

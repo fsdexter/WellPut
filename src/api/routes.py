@@ -142,9 +142,7 @@ def get_single_room(room_id):
     room_seralize['tenancies'] = reviews_list #Realmente se sacan las tenancies, la relación entre usuario, comentario y habitación
     return jsonify(room_seralize), 200
     
-    
-
-@api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # FUNCIONA !!!!
+@api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
 def edit_profile(user_id):
     body_request = request.get_json()
     user_selected = User.query.get_or_404(user_id)

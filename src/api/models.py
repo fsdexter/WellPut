@@ -812,7 +812,7 @@ class SeedData:
             rating = 4,
             date = "01/01/2021",
             tenancy_id = self.first_tenancy.id,
-            room_id = self.fifth_room.id
+            room_id = self.first_room.id
         )
 
         self.second_review = Review( 
@@ -820,7 +820,7 @@ class SeedData:
             rating = 5,
             date = "02/05/2021",
             tenancy_id = self.second_tenancy.id,
-            room_id = self.fifth_room.id
+            room_id = self.first_room.id
         )
 
         self.third_review = Review( 
@@ -828,7 +828,7 @@ class SeedData:
             rating = 3,
             date = "01/06/2021",
             tenancy_id = self.third_tenancy.id,
-            room_id = self.fifth_room.id
+            room_id = self.first_room.id
         )
 
         db.session.add(self.first_review)
