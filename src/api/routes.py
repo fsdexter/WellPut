@@ -109,7 +109,7 @@ def get_single_user(user_id):
     user_selected = User.query.get(user_id)
     user = user_selected.serialize()
     
-    city = City.query.filter(City.id == User.city_id).first()
+    city = City.query.filter(City.id == user_selected.city_id).first()
     city_user = [city.serialize()]
     # To add to "user" object the "city" property to appear inside the user
     user['city'] = city_user
@@ -122,7 +122,7 @@ def get_owner(owner_id):
     user_selected = User.query.get(owner_id)
     owner = user_selected.serialize()
     
-    city = City.query.filter(City.id == User.city_id).first()
+    city = City.query.filter(City.id == user_selected.city_id).first()
     city_user = [city.serialize()]
     owner['city'] = city_user
     
@@ -137,7 +137,6 @@ def get_rooms():
 def get_single_room(room_id):
     room_selected = Room.query.get(room_id)
     room_seralize = room_selected.serialize()
-    
     reviews_room = room_selected.reviews
     reviews_list = []
     
@@ -145,7 +144,6 @@ def get_single_room(room_id):
         tenancy_review = review.tenancy
         
         user = User.query.filter(User.id == tenancy_review.user_id).first()
-        
         user_tenancy = [user.serialize()]
         tenancy_review_serialize = tenancy_review.serialize()
         tenancy_review_serialize['user'] = user_tenancy        
