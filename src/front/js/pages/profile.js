@@ -3,8 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 
-import { AddReview } from "../component/addReview";
-import { NotificationRoomie } from "../component/notificationRoomie";
 import "../../styles/viewprofile.scss";
 import avatar from "/workspace/WellPut/src/front/img/avatar.png";
 
@@ -45,7 +43,7 @@ export const Profile = () => {
 								JSON.parse(localStorage.getItem("user")).id
 							}>
 							<img
-								className="card-img-top roundShape col-4"
+								className="col-4 card-img-top roundShape avatar-profile"
 								src={
 									JSON.parse(localStorage.getItem("user")).user?.avatar_url ||
 									JSON.parse(localStorage.getItem("user")).avatar_url

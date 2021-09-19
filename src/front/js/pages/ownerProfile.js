@@ -1,6 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { Context } from "../store/appContext";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 
@@ -10,8 +8,6 @@ import "../../styles/viewprofile.scss";
 import avatar from "/workspace/WellPut/src/front/img/avatar.png";
 
 export const OwnerProfile = () => {
-	const history = useHistory();
-	const { store, actions } = useContext(Context);
 	let { owner_id } = useParams();
 	const [owner, setOwner] = useState();
 
@@ -37,7 +33,7 @@ export const OwnerProfile = () => {
 					<>
 						<div className="row" key={owner.id}>
 							<img
-								className="card-img-top roundShape col-4"
+								className="col-4 card-img-top roundShape avatar-profile"
 								src={owner.avatar_url ? owner.avatar_url : avatar}
 								alt="Card image cap"
 							/>
