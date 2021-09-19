@@ -116,6 +116,18 @@ def get_single_user(user_id):
     
     return jsonify(user), 200
 
+@api.route('/owner-profile/<int:owner_id>', methods=['GET'])
+def get_owner(owner_id):
+    body = request.get_json()
+    user_selected = User.query.get(owner_id)
+    owner = user_selected.serialize()
+    
+    city = City.query.filter(City.id == User.city_id).first()
+    city_user = [city.serialize()]
+    owner['city'] = city_user
+    
+    return jsonify(owner), 200
+
 @api.route('/rooms', methods=['GET']) # ALL ROOMS LIST
 def get_rooms():
     rooms = Room.query.all()
