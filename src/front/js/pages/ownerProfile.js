@@ -37,7 +37,7 @@ export const OwnerProfile = () => {
 					<>
 						<div className="row" key={owner.id}>
 							<img
-								className="card-img-top roundShape col-4"
+								className="col-4 card-img-top roundShape avatar-profile"
 								src={owner.avatar_url ? owner.avatar_url : avatar}
 								alt="Card image cap"
 							/>
