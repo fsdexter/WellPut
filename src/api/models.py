@@ -732,7 +732,7 @@ class SeedData:
             country = "Spain",
             price = "500",
             deposit = "500",
-            title = "Hermosa habitación amueblada.",
+            title = "Spacious and Beautiful Room in Málaga",
             type_bed = "double",
             lat = 33.4329,
             lng = -4.642371,

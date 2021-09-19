@@ -47,7 +47,14 @@ export const DetailedView = () => {
 	return details ? (
 		<div className="d-flex flex-column">
 			<div className="carousel-item active">
-				<img className="d-block w-100 ddetai-img-room" src={details.room_url} />
+				<img
+					className="d-block w-100 detail-img-room"
+					src={
+						details.room_url
+							? details.room_url
+							: "https://img.freepik.com/vector-gratis/plantilla-fondo-interior-dormitorio-dibujos-animados-acogedora-habitacion-moderna-luz-manana_33099-171.jpg?size=626&ext=jpg"
+					}
+				/>
 				<div className="carousel-caption carousel-caption-details-room">
 					<h4 className="title-detail-room mt-3">{details.title} </h4>
 					<div className="row rowCustom d-flex justify-content-center">
