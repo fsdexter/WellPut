@@ -286,6 +286,7 @@ class Room (db.Model):
             "type_bed": self.type_bed,
             "lat": self.lat,
             "lng": self.lng,
+            "city_id": self.city_id,
             "room_url":self.room_url,
             "owner_id": self.user_id,
             #"tenancies": list(map(lambda tenancy: tenancy.serialize(), self.tenancies)),

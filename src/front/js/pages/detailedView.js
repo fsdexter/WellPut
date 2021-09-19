@@ -74,7 +74,9 @@ export const DetailedView = () => {
 							data-placement="top"
 							title="Address"
 						/>
-						<h4 className="ml-2 font-weight-bolder align-self-center mt-2">{details.address}</h4>
+						<h4 className="ml-2 font-weight-bolder align-self-center mt-2">
+							{details.address}, {details.city.map(c => c.name)}
+						</h4>
 					</div>
 					<p>{details.description}</p>
 				</div>

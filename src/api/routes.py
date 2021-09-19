@@ -148,6 +148,10 @@ def get_single_room(room_id):
         tenancy_review_serialize = tenancy_review.serialize()
         tenancy_review_serialize['user'] = user_tenancy        
         reviews_list.append(tenancy_review_serialize)
+    
+    city = City.query.filter(City.id == room_selected.city_id).first()
+    city_room = [city.serialize()]
+    room_seralize['city'] = city_room
         
     room_seralize['tenancies'] = reviews_list #Realmente se sacan las tenancies, la relación entre usuario, comentario y habitación
     return jsonify(room_seralize), 200
