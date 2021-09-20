@@ -255,6 +255,7 @@ class Room (db.Model):
     lat = db.Column(db.Float(15))
     lng = db.Column(db.Float(15))
     room_url = db.Column(db.String(450))
+    active_room = db.Column(db.Boolean, default=True)
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="rooms")
     reviews = db.relationship("Review", back_populates="room")
@@ -294,7 +295,8 @@ class Room (db.Model):
             "expense": list(map(lambda expen: expen.serialize(), self.expense)),
             "feature": list(map(lambda feat: feat.serialize(), self.feature)),
             "favorites": list(map(lambda favorite: favorite.serialize(), self.favorites)),
-            "reviews": list(map(lambda review: review.serialize(), self.reviews))
+            "reviews": list(map(lambda review: review.serialize(), self.reviews)),
+            "active_room":self.active_room
         }
         
 #------------------------------------------------------------------------------------------------------------------------------

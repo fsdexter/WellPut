@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export const Announcements = () => {
 	const { store, actions } = useContext(Context);
-
+	console.log(store.rooms);
 	return (
 		<div className="container-fluid announcements ">
 			<div className="row">
@@ -55,7 +55,7 @@ export const Announcements = () => {
 							<h5>Inactive Rooms</h5>
 						</a>
 					</li>
-					<li className="nav-item" id="tabModi2">
+					{/* <li className="nav-item" id="tabModi2">
 						<a
 							className="nav-link noLink2"
 							id="occupiedR-tab"
@@ -66,7 +66,7 @@ export const Announcements = () => {
 							aria-selected="false">
 							<h5>Occupied Rooms</h5>
 						</a>
-					</li>
+					</li> */}
 				</ul>
 				<div className="tab-content" id="myTabContent">
 					<div
@@ -74,17 +74,38 @@ export const Announcements = () => {
 						id="activeR"
 						role="tabpanel"
 						aria-labelledby="activeR-tab">
-						<MyRoomsItemActive />
-						<MyRoomsItemActive />
-						<MyRoomsItemActive />
+						{store.rooms ? (
+							store.rooms.map(room => {
+								if (room.active_room) {
+									return (
+										<div key={room.id}>
+											<MyRoomsItemActive room={room} />
+										</div>
+									);
+								}
+							})
+						) : (
+							<div></div>
+						)}
 					</div>
 					<div className="tab-pane fade mb-5" id="inactiveR" role="tabpanel" aria-labelledby="inactiveR-tab">
-						<MyRoomsItemInactive />
-						<MyRoomsItemInactive />
+						{store.rooms ? (
+							store.rooms.map(room => {
+								if (!room.active_room) {
+									return (
+										<div key={room.id}>
+											<MyRoomsItemActive room={room} />
+										</div>
+									);
+								}
+							})
+						) : (
+							<div></div>
+						)}
 					</div>
-					<div className="tab-pane fade mb-5" id="occupiedR" role="tabpanel" aria-labelledby="occupiedR-tab">
+					{/* <div className="tab-pane fade mb-5" id="occupiedR" role="tabpanel" aria-labelledby="occupiedR-tab">
 						<MyRoomsItemOccupied />
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>
