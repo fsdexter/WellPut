@@ -22,7 +22,7 @@ class User(db.Model):
     occupation = db.Column(db.String(120), nullable=True)
     description = db.Column(db.String(220), nullable=True)
     avatar_url = db.Column(db.String(220), unique=False, nullable=True)
-    
+    current_room= db.Column(db.Integer) 
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="users")
     
@@ -51,6 +51,7 @@ class User(db.Model):
             "description": self.description,
             "avatar_url": self.avatar_url,
             "city_id": self.city_id,
+            "current_room": self.current_room,
             "tenancies": list(map(lambda tenancy: tenancy.serialize(), self.tenancies)),
             "rooms": list(map(lambda room: room.serialize(), self.rooms)),
             "language": list(map(lambda language: language.serialize(), self.language)),
