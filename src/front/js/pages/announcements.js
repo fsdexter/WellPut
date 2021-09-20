@@ -76,19 +76,32 @@ export const Announcements = () => {
 						aria-labelledby="activeR-tab">
 						{store.rooms ? (
 							store.rooms.map(room => {
-								return (
-									<div key={room.id}>
-										<MyRoomsItemActive room={room} />
-									</div>
-								);
+								if (room.active_room) {
+									return (
+										<div key={room.id}>
+											<MyRoomsItemActive room={room} />
+										</div>
+									);
+								}
 							})
 						) : (
 							<div></div>
 						)}
 					</div>
 					<div className="tab-pane fade mb-5" id="inactiveR" role="tabpanel" aria-labelledby="inactiveR-tab">
-						<MyRoomsItemInactive />
-						<MyRoomsItemInactive />
+						{store.rooms ? (
+							store.rooms.map(room => {
+								if (!room.active_room) {
+									return (
+										<div key={room.id}>
+											<MyRoomsItemActive room={room} />
+										</div>
+									);
+								}
+							})
+						) : (
+							<div></div>
+						)}
 					</div>
 					<div className="tab-pane fade mb-5" id="occupiedR" role="tabpanel" aria-labelledby="occupiedR-tab">
 						<MyRoomsItemOccupied />

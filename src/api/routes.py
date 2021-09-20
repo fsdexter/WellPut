@@ -412,3 +412,13 @@ def search_room():
     response = list(map(lambda room: room.serialize(),search_filter))
     print(response)
     return "OK",200
+
+@api.route("/change_active_room/<int:id>", methods=[ "PUT"])
+#@jwt_required()
+def change_active_room(id):
+   # identity = get_jwt_identity()
+   # user = current_user(get_jwt_identity())
+    room = Room.query.get(id)
+    room.active_room = not room.active_room
+    db.session.commit()
+    return jsonify("Success")

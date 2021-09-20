@@ -295,6 +295,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//////////////////////////////////////////////////////////º
+			setRoomActive: id => {
+				fetch(API_BASE_URL + "/api/change_active_room/" + id, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}).then(res => {
+					if (res.ok) {
+						getActions().getRooms();
+					}
+				});
+			},
+			//////////////////////////////////////////////////////////º
 
 			getDetailsRoom: async room_id => {
 				const store = getStore();
