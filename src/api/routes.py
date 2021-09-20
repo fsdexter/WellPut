@@ -150,7 +150,6 @@ def get_single_room(room_id):
         reviews_list.append(tenancy_review_serialize)
     
     city = City.query.filter(City.id == room_selected.city_id).first()
-    print(city)
     city_room = [city.serialize()]
     room_seralize['city'] = city_room
         

@@ -31,6 +31,10 @@ export const NewAnnouncement = () => {
 		expGas: "",
 		expElectricity: "",
 		expWater: "",
+		// singleBed: "",
+		// doubleBed: "",
+		// sofaBed: "",
+		// noBed: ""
 		type_bed: "",
 		room_url: ""
 	});
@@ -64,28 +68,25 @@ export const NewAnnouncement = () => {
 		}
 	};
 	const handleCity = e => {
-		//setCity(e.target.value);
+		setCity(e.target.value);
+		//actions.setCity(e.target.value);
 		if (city != undefined) {
 			if (city.toLowerCase().trim() === "madri") {
 				setCenter({ lat: 40.416775, lng: -3.70379 });
-				setCity(e.target.value);
 			} else if (city.toLowerCase() === "barcelon") {
 				setCenter({ lat: 41.385063, lng: 2.173404 });
-				setCity(e.target.value);
 			} else if (city.toLowerCase() === "malag") {
 				setCenter({ lat: 36.721275, lng: -4.421399 });
-				setCity(e.target.value);
 			} else if (city.toLowerCase().trim() === "valenci") {
 				setCenter({ lat: 39.47024, lng: -0.375 });
-				setCity(e.target.value);
 			} else {
 				setCenter({ lat: 40.416775, lng: -3.70379 });
-				setCity(e.target.value);
 			}
 		}
 	};
 	const uploadImage = evt => {
 		evt.preventDefault();
+		console.log("this are the files", files);
 		let body = new FormData();
 		body.append("profile_image", files[0]);
 		const options = {
@@ -95,10 +96,49 @@ export const NewAnnouncement = () => {
 		fetch(API_BASE_URL + "/api/upload", options)
 			.then(resp => resp.json())
 			.then(data => {
+				console.log("success!!", data);
 				setRoomData(prevState => ({ ...prevState, room_url: data.url }));
 			})
 			.catch(error => console.log("errorrr", error));
 	};
+	/*function functionTest() {
+		if (document.getElementById("checkWifi").checked) {
+			console.log("Wifi");
+		}
+		if (document.getElementById("checkShower").checked) {
+			console.log("Water");
+		}
+		if (document.getElementById("checkBurn").checked) {
+			console.log("Gas");
+		}
+		if (document.getElementById("checkBulb").checked) {
+			console.log("Electricity");
+		}
+		if (document.getElementById("checkFacing").checked) {
+			console.log("Facing the street");
+		}
+		if (document.getElementById("checkFurnished").checked) {
+			console.log("Furnished");
+		}
+		if (document.getElementById("checkSuite").checked) {
+			console.log("Suite Room");
+		}
+		if (document.getElementById("checkedShared").checked) {
+			console.log("Shared Room");
+		}
+		if (document.getElementById("checkSingle").checked) {
+			console.log("Single Bed");
+		}
+		if (document.getElementById("checkDouble").checked) {
+			console.log("Double Bed");
+		}
+		if (document.getElementById("checkNope").checked) {
+			console.log("No Bed");
+		}
+		if (document.getElementById("checkSofa").checked) {
+			console.log("Sofa Bed");
+		}
+	}*/
 
 	return (
 		<div className="container">
@@ -168,6 +208,7 @@ export const NewAnnouncement = () => {
 						<div className="col-2 pt-3 fontInput">
 							<p className="pl-4">City </p>
 							<p className="pl-4">Address</p>
+							{/*<p className="pl-4">Number</p>*/}
 						</div>
 						<div className="col pt-3">
 							<input
@@ -393,6 +434,7 @@ export const NewAnnouncement = () => {
 										id="checkedShared"
 										value="option4"
 										onClick={onClickHandeler}
+										s
 									/>
 									<label className="form-check-label" htmlFor="inlineRadio4">
 										<i className="fab fa-slideshare fa-2x" />
