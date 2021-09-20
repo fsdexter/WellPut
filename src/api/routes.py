@@ -24,13 +24,7 @@ def handle_upload(user_id):
     
     if 'avatar_url' in request.files:
         result = cloudinary.uploader.upload(request.files['avatar_url'])
-        #result = cloudinary.uploader.upload(request.files[0])
-        #user1 = User.query.filter_by(user_id="user").first()
-        user1 = User.query.get(user_id)
-        
-        print(user1, user1.serialize())
-        
-        #user1["avatar_url"] = result['secure_url']  
+        user1 = User.query.get(user_id) 
         user1.avatar_url = result['secure_url']    
        
         db.session.add(user1)
@@ -113,79 +107,56 @@ def get_users():
 def get_single_user(user_id):
     body = request.get_json()
     user_selected = User.query.get(user_id)
-    
-    rooms_user = user_selected.rooms # -- "rooms" is a relationship in the table User
     user = user_selected.serialize()
-    rooms = []
     
-    for room in rooms_user:
-        room_res = room.serialize()
-        rooms.append(room_res)
-    
-    characteristic_user = user_selected.characteristic  # -- "characteristic" is a relationship in the table User
-    user = user_selected.serialize()
-    characteristics = []
-    
-    for characteristic in characteristic_user:
-        characteristic_res = characteristic.serialize()
-        characteristics.append(characteristic_res)
-    
-    language_user = user_selected.language # -- "language" is a relationship in the table User
-    user = user_selected.serialize()
-    languages = []
-    
-    for language in language_user:
-        language_res = language.serialize()
-        languages.append(language_res)
-        
-    tenancies_user = user_selected.tenancies # -- "tenancies" is a relationship in the table User
-    user = user_selected.serialize()
-    tenancies_list = []
-    
-    for tenancy in tenancies_user:
-        tenancies_res = tenancy.serialize()
-        tenancies_list.append(tenancies_res)
-    
-    city = City.query.filter(City.id == User.city_id).first()
+    city = City.query.filter(City.id == user_selected.city_id).first()
     city_user = [city.serialize()]
-
-    favorites_user = user_selected.favorites # -- "favorites" is a relationship in the table User
-    user = user_selected.serialize()
-    favorites_list = []
-    
-    for favorite in favorites_user:
-        favorite_res = favorite.serialize()
-        favorites_list.append(favorite_res)
-
-     
-    # To add to "user" object the "rooms" property to appear inside the user
-    user['rooms'] = rooms   
-    # To add to "user" object the "characteristic" property to appear inside the user
-    user['characteristics'] = characteristics
-    # To add to "user" object the "language" property to appear inside the user
-    user['languages'] = languages
-    # Añadir al Objeto "user" la propiedad "favorites" para que salga en el usuario
-    user['favorites'] = favorites_list
-    # To add to "user" object the "tenancies" property to appear inside the user
-    user['tenancies'] = tenancies_list
     # To add to "user" object the "city" property to appear inside the user
     user['city'] = city_user
- 
+    
     return jsonify(user), 200
+
+@api.route('/owner-profile/<int:owner_id>', methods=['GET'])
+def get_owner(owner_id):
+    body = request.get_json()
+    user_selected = User.query.get(owner_id)
+    owner = user_selected.serialize()
+    
+    city = City.query.filter(City.id == user_selected.city_id).first()
+    city_user = [city.serialize()]
+    owner['city'] = city_user
+    
+    return jsonify(owner), 200
 
 @api.route('/rooms', methods=['GET']) # ALL ROOMS LIST
 def get_rooms():
     rooms = Room.query.all()
-    return jsonify(list(map(lambda room: room.serialize(), rooms)))
+    return jsonify(list(map(lambda room: room.serialize(), rooms))), 200
        
 @api.route('/detailed_room/<int:room_id>', methods=['GET'])
 def get_single_room(room_id):
     room_selected = Room.query.get(room_id)
-    return jsonify(room_selected.serialize())
+    room_seralize = room_selected.serialize()
+    reviews_room = room_selected.reviews
+    reviews_list = []
     
-
-
-@api.route('/edit_profile/<int:user_id>', methods=['PATCH']) # FUNCIONA !!!!
+    for review in reviews_room:
+        tenancy_review = review.tenancy
+        
+        user = User.query.filter(User.id == tenancy_review.user_id).first()
+        user_tenancy = [user.serialize()]
+        tenancy_review_serialize = tenancy_review.serialize()
+        tenancy_review_serialize['user'] = user_tenancy        
+        reviews_list.append(tenancy_review_serialize)
+    
+    city = City.query.filter(City.id == room_selected.city_id).first()
+    city_room = [city.serialize()]
+    room_seralize['city'] = city_room
+        
+    room_seralize['tenancies'] = reviews_list #Realmente se sacan las tenancies, la relación entre usuario, comentario y habitación
+    return jsonify(room_seralize), 200
+    
+@api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
 def edit_profile(user_id):
     body_request = request.get_json()
     user_selected = User.query.get_or_404(user_id)
@@ -332,7 +303,13 @@ def create_announcement():
 @api.route('/tenancy_room_reviews', methods=['POST'])
 def reviewendp():
     body_request = request.get_json()
-    review=Review(comment=body_request["comment"], rating=body_request["rating"], date=date.today(), room_id=body_request["room_id"], tenancy_id=body_request["user"])
+    review=Review(
+        comment=body_request["comment"], 
+        rating=body_request["rating"], 
+        date=date.today(), 
+        room_id=body_request["room_id"], 
+        tenancy_id=body_request["user"])
+    
     db.session.add(review)
     db.session.commit()
     return jsonify({"review": review.serialize()}), 200

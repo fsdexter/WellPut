@@ -2,57 +2,57 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-import review1 from "../../img/review1.png";
-import review2 from "../../img/review2.png";
 import "../../styles/detailedView.scss";
 
-export const ReviewsResume = () => {
+export const ReviewsResume = props => {
 	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
-
-	console.log("id de la habitación Resumen review --- ", room_id);
-
-	useEffect(() => {
-		actions.getTenancies(room_id);
-	}, []);
+	const twoFirstReviews = props.tenancies && [props.tenancies[0], props.tenancies[1]];
 
 	return (
 		<div className="text-center mb-1" id="reviwsRC">
-			<div className="border border-white mt-2 mb-4">
+			<div className="border border-white mt-2 mb-4 white-border-min-heigth">
 				<div className="row mt-2 pt-2 text-center" id="titleRewsRes">
-					<h5 className="col-6 text-white">The property reviews</h5>
-					<h5 className="col-6 text-white">About the owner</h5>
+					<h5 className="col-12 text-white">Some reviews about this room</h5>
 				</div>
-				<div className="row mt-1 p-2 d-flex justify-content-around">
-					<div className="col-5 reviResContainer p-3">
-						<div className="d-flex justify-content-around">
-							<img src={review1} className="rewImgRe" />
-							<p className="text-left ml-2 text-white">
-								The neighborhood is great, it is well connected by public transport, the metro is 5
-								minutes away and there are many nice areas to hang out.
-							</p>
-						</div>
-					</div>
 
-					<div className="col-5  reviResContainer p-3">
-						<div className="d-flex justify-content-around">
-							<img src={review2} className="rewImgRe" />
-							<p className="text-left ml-2 text-white">
-								Living with Mia is the best. She is a very nice girl who helps you with everything you
-								need. I recommend her as a partner 100%!!
-							</p>
+				{props.tenancies.length ? (
+					twoFirstReviews.map(tenancy => {
+						return (
+							<div key={tenancy.id} className="row mt-3 d-flex justify-content-around">
+								<div className="col-10 reviResContainer ">
+									<div className="d-flex">
+										<img src={tenancy.user[0].avatar_url} className="rewImgRe" />
+										<div className="ml-2">
+											<p className="text-left ml-2 text-white">{tenancy.reviews[0].comment}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						);
+					})
+				) : (
+					<p className="text-white mt-5">This room has no reviews yet</p>
+				)}
+
+				{props.tenancies.length ? (
+					<div className="row text-center mt-5">
+						<div className="col-12">
+							<Link to={`/reviews/${room_id}`}>
+								<button className="btn btnYellow mt-1 mb-3 btnYeOwnR2">Read more</button>
+							</Link>
 						</div>
 					</div>
-				</div>
-				<div className="row text-center">
-					<div className="col-12">
-						<Link to={`/reviews/${room_id}`}>
-							<button className="btn btnYellow mt-1 mb-3 btnYeOwnR2">Read more</button>
-						</Link>
-					</div>
-				</div>
+				) : null}
 			</div>
 		</div>
 	);
+};
+
+ReviewsResume.propTypes = {
+	reviews: PropTypes.array,
+	roomId: PropTypes.number,
+	tenancies: PropTypes.array
 };

@@ -3,8 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 
-import { AddReview } from "../component/addReview";
-import { NotificationRoomie } from "../component/notificationRoomie";
 import "../../styles/viewprofile.scss";
 import avatar from "/workspace/WellPut/src/front/img/avatar.png";
 
@@ -14,9 +12,13 @@ export const Profile = () => {
 	let { user_id } = useParams();
 
 	useEffect(() => {
-		actions.getUser(
-			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
-		);
+		if (JSON.parse(localStorage.getItem("user"))) {
+			actions.getUser(
+				JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+			);
+		} else if (JSON.parse(localStorage.getItem("owner"))) {
+			actions.getOwner(JSON.parse(localStorage.getItem("owner")).id);
+		}
 	});
 
 	function handleSubmit() {
@@ -32,7 +34,7 @@ export const Profile = () => {
 	return (
 		<div className="picturefond col-12 d-flex justify-content-center text-white">
 			<div className="container col-10 detallefondblack">
-				{store.user || localStorage.getItem("user") ? (
+				{localStorage.getItem("user") ? (
 					<>
 						<div
 							className="row"
@@ -41,7 +43,7 @@ export const Profile = () => {
 								JSON.parse(localStorage.getItem("user")).id
 							}>
 							<img
-								className="card-img-top roundShape col-4"
+								className="col-4 card-img-top roundShape avatar-profile"
 								src={
 									JSON.parse(localStorage.getItem("user")).user?.avatar_url ||
 									JSON.parse(localStorage.getItem("user")).avatar_url
@@ -60,13 +62,6 @@ export const Profile = () => {
 										{JSON.parse(localStorage.getItem("user")).user?.last_name ||
 											JSON.parse(localStorage.getItem("user")).last_name}
 									</h1>
-									{/* <div className="d-flex align-items-center ml-3">
-										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
-										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
-										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
-										<i className="fa fa-star start fa-lg mr-2" aria-hidden="true" />
-										<i className="fa fa-star start fa-lg" aria-hidden="true" />
-									</div> */}
 								</div>
 
 								<div className="col-12 detallefondblack" id="presentationUser">
@@ -85,10 +80,10 @@ export const Profile = () => {
 										  })
 										: "My house"}
 
-									<h3>
+									<h4>
 										{JSON.parse(localStorage.getItem("user")).user?.description ||
 											JSON.parse(localStorage.getItem("user")).description}
-									</h3>
+									</h4>
 								</div>
 							</div>
 						</div>
@@ -146,7 +141,11 @@ export const Profile = () => {
 							</div>
 						</div>
 					</>
-				) : null}
+				) : (
+					<div className="text-center text-warning spiner-loading-data">
+						<i className="fas fa-spinner fa-pulse fa-6x" />
+					</div>
+				)}
 			</div>
 			<div className="col-1" id="containerOptionsProfile">
 				<div className="col buttonfondblack  d-flex justify-content-center">
@@ -179,49 +178,6 @@ export const Profile = () => {
 							<h5 className="textbuttons">My Rooms</h5>
 						</button>
 					</Link>
-				</div>
-				<div className="col buttonfondblack d-flex justify-content-center">
-					<button
-						type="button"
-						className="navbar-brand mb-0 mr-2 btn btn-navb"
-						data-toggle="modal"
-						data-target="#notificationModal">
-						<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" />
-						<h5 className="textbuttons">Add Romie</h5>
-					</button>
-				</div>
-				<div className="col buttonfondblack d-flex justify-content-center">
-					<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb" data-target="#addReviewModal">
-						<i className="fas fa-user-times fa-2x text-white"></i>
-						<h5 className="textbuttons">Delete Romie</h5>
-					</button>
-				</div>
-				<div className="col buttonfondblack d-flex justify-content-center">
-					<button
-						type="button"
-						className="navbar-brand mb-0 mr-2 btn btn-navb"
-						data-toggle="modal"
-						data-target="#addReviewModal">
-						<i className="far fa-comment-dots fa-2x text-white"></i>
-						<h5 className="textbuttons">Add review</h5>
-					</button>
-				</div>
-				{/*<!-- add ReviewModal Modal -->*/}
-				<div id="addReviewModal" className="modal fade" role="dialog">
-					<div className="modal-dialog modal-lg">
-						<div className="modal-content">
-							<AddReview />
-						</div>
-					</div>
-				</div>
-
-				{/*<!-- notification Modal -->*/}
-				<div id="notificationModal" className="modal fade" role="dialog">
-					<div className="modal-dialog modal-lg">
-						<div className="modal-content">
-							<NotificationRoomie />
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>

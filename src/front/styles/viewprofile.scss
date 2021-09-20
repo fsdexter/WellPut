@@ -10,7 +10,8 @@
 .pictureprofile1{
     -ms-flex-item-align: center;
     align-content: center;
-    width: 10px;
+    width: auto;
+    object-fit: cover;
     height: 9px;
     padding: 1%;
     display: inline;}
@@ -19,6 +20,12 @@
     background-color:rgba(0, 0, 0, 0.541);
     margin: 1%;
     padding: 5%;
+}
+
+.avatar-profile{
+    object-fit: cover;
+    object-position: center center;
+    margin-bottom: .5rem;
 }
 
 #presentationUser{
@@ -44,7 +51,7 @@
     width: 100%;
 }
 .contentfondblack{
-    background-color:rgba(0, 0, 0, 0.295);
+    background-color:rgba(0, 0, 0, 0.603);
     margin: 4%;
     padding: 2% 5% 2% 5%;
 }

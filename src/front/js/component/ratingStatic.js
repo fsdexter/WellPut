@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 export const RatingStatic = props => {
 	const ratingValue = props.rating;
 
-	console.log("ratingValue : ", ratingValue);
-
 	switch (ratingValue) {
 		case NaN:
 			return (

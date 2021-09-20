@@ -547,7 +547,6 @@ export const NewAnnouncement = () => {
 								data-toggle="tab"
 								href="#previewTab"
 								onClick={() => {
-									console.log(roomData);
 									actions.postNewAnnouncement(roomData);
 									history.push(`/`);
 								}}>
