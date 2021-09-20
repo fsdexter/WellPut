@@ -23,6 +23,11 @@
     height: 70%!important;  
 }
 
+.CenterStart{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
 .commentReview:hover, .commentReview:focus{
     background-color: rgba(0, 0, 0, 0.37);
     color: white;

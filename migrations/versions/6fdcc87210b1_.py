@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: d65f7370b3e5
+Revision ID: 6fdcc87210b1
 Revises: 
-Create Date: 2021-09-19 19:24:07.219793
+Create Date: 2021-09-20 18:32:53.307080
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd65f7370b3e5'
+revision = '6fdcc87210b1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -66,6 +66,7 @@ def upgrade():
     sa.Column('occupation', sa.String(length=120), nullable=True),
     sa.Column('description', sa.String(length=220), nullable=True),
     sa.Column('avatar_url', sa.String(length=220), nullable=True),
+    sa.Column('current_room', sa.Integer(), nullable=True),
     sa.Column('city_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['city_id'], ['city.id'], ),
     sa.PrimaryKeyConstraint('id'),
@@ -91,6 +92,7 @@ def upgrade():
     sa.Column('lat', sa.Float(precision=15), nullable=True),
     sa.Column('lng', sa.Float(precision=15), nullable=True),
     sa.Column('room_url', sa.String(length=450), nullable=True),
+    sa.Column('active_room', sa.Boolean(), nullable=True),
     sa.Column('city_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['city_id'], ['city.id'], ),
