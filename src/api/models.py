@@ -22,7 +22,7 @@ class User(db.Model):
     occupation = db.Column(db.String(120), nullable=True)
     description = db.Column(db.String(220), nullable=True)
     avatar_url = db.Column(db.String(220), unique=False, nullable=True)
-    current_room= db.Column(db.Integer) 
+    current_room = db.Column(db.Integer) 
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     city =  db.relationship("City", back_populates="users")
     
@@ -572,7 +572,8 @@ class SeedData:
             gender = "male",
             description = "Sportsman, adventurer and super sociable boy.I love meeting people and visiting new places",
             avatar_url = "https://d1bvpoagx8hqbg.cloudfront.net/259/b59e40d45c7460cb65467d2000705086.jpg",
-            city_id = self.first_city.id
+            city_id = self.first_city.id,
+            current_room = None
             
         ) 
 
@@ -586,7 +587,8 @@ class SeedData:
             gender = "female",
             description = "I am a sociable girl, I love to dance and read",
             avatar_url = "https://img.europapress.es/fotoweb/fotonoticia_20200907131946_420.jpg",
-            city_id = self.first_city.id
+            city_id = self.first_city.id,
+            current_room = None
         )
 
         self.third_user = User( 
@@ -599,7 +601,8 @@ class SeedData:
             gender = "female",
             description = "I am super chefs, I love animals and swimming",
             avatar_url = "https://img.europapress.es/fotoweb/fotonoticia_20180118120033_420.jpg",
-            city_id = self.first_city.id
+            city_id = self.first_city.id,
+            current_room = None
         )
 
         self.fourth_user = User( 
@@ -612,7 +615,8 @@ class SeedData:
             gender = "male",
             description =  "I love food, nice people and good music",
             avatar_url = "https://media.istockphoto.com/photos/portrait-of-young-man-in-yellow-tshirt-at-backyard-picture-id1180616281?k=20&m=1180616281&s=612x612&w=0&h=ZChvYgG8WCJ1M73lGE8oSyp0TMzWJxS3xRNw7uFwO6w=",
-            city_id = self.second_city.id
+            city_id = self.second_city.id,
+            current_room = None
         )
 
         self.fifth_user = User( 
@@ -625,7 +629,8 @@ class SeedData:
             gender = "male",
             description = "I am a quiet guy. I like to stay at home reading or watching a good good movie.",
             avatar_url = "https://media.istockphoto.com/photos/portrait-of-a-smiling-student-at-the-city-street-picture-id1147289240?k=20&m=1147289240&s=612x612&w=0&h=sEx-9oXUdDRMqZF0o1viaumUjAud3Lsr9QxWAqrW3ks=",
-            city_id = self.third_city.id
+            city_id = self.third_city.id,
+            current_room = None
         )
     
         db.session.add(self.first_user)
@@ -651,7 +656,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
-            room_url = "https://media.revistaad.es/photos/60c2294bb4a53607d5b4669f/4:3/w_1568,h_1176,c_limit/231620.jpg"
+            room_url = "https://media.revistaad.es/photos/60c2294bb4a53607d5b4669f/4:3/w_1568,h_1176,c_limit/231620.jpg",
+            active_room = True
         )
 
         self.second_room = Room( 
@@ -666,7 +672,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.second_user.id,
-            room_url = "https://i.pinimg.com/originals/a2/04/d3/a204d395e71329a6769d097575490b7a.jpg"
+            room_url = "https://i.pinimg.com/originals/a2/04/d3/a204d395e71329a6769d097575490b7a.jpg",
+            active_room = True
         )
 
         self.third_room = Room( 
@@ -681,7 +688,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.third_user.id,
-            room_url = "https://casaydiseno.com/wp-content/uploads/2016/08/dormitorios-con-encanto-decoracion-pequeno-comodo.jpg"
+            room_url = "https://casaydiseno.com/wp-content/uploads/2016/08/dormitorios-con-encanto-decoracion-pequeno-comodo.jpg",
+            active_room = True
         )
 
         self.fourth_room = Room( 
@@ -696,7 +704,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.first_city.id,
             user_id = self.first_user.id,
-            room_url = "https://i.pinimg.com/originals/5e/52/d4/5e52d4a5b28b76cbc6a73b5b0f43f42d.jpg"
+            room_url = "https://i.pinimg.com/originals/5e/52/d4/5e52d4a5b28b76cbc6a73b5b0f43f42d.jpg",
+            active_room = True
         )
         
         self.fifth_room = Room( 
@@ -711,7 +720,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.second_city.id,
             user_id = self.fourth_user.id,
-            room_url = "https://www.hola.com/imagenes/decoracion/20200220161121/iluminacion-habitaciones-juveniles/0-786-452/luz-teens-6a-a.jpg"
+            room_url = "https://www.hola.com/imagenes/decoracion/20200220161121/iluminacion-habitaciones-juveniles/0-786-452/luz-teens-6a-a.jpg",
+            active_room = True
         )
         
         self.sixth_room = Room( 
@@ -726,7 +736,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.second_city.id,
             user_id = self.fourth_user.id,
-            room_url = "https://cafeversatil.com/nuestroshijos/wp-content/uploads/2019/11/01-2-768x576.jpg"   
+            room_url = "https://cafeversatil.com/nuestroshijos/wp-content/uploads/2019/11/01-2-768x576.jpg",
+            active_room = True   
         )
         
         self.seventh_room = Room( 
@@ -741,7 +752,8 @@ class SeedData:
             lng = -4.642371,
             city_id = self.third_city.id,
             user_id = self.fifth_user.id,
-            room_url = "https://i.pinimg.com/736x/72/1a/8c/721a8c00c5e682403d13aa15d2168c79.jpg"
+            room_url = "https://i.pinimg.com/736x/72/1a/8c/721a8c00c5e682403d13aa15d2168c79.jpg",
+            active_room = True
         )
 
         db.session.add(self.first_room)
