@@ -363,7 +363,7 @@ def handle_seed_user_data():
 @api.route('/search_room', methods=['POST'])
 def search_room():
     body_request = request.get_json()
-    print(body_request)
+    # print(body_request)
     queries = []
     if body_request["country"]:
         queries.append(Room.country == body_request["country"])
@@ -372,28 +372,20 @@ def search_room():
     if body_request["city"]:
         print(body_request["city"], "city ok")
         # queries.append(Room.city == body_request["city"])
-    # if body_request["rating"]:
     if body_request["filters"]:
         for item in body_request["filters"]:
-            if item == 'wifi' or item == 'Water' or item == 'light ' or item == 'gas':
-                print("expense")
+            if item == 'wifi' or item == 'Water' or item == 'light ' or item == 'gas':                
                 print(item)
-            elif item == 'facingTheStreet' or item == 'furnishedRoom' or item == 'sharedRoom ' or item == 'suiteRoom':
-                print("feature")
+            elif item == 'facingTheStreet' or item == 'furnishedRoom' or item == 'sharedRoom' or item == 'suiteRoom':
                 print(item)
-        # print("array")
-        # print(body_request["filters"])
     if body_request["money"]:
-        for elmt in body_request["money"]:
+        thisdict =  body_request["money"]
+        for elmt in thisdict:
             if elmt == 'priceMIN' or elmt == 'priceMAX':
-                print(elmt)
-                print("price")
+                print(thisdict[elmt])                
             elif elmt == 'depositoMIN' or elmt == 'depositoMAX':
-                print(elmt)
-                print("deposite")
-        # print("obejeto")
-        # print(body_request["money"])
-    
+                print(thisdict[elmt])  
+           
     # print(queries)
     search_filter = Room.query.filter(*queries).all()
     # print(search_filter)
@@ -401,6 +393,7 @@ def search_room():
     # print(response)
     return "OK",200
 
+    # if body_request["rating"]:
     # if body_request["interests"]:
     #     print("interessante")
     #     print(body_request["interests"])
