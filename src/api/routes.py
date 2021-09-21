@@ -370,6 +370,10 @@ def search_room():
     if body_request["bedType"]:
         queries.append(Room.type_bed == body_request["bedType"])
     if body_request["city"]:
+        aux = City.query.filter(City.name == body_request["city"]).first()
+        print(aux)
+        # queries.append(Room.city_id == aux)
+        # queries.append(Room.city_id == City.query.filter(City.name == body_request["city"]).first() )
         print(body_request["city"], "city ok")
         # queries.append(Room.city == body_request["city"])
     if body_request["filters"]:
@@ -386,7 +390,7 @@ def search_room():
             elif elmt == 'depositoMIN' or elmt == 'depositoMAX':
                 print(thisdict[elmt])  
            
-    # print(queries)
+    print(queries)
     search_filter = Room.query.filter(*queries).all()
     # print(search_filter)
     response = list(map(lambda room: room.serialize(),search_filter))
