@@ -44,7 +44,12 @@ export const MyRoomsItemActive = props => {
 								<img src={props.room.active_room ? closeEye : openEye} className="closedEye" />
 							</button>
 
-							<button type="button" className="btn btn-outline-warning mt-5 roomsButtons">
+							<button
+								type="button"
+								className="btn btn-outline-warning mt-5 roomsButtons"
+								onClick={() => {
+									actions.setRoomDelete(props.room.id);
+								}}>
 								<img src={deleteRoom} />
 							</button>
 						</div>
