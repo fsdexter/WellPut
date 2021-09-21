@@ -76,7 +76,7 @@ export const Announcements = () => {
 						aria-labelledby="activeR-tab">
 						{store.rooms ? (
 							store.rooms.map(room => {
-								if (room.active_room) {
+								if (room.active_room && room.delete_room) {
 									return (
 										<div key={room.id}>
 											<MyRoomsItemActive room={room} />
@@ -91,7 +91,7 @@ export const Announcements = () => {
 					<div className="tab-pane fade mb-5" id="inactiveR" role="tabpanel" aria-labelledby="inactiveR-tab">
 						{store.rooms ? (
 							store.rooms.map(room => {
-								if (!room.active_room) {
+								if (!room.active_room && room.delete_room) {
 									return (
 										<div key={room.id}>
 											<MyRoomsItemActive room={room} />

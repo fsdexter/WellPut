@@ -261,6 +261,7 @@ class Room (db.Model):
     city =  db.relationship("City", back_populates="rooms")
     reviews = db.relationship("Review", back_populates="room")
     tenancies = db.relationship("Tenancy", back_populates="room")
+    delete_room = db.Column(db.Boolean, default=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="rooms")
@@ -297,7 +298,8 @@ class Room (db.Model):
             "feature": list(map(lambda feat: feat.serialize(), self.feature)),
             "favorites": list(map(lambda favorite: favorite.serialize(), self.favorites)),
             "reviews": list(map(lambda review: review.serialize(), self.reviews)),
-            "active_room":self.active_room
+            "active_room":self.active_room,
+            "delete_room":self.delete_room
         }
         
 #------------------------------------------------------------------------------------------------------------------------------
