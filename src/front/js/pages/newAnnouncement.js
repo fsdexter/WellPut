@@ -35,8 +35,13 @@ export const NewAnnouncement = () => {
 		room_url: ""
 	});
 	const handleRoomData = e => {
+		console.log("HOLAAAAAAAAA 1");
+
 		const { name, value } = e.target;
+		console.log("OBJETO ? : ", { [name]: value });
 		setRoomData(prevState => ({ ...prevState, [name]: value }));
+
+		console.log("city ? --- ", roomData.city);
 	};
 
 	const onClickHandeler = e => {
@@ -64,6 +69,8 @@ export const NewAnnouncement = () => {
 		}
 	};
 	const handleCity = e => {
+		console.log("HOLAAAAAAAAA 2");
+
 		//setCity(e.target.value);
 		if (city != undefined) {
 			if (city.toLowerCase().trim() === "madri") {
@@ -84,6 +91,13 @@ export const NewAnnouncement = () => {
 			}
 		}
 	};
+
+	const sendCity = e => {
+		console.log(e);
+		handleRoomData(e);
+		handleCity(e);
+	};
+
 	const uploadImage = evt => {
 		evt.preventDefault();
 		let body = new FormData();
@@ -174,7 +188,8 @@ export const NewAnnouncement = () => {
 								type="text"
 								className="form-control roundShape"
 								name="city"
-								onChange={(handleRoomData, handleCity)}
+								//onChange={(handleRoomData, handleCity)}
+								onChange={sendCity}
 							/>
 							<input
 								type="text"
@@ -505,6 +520,9 @@ export const NewAnnouncement = () => {
 								data-toggle="tab"
 								href="#previewTab"
 								onClick={() => {
+									console.log("DATA : ", roomData);
+									console.log("price : ", roomData.price);
+									console.log("city : ", roomData.city);
 									actions.postNewAnnouncement(roomData);
 									history.push(`/`);
 								}}>
