@@ -197,10 +197,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ rating: s });
 			},
-			setRoomies: r => {
-				const store = getStore();
-				setStore({ roomies: r });
-			},
+
 			setBedType: b => {
 				const store = getStore();
 				setStore({ bedType: b });
@@ -219,13 +216,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			searchRoom: () => {
 				const store = getStore();
+
 				fetch(API_BASE_URL + "/api/search_room", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({
-						roomies: store.roomies,
 						filters: store.filters,
 						rating: store.rating,
 						bedType: store.bedType,

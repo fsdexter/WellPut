@@ -359,6 +359,7 @@ def handle_seed_user_data():
     return jsonify({"msg": "The data was created!" }), 200
 
 # -------------------------- search room -------------------------
+
 @api.route('/search_room', methods=['POST'])
 def search_room():
     body_request = request.get_json()
@@ -366,30 +367,60 @@ def search_room():
     queries = []
     if body_request["country"]:
         queries.append(Room.country == body_request["country"])
-    if body_request["typeBed"]:
-        queries.append(Room.type_bed == body_request["typeBed"])
+    if body_request["bedType"]:
+        queries.append(Room.type_bed == body_request["bedType"])
     if body_request["city"]:
-        queries.append(Room.city == body_request["city"])
-    if body_request["roomies"]:
-        print(roomies)
+        print(body_request["city"], "city ok")
+        # queries.append(Room.city == body_request["city"])
+    # if body_request["rating"]:
     if body_request["filters"]:
-        print(filters)
-    if body_request["rating"]:
-        print(rating)
+        for item in body_request["filters"]:
+            if item == 'wifi' or item == 'Water' or item == 'light ' or item == 'gas':
+                print("expense")
+                print(item)
+            elif item == 'facingTheStreet' or item == 'furnishedRoom' or item == 'sharedRoom ' or item == 'suiteRoom':
+                print("feature")
+                print(item)
+        # print("array")
+        # print(body_request["filters"])
     if body_request["money"]:
-        print(money)
-    if body_request["interests"]:
-        print(interests)
-#   
-
-#   if body_request["kye del flux"]:
-#         for
-#        queries.append(Room.type_bed == body_request["key"])
+        for elmt in body_request["money"]:
+            if elmt == 'priceMIN' or elmt == 'priceMAX':
+                print(elmt)
+                print("price")
+            elif elmt == 'depositoMIN' or elmt == 'depositoMAX':
+                print(elmt)
+                print("deposite")
+        # print("obejeto")
+        # print(body_request["money"])
     
+    # print(queries)
     search_filter = Room.query.filter(*queries).all()
+    # print(search_filter)
     response = list(map(lambda room: room.serialize(),search_filter))
-    print(response)
+    # print(response)
     return "OK",200
+
+    # if body_request["interests"]:
+    #     print("interessante")
+    #     print(body_request["interests"])
+    
+    # if body_request[""]:
+    # if body_request["city"]:
+    #     queries.append(Room.city == body_request["city"])
+    # if body_request["filters"]:
+    #     print(filters)
+    # if body_request["rating"]:
+    #     print(rating)
+    # if body_request["money"]:
+    #     print(money)
+    # if body_request["interests"]:
+    #     print(interests)
+  
+
+    # if body_request["kye del flux"]:
+    #     for
+    #    queries.append(Room.type_bed == body_request["key"])
 
 @api.route("/change_active_room/<int:id>", methods=[ "PUT"])
 #@jwt_required()
