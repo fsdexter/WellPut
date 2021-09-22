@@ -7,6 +7,7 @@ import { API_BASE_URL } from "../constants";
 import { OwnerResume } from "../component/ownerResume";
 import { ReviewsResume } from "../component/reviewsResumen";
 import { RatingStatic } from "../component/ratingStatic";
+import { ApplyToRoom } from "../component/ApplyToRoom";
 
 import bedSofa from "../../img/bedsofaBlack.png";
 import doubleBed from "../../img/doubleBlack.png";
@@ -63,8 +64,13 @@ export const DetailedView = () => {
 						</div>
 						<div className="starCaroCustom d-flex justify-content-around mb-3">
 							<RatingStatic rating={averageRating} />
-							<button className="heartButtonFix ml-5 pr-5 pl-5">
-								<i className="far fa-heart fa-2x" />
+							<button
+								type="button"
+								className="navbar btn  btnapllyroom"
+								data-toggle="modal"
+								data-target="#notificationModal">
+								<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" /> &nbsp;&nbsp;
+								<h4 className="textbuttons"> Apply Room</h4>
 							</button>
 						</div>
 					</div>
@@ -254,6 +260,14 @@ export const DetailedView = () => {
 					</div>
 					<div className="col-6 reviesRes">
 						<ReviewsResume reviews={details.reviews} roomId={details.id} tenancies={details.tenancies} />
+					</div>
+				</div>
+				{/*<!-- notification Modal -->*/}
+				<div id="notificationModal" className="modal fade" role="dialog">
+					<div className="modal-dialog modal-lg">
+						<div className="modal-content">
+							<ApplyToRoom />
+						</div>
 					</div>
 				</div>
 			</div>

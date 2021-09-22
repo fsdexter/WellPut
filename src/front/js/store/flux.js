@@ -174,7 +174,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
 			},
 			addRoomie: () => {
-				console.log("SE AGREGÓ UN NUEVO COMPAÑERO DE PISO");
+				console.log("Solicitud de  habitacion generada ");
 			},
 			deleteRoomie: () => {
 				console.log("SE ELIMINÓ A UN COMPAÑERO DE PISO");
