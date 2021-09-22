@@ -363,38 +363,72 @@ def handle_seed_user_data():
 @api.route('/search_room', methods=['POST'])
 def search_room():
     body_request = request.get_json()
-    # print(body_request)
+    
+
     queries = []
     if body_request["country"]:
         queries.append(Room.country == body_request["country"])
     if body_request["bedType"]:
         queries.append(Room.type_bed == body_request["bedType"])
     if body_request["city"]:
+
+       
         aux = City.query.filter(City.name == body_request["city"]).first()
-        print(aux)
-        # queries.append(Room.city_id == aux)
+       
+        queries.append(Room.city_id == aux.id)
         # queries.append(Room.city_id == City.query.filter(City.name == body_request["city"]).first() )
-        print(body_request["city"], "city ok")
         # queries.append(Room.city == body_request["city"])
+    #  if body_request["filters"]:
+    #      for item in body_request["filters"]:
+    #          if item == 'wifi' or item == 'Water' or item == 'light ' or item == 'gas':                
+    #              print(item)
+    #              fet2 = []
+    #          elif item == 'facingTheStreet' or item == 'furnishedRoom' or item == 'sharedRoom' or item == 'suiteRoom':
+    #              print(item)
+    # if body_request["money"]:
+    #     thisdict =  body_request["money"]
+    #     for elmt in thisdict:
+    #         if elmt == 'priceMIN' or elmt == 'priceMAX':
+    #             print(thisdict[elmt])                
+    #         elif elmt == 'depositoMIN' or elmt == 'depositoMAX':
+    #             print(thisdict[elmt])  
+           
+    
+    search_filter = Room.query.filter(*queries).all()
+    
+
+    def sublist(lst1, lst2):
+        return set(lst1) <= set(lst2)
+    print(body_request["filters"])
     if body_request["filters"]:
+    
+        search_filter_2 = []
+        features = []
+        expanse = []
+
         for item in body_request["filters"]:
             if item == 'wifi' or item == 'Water' or item == 'light ' or item == 'gas':                
-                print(item)
-            elif item == 'facingTheStreet' or item == 'furnishedRoom' or item == 'sharedRoom' or item == 'suiteRoom':
-                print(item)
-    if body_request["money"]:
-        thisdict =  body_request["money"]
-        for elmt in thisdict:
-            if elmt == 'priceMIN' or elmt == 'priceMAX':
-                print(thisdict[elmt])                
-            elif elmt == 'depositoMIN' or elmt == 'depositoMAX':
-                print(thisdict[elmt])  
-           
-    print(queries)
-    search_filter = Room.query.filter(*queries).all()
-    # print(search_filter)
+               
+                expanse.append(item)
+            elif item == 'facing the street' or item == 'furnished room' or item == 'sharedRoom' or item == 'suiteRoom':
+                
+                features.append(item)
+        for room in search_filter:
+            if len(features)>0 and sublist(features,list(map(lambda x:x.name,room.feature))):
+                search_filter_2.append(room)
+        search_filter_3 = []
+        for room in search_filter:
+            if len(expanse)>0 and sublist(expanse,list(map(lambda x:x.name,room.expanse))):
+                search_filter_3.append(room)
+
+        search_filter_4 = search_filter_2 + search_filter_3
+        response = list(map(lambda room: room.serialize(),search_filter_4))
+        print(response,len(response))
+        return "OK",200
+
+   
     response = list(map(lambda room: room.serialize(),search_filter))
-    # print(response)
+    print(response,len(response))
     return "OK",200
 
     # if body_request["rating"]:
