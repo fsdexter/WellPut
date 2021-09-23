@@ -201,9 +201,9 @@ export const NewAnnouncement = () => {
 						<div className="col-2 pt-3 fontInput" />
 						<div className="col-3" />
 					</div>
-					{/* <center>
+					<center>
 						<MyMap center={center} style={{ width: "500px", height: "350px" }} zoom={10} />
-					</center> */}
+					</center>
 					<div className="row">
 						<div className="col-10" />
 						<div className="col-2">
