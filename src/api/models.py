@@ -31,7 +31,6 @@ class User(db.Model):
     
     language = db.relationship("Language", secondary="spoken_languages")
     characteristic = db.relationship("Characteristic", secondary="characteristic_user", lazy='subquery')
-    
     favorites = db.relationship("Favorites", back_populates="user")
     
     def __repr__(self):

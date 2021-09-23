@@ -266,7 +266,13 @@ export const DetailedView = () => {
 				<div id="notificationModal" className="modal fade" role="dialog">
 					<div className="modal-dialog modal-lg">
 						<div className="modal-content">
-							<ApplyToRoom />
+							<ApplyToRoom
+								img={details.room_url}
+								title={details.title}
+								price={details.price}
+								address={details.address}
+								roomId={details.id}
+							/>
 						</div>
 					</div>
 				</div>

@@ -410,3 +410,14 @@ def change_delete_room(id):
     room.delete_room = not room.delete_room
     db.session.commit()
     return jsonify("Delete Room Success")
+
+@api.route("/change_current_room/<int:user_id>", methods=[ "PUT"])
+#@jwt_required()
+def change_current_room(user_id):
+    body_request = request.get_json()
+   # identity = get_jwt_identity()
+   # user = current_user(get_jwt_identity())
+    user = User.query.get(user_id)
+    user.current_user = body_request["room_id"]
+    db.session.commit()
+    return jsonify("Change Active user Success")
