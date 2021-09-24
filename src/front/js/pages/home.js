@@ -102,7 +102,7 @@ export const Home = () => {
 						<div className="border border-warning pb-3">
 							<FilterExp />
 						</div>
-						<br />
+						{/* <br />
 						<div className="border border-warning pt-4 pb-4">
 							<div className="row">
 								<div className="col-4">
@@ -130,7 +130,7 @@ export const Home = () => {
 									/>
 								</div>
 							</div>
-						</div>
+						</div> */}
 						<br />
 						<div className="border border-warning pt-4 pb-4">
 							<FilterFea />
