@@ -377,16 +377,12 @@ def search_room():
     def sublist(lst1, lst2):
         return set(lst1) <= set(lst2)
     
+    search_filter_2 = []
+    search_filter_3 = []
+    search_filter_4 = []
+    features = []
+    expanse = []
     if body_request["filters"]:
-
-        search_filter_2 = []
-        search_filter_3 = []
-        search_filter_4 = []
-        features = []
-        expanse = []
-        price = []
-        deposite = []
-
         for item in body_request["filters"]:
             if item == 'wifi' or item == 'Water' or item == 'light ' or item == 'gas':               
                 expanse.append(item)
@@ -398,27 +394,7 @@ def search_room():
         for room in search_filter:
             if len(expanse)>0 and sublist(expanse,list(map(lambda x:x.name,room.expanse))):
                 search_filter_3.append(room)
-
-            #max > room.price > mim
-        if body_request["money"]:
-            thisdict =  body_request["money"]
-            for elmt in thisdict:
-                if elmt == 'priceMIN' or elmt == 'priceMAX':
-                                    
-                elif elmt == 'depositoMIN' or elmt == 'depositoMAX':
-                    print(thisdict[elmt])  
-           
-        search_filter_5 = search_filter_2 + search_filter_3 + search_filter_4
-        response = list(map(lambda room: room.serialize(),search_filter_5))
-        print(response,len(response))
-        return "OK",200
-
    
-    response = list(map(lambda room: room.serialize(),search_filter))
-    print(response,len(response))
-    return "OK",200
-
-        
     #max > price > mim
     if body_request["money"]:
         thisdict =  body_request["money"]
@@ -427,6 +403,18 @@ def search_room():
                 print(thisdict[elmt])                
             elif elmt == 'depositoMIN' or elmt == 'depositoMAX':
                 print(thisdict[elmt])  
+                   
+    search_filter_5 = search_filter_2 + search_filter_3 + search_filter_4
+    response = list(map(lambda room: room.serialize(),search_filter_5))
+    print(response,len(response))
+    return "OK",200
+
+   
+    # response = list(map(lambda room: room.serialize(),search_filter))
+    # print(response,len(response))
+    # return "OK",200
+
+        
            
     # if body_request["rating"]:
     # if body_request["interests"]:
