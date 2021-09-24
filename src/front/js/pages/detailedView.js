@@ -272,6 +272,7 @@ export const DetailedView = () => {
 								price={details.price}
 								address={details.address}
 								roomId={details.id}
+								city={details.city.map(c => c.name)}
 							/>
 						</div>
 					</div>
