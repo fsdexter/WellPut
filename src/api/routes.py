@@ -229,12 +229,18 @@ def create_announcement():
     expWater_request = body_request.get("expWater", None)
     type_bed_request = body_request.get("type_bed", None)
     room_url_request = body_request.get("room_url", None)
+    owner_id_request = body_request.get("owner_id", None)
     
-    # To get de city id and create city_id inside to the new room
+    # To get the city id and create city_id inside to the new room
     city = City.query.filter(City.name == city_request).first()  
     city_serialize = city.serialize()
     city_room_id = city_serialize['id']
-        
+
+    # To add the new room owner
+    owner = User.query.filter(User.id == owner_id_request).first()
+    owner_serialize = owner.serialize()
+    owner_id = owner_serialize['id']
+
     expense_room= Expense(
         name = expWater_request
     )
@@ -269,11 +275,10 @@ def create_announcement():
         deposit = deposit_request,
         type_bed = type_bed_request,
         room_url =  room_url_request,
-        city_id = city_room_id
+        city_id = city_room_id,
+        user_id = owner_id
         )
     
-    
-
     db.session.add(new_room)
     db.session.add(feature1_room)
     db.session.add(feature2_room)
@@ -284,8 +289,6 @@ def create_announcement():
     db.session.add(expense3_room)
     db.session.add(expense4_room)
     db.session.commit()
-    
-    print("NUEVA HABITACIÓN  :: ", new_room)
 
     return jsonify(new_room.serialize()), 200
 
