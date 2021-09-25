@@ -22,6 +22,10 @@ export const Home = () => {
 		actions.getRooms();
 	}, []);
 
+	useEffect(() => {
+		actions.getRooms();
+	}, [store.rooms.length]);
+
 	const [city, setCity] = useState();
 	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
 	const [formValue, setFormValue] = useState({
@@ -37,6 +41,7 @@ export const Home = () => {
 		actions.setInterests(formValue);
 	};
 	const handleCity = e => {
+		e.preventDefault();
 		setCity(e.target.value);
 		actions.setCity(e.target.value);
 		if (city != undefined) {
@@ -76,20 +81,21 @@ export const Home = () => {
 					<h1 className="mt-5 texto_yellow">Search a room</h1>
 					<br />
 					<div className="row">
-						<div className="col-3">
-							<h3 className="ml-5 pt-3">City</h3>
+						<div className="col-4">
+							<h3 className="ml-5 pt-3">City *</h3>
 						</div>
-						<form>
+						<div className="col-6">
 							<div className="col-12 ml-3 pt-3">
 								<input
 									type="text"
 									className="form-control roundShape"
+									required
 									onChange={e => {
 										handleCity(e);
 									}}
 								/>
 							</div>
-						</form>
+						</div>
 					</div>
 					<br />
 					<center>
@@ -150,7 +156,16 @@ export const Home = () => {
 				</div>
 				<div className="col-6 ml-5 mt-5">
 					<div id="carouselOne" className="carousel slide" data-ride="carousel" data-interval="false">
-						{store.rooms ? (
+						{/* CONDICIÓN QUE CAMBIA DE LAS ROOMS DEL SEED A LAS DEL SEARCH */}
+						{store.roomsSearch.length ? (
+							store.roomsSearch.map(room => {
+								return (
+									<div key={room.id}>
+										<CarouselRoomImg room={room} />
+									</div>
+								);
+							})
+						) : store.rooms ? (
 							store.rooms.map(room => {
 								return (
 									<div key={room.id}>

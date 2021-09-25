@@ -19,7 +19,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			room: {},
 			review: {},
 			myLocalStore: {},
-			owner: {}
+			owner: {},
+			roomsSearch: []
 		},
 		actions: {
 			getLocalStore: () => {
@@ -233,7 +234,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				})
 					.then(res => res.json())
-					.then(data => console.log(data, "response serach_room"));
+					.then(data => {
+						console.log(data, "response serach_room");
+						// TIENES QUE METER LA DATA DE LA BUSQUEDAD, QUE ES EL RESULTADO DEL SEARCH EN UNA VARIABLE PARA PODER PINTARLA EN EL HOME
+						setStore({ roomsSearch: data });
+					});
 			},
 			//////////////////////////////////////////
 			postNewAnnouncement: room => {
