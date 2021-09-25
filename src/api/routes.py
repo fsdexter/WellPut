@@ -427,7 +427,8 @@ def search_room():
     search_filter_5 = search_filter_2 + search_filter_3 + search_filter_4+search_filter
     response = list(map(lambda room: room.serialize(),search_filter_5))
     print(response,len(response))
-    return "OK",200
+   # return "OK",200
+    return jsonify(response),200
 
    
     # response = list(map(lambda room: room.serialize(),search_filter))
