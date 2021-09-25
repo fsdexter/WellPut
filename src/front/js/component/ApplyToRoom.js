@@ -37,13 +37,15 @@ export const ApplyToRoom = props => {
 		}
 	};
 	//////////////////////////////////////
+
 	const closeModalLogin = () => {
 		closeBtn.current.click();
 	};
 	const aceptRoomie = () => {
-		actions.addRoomie();
-		closeModalLogin();
-		alert("Seleccionó habitación , se le notificara al propietario");
+		actions.addRoomie(
+			JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user")),
+			roomId
+		);
 	};
 	return (
 		<div className="row container text-center  " id="loginContainer">
@@ -76,8 +78,13 @@ export const ApplyToRoom = props => {
 				</div>
 			</div>
 			<div className="col-12 mt-3  m-0 p-0 d-flex ">
-				<Link to="/detailedView">
-					<button className="btn btnYellow mb-5 btnYelloRoom" onClick={() => closeModalLogin()}>
+				<Link>
+					<button
+						className="btn btnYellow mb-5 btnYelloRoom"
+						onClick={() => {
+							aceptRoomie();
+							closeModalLogin();
+						}}>
 						Confirm
 					</button>
 				</Link>

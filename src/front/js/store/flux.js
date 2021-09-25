@@ -173,12 +173,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			recoverPassword: userValues => {
 				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
 			},
-			addRoomie: () => {
-				console.log("Solicitud de  habitacion generada ");
+			//////////////////////////////////////// Apply Room
+			addRoomie: (user, roomId) => {
+				user.current_room = roomId;
+
+				fetch(API_BASE_URL + "/api/applyroom", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(user)
+				})
+					.then(res => res.json())
+					.then(data => console.log(data, "Apply Romie"));
+				// console.log("Solicitud de  habitacion generada ", user);
+				// console.log(user);
 			},
-			deleteRoomie: () => {
-				console.log("SE ELIMINÓ A UN COMPAÑERO DE PISO");
-			},
+			///////////////////////////////
 			onClickHandeler: e => {
 				const store = getStore();
 				const checker = value => ![e.target.name].some(element => value.includes(element));

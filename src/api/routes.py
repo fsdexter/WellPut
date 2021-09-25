@@ -16,6 +16,14 @@ import cloudinary;
 import cloudinary.uploader
 
 api = Blueprint('api', __name__)
+
+# ----------- aplication ---------------------------------
+
+@api.route('/applyroom', methods=['POST'])
+def get_addapplyromie():
+    room=Room.query.get_or_404(room_id)
+    print(room)
+
 # ----------- Upload Photo User ---------------------------------
 @api.route('/user/<int:user_id>/image', methods=['POST'])
 def handle_upload(user_id):
