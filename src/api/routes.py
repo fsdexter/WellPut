@@ -140,10 +140,10 @@ def get_single_room(room_id):
         reviews_list.append(tenancy_review_serialize)
     
     city = City.query.filter(City.id == room_selected.city_id).first()
-    print(city)
     city_room = [city.serialize()]
     room_seralize['city'] = city_room
     room_seralize['tenancies'] = reviews_list #Realmente se sacan las tenancies, la relación entre usuario, comentario y habitación
+    
     return jsonify(room_seralize), 200
     
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
@@ -253,7 +253,6 @@ def create_announcement():
     expense4_room= Expense(
         name = expGas_request
     )
-
     feature1_room= Feature(
         name=facingTheStreet_request
     )

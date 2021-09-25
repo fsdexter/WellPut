@@ -125,7 +125,7 @@ export const DetailedView = () => {
 									data-toggle="tooltip"
 									data-placement="top"
 									title="Double Bed"
-									className="mt-2"
+									className="mt-2 doubleBed"
 								/>
 							) : null}
 							{details.type_bed === "noBed" ? (
@@ -144,7 +144,7 @@ export const DetailedView = () => {
 									data-toggle="tooltip"
 									data-placement="top"
 									title="Sofa Bed"
-									className="mt-2"
+									className="mt-2 sofaBed"
 								/>
 							) : null}
 						</div>
