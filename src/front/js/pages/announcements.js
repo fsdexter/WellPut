@@ -7,14 +7,13 @@ import { Link } from "react-router-dom";
 
 export const Announcements = () => {
 	const { store, actions } = useContext(Context);
-	console.log(store.rooms);
 
-	// let viviable = store.rooms.filter(
-	// 	room =>
-	// 		room.owner_id == JSON.parse(localStorage.getItem("user")).user?.id ||
-	// 		JSON.parse(localStorage.getItem("user")).id
-	// );
-	// console.log(viviable, "viviaabeleee");
+	let user_rooms = store.rooms.filter(
+		room =>
+			room.owner_id ===
+			(JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id)
+	);
+
 	return (
 		<div className="container-fluid announcements ">
 			<div className="row">
@@ -81,8 +80,8 @@ export const Announcements = () => {
 						id="activeR"
 						role="tabpanel"
 						aria-labelledby="activeR-tab">
-						{store.rooms ? (
-							store.rooms.map(room => {
+						{user_rooms ? (
+							user_rooms.map(room => {
 								if (room.active_room && room.delete_room) {
 									return (
 										<div key={room.id}>
@@ -96,8 +95,8 @@ export const Announcements = () => {
 						)}
 					</div>
 					<div className="tab-pane fade mb-5" id="inactiveR" role="tabpanel" aria-labelledby="inactiveR-tab">
-						{store.rooms ? (
-							store.rooms.map(room => {
+						{user_rooms ? (
+							user_rooms.map(room => {
 								if (!room.active_room && room.delete_room) {
 									return (
 										<div key={room.id}>
