@@ -152,11 +152,13 @@ export const Home = () => {
 					<div id="carouselOne" className="carousel slide" data-ride="carousel" data-interval="false">
 						{store.rooms ? (
 							store.rooms.map(room => {
-								return (
-									<div key={room.id}>
-										<CarouselRoomImg room={room} />
-									</div>
-								);
+								if (room.active_room && room.delete_room) {
+									return (
+										<div key={room.id}>
+											<CarouselRoomImg room={room} />
+										</div>
+									);
+								}
 							})
 						) : (
 							<div className="text-center text-warning spiner-loading-data">
