@@ -372,7 +372,16 @@ def search_room():
     if body_request["city"]:       
         aux = City.query.filter(City.name == body_request["city"]).first()       
         queries.append(Room.city_id == aux.id)    
+
     search_filter = Room.query.filter(*queries).all()
+    
+    if body_request["money"]:
+        thisdict =  body_request["money"]
+        for elmt in thisdict:
+            if elmt == 'priceMIN' or elmt == 'priceMAX':
+                print(thisdict[elmt])                
+            elif elmt == 'depositoMIN' or elmt == 'depositoMAX':
+                print(thisdict[elmt])  
     
     def sublist(lst1, lst2):
         return set(lst1) <= set(lst2)
@@ -396,15 +405,8 @@ def search_room():
                 search_filter_3.append(room)
    
     #max > price > mim
-    if body_request["money"]:
-        thisdict =  body_request["money"]
-        for elmt in thisdict:
-            if elmt == 'priceMIN' or elmt == 'priceMAX':
-                print(thisdict[elmt])                
-            elif elmt == 'depositoMIN' or elmt == 'depositoMAX':
-                print(thisdict[elmt])  
                    
-    search_filter_5 = search_filter_2 + search_filter_3 + search_filter_4
+    search_filter_5 = search_filter_2 + search_filter_3 + search_filter_4+search_filter
     response = list(map(lambda room: room.serialize(),search_filter_5))
     print(response,len(response))
     return "OK",200
