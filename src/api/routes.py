@@ -372,16 +372,34 @@ def search_room():
     if body_request["city"]:       
         aux = City.query.filter(City.name == body_request["city"]).first()       
         queries.append(Room.city_id == aux.id)    
-
-    search_filter = Room.query.filter(*queries).all()
-    
     if body_request["money"]:
         thisdict =  body_request["money"]
-        for elmt in thisdict:
-            if elmt == 'priceMIN' or elmt == 'priceMAX':
-                print(thisdict[elmt])                
-            elif elmt == 'depositoMIN' or elmt == 'depositoMAX':
-                print(thisdict[elmt])  
+        # price_filter = Room.query
+        for elmt, value in thisdict.items():
+        # for elmt in thisdict:
+            if elmt == 'priceMIN' and value!="": 
+                queries.append(Room.price >= value)             
+                #priceMIN = price_filter.filter(Room.price > thisdict[elmt]))
+            elif elmt == 'priceMAX'and value:
+                queries.append(Room.price <= value) 
+                #priceMIN = (thisdict[elmt])
+                #price_filter.filter(Room.price > priceMAX)
+            elif elmt == 'depositoMIN'and value:
+                queries.append(Room.deposit >= value)
+                #pdepositoMIN =(thisdict[elmt])
+            elif elmt == 'depositoMAX' and value:
+                queries.append(Room.deposit <= value)  
+                #depositoMIN = (thisdict[elmt])
+
+    search_filter = Room.query.filter(*queries).all()
+
+    # priceMIN = ""
+    # priceMAX = ""
+    # depositoMIN = ""
+    # depositoMAX = ""
+
+    # search_by_price = Romm.query.filter(Romm.price.between(priceMIN, priceMIN))
+    # search_by_price = Romm.query.filter(Romm.price.between(depositoMIN, depositoMAX))
     
     def sublist(lst1, lst2):
         return set(lst1) <= set(lst2)
