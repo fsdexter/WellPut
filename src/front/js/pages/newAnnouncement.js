@@ -32,16 +32,16 @@ export const NewAnnouncement = () => {
 		expElectricity: "",
 		expWater: "",
 		type_bed: "",
-		room_url: ""
+		room_url: "",
+		owner_id: null
 	});
 	const handleRoomData = e => {
-		console.log("HOLAAAAAAAAA 1");
-
 		const { name, value } = e.target;
-		console.log("OBJETO ? : ", { [name]: value });
-		setRoomData(prevState => ({ ...prevState, [name]: value }));
-
-		console.log("city ? --- ", roomData.city);
+		setRoomData(prevState => ({
+			...prevState,
+			[name]: value,
+			owner_id: JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		}));
 	};
 
 	const onClickHandeler = e => {
@@ -52,6 +52,7 @@ export const NewAnnouncement = () => {
 			setRoomData({ ...roomData, [e.target.name]: "" });
 		}
 	};
+
 	const onClickHandelerBed = e => {
 		var item = e.target.value;
 		if (item == "singleBed") {
@@ -68,9 +69,8 @@ export const NewAnnouncement = () => {
 			setRoomData({ ...roomData, type_bed: item });
 		}
 	};
-	const handleCity = e => {
-		console.log("HOLAAAAAAAAA 2");
 
+	const handleCity = e => {
 		//setCity(e.target.value);
 		if (city != undefined) {
 			if (city.toLowerCase().trim() === "madri") {
@@ -93,7 +93,6 @@ export const NewAnnouncement = () => {
 	};
 
 	const sendCity = e => {
-		console.log(e);
 		handleRoomData(e);
 		handleCity(e);
 	};
@@ -178,19 +177,13 @@ export const NewAnnouncement = () => {
 					id="locationTab"
 					role="tabpanel"
 					aria-labelledby="locationTab-tab">
-					<div className="row">
-						<div className="col-2 pt-3 fontInput">
+					<div className="row pl-5 mb-4">
+						<div className="col-2 pt-5 fontInput">
 							<p className="pl-4">City </p>
 							<p className="pl-4">Address</p>
 						</div>
-						<div className="col pt-3">
-							<input
-								type="text"
-								className="form-control roundShape"
-								name="city"
-								//onChange={(handleRoomData, handleCity)}
-								onChange={sendCity}
-							/>
+						<div className="col-6 pt-3">
+							<input type="text" className="form-control roundShape" name="city" onChange={sendCity} />
 							<input
 								type="text"
 								className="form-control roundShape mt-3"
@@ -201,9 +194,9 @@ export const NewAnnouncement = () => {
 						<div className="col-2 pt-3 fontInput" />
 						<div className="col-3" />
 					</div>
-					<center>
+					<div className="col-7 map-nuew-room">
 						<MyMap center={center} style={{ width: "500px", height: "350px" }} zoom={10} />
-					</center>
+					</div>
 					<div className="row">
 						<div className="col-10" />
 						<div className="col-2">
@@ -235,7 +228,7 @@ export const NewAnnouncement = () => {
 					</div>
 					<div className="row mt-1  mb-3">
 						<div className="col-2 mt-4">
-							<p className="fontInputSm pl-2">Description </p>{" "}
+							<p className="fontInputSm pl-5">Description </p>
 						</div>
 						<div className="col-8 ">
 							<textarea
@@ -252,7 +245,7 @@ export const NewAnnouncement = () => {
 						<div className="col">
 							<div className="row ">
 								<div className="col-4">
-									<p className="fontInput pl-2">Price</p>{" "}
+									<p className="fontInput pl-5">Price</p>{" "}
 								</div>
 								<div className="col-5">
 									<input
@@ -268,7 +261,7 @@ export const NewAnnouncement = () => {
 							</div>
 							<div className="row ">
 								<div className="col-4">
-									<p className="fontInput pl-2">Deposit </p>{" "}
+									<p className="fontInput pl-5">Deposit </p>{" "}
 								</div>
 								<div className="col-5">
 									<input
@@ -352,7 +345,7 @@ export const NewAnnouncement = () => {
 						<div className="col">
 							<div className="row ">
 								<div className="col-4">
-									<p className="fontInput pl-2">Features</p>
+									<p className="fontInput pl-5">Features</p>
 								</div>
 								<div className="form-check form-check-inline col-3 pb-5  ">
 									<input
@@ -520,9 +513,9 @@ export const NewAnnouncement = () => {
 								data-toggle="tab"
 								href="#previewTab"
 								onClick={() => {
-									console.log("DATA : ", roomData);
-									console.log("price : ", roomData.price);
-									console.log("city : ", roomData.city);
+									console.log(4, "roomData : ", roomData);
+
+									console.log("roomData owner_id : ", roomData.owner_id);
 									actions.postNewAnnouncement(roomData);
 									history.push(`/`);
 								}}>
