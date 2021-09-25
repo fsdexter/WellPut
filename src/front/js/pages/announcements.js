@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/announcements.scss";
 import my_rooms from "../../img/my_rooms.png";
@@ -8,6 +8,13 @@ import { Link } from "react-router-dom";
 export const Announcements = () => {
 	const { store, actions } = useContext(Context);
 	console.log(store.rooms);
+
+	// let viviable = store.rooms.filter(
+	// 	room =>
+	// 		room.owner_id == JSON.parse(localStorage.getItem("user")).user?.id ||
+	// 		JSON.parse(localStorage.getItem("user")).id
+	// );
+	// console.log(viviable, "viviaabeleee");
 	return (
 		<div className="container-fluid announcements ">
 			<div className="row">
