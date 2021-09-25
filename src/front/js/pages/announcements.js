@@ -14,6 +14,9 @@ export const Announcements = () => {
 			(JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id)
 	);
 
+	let active_rooms = user_rooms.filter(room => room.active_room === true && room.delete_room === false);
+	let inactive_rooms = user_rooms.filter(room => room.active_room === false && room.delete_room === false);
+
 	return (
 		<div className="container-fluid announcements ">
 			<div className="row">
@@ -80,33 +83,33 @@ export const Announcements = () => {
 						id="activeR"
 						role="tabpanel"
 						aria-labelledby="activeR-tab">
-						{user_rooms ? (
-							user_rooms.map(room => {
-								if (room.active_room && room.delete_room) {
-									return (
-										<div key={room.id}>
-											<MyRoomsItemActive room={room} />
-										</div>
-									);
-								}
+						{active_rooms.length ? (
+							active_rooms.map(room => {
+								return (
+									<div key={room.id}>
+										<MyRoomsItemActive room={room} />
+									</div>
+								);
 							})
 						) : (
-							<div></div>
+							<div className="default-mesage-announcements justify-content-center">
+								<p className="align-self-center">You have not any active rooms</p>
+							</div>
 						)}
 					</div>
 					<div className="tab-pane fade mb-5" id="inactiveR" role="tabpanel" aria-labelledby="inactiveR-tab">
-						{user_rooms ? (
-							user_rooms.map(room => {
-								if (!room.active_room && room.delete_room) {
-									return (
-										<div key={room.id}>
-											<MyRoomsItemActive room={room} />
-										</div>
-									);
-								}
+						{inactive_rooms.length ? (
+							inactive_rooms.map(room => {
+								return (
+									<div key={room.id}>
+										<MyRoomsItemActive room={room} />
+									</div>
+								);
 							})
 						) : (
-							<div></div>
+							<div className="default-mesage-announcements d-flex justify-content-center">
+								<p className="align-self-center">You have not any inactive rooms</p>
+							</div>
 						)}
 					</div>
 					{/* <div className="tab-pane fade mb-5" id="occupiedR" role="tabpanel" aria-labelledby="occupiedR-tab">
