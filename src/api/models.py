@@ -261,7 +261,7 @@ class Room (db.Model):
     city =  db.relationship("City", back_populates="rooms")
     reviews = db.relationship("Review", back_populates="room")
     tenancies = db.relationship("Tenancy", back_populates="room")
-    delete_room = db.Column(db.Boolean, default=True)
+    delete_room = db.Column(db.Boolean, default=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="rooms")
