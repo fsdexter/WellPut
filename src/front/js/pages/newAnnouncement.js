@@ -32,16 +32,16 @@ export const NewAnnouncement = () => {
 		expElectricity: "",
 		expWater: "",
 		type_bed: "",
-		room_url: ""
+		room_url: "",
+		owner_id: null
 	});
 	const handleRoomData = e => {
-		console.log("HOLAAAAAAAAA 1");
-
 		const { name, value } = e.target;
-		console.log("OBJETO ? : ", { [name]: value });
-		setRoomData(prevState => ({ ...prevState, [name]: value }));
-
-		console.log("city ? --- ", roomData.city);
+		setRoomData(prevState => ({
+			...prevState,
+			[name]: value,
+			owner_id: JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		}));
 	};
 
 	const onClickHandeler = e => {
@@ -52,6 +52,7 @@ export const NewAnnouncement = () => {
 			setRoomData({ ...roomData, [e.target.name]: "" });
 		}
 	};
+
 	const onClickHandelerBed = e => {
 		var item = e.target.value;
 		if (item == "singleBed") {
@@ -68,9 +69,8 @@ export const NewAnnouncement = () => {
 			setRoomData({ ...roomData, type_bed: item });
 		}
 	};
-	const handleCity = e => {
-		console.log("HOLAAAAAAAAA 2");
 
+	const handleCity = e => {
 		//setCity(e.target.value);
 		if (city != undefined) {
 			if (city.toLowerCase().trim() === "madri") {
@@ -93,7 +93,6 @@ export const NewAnnouncement = () => {
 	};
 
 	const sendCity = e => {
-		console.log(e);
 		handleRoomData(e);
 		handleCity(e);
 	};
@@ -184,13 +183,7 @@ export const NewAnnouncement = () => {
 							<p className="pl-4">Address</p>
 						</div>
 						<div className="col pt-3">
-							<input
-								type="text"
-								className="form-control roundShape"
-								name="city"
-								//onChange={(handleRoomData, handleCity)}
-								onChange={sendCity}
-							/>
+							<input type="text" className="form-control roundShape" name="city" onChange={sendCity} />
 							<input
 								type="text"
 								className="form-control roundShape mt-3"
@@ -520,9 +513,9 @@ export const NewAnnouncement = () => {
 								data-toggle="tab"
 								href="#previewTab"
 								onClick={() => {
-									console.log("DATA : ", roomData);
-									console.log("price : ", roomData.price);
-									console.log("city : ", roomData.city);
+									console.log(4, "roomData : ", roomData);
+
+									console.log("roomData owner_id : ", roomData.owner_id);
 									actions.postNewAnnouncement(roomData);
 									history.push(`/`);
 								}}>
