@@ -21,8 +21,10 @@ api = Blueprint('api', __name__)
 
 @api.route('/applyroom', methods=['POST'])
 def get_addapplyromie():
-    room=Room.query.get_or_404(room_id)
-    print(room)
+    # room=Room.query.get_or_404(room_id)
+    body_request= request.get_json()
+    print(body_request)
+    return "OK", 200
 
 # ----------- Upload Photo User ---------------------------------
 @api.route('/user/<int:user_id>/image', methods=['POST'])

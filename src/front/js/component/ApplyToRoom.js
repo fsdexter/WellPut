@@ -41,11 +41,16 @@ export const ApplyToRoom = props => {
 	const closeModalLogin = () => {
 		closeBtn.current.click();
 	};
-	const aceptRoomie = () => {
-		actions.addRoomie(
-			JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user")),
-			roomId
-		);
+	const aceptRoomie = props => {
+		if (localStorage.length > 0) {
+			actions.addRoomie(
+				JSON.parse(localStorage.getItem("user")).id || JSON.parse(localStorage.getItem("user")),
+				roomId
+			);
+			alert("exitoso");
+		} else {
+			alert("You are not looged,  Please login!");
+		}
 	};
 	return (
 		<div className="row container text-center  " id="loginContainer">
@@ -98,5 +103,6 @@ ApplyToRoom.propTypes = {
 	price: PropTypes.string,
 	address: PropTypes.string,
 	city: PropTypes.string,
-	roomId: PropTypes.int
+	roomId: PropTypes.int,
+	userlog: PropTypes.int
 };

@@ -175,14 +175,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			//////////////////////////////////////// Apply Room
 			addRoomie: (user, roomId) => {
-				user.current_room = roomId;
-
+				console.log("este es el user", user);
+				console.log("este es el room id", roomId);
 				fetch(API_BASE_URL + "/api/applyroom", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
-					body: JSON.stringify(user)
+					body: JSON.stringify({
+						user: user,
+						room_Id: roomId
+					})
 				})
 					.then(res => res.json())
 					.then(data => console.log(data, "Apply Romie"));
