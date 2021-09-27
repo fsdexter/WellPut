@@ -81,7 +81,7 @@ export const Announcements = () => {
 							})
 						) : (
 							<div className="default-mesage-announcements justify-content-center">
-								<p className="align-self-center">You have not any active rooms</p>
+								<p className="align-self-center active-room-text">You have not any active rooms</p>
 							</div>
 						)}
 					</div>

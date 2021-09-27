@@ -106,9 +106,9 @@ margin-top: 30px;
     text-align: center;
 }
 .deleteRoomieButton{
-background: whitesmoke;
-color:black;
-margin-left:75px;
+    background: whitesmoke;
+    color:black;
+    margin-left:75px;
 }
 .fontRoom{
     white-space: nowrap;
@@ -119,4 +119,8 @@ margin-left:75px;
 
 .default-mesage-announcements{
     height: 224px;
+}
+
+.active-room-text{
+    //mensaje de desfecto 
 }

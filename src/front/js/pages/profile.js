@@ -158,14 +158,20 @@ export const Profile = () => {
 						<h5 className="textbuttons">My Favorites</h5>
 					</button>
 				</div>
-				<div className="col buttonfondblack  d-flex justify-content-center">
-					<Link to="/detailedView">
-						<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb">
-							<i className="fas fa-euro-sign fa-2x text-white btn-options-profile" />
-							<h5 className="textbuttons">My Rents</h5>
-						</button>
-					</Link>
-				</div>
+				{JSON.parse(localStorage.getItem("user")).user?.current_room ||
+				JSON.parse(localStorage.getItem("user")).current_room ? (
+					<div className="col buttonfondblack  d-flex justify-content-center">
+						<Link
+							to={`/detailedView/${JSON.parse(localStorage.getItem("user")).user?.current_room ||
+								JSON.parse(localStorage.getItem("user")).current_room}`}>
+							<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb">
+								<i className="fas fa-euro-sign fa-2x text-white btn-options-profile" />
+								<h5 className="textbuttons">My Rents</h5>
+							</button>
+						</Link>
+					</div>
+				) : null}
+
 				<div className="col buttonfondblack  d-flex justify-content-center">
 					<Link to="/announcements">
 						<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb">
