@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "react-awesome-slider/dist/styles.css?raw";
@@ -6,8 +7,8 @@ import "../../styles/carouselRoomImg.scss";
 import { RatingStatic } from "./ratingStatic";
 
 export const CarouselRoomImg = props => {
+	const { store, actions } = useContext(Context);
 	let room_reviews = props.room.reviews.map(review => review.rating);
-
 	let averageRating = Math.round(
 		room_reviews.reduce(
 			(accumulator, currentValue) => (currentValue ? currentValue + accumulator : accumulator),
@@ -46,7 +47,11 @@ export const CarouselRoomImg = props => {
 										className="heartButtonFix ml-5 pr-5 pl-5"
 										data-toggle="tooltip"
 										data-placement="top"
-										title="Add Favorite">
+										title="Add Favorite"
+										onClick={() => {
+											actions.setFavorites(props.room.id);
+										}}>
+
 										<i className="far fa-heart fa-2x" />
 									</button>
 								</div>
