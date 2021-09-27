@@ -3,7 +3,6 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, SeedData, Room, City, Expense, Feature, Review, Tenancy, Characteristic, CharacteristicUser, Language, SpokenLanguages
-#from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
 from flask_jwt_extended import create_access_token
@@ -128,7 +127,7 @@ def get_owner(owner_id):
     
     return jsonify(owner), 200
 
-@api.route('/rooms', methods=['GET']) # ALL ROOMS LIST
+@api.route('/rooms', methods=['GET'])
 def get_rooms():
     rooms = Room.query.all()
     return jsonify(list(map(lambda room: room.serialize(), rooms))), 200
@@ -284,7 +283,6 @@ def create_announcement():
         deposit = deposit_request,
         type_bed = type_bed_request,
         room_url =  room_url_request
-        # room_image_url = room_image_url_request 
         )
     
     db.session.add(city_room)
@@ -374,32 +372,17 @@ def search_room():
         queries.append(Room.city_id == aux.id)    
     if body_request["money"]:
         thisdict =  body_request["money"]
-        # price_filter = Room.query
         for elmt, value in thisdict.items():
-        # for elmt in thisdict:
             if elmt == 'priceMIN' and value!="": 
                 queries.append(Room.price >= value)             
-                #priceMIN = price_filter.filter(Room.price > thisdict[elmt]))
             elif elmt == 'priceMAX'and value:
                 queries.append(Room.price <= value) 
-                #priceMIN = (thisdict[elmt])
-                #price_filter.filter(Room.price > priceMAX)
             elif elmt == 'depositoMIN'and value:
                 queries.append(Room.deposit >= value)
-                #pdepositoMIN =(thisdict[elmt])
             elif elmt == 'depositoMAX' and value:
                 queries.append(Room.deposit <= value)  
-                #depositoMIN = (thisdict[elmt])
 
     search_filter = Room.query.filter(*queries).all()
-
-    # priceMIN = ""
-    # priceMAX = ""
-    # depositoMIN = ""
-    # depositoMAX = ""
-
-    # search_by_price = Romm.query.filter(Romm.price.between(priceMIN, priceMIN))
-    # search_by_price = Romm.query.filter(Romm.price.between(depositoMIN, depositoMAX))
     
     def sublist(lst1, lst2):
         return set(lst1) <= set(lst2)
@@ -421,49 +404,14 @@ def search_room():
         for room in search_filter:
             if len(expanse)>0 and sublist(expanse,list(map(lambda x:x.name,room.expanse))):
                 search_filter_3.append(room)
-   
-    #max > price > mim
-                   
+                      
     search_filter_5 = search_filter_2 + search_filter_3 + search_filter_4+search_filter
     response = list(map(lambda room: room.serialize(),search_filter_5))
     print(response,len(response))
-   # return "OK",200 --->>>>> ESTO ERA LO QUE TENÍAS, PERO ASÍ NO DEVUELVES EL RESULTADO DEL SEARCH, SOLO DEVUELVES UN "OK"
     return jsonify(response),200
 
-   
-    # response = list(map(lambda room: room.serialize(),search_filter))
-    # print(response,len(response))
-    # return "OK",200
-
-        
-           
-    # if body_request["rating"]:
-    # if body_request["interests"]:
-    #     print("interessante")
-    #     print(body_request["interests"])
-    
-    # if body_request[""]:
-    # if body_request["city"]:
-    #     queries.append(Room.city == body_request["city"])
-    # if body_request["filters"]:
-    #     print(filters)
-    # if body_request["rating"]:
-    #     print(rating)
-    # if body_request["money"]:
-    #     print(money)
-    # if body_request["interests"]:
-    #     print(interests)
-  
-
-    # if body_request["kye del flux"]:
-    #     for
-    #    queries.append(Room.type_bed == body_request["key"])
-
 @api.route("/change_active_room/<int:id>", methods=[ "PUT"])
-#@jwt_required()
 def change_active_room(id):
-   # identity = get_jwt_identity()
-   # user = current_user(get_jwt_identity())
     room = Room.query.get(id)
     room.active_room = not room.active_room
     db.session.commit()

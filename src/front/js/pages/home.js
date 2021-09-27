@@ -2,14 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 
 import "../../styles/home.scss";
-import { Rating } from "../component/rating";
-import { AnimatedMulti } from "../component/multiSelector";
 import { FilterExp } from "../component/filterExp";
-import { FilterOcc } from "../component/filterOcc";
 import { FilterFea } from "../component/filterFea";
 import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
-import { interestsOptions } from "../constants";
 
 import MyMap from "../component/mapEngine";
 import { CarouselRoomImg } from "../component/carouselRoomImg";
@@ -108,35 +104,6 @@ export const Home = () => {
 						<div className="border border-warning pb-3">
 							<FilterExp />
 						</div>
-						{/* <br />
-						<div className="border border-warning pt-4 pb-4">
-							<div className="row">
-								<div className="col-4">
-									<h3 className="ml-4">Rating</h3>
-								</div>
-								<div className="col-6 ml-5 ratings">
-									<Rating />
-								</div>
-							</div>
-						</div>
-						<br />
-						<div className="border border-warning pt-5">
-							<FilterOcc />
-						</div>
-						<br />
-						<div className="border border-warning pt-5">
-							<div className="row ">
-								<div className="col-4 mb-5">
-									<h3 className="ml-4">Interests</h3>
-								</div>
-								<div className="col-6 ml-5">
-									<AnimatedMulti
-										options={interestsOptions}
-										change={f => handleAddrTypeChange(f, "interests")}
-									/>
-								</div>
-							</div>
-						</div> */}
 						<br />
 						<div className="border border-warning pt-4 pb-4">
 							<FilterFea />
@@ -156,7 +123,6 @@ export const Home = () => {
 				</div>
 				<div className="col-6 ml-5 mt-5">
 					<div id="carouselOne" className="carousel slide" data-ride="carousel" data-interval="false">
-						{/* CONDICIÓN QUE CAMBIA DE LAS ROOMS DEL SEED A LAS DEL SEARCH */}
 						{store.roomsSearch.length ? (
 							store.roomsSearch.map(room => {
 								return (
