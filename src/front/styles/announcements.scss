@@ -1,7 +1,9 @@
+
 .announcements{
     background: #184F5F;
-    width: 80%;
+    width: 100vw;
     height:max-content ;
+    min-height: 85vh;
 }
 #my_rooms_title{
     padding-top:35px;
@@ -29,7 +31,7 @@
 }
 #annSquare{
     width: 70%;
-    margin:auto;
+    margin: 5rem auto;
 }
 .noLink2{
     text-decoration: none !important; 
@@ -55,13 +57,14 @@
     height: 300px;    
 }
 
+
 .roomItemBar2{
     background:#BCC7C1 !important;
     height: 300px;
 }
 .roomItemsButton{
-margin-left: 38px;
-margin-top: 30px;
+    margin-left: 38px;
+    margin-top: 30px;
 }
 .roomsButtons:hover{
     border-color: #FFDE59;
@@ -86,8 +89,6 @@ margin-top: 30px;
     overflow: hidden;
     position: relative;
 }
-
-
 
 .firstRect{
     background: #BCC7C1;
@@ -122,5 +123,9 @@ margin-top: 30px;
 }
 
 .active-room-text{
-    //mensaje de desfecto 
+   padding: 6rem 23rem;
+}
+
+.btn-icons-annonc{
+    margin-left: 3rem;
 }

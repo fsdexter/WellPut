@@ -19,7 +19,7 @@ export const Announcements = () => {
 
 	return (
 		<div className="container-fluid announcements ">
-			<div className="row">
+			<div className="row ml-5 mt-3">
 				<div id="my_room_pic">
 					<img id="my_room_pic2" src={my_rooms} />
 				</div>
@@ -32,7 +32,7 @@ export const Announcements = () => {
 				<div className="col-4" />
 				<div className="col-4">
 					<Link to="/newAnnouncement">
-						<button type="button" id="new_ann_button" className="btn btn-warning ml-5">
+						<button type="button" id="new_ann_button" className="btn btnYellow ">
 							New Announcement
 						</button>
 					</Link>
