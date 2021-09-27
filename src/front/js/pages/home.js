@@ -54,6 +54,8 @@ export const Home = () => {
 		}
 	};
 
+	let active_rooms = store.rooms?.filter(room => room.active_room === true && room.delete_room === false);
+
 	return (
 		<div className="container-fluid" id="myContainerHome">
 			<div style={{ height: "400px" }}>
@@ -150,15 +152,13 @@ export const Home = () => {
 				</div>
 				<div className="col-6 ml-5 mt-5">
 					<div id="carouselOne" className="carousel slide" data-ride="carousel" data-interval="false">
-						{store.rooms ? (
-							store.rooms.map(room => {
-								if (room.active_room && room.delete_room) {
-									return (
-										<div key={room.id}>
-											<CarouselRoomImg room={room} />
-										</div>
-									);
-								}
+						{active_rooms.length ? (
+							active_rooms.map(room => {
+								return (
+									<div key={room.id}>
+										<CarouselRoomImg room={room} />
+									</div>
+								);
 							})
 						) : (
 							<div className="text-center text-warning spiner-loading-data">
