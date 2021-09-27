@@ -63,7 +63,11 @@ export const DetailedView = () => {
 						</div>
 						<div className="starCaroCustom d-flex justify-content-around mb-3">
 							<RatingStatic rating={averageRating} />
-							<button className="heartButtonFix ml-5 pr-5 pl-5">
+							<button
+								className="heartButtonFix ml-5 pr-5 pl-5"
+								data-toggle="tooltip"
+								data-placement="top"
+								title="Add Favorite">
 								<i className="far fa-heart fa-2x" />
 							</button>
 						</div>

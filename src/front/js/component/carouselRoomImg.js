@@ -6,7 +6,6 @@ import "../../styles/carouselRoomImg.scss";
 import { RatingStatic } from "./ratingStatic";
 
 export const CarouselRoomImg = props => {
-	//MEDIA EN BACKS
 	let room_reviews = props.room.reviews.map(review => review.rating);
 
 	let averageRating = Math.round(
@@ -43,7 +42,11 @@ export const CarouselRoomImg = props => {
 								<div className="starCaro d-flex justify-content-around">
 									<RatingStatic rating={averageRating} />
 
-									<button className="heartButtonFix ml-5 pr-5 pl-5">
+									<button
+										className="heartButtonFix ml-5 pr-5 pl-5"
+										data-toggle="tooltip"
+										data-placement="top"
+										title="Add Favorite">
 										<i className="far fa-heart fa-2x" />
 									</button>
 								</div>

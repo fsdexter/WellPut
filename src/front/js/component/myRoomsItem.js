@@ -32,6 +32,9 @@ export const MyRoomsItemActive = props => {
 								type="button"
 								className="btn btn-outline-warning roomsButtons mt-4 "
 								alt="click to set room inactive"
+								data-toggle="tooltip"
+								data-placement="top"
+								title="Deactivate/Activate"
 								onClick={() => {
 									actions.setRoomActive(props.room.id);
 								}}>
@@ -41,6 +44,9 @@ export const MyRoomsItemActive = props => {
 							<button
 								type="button"
 								className="btn btn-outline-warning mt-5 roomsButtons"
+								data-toggle="tooltip"
+								data-placement="top"
+								title="Delete"
 								onClick={() => {
 									actions.setRoomDelete(props.room.id);
 								}}>
