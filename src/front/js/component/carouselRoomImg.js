@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "react-awesome-slider/dist/styles.css?raw";
@@ -7,6 +8,7 @@ import { RatingStatic } from "./ratingStatic";
 
 export const CarouselRoomImg = props => {
 	//MEDIA EN BACKS
+	const { store, actions } = useContext(Context);
 	let room_reviews = props.room.reviews.map(review => review.rating);
 
 	let averageRating = Math.round(
@@ -43,7 +45,11 @@ export const CarouselRoomImg = props => {
 								<div className="starCaro d-flex justify-content-around">
 									<RatingStatic rating={averageRating} />
 
-									<button className="heartButtonFix ml-5 pr-5 pl-5">
+									<button
+										className="heartButtonFix ml-5 pr-5 pl-5"
+										onClick={() => {
+											actions.setFavorites(props.room.id);
+										}}>
 										<i className="far fa-heart fa-2x" />
 									</button>
 								</div>
