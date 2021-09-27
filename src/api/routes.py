@@ -23,6 +23,10 @@ api = Blueprint('api', __name__)
 def get_addapplyromie():
     # room=Room.query.get_or_404(room_id)
     body_request= request.get_json()
+    user=User.query.get(body_request["user"])
+    if user:
+        user.temporal_current_room=body_request["room_Id"]
+        db.session.commit()
     print(body_request)
     return "OK", 200
 
@@ -314,16 +318,23 @@ def create_announcement():
 @api.route('/tenancy_room_reviews', methods=['POST'])
 def reviewendp():
     body_request = request.get_json()
-    review=Review(
-        comment=body_request["comment"], 
-        rating=body_request["rating"], 
-        date=date.today(), 
-        room_id=body_request["room_id"], 
-        tenancy_id=body_request["user"])
-    
-    db.session.add(review)
-    db.session.commit()
-    return jsonify({"review": review.serialize()}), 200
+    print(body_request)
+    user=User.query.get(body_request["user"])
+    print(user.current_room, body_request["room_id"])
+    already_reviewed=Review.query.filter_by(room_id=body_request["room_id"],tenancy_id=user.id).first()
+    if user.current_room==body_request["room_id"] and not already_reviewed:
+        review=Review(
+            comment=body_request["comment"], 
+            rating=body_request["rating"], 
+            date=date.today(), 
+            room_id=body_request["room_id"], 
+            tenancy_id=body_request["user"])
+        
+        db.session.add(review)
+        db.session.commit()
+        return jsonify({"review": review.serialize()}), 200
+    else:
+        return jsonify("ya comento"),400
 
 @api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) 
 def get_reviews_room(room_id):

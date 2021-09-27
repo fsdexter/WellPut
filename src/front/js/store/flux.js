@@ -1,4 +1,5 @@
 // Backend URL
+
 import { API_BASE_URL } from "../constants";
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -280,6 +281,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			/////////////////////AÑADIR REVIEW /////////////////////////////////////
 			addReview: async formValue => {
 				const store = getStore();
+				formValue["room_id"] = JSON.parse(localStorage.getItem("details")).id;
+				formValue["user"] = JSON.parse(localStorage.getItem("user")).id;
+				formValue["rating"] = store.rating;
 				const postreview = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
@@ -290,7 +294,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews`, postreview);
 					if (response.status >= 300) {
 						const errorMsg = "Error saving comment";
-						throw new Error(errorMsg);
+						alert("error....");
 					} else {
 						const newStore = await response.json();
 						setStore({ review: newStore }); ///aqui lo paso pero no guarda

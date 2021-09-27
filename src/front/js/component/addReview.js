@@ -8,8 +8,7 @@ export const AddReview = () => {
 	const { store, actions } = useContext(Context);
 
 	const [formValue, setFormValue] = useState({
-		comment: "",
-		rating: ""
+		comment: ""
 	});
 	/////////////
 	const inputHandelChange = e => {
@@ -23,11 +22,9 @@ export const AddReview = () => {
 		closeBtn.current.click();
 	};
 	///////////////////////ç
-	const handelRating = () => {
-		setFormValue({ ...formValue, rating: store.rating });
-	};
+
 	const reviewSubmit = () => {
-		actions.addReview(formValue); /// por ahora se le pasa como user 1 , room id 1
+		actions.addReview(formValue);
 		closeModalLogin();
 	};
 
@@ -60,7 +57,7 @@ export const AddReview = () => {
 						<div className="onCommentStarsReview p-3 d-flex flex-column">
 							<h4 className="text text-white">How many stars do you give this experience? *</h4>
 							<div className="mt-3 mb-2">
-								<Rating click={handelRating} />
+								<Rating />
 							</div>
 							<button className="btn btnYellow mt-4" onClick={() => reviewSubmit()}>
 								Publish
