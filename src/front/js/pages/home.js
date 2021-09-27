@@ -133,9 +133,7 @@ export const Home = () => {
 									</div>
 								);
 							})
-						) : store.rooms ? (
-							store.rooms.map(room => {
-						{active_rooms.length ? (
+						) : active_rooms.length ? (
 							active_rooms.map(room => {
 								return (
 									<div key={room.id}>
