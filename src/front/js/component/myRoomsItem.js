@@ -3,15 +3,10 @@ import "../../styles/announcements.scss";
 import openEye from "../../img/openEye.png";
 import closeEye from "../../img/closeEye.png";
 import deleteRoom from "../../img/deleteRoom.png";
-import room from "../../img/room.jpg";
-import Becker from "../../img/Becker.jpg";
-import deleteRoomie from "../../img/deleteRoomie.png";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
-const exampleTitle = "Habitación luminosa frente a Sagrada Familia";
-const exampleDescription =
-	"Habitación amueblada y con mucha luz (da al exterior, a un patio abierto), en un piso grande, nuevo y amueblado. Tenemos un balcón grande con sofá que da al parque y el baño es a compartir entre 2 personas.";
-const roomieExample = "Jason Becker Second";
+
 export const MyRoomsItemActive = props => {
 	const { store, actions } = useContext(Context);
 	return (
@@ -27,9 +22,9 @@ export const MyRoomsItemActive = props => {
 						<h5 className="fontRoom ml-2 ">Deposit: €{props.room.deposit}</h5>
 					</div>
 					<div className="col-3 roomItemBar">
-						<a href="#">
+						<Link to={`/detailedView/${props.room.id}`}>
 							<img className="roomItemPic" src={props.room.room_url} href="#" />
-						</a>
+						</Link>
 					</div>
 					<div className="col-1 d-flex justify-content-center btn-icons-annonc">
 						<div className="d-flex flex-column">
