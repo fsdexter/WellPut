@@ -225,12 +225,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify({
 						filters: store.filters,
-						rating: store.rating,
 						bedType: store.bedType,
 						city: store.city,
 						money: store.money,
 						country: "Spain",
-						interests: store.interests
 					})
 				})
 					.then(res => res.json())

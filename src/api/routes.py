@@ -362,9 +362,13 @@ def handle_seed_user_data():
 
 @api.route('/search_room', methods=['POST'])
 def search_room():
+
+    #info recive from front-end
     body_request = request.get_json()    
 
+    #bloc to create first query
     queries = []
+
     if body_request["country"]:
         queries.append(Room.country == body_request["country"])
     if body_request["bedType"]:
@@ -374,41 +378,27 @@ def search_room():
         queries.append(Room.city_id == aux.id)    
     if body_request["money"]:
         thisdict =  body_request["money"]
-        # price_filter = Room.query
         for elmt, value in thisdict.items():
-        # for elmt in thisdict:
             if elmt == 'priceMIN' and value!="": 
                 queries.append(Room.price >= value)             
-                #priceMIN = price_filter.filter(Room.price > thisdict[elmt]))
             elif elmt == 'priceMAX'and value:
                 queries.append(Room.price <= value) 
-                #priceMIN = (thisdict[elmt])
-                #price_filter.filter(Room.price > priceMAX)
             elif elmt == 'depositoMIN'and value:
                 queries.append(Room.deposit >= value)
-                #pdepositoMIN =(thisdict[elmt])
             elif elmt == 'depositoMAX' and value:
                 queries.append(Room.deposit <= value)  
-                #depositoMIN = (thisdict[elmt])
 
     search_filter = Room.query.filter(*queries).all()
-
-    # priceMIN = ""
-    # priceMAX = ""
-    # depositoMIN = ""
-    # depositoMAX = ""
-
-    # search_by_price = Romm.query.filter(Romm.price.between(priceMIN, priceMIN))
-    # search_by_price = Romm.query.filter(Romm.price.between(depositoMIN, depositoMAX))
-    
-    def sublist(lst1, lst2):
-        return set(lst1) <= set(lst2)
     
     search_filter_2 = []
     search_filter_3 = []
-    search_filter_4 = []
     features = []
     expanse = []
+    
+    #to check ifo list of features coming from front end machs the list of features in de back end response
+    def sublist(lst1, lst2):
+        return set(lst1) <= set(lst2)
+
     if body_request["filters"]:
         for item in body_request["filters"]:
             if item == 'wifi' or item == 'Water' or item == 'light ' or item == 'gas':               
@@ -422,42 +412,15 @@ def search_room():
             if len(expanse)>0 and sublist(expanse,list(map(lambda x:x.name,room.expanse))):
                 search_filter_3.append(room)
    
-    #max > price > mim
+    
                    
-    search_filter_5 = search_filter_2 + search_filter_3 + search_filter_4+search_filter
-    response = list(map(lambda room: room.serialize(),search_filter_5))
+    search_filter_4 = search_filter_2 + search_filter_3 +  + search_filter
+    response = list(map(lambda room: room.serialize(),search_filter_4))
     print(response,len(response))
-   # return "OK",200 --->>>>> ESTO ERA LO QUE TENÍAS, PERO ASÍ NO DEVUELVES EL RESULTADO DEL SEARCH, SOLO DEVUELVES UN "OK"
     return jsonify(response),200
 
    
-    # response = list(map(lambda room: room.serialize(),search_filter))
-    # print(response,len(response))
-    # return "OK",200
-
-        
-           
-    # if body_request["rating"]:
-    # if body_request["interests"]:
-    #     print("interessante")
-    #     print(body_request["interests"])
     
-    # if body_request[""]:
-    # if body_request["city"]:
-    #     queries.append(Room.city == body_request["city"])
-    # if body_request["filters"]:
-    #     print(filters)
-    # if body_request["rating"]:
-    #     print(rating)
-    # if body_request["money"]:
-    #     print(money)
-    # if body_request["interests"]:
-    #     print(interests)
-  
-
-    # if body_request["kye del flux"]:
-    #     for
-    #    queries.append(Room.type_bed == body_request["key"])
 
 @api.route("/change_active_room/<int:id>", methods=[ "PUT"])
 #@jwt_required()
