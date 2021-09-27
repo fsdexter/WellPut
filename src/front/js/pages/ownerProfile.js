@@ -50,7 +50,7 @@ export const OwnerProfile = () => {
 										? owner.city.map(city => {
 												return (
 													<div className="d-flex mb-5" key={city.id}>
-														<i className="fas fa-map-marker-alt fa-2x text-white mr-4"></i>
+														<i className="fas fa-map-marker-alt fa-2x mr-4 yellow-icon"></i>
 														<h2>{city.name}</h2>
 													</div>
 												);
@@ -66,21 +66,18 @@ export const OwnerProfile = () => {
 								<div className="mb-3">
 									<h3>CONTACT</h3>
 									<div className="d-flex ml-4 align-items-center">
-										<i className="far fa-envelope fa-2x"></i>
+										<i className="far fa-envelope fa-2x yellow-icon"></i>
 										<h5 className="ml-3 align-self-center">{owner.email}</h5>
 									</div>
 								</div>
 								<div className="mt-4">
 									<h3>SPOKEN LANGUAGES</h3>
-									{owner.languages
-										? owner.languages.map(language => {
+									{owner.language
+										? owner.language.map(idiom => {
 												return (
-													<div
-														key={language.id}
-														className="d-flex ml-4 mt-2 align-items-center">
-														{" "}
-														<i className="far fa-grin-tongue-wink fa-lg"></i>
-														<h5 className="ml-3">{language.name}</h5>
+													<div key={idiom.id} className="d-flex ml-4 mt-2 align-items-center">
+														<i className="far fa-grin-tongue-wink fa-lg yellow-icon"></i>
+														<h5 className="ml-3">{idiom.name}</h5>
 													</div>
 												);
 										  })
@@ -89,14 +86,12 @@ export const OwnerProfile = () => {
 							</div>
 							<div className="col-4 contentfondblack">
 								<h3 className="mb-3">INTEREST</h3>
-								{owner.characteristics
-									? owner.characteristics.map(characteristic => {
+								{owner.characteristic
+									? owner.characteristic.map(interest => {
 											return (
-												<div
-													key={characteristic.id}
-													className="d-flex ml-4 mt-2 align-items-center">
-													<i className="far fa-check-circle fa-lg"></i>
-													<h5 className="ml-3 text-capitalize">{characteristic.name}</h5>
+												<div key={interest.id} className="d-flex ml-4 mt-2 align-items-center">
+													<i className="far fa-check-circle fa-lg yellow-icon"></i>
+													<h5 className="ml-3 text-capitalize">{interest.name}</h5>
 												</div>
 											);
 									  })
@@ -117,13 +112,13 @@ export const OwnerProfile = () => {
 						className="navbar-brand mb-0 mr-2 btn btn-navb"
 						data-toggle="modal"
 						data-target="#notificationModal">
-						<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" />
+						<i className="fa fa-user-plus fa-2x text-white btn-options-profile" aria-hidden="true" />
 						<h5 className="textbuttons">Add Romie</h5>
 					</button>
 				</div>
 				<div className="col buttonfondblack d-flex justify-content-center">
 					<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb" data-target="#addReviewModal">
-						<i className="fas fa-user-times fa-2x text-white"></i>
+						<i className="fas fa-user-times fa-2x text-white btn-options-profile"></i>
 						<h5 className="textbuttons">Delete Romie</h5>
 					</button>
 				</div>
@@ -133,7 +128,7 @@ export const OwnerProfile = () => {
 						className="navbar-brand mb-0 mr-2 btn btn-navb"
 						data-toggle="modal"
 						data-target="#addReviewModal">
-						<i className="far fa-comment-dots fa-2x text-white"></i>
+						<i className="far fa-comment-dots fa-2x text-white btn-options-profile"></i>
 						<h5 className="textbuttons">Add review</h5>
 					</button>
 				</div>

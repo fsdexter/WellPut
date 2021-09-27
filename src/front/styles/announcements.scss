@@ -1,7 +1,9 @@
+
 .announcements{
     background: #184F5F;
-    width: 80%;
+    width: 100vw;
     height:max-content ;
+    min-height: 85vh;
 }
 #my_rooms_title{
     padding-top:35px;
@@ -29,7 +31,7 @@
 }
 #annSquare{
     width: 70%;
-    margin:auto;
+    margin: 5rem auto;
 }
 .noLink2{
     text-decoration: none !important; 
@@ -55,13 +57,14 @@
     height: 300px;    
 }
 
+
 .roomItemBar2{
     background:#BCC7C1 !important;
     height: 300px;
 }
 .roomItemsButton{
-margin-left: 38px;
-margin-top: 30px;
+    margin-left: 38px;
+    margin-top: 30px;
 }
 .roomsButtons:hover{
     border-color: #FFDE59;
@@ -87,8 +90,6 @@ margin-top: 30px;
     position: relative;
 }
 
-
-
 .firstRect{
     background: #BCC7C1;
     width:100%;
@@ -106,9 +107,9 @@ margin-top: 30px;
     text-align: center;
 }
 .deleteRoomieButton{
-background: whitesmoke;
-color:black;
-margin-left:75px;
+    background: whitesmoke;
+    color:black;
+    margin-left:75px;
 }
 .fontRoom{
     white-space: nowrap;
@@ -119,4 +120,12 @@ margin-left:75px;
 
 .default-mesage-announcements{
     height: 224px;
+}
+
+.active-room-text{
+   padding: 6rem 32rem;
+}
+
+.btn-icons-annonc{
+    margin-left: 3rem;
 }
