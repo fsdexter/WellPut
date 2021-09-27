@@ -326,6 +326,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					return error.message;
 				}
+			},
+			setFavorites: id => {
+				fetch(API_BASE_URL + "/api/change_favorite/" + id, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}).then(res => {});
 			}
 		}
 	};

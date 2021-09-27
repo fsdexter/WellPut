@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, SeedData, Room, City, Expense, Feature, Review, Tenancy, Characteristic, CharacteristicUser, Language, SpokenLanguages
+from api.models import db, User, SeedData, Room, City, Expense, Feature, Review, Tenancy, Characteristic, CharacteristicUser, Language, SpokenLanguages, Favorites
 #from api.models import db, User, Room
 from api.utils import generate_sitemap, APIException
 # to make the token
@@ -397,3 +397,23 @@ def change_delete_room(id):
     room.delete_room = not room.delete_room
     db.session.commit()
     return jsonify("Delete Room Success")
+
+@api.route("/change_favorite/<int:id>", methods=[ "POST"])
+#@jwt_required()
+def change_favorite(id):
+    #identity = get_jwt_identity()
+    user = User.query.get(1)#current_user(get_jwt_identity())
+    room = Room.query.get(id)
+    print(user.id, room.id)
+    already_favorite  = Favorites.query.filter_by(user_id = user.id, room_id = room.id).first()
+    print(already_favorite)
+    if not already_favorite: 
+        favorite = Favorites(user_id = user.id, room_id = room.id)
+        db.session.add(favorite)
+        db.session.commit()
+        return jsonify("Favorite added")
+    else : 
+        db.session.delete(already_favorite)
+        db.session.commit()
+        return jsonify("Favorite deleted")    
+    return jsonify("Error with favorites")
