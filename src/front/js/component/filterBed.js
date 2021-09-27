@@ -18,7 +18,7 @@ export const FilterBed = () => {
 					name="inlineRadioOptions"
 					id="inlineRadio1"
 					value="option1"
-					onClick={() => actions.setBedType("Single Bed")}
+					onClick={() => actions.setBedType("single")}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio1">
 					<i className="fas fa-bed fa-2x" />
@@ -33,7 +33,7 @@ export const FilterBed = () => {
 					name="inlineRadioOptions"
 					id="inlineRadio2"
 					value="option2"
-					onClick={() => actions.setBedType("Double Bed")}
+					onClick={() => actions.setBedType("double")}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio2">
 					<img id="doubleBed" src={double} />
@@ -49,7 +49,7 @@ export const FilterBed = () => {
 					name="inlineRadioOptions"
 					id="inlineRadio3"
 					value="option3"
-					onClick={() => actions.setBedType("No Bed")}
+					onClick={() => actions.setBedType("no_bed")}
 				/>
 				<label className="form-check-label " htmlFor="inlineRadio3">
 					<i className="fas fa-times fa-2x" />
@@ -64,7 +64,7 @@ export const FilterBed = () => {
 					name="inlineRadioOptions"
 					id="inlineRadio4"
 					value="option4"
-					onClick={() => actions.setBedType("Sofa Bed")}
+					onClick={() => actions.setBedType("sofa_bed")}
 				/>
 				<label className="form-check-label" htmlFor="inlineRadio4">
 					<img id="sofaBed" src={bedsofa} />

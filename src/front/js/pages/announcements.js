@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/announcements.scss";
 import my_rooms from "../../img/my_rooms.png";
-import { MyRoomsItemActive, MyRoomsItemInactive, MyRoomsItemOccupied } from "../component/myRoomsItem";
+import { MyRoomsItemActive } from "../component/myRoomsItem";
 import { Link } from "react-router-dom";
 
 export const Announcements = () => {
@@ -64,18 +64,6 @@ export const Announcements = () => {
 							<h5>Inactive Rooms</h5>
 						</a>
 					</li>
-					{/* <li className="nav-item" id="tabModi2">
-						<a
-							className="nav-link noLink2"
-							id="occupiedR-tab"
-							data-toggle="tab"
-							href="#occupiedR"
-							role="tab"
-							aria-controls="occupiedR"
-							aria-selected="false">
-							<h5>Occupied Rooms</h5>
-						</a>
-					</li> */}
 				</ul>
 				<div className="tab-content" id="myTabContent">
 					<div
@@ -112,9 +100,6 @@ export const Announcements = () => {
 							</div>
 						)}
 					</div>
-					{/* <div className="tab-pane fade mb-5" id="occupiedR" role="tabpanel" aria-labelledby="occupiedR-tab">
-						<MyRoomsItemOccupied />
-					</div> */}
 				</div>
 			</div>
 		</div>

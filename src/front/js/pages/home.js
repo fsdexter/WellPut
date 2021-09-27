@@ -2,14 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 
 import "../../styles/home.scss";
-import { Rating } from "../component/rating";
-import { AnimatedMulti } from "../component/multiSelector";
 import { FilterExp } from "../component/filterExp";
-import { FilterOcc } from "../component/filterOcc";
 import { FilterFea } from "../component/filterFea";
 import { FilterBed } from "../component/filterBed";
 import { PriceInput } from "../component/priceInput";
-import { interestsOptions } from "../constants";
 
 import MyMap from "../component/mapEngine";
 import { CarouselRoomImg } from "../component/carouselRoomImg";
@@ -21,6 +17,10 @@ export const Home = () => {
 	useEffect(() => {
 		actions.getRooms();
 	}, []);
+
+	useEffect(() => {
+		actions.getRooms();
+	}, [store.rooms.length]);
 
 	const [city, setCity] = useState();
 	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
@@ -37,6 +37,7 @@ export const Home = () => {
 		actions.setInterests(formValue);
 	};
 	const handleCity = e => {
+		e.preventDefault();
 		setCity(e.target.value);
 		actions.setCity(e.target.value);
 		if (city != undefined) {
@@ -53,6 +54,8 @@ export const Home = () => {
 			}
 		}
 	};
+
+	let active_rooms = store.rooms?.filter(room => room.active_room === true && room.delete_room === false);
 
 	return (
 		<div className="container-fluid" id="myContainerHome">
@@ -76,20 +79,21 @@ export const Home = () => {
 					<h1 className="mt-5 texto_yellow">Search a room</h1>
 					<br />
 					<div className="row">
-						<div className="col-3">
-							<h3 className="ml-5 pt-3">City</h3>
+						<div className="col-4">
+							<h3 className="ml-5 pt-3">City *</h3>
 						</div>
-						<form>
+						<div className="col-6">
 							<div className="col-12 ml-3 pt-3">
 								<input
 									type="text"
 									className="form-control roundShape"
+									required
 									onChange={e => {
 										handleCity(e);
 									}}
 								/>
 							</div>
-						</form>
+						</div>
 					</div>
 					<br />
 					<center>
@@ -101,35 +105,6 @@ export const Home = () => {
 						<br />
 						<div className="border border-warning pb-3">
 							<FilterExp />
-						</div>
-						<br />
-						<div className="border border-warning pt-4 pb-4">
-							<div className="row">
-								<div className="col-4">
-									<h3 className="ml-4">Rating</h3>
-								</div>
-								<div className="col-6 ml-5 ratings">
-									<Rating />
-								</div>
-							</div>
-						</div>
-						<br />
-						<div className="border border-warning pt-5">
-							<FilterOcc />
-						</div>
-						<br />
-						<div className="border border-warning pt-5">
-							<div className="row ">
-								<div className="col-4 mb-5">
-									<h3 className="ml-4">Interests</h3>
-								</div>
-								<div className="col-6 ml-5">
-									<AnimatedMulti
-										options={interestsOptions}
-										change={f => handleAddrTypeChange(f, "interests")}
-									/>
-								</div>
-							</div>
 						</div>
 						<br />
 						<div className="border border-warning pt-4 pb-4">
@@ -150,15 +125,21 @@ export const Home = () => {
 				</div>
 				<div className="col-6 ml-5 mt-5">
 					<div id="carouselOne" className="carousel slide" data-ride="carousel" data-interval="false">
-						{store.rooms ? (
-							store.rooms.map(room => {
-								if (room.active_room && room.delete_room) {
-									return (
-										<div key={room.id}>
-											<CarouselRoomImg room={room} />
-										</div>
-									);
-								}
+						{store.roomsSearch.length ? (
+							store.roomsSearch.map(room => {
+								return (
+									<div key={room.id}>
+										<CarouselRoomImg room={room} />
+									</div>
+								);
+							})
+						) : active_rooms.length ? (
+							active_rooms.map(room => {
+								return (
+									<div key={room.id}>
+										<CarouselRoomImg room={room} />
+									</div>
+								);
 							})
 						) : (
 							<div className="text-center text-warning spiner-loading-data">

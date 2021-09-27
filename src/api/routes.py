@@ -346,43 +346,61 @@ def handle_seed_user_data():
     return jsonify({"msg": "The data was created!" }), 200
 
 # -------------------------- search room -------------------------
+
 @api.route('/search_room', methods=['POST'])
 def search_room():
-    body_request = request.get_json()
-    print(body_request)
+    body_request = request.get_json()    
+
     queries = []
     if body_request["country"]:
         queries.append(Room.country == body_request["country"])
-    if body_request["typeBed"]:
-        queries.append(Room.type_bed == body_request["typeBed"])
-    if body_request["city"]:
-        queries.append(Room.city == body_request["city"])
-    if body_request["roomies"]:
-        print(roomies)
-    if body_request["filters"]:
-        print(filters)
-    if body_request["rating"]:
-        print(rating)
+    if body_request["bedType"]:
+        queries.append(Room.type_bed == body_request["bedType"])
+    if body_request["city"]:       
+        aux = City.query.filter(City.name == body_request["city"]).first()       
+        queries.append(Room.city_id == aux.id)    
     if body_request["money"]:
-        print(money)
-    if body_request["interests"]:
-        print(interests)
-#   
+        thisdict =  body_request["money"]
+        for elmt, value in thisdict.items():
+            if elmt == 'priceMIN' and value!="": 
+                queries.append(Room.price >= value)             
+            elif elmt == 'priceMAX'and value:
+                queries.append(Room.price <= value) 
+            elif elmt == 'depositoMIN'and value:
+                queries.append(Room.deposit >= value)
+            elif elmt == 'depositoMAX' and value:
+                queries.append(Room.deposit <= value)  
 
-#   if body_request["kye del flux"]:
-#         for
-#        queries.append(Room.type_bed == body_request["key"])
-    
     search_filter = Room.query.filter(*queries).all()
-    response = list(map(lambda room: room.serialize(),search_filter))
-    print(response)
-    return "OK",200
+    
+    def sublist(lst1, lst2):
+        return set(lst1) <= set(lst2)
+    
+    search_filter_2 = []
+    search_filter_3 = []
+    search_filter_4 = []
+    features = []
+    expanse = []
+    if body_request["filters"]:
+        for item in body_request["filters"]:
+            if item == 'wifi' or item == 'Water' or item == 'light ' or item == 'gas':               
+                expanse.append(item)
+            elif item == 'facing the street' or item == 'furnished room' or item == 'sharedRoom' or item == 'suiteRoom':
+                features.append(item)
+        for room in search_filter:
+            if len(features)>0 and sublist(features,list(map(lambda x:x.name,room.feature))):
+                search_filter_2.append(room)
+        for room in search_filter:
+            if len(expanse)>0 and sublist(expanse,list(map(lambda x:x.name,room.expanse))):
+                search_filter_3.append(room)
+                      
+    search_filter_5 = search_filter_2 + search_filter_3 + search_filter_4+search_filter
+    response = list(map(lambda room: room.serialize(),search_filter_5))
+    print(response,len(response))
+    return jsonify(response),200
 
 @api.route("/change_active_room/<int:id>", methods=[ "PUT"])
-#@jwt_required()
 def change_active_room(id):
-   # identity = get_jwt_identity()
-   # user = current_user(get_jwt_identity())
     room = Room.query.get(id)
     room.active_room = not room.active_room
     db.session.commit()
