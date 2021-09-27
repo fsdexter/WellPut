@@ -25,10 +25,8 @@ def handle_upload(user_id):
         result = cloudinary.uploader.upload(request.files['avatar_url'])
         user1 = User.query.get(user_id) 
         user1.avatar_url = result['secure_url']    
-       
         db.session.add(user1)
         db.session.commit()
-
         return jsonify(user1.serialize()), 200
     else:
         raise APIException('Missing profile_image on the FormData')
@@ -52,9 +50,7 @@ def sign_up_user():
     
     db.session.add(new_user)
     db.session.commit()
-    
     new_user_DB = User.query.filter(User.email == email_request).first()
-    
     return jsonify(new_user_DB.serialize()), 200
 
 @api.route('/login', methods=['POST'])
@@ -74,7 +70,6 @@ def login_user():
     
     # New token
     access_token = create_access_token(identity = user_checked.serialize())
-
     return jsonify({"access_token": access_token, "user": user_checked.serialize()}), 200
 
 # ----------- to verify the identity of the user ----------
@@ -84,7 +79,6 @@ def login_user():
 def user_profile():
   identity = get_jwt_identity()
   user = current_user(get_jwt_identity())
-
   return jsonify(user.serialize())
 
 # ----------- to verify the identity of the user ----------
@@ -107,12 +101,10 @@ def get_single_user(user_id):
     body = request.get_json()
     user_selected = User.query.get(user_id)
     user = user_selected.serialize()
-    
     city = City.query.filter(City.id == user_selected.city_id).first()
     city_user = [city.serialize()]
     # To add to "user" object the "city" property to appear inside the user
     user['city'] = city_user
-    
     return jsonify(user), 200
 
 @api.route('/owner-profile/<int:owner_id>', methods=['GET'])
@@ -120,11 +112,9 @@ def get_owner(owner_id):
     body = request.get_json()
     user_selected = User.query.get(owner_id)
     owner = user_selected.serialize()
-    
     city = City.query.filter(City.id == user_selected.city_id).first()
     city_user = [city.serialize()]
     owner['city'] = city_user
-    
     return jsonify(owner), 200
 
 @api.route('/rooms', methods=['GET'])
@@ -149,11 +139,10 @@ def get_single_room(room_id):
         reviews_list.append(tenancy_review_serialize)
     
     city = City.query.filter(City.id == room_selected.city_id).first()
-    print(city)
     city_room = [city.serialize()]
     room_seralize['city'] = city_room
-        
     room_seralize['tenancies'] = reviews_list #Realmente se sacan las tenancies, la relación entre usuario, comentario y habitación
+    
     return jsonify(room_seralize), 200
     
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
@@ -161,7 +150,6 @@ def edit_profile(user_id):
     body_request = request.get_json()
     user_selected = User.query.get_or_404(user_id)
     user_to_edit = user_selected.serialize()
-    
     db.session.delete(user_selected)
     db.session.commit()
     
@@ -209,13 +197,12 @@ def edit_profile(user_id):
         
         db.session.add(new_language_user)
         db.session.commit()
-    
+        
     return jsonify(user_to_edit), 200
 
     # -------------------------- TEST -------------------------
 @api.route('/upload', methods=['POST'])
 def handle_pic ():
-      
         result = cloudinary.uploader.upload(request.files["profile_image"])
         print(result["url"])
         return jsonify({"url":result["url"]} ), 200
@@ -224,8 +211,7 @@ def handle_pic ():
 @api.route('/new_announcement', methods=['POST'])
 def create_announcement():
     body_request = request.get_json()
-    print("acá están los parámetros")
-    print(body_request)
+   
     city_request = body_request.get("city", None)
     address_request = body_request.get("address", None)
     title_request = body_request.get("title", None)
@@ -242,13 +228,18 @@ def create_announcement():
     expWater_request = body_request.get("expWater", None)
     type_bed_request = body_request.get("type_bed", None)
     room_url_request = body_request.get("room_url", None)
-    #agregando foto de room
-    # room_cloudinary = cloudinary.uploader.upload(body_request.get("room_url"), folder = "agile_monkeys")
-    # room_image_url_request = room_image_url["secure_url"]
+    owner_id_request = body_request.get("owner_id", None)
+    
+    # To get the city id and create city_id inside to the new room
+    city = City.query.filter(City.name == city_request).first()  
+    city_serialize = city.serialize()
+    city_room_id = city_serialize['id']
 
-    city_room= City(
-        name = city_request
-    )
+    # To add the new room owner
+    owner = User.query.filter(User.id == owner_id_request).first()
+    owner_serialize = owner.serialize()
+    owner_id = owner_serialize['id']
+
     expense_room= Expense(
         name = expWater_request
     )
@@ -261,7 +252,6 @@ def create_announcement():
     expense4_room= Expense(
         name = expGas_request
     )
-
     feature1_room= Feature(
         name=facingTheStreet_request
     )
@@ -282,10 +272,11 @@ def create_announcement():
         price = price_request,
         deposit = deposit_request,
         type_bed = type_bed_request,
-        room_url =  room_url_request
+        room_url =  room_url_request,
+        city_id = city_room_id,
+        user_id = owner_id
         )
     
-    db.session.add(city_room)
     db.session.add(new_room)
     db.session.add(feature1_room)
     db.session.add(feature2_room)
@@ -297,7 +288,7 @@ def create_announcement():
     db.session.add(expense4_room)
     db.session.commit()
 
-    return jsonify(body_request), 200
+    return jsonify(new_room.serialize()), 200
 
 @api.route('/tenancy_room_reviews', methods=['POST'])
 def reviewendp():
@@ -315,9 +306,7 @@ def reviewendp():
 
 @api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) 
 def get_reviews_room(room_id):
-    
     tenancies_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).all()
-    
     tenancies_list = []
     
     for tenancy_room_selected in tenancies_room_selected:
@@ -340,8 +329,7 @@ def get_reviews_room(room_id):
         
         tenancy['reviews'] = reviews_list
         tenancy['user'] = tenancy_user
-        tenancy['room'] = room_tenancy
-        
+        tenancy['room'] = room_tenancy        
         tenancies_list.append(tenancy)
         
     return jsonify(tenancies_list), 200  
@@ -415,4 +403,14 @@ def change_active_room(id):
     room = Room.query.get(id)
     room.active_room = not room.active_room
     db.session.commit()
-    return jsonify("Success")
+    return jsonify("Change Active Room Success")
+
+@api.route("/change_delete_room/<int:id>", methods=[ "PUT"])
+#@jwt_required()
+def change_delete_room(id):
+   # identity = get_jwt_identity()
+   # user = current_user(get_jwt_identity())
+    room = Room.query.get(id)
+    room.delete_room = not room.delete_room
+    db.session.commit()
+    return jsonify("Delete Room Success")

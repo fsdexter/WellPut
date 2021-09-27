@@ -290,9 +290,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			//////////////////////////////////////////////////////////º
+			////////////////////////Habitación de mis anuncios activa o inactiva//////////////////////////////////º
 			setRoomActive: id => {
 				fetch(API_BASE_URL + "/api/change_active_room/" + id, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}).then(res => {
+					if (res.ok) {
+						getActions().getRooms();
+					}
+				});
+			},
+			////////////////////////Eliminar habitación de mis anuncios//////////////////////////////////º
+			setRoomDelete: id => {
+				fetch(API_BASE_URL + "/api/change_delete_room/" + id, {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json"

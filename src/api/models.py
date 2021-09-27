@@ -261,6 +261,7 @@ class Room (db.Model):
     city =  db.relationship("City", back_populates="rooms")
     reviews = db.relationship("Review", back_populates="room")
     tenancies = db.relationship("Tenancy", back_populates="room")
+    delete_room = db.Column(db.Boolean, default=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="rooms")
@@ -297,7 +298,8 @@ class Room (db.Model):
             "feature": list(map(lambda feat: feat.serialize(), self.feature)),
             "favorites": list(map(lambda favorite: favorite.serialize(), self.favorites)),
             "reviews": list(map(lambda review: review.serialize(), self.reviews)),
-            "active_room":self.active_room
+            "active_room":self.active_room,
+            "delete_room":self.delete_room
         }
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -683,7 +685,7 @@ class SeedData:
             price = 500,
             deposit = 500,
             title = "Amazing Double Room",
-            type_bed ="double",
+            type_bed ="doubleBed",
             lat = 23.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
@@ -699,7 +701,7 @@ class SeedData:
             price = 500,
             deposit = 500,
             title = "Lovely Clean Room",
-            type_bed = "double",
+            type_bed = "doubleBed",
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.first_city.id,
@@ -715,7 +717,7 @@ class SeedData:
             price = 300,
             deposit = 100,
             title = "Beautiful Room",
-            type_bed = "double",
+            type_bed = "doubleBed",
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.second_city.id,
@@ -731,7 +733,7 @@ class SeedData:
             price = 500,
             deposit = 500,
             title = "Moder Room",
-            type_bed = "double",
+            type_bed = "doubleBed",
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.second_city.id,
@@ -747,7 +749,7 @@ class SeedData:
             price = 500,
             deposit = 500,
             title = "Spacious and Beautiful Room in Málaga",
-            type_bed = "double",
+            type_bed = "doubleBed",
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.third_city.id,
