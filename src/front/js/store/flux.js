@@ -294,12 +294,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews`, postreview);
 					if (response.status >= 300) {
 						const errorMsg = "Error saving comment";
-						alert("error....");
+						alert("You cannot write a comment for this room!");
 					} else {
 						const newStore = await response.json();
-						setStore({ review: newStore }); ///aqui lo paso pero no guarda
+						setStore({ review: newStore });
 						localStorage.setItem("review", JSON.stringify(store.review));
-						alert("thank you for your comment");
+						alert("Thank you for your comment");
 					}
 				} catch (errorMsg) {
 					return errorMsg.message;

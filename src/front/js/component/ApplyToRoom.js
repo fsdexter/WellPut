@@ -47,52 +47,66 @@ export const ApplyToRoom = props => {
 				JSON.parse(localStorage.getItem("user")).id || JSON.parse(localStorage.getItem("user")),
 				roomId
 			);
-			alert("exitoso");
+			alert("Your apply has been sent successfully!");
 		} else {
-			alert("You are not looged,  Please login!");
+			alert("You are not logged, please login to can apply at this room!");
 		}
 	};
 	return (
-		<div className="row container text-center  " id="loginContainer">
-			<div
-				className="iconClose col-12 mt-3  m-0 p-0 d-flex justify-content-end close"
-				data-dismiss="modal"
-				ref={closeBtn}>
-				<i className="far fa-window-close text-white fa-lg" />
-			</div>
+		<div className="row container text-center" id="ContainerAplytoRoom">
+			<div className="col-11 mt-3">
+				<div className="carousel-caption-details-room-2   col-12  text-white">
+					<h2 className=" mt-3 mb-2">{title}</h2>
+				</div>
 
-			<div className="carousel-caption-details-room  col-12 d-flex text-white">
-				<h2 className="title-detail-room">{title}</h2>
-			</div>
-			<div className="row d-flex justify-content-around">
-				<div className="col-12  d-flex">
+				<div className="d-flex flex-column">
 					<div
-						className="col-8 mt-4"
+						className=" mt-4"
 						style={{
 							backgroundImage: `url(${img})`,
 							backgroundSize: "cover",
 							width: "50rem",
-							height: "38rem"
+							height: "30rem",
+							marginLeft: "7rem"
 						}}></div>
-					<div className="col-4 mt-4 text-white">
+					<div className=" mt-4 text-white">
 						<h2>{price} €</h2>
-						<h2>{address}</h2>
-						<h2>{city}</h2>
-						<RatingStatic rating={averageRating} />
+						<div className="d-flex justify-content-center">
+							<i
+								className="fas fa-map-marker-alt fa-2x mr-2"
+								type="button"
+								data-toggle="tooltip"
+								data-placement="top"
+								title="Address"
+							/>
+							<h2>{address},</h2>
+							<h2>{city}</h2>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div className="col-12 mt-3  m-0 p-0 d-flex ">
-				<Link>
-					<button
-						className="btn btnYellow mb-5 btnYelloRoom"
-						onClick={() => {
-							aceptRoomie();
-							closeModalLogin();
-						}}>
-						Confirm
-					</button>
-				</Link>
+			<div
+				className="iconClose col-1 mt-3  m-0 p-0 d-flex justify-content-end close"
+				data-dismiss="modal"
+				ref={closeBtn}>
+				<i className="far fa-window-close text-white fa-lg" />
+			</div>
+			<div className="col-11 mt-3   m-0 p-0 d-flex justify-content-around ">
+				<button
+					className="btn btngreen mb-5 "
+					onClick={() => {
+						aceptRoomie();
+						closeModalLogin();
+					}}>
+					Confirm
+				</button>
+				<button
+					className="btn btnred mb-5 "
+					onClick={() => {
+						closeModalLogin();
+					}}>
+					Cancel
+				</button>
 			</div>
 		</div>
 	);
