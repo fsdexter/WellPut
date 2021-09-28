@@ -20,7 +20,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			room: {},
 			review: {},
 			myLocalStore: {},
-			owner: {}
+			owner: {},
+			roomsSearch: []
 		},
 		actions: {
 			getLocalStore: () => {
@@ -212,10 +213,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ rating: s });
 			},
-			setRoomies: r => {
-				const store = getStore();
-				setStore({ roomies: r });
-			},
+
 			setBedType: b => {
 				const store = getStore();
 				setStore({ bedType: b });
@@ -234,13 +232,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			searchRoom: () => {
 				const store = getStore();
+
 				fetch(API_BASE_URL + "/api/search_room", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({
-						roomies: store.roomies,
 						filters: store.filters,
 						rating: store.rating,
 						bedType: store.bedType,
@@ -251,7 +249,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				})
 					.then(res => res.json())
-					.then(data => console.log(data, "response serach_room"));
+					.then(data => {
+						console.log(data, "response serach_room");
+						// TIENES QUE METER LA DATA DE LA BUSQUEDAD, QUE ES EL RESULTADO DEL SEARCH EN UNA VARIABLE PARA PODER PINTARLA EN EL HOME
+						setStore({ roomsSearch: data });
+					});
 			},
 			//////////////////////////////////////////
 			postNewAnnouncement: room => {
@@ -344,6 +346,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					return error.message;
 				}
+			},
+			setFavorites: id => {
+				fetch(API_BASE_URL + "/api/change_favorite/" + id, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}).then(res => {});
 			}
 		}
 	};

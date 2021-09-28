@@ -71,6 +71,14 @@ export const DetailedView = () => {
 								data-target="#notificationModal">
 								<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" /> &nbsp;&nbsp;
 								<h4 className="textbuttons"> Apply Room</h4>
+               </button>
+
+                <button
+								className="heartButtonFix ml-5 pr-5 pl-5"
+								data-toggle="tooltip"
+								data-placement="top"
+								title="Add Favorite">
+								<i className="far fa-heart fa-2x" />
 							</button>
 						</div>
 					</div>
@@ -131,7 +139,7 @@ export const DetailedView = () => {
 									data-toggle="tooltip"
 									data-placement="top"
 									title="Double Bed"
-									className="mt-2"
+									className="mt-2 doubleBed"
 								/>
 							) : null}
 							{details.type_bed === "noBed" ? (
@@ -150,7 +158,7 @@ export const DetailedView = () => {
 									data-toggle="tooltip"
 									data-placement="top"
 									title="Sofa Bed"
-									className="mt-2"
+									className="mt-2 sofaBed"
 								/>
 							) : null}
 						</div>
