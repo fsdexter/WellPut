@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 
 import { AddReview } from "../component/addReview";
-import { NotificationRoomie } from "../component/notificationRoomie";
+import { ApplyToRoom } from "../component/ApplyToRoom";
 import "../../styles/viewprofile.scss";
 import avatar from "/workspace/WellPut/src/front/img/avatar.png";
 
@@ -113,7 +113,7 @@ export const OwnerProfile = () => {
 						data-toggle="modal"
 						data-target="#notificationModal">
 						<i className="fa fa-user-plus fa-2x text-white btn-options-profile" aria-hidden="true" />
-						<h5 className="textbuttons">Add Romie</h5>
+						<h5 className="textbuttons">Apply Room</h5>
 					</button>
 				</div>
 				<div className="col buttonfondblack d-flex justify-content-center">
@@ -145,7 +145,7 @@ export const OwnerProfile = () => {
 				<div id="notificationModal" className="modal fade" role="dialog">
 					<div className="modal-dialog modal-lg">
 						<div className="modal-content">
-							<NotificationRoomie />
+							<ApplyToRoom />
 						</div>
 					</div>
 				</div>

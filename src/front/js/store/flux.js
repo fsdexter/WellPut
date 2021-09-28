@@ -1,4 +1,5 @@
 // Backend URL
+
 import { API_BASE_URL } from "../constants";
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -174,12 +175,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 			recoverPassword: userValues => {
 				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
 			},
-			addRoomie: () => {
-				console.log("SE AGREGÓ UN NUEVO COMPAÑERO DE PISO");
+			//////////////////////////////////////// Apply Room
+			addRoomie: (user, roomId) => {
+				console.log("este es el user", user);
+				console.log("este es el room id", roomId);
+				fetch(API_BASE_URL + "/api/applyroom", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						user: user,
+						room_Id: roomId
+					})
+				})
+					.then(res => res.json())
+					.then(data => console.log(data, "Apply Romie"));
+				// console.log("Solicitud de  habitacion generada ", user);
+				// console.log(user);
 			},
-			deleteRoomie: () => {
-				console.log("SE ELIMINÓ A UN COMPAÑERO DE PISO");
-			},
+			///////////////////////////////
 			onClickHandeler: e => {
 				const store = getStore();
 				const checker = value => ![e.target.name].some(element => value.includes(element));
@@ -268,6 +283,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			/////////////////////AÑADIR REVIEW /////////////////////////////////////
 			addReview: async formValue => {
 				const store = getStore();
+				formValue["room_id"] = JSON.parse(localStorage.getItem("details")).id;
+				formValue["user"] = JSON.parse(localStorage.getItem("user")).id;
+				formValue["rating"] = store.rating;
 				const postreview = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
@@ -278,12 +296,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews`, postreview);
 					if (response.status >= 300) {
 						const errorMsg = "Error saving comment";
-						throw new Error(errorMsg);
+						alert("You cannot write a comment for this room!");
 					} else {
 						const newStore = await response.json();
-						setStore({ review: newStore }); ///aqui lo paso pero no guarda
+						setStore({ review: newStore });
 						localStorage.setItem("review", JSON.stringify(store.review));
-						alert("thank you for your comment");
+						alert("Thank you for your comment");
 					}
 				} catch (errorMsg) {
 					return errorMsg.message;
