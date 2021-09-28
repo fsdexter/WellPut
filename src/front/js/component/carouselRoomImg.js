@@ -51,7 +51,6 @@ export const CarouselRoomImg = props => {
 										onClick={() => {
 											actions.setFavorites(props.room.id);
 										}}>
-
 										<i className="far fa-heart fa-2x" />
 									</button>
 								</div>

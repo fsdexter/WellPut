@@ -42,7 +42,7 @@ export const ApplyToRoom = props => {
 		closeBtn.current.click();
 	};
 	const aceptRoomie = props => {
-		if (localStorage.length > 0) {
+		if (JSON.parse(localStorage.getItem("user"))) {
 			actions.addRoomie(
 				JSON.parse(localStorage.getItem("user")).id || JSON.parse(localStorage.getItem("user")),
 				roomId

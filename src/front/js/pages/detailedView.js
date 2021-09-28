@@ -71,9 +71,9 @@ export const DetailedView = () => {
 								data-target="#notificationModal">
 								<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" /> &nbsp;&nbsp;
 								<h4 className="textbuttons"> Apply Room</h4>
-               </button>
+							</button>
 
-                <button
+							<button
 								className="heartButtonFix ml-5 pr-5 pl-5"
 								data-toggle="tooltip"
 								data-placement="top"
