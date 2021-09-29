@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 
 import { AddReview } from "../component/addReview";
-import { ApplyToRoom } from "../component/ApplyToRoom";
+import { Notifications } from "../component/notifications";
 import "../../styles/viewprofile.scss";
 import avatar from "/workspace/WellPut/src/front/img/avatar.png";
 
@@ -106,16 +106,16 @@ export const OwnerProfile = () => {
 				)}
 			</div>
 			<div className="col-1" id="containerOptionsProfile">
-				<div className="col buttonfondblack d-flex justify-content-center">
+				{/* <div className="col buttonfondblack d-flex justify-content-center">
 					<button
 						type="button"
 						className="navbar-brand mb-0 mr-2 btn btn-navb"
 						data-toggle="modal"
 						data-target="#notificationModal">
 						<i className="fa fa-user-plus fa-2x text-white btn-options-profile" aria-hidden="true" />
-						<h5 className="textbuttons">Apply Room</h5>
+						<h5 className="textbuttons">Notifications</h5>
 					</button>
-				</div>
+				</div> */}
 				<div className="col buttonfondblack d-flex justify-content-center">
 					<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb" data-target="#addReviewModal">
 						<i className="fas fa-user-times fa-2x text-white btn-options-profile"></i>
@@ -142,13 +142,13 @@ export const OwnerProfile = () => {
 				</div>
 
 				{/*<!-- notification Modal -->*/}
-				<div id="notificationModal" className="modal fade" role="dialog">
+				{/* <div id="notificationModal" className="modal fade" role="dialog">
 					<div className="modal-dialog modal-lg">
 						<div className="modal-content">
-							<ApplyToRoom />
+							<Notifications />
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

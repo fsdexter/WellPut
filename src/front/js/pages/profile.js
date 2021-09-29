@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
+import { Notifications } from "../component/notifications";
 
 import "../../styles/viewprofile.scss";
 import avatar from "/workspace/WellPut/src/front/img/avatar.png";
@@ -179,6 +180,26 @@ export const Profile = () => {
 							<h5 className="textbuttons">My Rooms</h5>
 						</button>
 					</Link>
+				</div>
+
+				<div className="col buttonfondblack d-flex justify-content-center">
+					<button
+						type="button"
+						className="navbar-brand mb-0 mr-2 btn btn-navb"
+						data-toggle="modal"
+						data-target="#notificationModal">
+						<i className="fa fa-user-plus fa-2x text-white btn-options-profile" aria-hidden="true" />
+						<h5 className="textbuttons">Notifications</h5>
+					</button>
+				</div>
+
+				{/*<!-- notification Modal -->*/}
+				<div id="notificationModal" className="modal fade" role="dialog">
+					<div className="modal-dialog modal-lg">
+						<div className="modal-content">
+							<Notifications />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
