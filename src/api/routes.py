@@ -390,33 +390,35 @@ def search_room():
 
     search_filter = Room.query.filter(*queries).all()
     
+    #to check ifo list of features or/and expances coming from front end machs the list of features or/and expances in de back end response
     search_filter_2 = []
     search_filter_3 = []
+    search_filter_4 = []
     features = []
     expanse = []
-    
-    #to check ifo list of features coming from front end machs the list of features in de back end response
+    #to check if list 1 and 2 mach
     def sublist(lst1, lst2):
         return set(lst1) <= set(lst2)
-
+    #to separate filters in features and expances
     if body_request["filters"]:
         for item in body_request["filters"]:
-            if item == 'wifi' or item == 'Water' or item == 'light ' or item == 'gas':               
+            if item == 'wifi' or item == 'Water' or item == 'light' or item == 'gas':               
                 expanse.append(item)
-            elif item == 'facing the street' or item == 'furnished room' or item == 'sharedRoom' or item == 'suiteRoom':
+            elif item == 'facing the street' or item == 'furnished room' or item == 'shared room' or item == 'suite room':
                 features.append(item)
         for room in search_filter:
             if len(features)>0 and sublist(features,list(map(lambda x:x.name,room.feature))):
                 search_filter_2.append(room)
         for room in search_filter:
-            if len(expanse)>0 and sublist(expanse,list(map(lambda x:x.name,room.expanse))):
+            if len(expanse)>0 and sublist(expanse,list(map(lambda x:x.name,room.expense))):
                 search_filter_3.append(room)
-   
-    
-                   
-    search_filter_4 = search_filter_2 + search_filter_3 +  + search_filter
-    response = list(map(lambda room: room.serialize(),search_filter_4))
-    print(response,len(response))
+    # in case "filters" is empty
+    else:
+        search_filter_4 = search_filter
+                      
+    search_filter_5 = search_filter_2 + search_filter_3 + search_filter_4
+    response = list(map(lambda room: room.serialize(),search_filter_5))
+    print("response",len(response))
     return jsonify(response),200
 
    

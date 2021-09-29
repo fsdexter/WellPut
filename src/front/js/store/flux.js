@@ -228,7 +228,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						bedType: store.bedType,
 						city: store.city,
 						money: store.money,
-						country: "Spain",
+						country: "Spain"
 					})
 				})
 					.then(res => res.json())

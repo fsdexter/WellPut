@@ -46,7 +46,7 @@ export const FilterFea = () => {
 				<input
 					className=" form-check-input"
 					type="checkbox"
-					name="suiteRoom"
+					name="suite room"
 					id="inlineRadio3"
 					onClick={e => {
 						actions.onClickHandeler(e);
@@ -62,7 +62,7 @@ export const FilterFea = () => {
 				<input
 					className="form-check-input"
 					type="checkbox"
-					name="sharedRoom"
+					name="shared room"
 					id="inlineRadio4"
 					onClick={e => {
 						actions.onClickHandeler(e);
