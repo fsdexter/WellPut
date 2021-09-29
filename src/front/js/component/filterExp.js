@@ -62,7 +62,7 @@ export const FilterExp = () => {
 				<input
 					className="form-check-input"
 					type="checkbox"
-					name="light "
+					name="light"
 					id="inlineRadio4"
 					value="option4"
 					onClick={e => {
