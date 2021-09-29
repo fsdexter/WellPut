@@ -1,0 +1,48 @@
+.title-detail-room{
+    height: 65px;
+    background-color: #63e21a;
+    text-align: center;
+    padding: 20px 20px 30px 20px;
+}
+.carousel-caption-details-room-2{
+    width: 100vw !important;
+    right: 0 !important;
+    left: 1.5rem !important;
+}
+#ContainerAplytoRoom{
+    background-color: #184F5F;
+    position: relative;
+    width: 70vw;
+    height: 90vh;
+    align-items: initial !important;
+}
+.btngreen{
+    background-color: #63e21a;
+    color: white;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding: .5rem 2rem;
+    
+}
+
+.btngreen:hover{
+    background-color: #ffde5900;
+    color: white;
+    border-color: #63e21a;
+}
+.btnred{
+    background-color: #d80a0a;
+    color: white;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding: .5rem 2rem;
+    
+}
+
+.btnred:hover{
+    background-color: #ffde5900;
+    color: white;
+    border-color: #d80a0a;
+}

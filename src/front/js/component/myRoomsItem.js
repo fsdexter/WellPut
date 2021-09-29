@@ -3,22 +3,17 @@ import "../../styles/announcements.scss";
 import openEye from "../../img/openEye.png";
 import closeEye from "../../img/closeEye.png";
 import deleteRoom from "../../img/deleteRoom.png";
-import room from "../../img/room.jpg";
-import Becker from "../../img/Becker.jpg";
-import deleteRoomie from "../../img/deleteRoomie.png";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
-const exampleTitle = "Habitación luminosa frente a Sagrada Familia";
-const exampleDescription =
-	"Habitación amueblada y con mucha luz (da al exterior, a un patio abierto), en un piso grande, nuevo y amueblado. Tenemos un balcón grande con sofá que da al parque y el baño es a compartir entre 2 personas.";
-const roomieExample = "Jason Becker Second";
+
 export const MyRoomsItemActive = props => {
 	const { store, actions } = useContext(Context);
 	return (
 		<div className="row">
 			<div className="third_part mx-auto mt-3 mb-2">
-				<div className="row">
-					<div className="col-6 mt-4 ">
+				<div className="row pl-3 pr-3">
+					<div className="col-7 mt-4">
 						<div className="ml-2 mb-4">
 							<h5 className="fontRoom">{props.room.title}</h5>
 						</div>
@@ -26,25 +21,35 @@ export const MyRoomsItemActive = props => {
 						<h5 className="fontRoom ml-2 ">Price: €{props.room.price}</h5>
 						<h5 className="fontRoom ml-2 ">Deposit: €{props.room.deposit}</h5>
 					</div>
-					<div className="col-4 roomItemBar">
-						<a href="#">
-							{" "}
-							<img className="roomItemPic" src={props.room.room_url} href="#" />{" "}
-						</a>
+					<div className="col-3 roomItemBar">
+						<Link to={`/detailedView/${props.room.id}`}>
+							<img className="roomItemPic" src={props.room.room_url} href="#" />
+						</Link>
 					</div>
-					<div className="col-2">
-						<div className="roomItemsButton">
+					<div className="col-1 d-flex justify-content-center btn-icons-annonc">
+						<div className="d-flex flex-column">
 							<button
 								type="button"
-								className="btn btn-outline-warning roomsButtons"
+								className="btn btn-outline-warning roomsButtons mt-4 "
 								alt="click to set room inactive"
+								data-toggle="tooltip"
+								data-placement="top"
+								title="Deactivate/Activate"
 								onClick={() => {
 									actions.setRoomActive(props.room.id);
 								}}>
 								<img src={props.room.active_room ? closeEye : openEye} className="closedEye" />
 							</button>
 
-							<button type="button" className="btn btn-outline-warning mt-5 roomsButtons">
+							<button
+								type="button"
+								className="btn btn-outline-warning mt-5 roomsButtons"
+								data-toggle="tooltip"
+								data-placement="top"
+								title="Delete"
+								onClick={() => {
+									actions.setRoomDelete(props.room.id);
+								}}>
 								<img src={deleteRoom} />
 							</button>
 						</div>

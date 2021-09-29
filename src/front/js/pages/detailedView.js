@@ -7,6 +7,7 @@ import { API_BASE_URL } from "../constants";
 import { OwnerResume } from "../component/ownerResume";
 import { ReviewsResume } from "../component/reviewsResumen";
 import { RatingStatic } from "../component/ratingStatic";
+import { ApplyToRoom } from "../component/ApplyToRoom";
 
 import bedSofa from "../../img/bedsofaBlack.png";
 import doubleBed from "../../img/doubleBlack.png";
@@ -63,7 +64,20 @@ export const DetailedView = () => {
 						</div>
 						<div className="starCaroCustom d-flex justify-content-around mb-3">
 							<RatingStatic rating={averageRating} />
-							<button className="heartButtonFix ml-5 pr-5 pl-5">
+							<button
+								type="button"
+								className="navbar btn  btnapllyroom"
+								data-toggle="modal"
+								data-target="#notificationModal">
+								<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" /> &nbsp;&nbsp;
+								<h4 className="textbuttons"> Apply Room</h4>
+							</button>
+
+							<button
+								className="heartButtonFix ml-5 pr-5 pl-5"
+								data-toggle="tooltip"
+								data-placement="top"
+								title="Add Favorite">
 								<i className="far fa-heart fa-2x" />
 							</button>
 						</div>
@@ -125,7 +139,7 @@ export const DetailedView = () => {
 									data-toggle="tooltip"
 									data-placement="top"
 									title="Double Bed"
-									className="mt-2"
+									className="mt-2 doubleBed"
 								/>
 							) : null}
 							{details.type_bed === "noBed" ? (
@@ -144,7 +158,7 @@ export const DetailedView = () => {
 									data-toggle="tooltip"
 									data-placement="top"
 									title="Sofa Bed"
-									className="mt-2"
+									className="mt-2 sofaBed"
 								/>
 							) : null}
 						</div>
@@ -254,6 +268,21 @@ export const DetailedView = () => {
 					</div>
 					<div className="col-6 reviesRes">
 						<ReviewsResume reviews={details.reviews} roomId={details.id} tenancies={details.tenancies} />
+					</div>
+				</div>
+				{/*<!-- notification Modal -->*/}
+				<div id="notificationModal" className="modal fade" role="dialog">
+					<div className="modal-dialog modal-lg">
+						<div className="modal-content">
+							<ApplyToRoom
+								img={details.room_url}
+								title={details.title}
+								price={details.price}
+								address={details.address}
+								roomId={details.id}
+								city={details.city.map(c => c.name)}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
