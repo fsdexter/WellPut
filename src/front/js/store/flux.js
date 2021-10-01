@@ -191,8 +191,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(res => res.json())
 					.then(data => console.log(data, "Apply Romie"));
-				// console.log("Solicitud de  habitacion generada ", user);
-				// console.log(user);
 			},
 			///////////////////////////////
 			onClickHandeler: e => {
@@ -281,6 +279,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			/////////////////////AÑADIR REVIEW /////////////////////////////////////
 			addReview: async formValue => {
 				const store = getStore();
+
+				////la romie de detail debe ser igual a la de current review del user. para que pueda comentar. ya que es su habitacion
 				formValue["room_id"] = JSON.parse(localStorage.getItem("details")).id;
 				formValue["user"] = JSON.parse(localStorage.getItem("user")).id;
 				formValue["rating"] = store.rating;

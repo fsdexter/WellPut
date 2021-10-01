@@ -21,11 +21,15 @@ export const AddReview = () => {
 	const closeModalLogin = () => {
 		closeBtn.current.click();
 	};
-	///////////////////////ç
+	///////////////////////
 
 	const reviewSubmit = () => {
-		actions.addReview(formValue);
-		closeModalLogin();
+		if (JSON.parse(localStorage.getItem("user"))) {
+			actions.addReview(formValue);
+			closeModalLogin();
+		} else {
+			alert("You have not logged in, log in to rate this room!");
+		}
 	};
 
 	return (
