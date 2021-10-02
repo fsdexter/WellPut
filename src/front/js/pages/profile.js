@@ -147,14 +147,13 @@ export const Profile = () => {
 					? user.rooms.map(room => {
 							if (room.temporal_renter !== null) {
 								return (
-									<div className="col buttonfondblack d-flex justify-content-center">
+									<div key={room.id} className="col buttonfondblack d-flex justify-content-center">
 										<button
 											type="button"
 											className="navbar-brand mb-0 mr-2 btn btn-navb"
 											data-toggle="modal"
 											data-target="#notificationModal">
 											<i
-												key={room.id}
 												className="fas fa-bell fa-2x text-white notifications-bell fa-spin"
 												aria-hidden="true"
 											/>

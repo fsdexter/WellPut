@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import "../../styles/notificationRoomie.scss";
-import roomExample from "../../img/roomDetails.png";
 
 export const NotificationRoomie = props => {
 	const { actions } = useContext(Context);
@@ -14,10 +13,6 @@ export const NotificationRoomie = props => {
 
 	const closeModalLogin = () => {
 		closeBtn.current.click();
-	};
-
-	const selectRoomToRoomie = () => {
-		console.log("Se seleccionó una habitación para el nuevo inquilino");
 	};
 
 	const aceptRoomie = () => {
@@ -31,8 +26,6 @@ export const NotificationRoomie = props => {
 	};
 
 	let roomToRent = props.rooms.filter(room => room.temporal_renter !== null);
-	console.log("HABITACIÓN CON USUARIO INTERESADO", roomToRent[0]);
-
 	let userAppliedId;
 	roomToRent.filter(user => (userAppliedId = user.temporal_renter));
 
