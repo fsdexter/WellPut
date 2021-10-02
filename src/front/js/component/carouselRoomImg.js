@@ -9,6 +9,9 @@ import { RatingStatic } from "./ratingStatic";
 export const CarouselRoomImg = props => {
 	const { store, actions } = useContext(Context);
 	let room_reviews = props.room.reviews.map(review => review.rating);
+	let id_user = JSON.parse(localStorage.getItem("user"))
+		? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		: null;
 	let averageRating = Math.round(
 		room_reviews.reduce(
 			(accumulator, currentValue) => (currentValue ? currentValue + accumulator : accumulator),
@@ -49,7 +52,7 @@ export const CarouselRoomImg = props => {
 										data-placement="top"
 										title="Add Favorite"
 										onClick={() => {
-											actions.setFavorites(props.room.id);
+											actions.setFavorites(id_user, props.room.id);
 										}}>
 										<i className="far fa-heart fa-2x" />
 									</button>

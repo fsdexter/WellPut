@@ -345,8 +345,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return error.message;
 				}
 			},
-			setFavorites: id => {
-				fetch(API_BASE_URL + "/api/change_favorite/" + id, {
+			setFavorites: (id_user, id_room) => {
+				fetch(API_BASE_URL + "/api/change_favorite/" + id_user + "/" + id_room, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"

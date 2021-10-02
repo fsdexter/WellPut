@@ -459,12 +459,12 @@ def change_current_room(user_id):
     db.session.commit()
     return jsonify("Change Active user Success")
 
-@api.route("/change_favorite/<int:id>", methods=[ "POST"])
+@api.route("/change_favorite/<int:id_user>/<int:id_room>", methods=[ "POST"])
 #@jwt_required()
-def change_favorite(id):
+def change_favorite(id_user, id_room):
     #identity = get_jwt_identity()
-    user = User.query.get(1)#current_user(get_jwt_identity())
-    room = Room.query.get(id)
+    user = User.query.get(id_user)#current_user(get_jwt_identity())
+    room = Room.query.get(id_room)
     print(user.id, room.id)
     already_favorite  = Favorites.query.filter_by(user_id = user.id, room_id = room.id).first()
     print(already_favorite)
