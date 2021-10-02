@@ -359,14 +359,21 @@ def get_reviews_room(room_id):
         
     return jsonify(tenancies_list), 200 
 
-@api.route('/add-roomie/<int:renter_id>', methods=['POST'])
-def get_addroomie():
+@api.route('/add-roomie/<int:renter_id>/<int:room_id>', methods=['POST'])
+def get_addroomie(renter_id, room_id):
     body_request = request.get_json()
-    user = User.query.get(body_request["user"])
-    if user:
-        user.temporal_current_room=body_request["room_Id"]
+    user = User.query.get(body_request["user_id"])
+    room = Room.query.get(body_request["room_id"])
+    
+    user_serialize = user.serialize()
+    room_serialize = room.serialize()
+   
+    if user and room:
+        user_serialize['current_room'] = body_request["room_id"]
+        room_serialize['courrent_renter'] = body_request["user_id"]
         db.session.commit()
-    return jsonify(body_request), 200
+        
+    return jsonify(user_serialize,room_serialize), 200
     
 
 # -------------------------- SEED -------------------------

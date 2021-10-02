@@ -15,17 +15,15 @@ export const NotificationRoomie = props => {
 		closeBtn.current.click();
 	};
 
-	const aceptRoomie = () => {
-		//actions.addRoomie();
-
-		fetch(API_BASE_URL + "/api/applyroom", {
+	const aceptRoomie = (userId, roomId) => {
+		fetch(`${API_BASE_URL}/api/add-roomie/${userId}/${roomId}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
-				user: user,
-				room_Id: roomId
+				user_id: userId,
+				room_id: roomId
 			})
 		})
 			.then(res => res.json())
@@ -105,7 +103,9 @@ export const NotificationRoomie = props => {
 									</div>
 									<div className="d-flex justify-content-center">
 										<div className="col-12 d-flex flex-column">
-											<button className="btn btnGreen mt-4" onClick={() => aceptRoomie()}>
+											<button
+												className="btn btnGreen mt-4"
+												onClick={() => aceptRoomie(renter.id, roomToRent[0].id)}>
 												Accept
 											</button>
 											<button className="btn btnRed mt-4" onClick={() => RefuseRoomie()}>
