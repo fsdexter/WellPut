@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
-import { Notifications } from "../component/notifications";
+import { NotificationRoomie } from "../component/notificationRoomie";
 
 import "../../styles/viewprofile.scss";
 import avatar from "/workspace/WellPut/src/front/img/avatar.png";
@@ -154,11 +154,11 @@ export const Profile = () => {
 					</button>
 				</div>
 
-				{/*<!-- notification Modal -->*/}
+				{/*<!-- Notification Modal -->*/}
 				<div id="notificationModal" className="modal fade" role="dialog">
 					<div className="modal-dialog modal-lg">
 						<div className="modal-content">
-							<Notifications />
+							<NotificationRoomie rooms={user.rooms} />
 						</div>
 					</div>
 				</div>

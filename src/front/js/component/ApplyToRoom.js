@@ -51,7 +51,7 @@ export const ApplyToRoom = props => {
 		}
 	};
 	return (
-		<div className="row container text-center" id="ContainerAplytoRoom">
+		<div className="row container text-center container-modals">
 			<div className="col-11 mt-3">
 				<div className="carousel-caption-details-room-2   col-12  text-white">
 					<h2 className=" mt-3 mb-2">{title}</h2>

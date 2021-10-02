@@ -1,14 +1,17 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
+import { API_BASE_URL } from "../constants";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import "../../styles/notificationRoomie.scss";
 import roomExample from "../../img/roomDetails.png";
 import tenantExample from "../../img/Becker.jpg";
 
-export const NotificationRoomie = () => {
+export const NotificationRoomie = props => {
 	const { actions } = useContext(Context);
 	const closeBtn = useRef(null);
+	const [userInterested, setUserInterested] = useState();
 
 	const closeModalLogin = () => {
 		closeBtn.current.click();
@@ -28,8 +31,31 @@ export const NotificationRoomie = () => {
 		closeModalLogin();
 	};
 
+	let roomToRent = props.rooms.filter(room => room.temporal_renter !== null);
+	console.log("HABITACIÓN CON USUARIO INTERESADO", roomToRent);
+
+	let userAppliedId;
+	roomToRent.filter(user => (userAppliedId = user.temporal_renter));
+
+	useEffect(() => {
+		getUserApplied();
+	}, []);
+
+	const getUserApplied = async () => {
+		try {
+			const response = await fetch(`${API_BASE_URL}/api/profile/${userAppliedId}`);
+			const renter = await response.json();
+			setUserInterested(renter);
+			localStorage.setItem("renter", JSON.stringify(renter));
+		} catch (error) {
+			return error.message;
+		}
+	};
+
+	console.log("USUARIO INTERESADO : ", userInterested);
+
 	return (
-		<div className="row container text-center d-flex flex-column" id="loginContainer">
+		<div className="row container text-center d-flex flex-column container-modals">
 			<div
 				className="iconClose mt-3  m-0 p-0 d-flex justify-content-end close"
 				data-dismiss="modal"
@@ -104,4 +130,8 @@ export const NotificationRoomie = () => {
 			</div>
 		</div>
 	);
+};
+
+NotificationRoomie.propTypes = {
+	rooms: PropTypes.array
 };
