@@ -11,19 +11,16 @@ export const Profile = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
 	let { user_id } = useParams();
+	let userId = JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id;
+	let user = JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user"));
 
 	useEffect(() => {
-		actions.getUser(
-			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
-		);
+		actions.getUser(userId);
 	}, []); // HAY QUE HACER OTRA COSA PARA QUE EL PERFIL DEL USUARIO SE ACTUALICE TRAS EDITARLO, PUES
 	// SI SE DEJA EL useEffect sin el '[]' está llamámdose todo el tiempo , y no creo que sea lo mejor
 
 	function handleSubmit() {
-		history.push(
-			`/edit_profile/${JSON.parse(localStorage.getItem("user")).user?.id ||
-				JSON.parse(localStorage.getItem("user")).id}`
-		);
+		history.push(`/edit_profile/${userId}`);
 	}
 	function favorites() {
 		history.push("/favorites");
@@ -34,41 +31,23 @@ export const Profile = () => {
 			<div className="container col-10 detallefondblack">
 				{localStorage.getItem("user") ? (
 					<>
-						<div
-							className="row"
-							key={
-								JSON.parse(localStorage.getItem("user")).user?.id ||
-								JSON.parse(localStorage.getItem("user")).id
-							}>
+						<div className="row" key={userId}>
 							<img
 								className="col-4 card-img-top roundShape avatar-profile"
-								src={
-									JSON.parse(localStorage.getItem("user")).user?.avatar_url ||
-									JSON.parse(localStorage.getItem("user")).avatar_url
-										? JSON.parse(localStorage.getItem("user")).user?.avatar_url ||
-										  JSON.parse(localStorage.getItem("user")).avatar_url
-										: avatar
-								}
+								src={user.avatar_url ? user.avatar_url : avatar}
 								alt="Card image cap"
 							/>
 
 							<div className="col-8 text-white">
 								<div className="row">
 									<h1 className="textwhhite ml-5">
-										{JSON.parse(localStorage.getItem("user")).user?.name ||
-											JSON.parse(localStorage.getItem("user")).name}{" "}
-										{JSON.parse(localStorage.getItem("user")).user?.last_name ||
-											JSON.parse(localStorage.getItem("user")).last_name}
+										{user.name} {user.last_name}
 									</h1>
 								</div>
 
 								<div className="col-12 detallefondblack" id="presentationUser">
-									{JSON.parse(localStorage.getItem("user")).user?.city ||
-									JSON.parse(localStorage.getItem("user")).city
-										? (
-												JSON.parse(localStorage.getItem("user")).user?.city ||
-												JSON.parse(localStorage.getItem("user")).city
-										  ).map(city => {
+									{user.city
+										? user.city.map(city => {
 												return (
 													<div className="d-flex mb-5" key={city.id}>
 														<i className="fas fa-map-marker-alt fa-2x mr-4 yellow-icon"></i>
@@ -78,10 +57,7 @@ export const Profile = () => {
 										  })
 										: "My house"}
 
-									<h4>
-										{JSON.parse(localStorage.getItem("user")).user?.description ||
-											JSON.parse(localStorage.getItem("user")).description}
-									</h4>
+									<h4>{user.description}</h4>
 								</div>
 							</div>
 						</div>
@@ -91,20 +67,13 @@ export const Profile = () => {
 									<h3>CONTACT</h3>
 									<div className="d-flex ml-4 align-items-center">
 										<i className="far fa-envelope fa-2x yellow-icon"></i>
-										<h5 className="ml-3 align-self-center">
-											{JSON.parse(localStorage.getItem("user")).user?.email ||
-												JSON.parse(localStorage.getItem("user")).email}
-										</h5>
+										<h5 className="ml-3 align-self-center">{user.email.email}</h5>
 									</div>
 								</div>
 								<div className="mt-4">
 									<h3>SPOKEN LANGUAGES</h3>
-									{JSON.parse(localStorage.getItem("user")).user?.language ||
-									JSON.parse(localStorage.getItem("user")).language
-										? (
-												JSON.parse(localStorage.getItem("user")).user?.language ||
-												JSON.parse(localStorage.getItem("user")).language
-										  ).map(idiom => {
+									{user.language
+										? user.language.map(idiom => {
 												return (
 													<div key={idiom.id} className="d-flex ml-4 mt-2 align-items-center">
 														<i className="far fa-grin-tongue-wink fa-lg yellow-icon"></i>
@@ -117,12 +86,8 @@ export const Profile = () => {
 							</div>
 							<div className="col-4 contentfondblack">
 								<h3 className="mb-3">INTEREST</h3>
-								{JSON.parse(localStorage.getItem("user")).user?.characteristic ||
-								JSON.parse(localStorage.getItem("user")).characteristic
-									? (
-											JSON.parse(localStorage.getItem("user")).user?.characteristic ||
-											JSON.parse(localStorage.getItem("user")).characteristic
-									  ).map(interest => {
+								{user.characteristic
+									? user.characteristic.map(interest => {
 											return (
 												<div key={interest.id} className="d-flex ml-4 mt-2 align-items-center">
 													<i className="far fa-check-circle fa-lg yellow-icon"></i>
@@ -156,11 +121,10 @@ export const Profile = () => {
 						<h5 className="textbuttons">My Favorites</h5>
 					</button>
 				</div>
-				{JSON.parse(localStorage.getItem("user")).user?.current_room ||
-				JSON.parse(localStorage.getItem("user")).current_room ? (
+				{user.current_room ? (
 					<div className="col buttonfondblack  d-flex justify-content-center">
 						<Link
-							to={`/detailedView/${JSON.parse(localStorage.getItem("user")).user?.current_room ||
+							to={`/detailedView/${user.current_room ||
 								JSON.parse(localStorage.getItem("user")).current_room}`}>
 							<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb">
 								<i className="fas fa-euro-sign fa-2x text-white btn-options-profile" />
