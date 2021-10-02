@@ -514,6 +514,8 @@ class SeedData:
         self.second_feature = None
         self.third_feature = None
         self.fourth_feature = None
+        self.fifth_featuresRoom = None
+        self.sixth_featuresRoom = None
         self.first_featuresRoom = None
         self.second_featuresRoom = None
         self.third_featuresRoom = None
@@ -1185,11 +1187,23 @@ class SeedData:
             room_id = self.fourth_room.id,
             feature_id = self.fourth_feature.id
         )
+        
+        self.fifth_featuresRoom = FeaturesRoom(
+            room_id = self.first_room.id,
+            feature_id = self.third_feature.id
+        )
+        
+        self.sixth_featuresRoom = FeaturesRoom(
+            room_id = self.sixth_room.id,
+            feature_id = self.third_feature.id
+        )
 
         db.session.add(self.first_featuresRoom)
         db.session.add(self.second_featuresRoom)
         db.session.add(self.third_featuresRoom)
         db.session.add(self.fourth_featuresRoom)
+        db.session.add(self.fifth_featuresRoom)
+        db.session.add(self.sixth_featuresRoom)
         db.session.commit()          
                                           
        

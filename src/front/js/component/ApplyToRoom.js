@@ -114,7 +114,7 @@ export const ApplyToRoom = props => {
 ApplyToRoom.propTypes = {
 	img: PropTypes.string,
 	title: PropTypes.string,
-	price: PropTypes.string,
+	price: PropTypes.number,
 	address: PropTypes.string,
 	city: PropTypes.string,
 	roomId: PropTypes.number,

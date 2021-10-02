@@ -188,7 +188,7 @@ export const Profile = () => {
 						className="navbar-brand mb-0 mr-2 btn btn-navb"
 						data-toggle="modal"
 						data-target="#notificationModal">
-						<i className="fa fa-user-plus fa-2x text-white btn-options-profile" aria-hidden="true" />
+						<i className="fas fa-bell fa-2x text-white btn-options-profile" aria-hidden="true" />
 						<h5 className="textbuttons">Notifications</h5>
 					</button>
 				</div>
