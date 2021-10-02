@@ -7,6 +7,7 @@ import { Home } from "./pages/home";
 import { EditProfile } from "./pages/editProfile";
 import { Profile } from "./pages/profile";
 import { OwnerProfile } from "./pages/ownerProfile";
+import { UserProfile } from "./pages/userProfile";
 import { Announcements } from "./pages/announcements";
 import { Favorites } from "./pages/favorites";
 import { NewAnnouncement } from "./pages/newAnnouncement";
@@ -40,6 +41,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/owner-profile/:owner_id">
 							<OwnerProfile />
+						</Route>
+						<Route exact path="/user-profile/:renter_id">
+							<UserProfile />
 						</Route>
 						<Route exact path="/announcements">
 							<Announcements />

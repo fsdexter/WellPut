@@ -43,7 +43,7 @@ export const NotificationRoomie = props => {
 
 	const getUserApplied = async () => {
 		try {
-			const response = await fetch(`${API_BASE_URL}/api/profile/${userAppliedId}`);
+			const response = await fetch(`${API_BASE_URL}/api/user-profile/${userAppliedId}`);
 			const renter = await response.json();
 			setRenter(renter);
 			localStorage.setItem("renter", JSON.stringify(renter));
@@ -64,51 +64,58 @@ export const NotificationRoomie = props => {
 			</div>
 			<div className="row d-flex justify-content-around">
 				<div className="col-6" id="containerAddRoomie">
-					<div
-						className="d-flex flex-column text-center"
-						style={{
-							backgroundImage: "url(" + tenantExample + ")",
-							backgroundSize: "cover",
-							width: "100%",
-							height: "100%"
-						}}>
-						<div className="onIMNewRoomie pl-3 pt-5">
-							<div className="col-12 text-white mb-3">
-								<h3>
-									<strong>Jason Becker</strong> wants to be your roomie
-								</h3>
-							</div>
-							<div className="d-flex justify-content-center">
-								<Link to="/profile">
-									<button
-										className="btn btnYellow mt-4 mb-5 btnYeOwnR"
-										onClick={() => closeModalLogin()}>
-										Show her/his profile
-									</button>
-								</Link>
-							</div>
-							<div className="col-12 text-white mt-5 mb-5">
-								<h5>
-									Select the room where <strong>Jason Becker</strong> will live *
-								</h5>
-							</div>
-							<div className="col-12" id="addOrNot">
-								<div className="text-white">
-									<h5>Add him/her as a roomie? *</h5>
+					{renter ? (
+						<div
+							className="d-flex flex-column text-center"
+							style={{
+								backgroundImage: "url(" + renter.avatar_url + ")",
+								backgroundSize: "cover",
+								width: "100%",
+								height: "100%"
+							}}>
+							<div className="onIMNewRoomie pl-3 pt-5">
+								<div className="col-12 text-white mb-3">
+									<h3>
+										<strong>
+											{renter.name} {renter.last_name}
+										</strong>
+										wants to be your roomie
+									</h3>
 								</div>
 								<div className="d-flex justify-content-center">
-									<div className="col-12 d-flex flex-column">
-										<button className="btn btnGreen mt-4" onClick={() => aceptRoomie()}>
-											Accept
+									<Link to={`/user-profile/${renter.id}`}>
+										<button
+											className="btn btnYellow mt-4 mb-5 btnYeOwnR"
+											onClick={() => closeModalLogin()}>
+											Show her/his profile
 										</button>
-										<button className="btn btnRed mt-4" onClick={() => RefuseRoomie()}>
-											Refuse
-										</button>
+									</Link>
+								</div>
+								<div className="col-12 text-white mt-5 mb-5">
+									<h5>
+										Select the room where <strong>Jason Becker</strong> will live *
+									</h5>
+								</div>
+								<div className="col-12" id="addOrNot">
+									<div className="text-white">
+										<h5>Add him/her as a roomie? *</h5>
+									</div>
+									<div className="d-flex justify-content-center">
+										<div className="col-12 d-flex flex-column">
+											<button className="btn btnGreen mt-4" onClick={() => aceptRoomie()}>
+												Accept
+											</button>
+											<button className="btn btnRed mt-4" onClick={() => RefuseRoomie()}>
+												Refuse
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					) : (
+						"You do not have any notification"
+					)}
 				</div>
 				<div className="col-5 mt-4">
 					<div
