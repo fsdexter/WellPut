@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { RatingStatic } from "../component/ratingStatic";
 import "../../styles/applyToRoom.scss";
-import roomExample from "../../img/roomDetails.png";
-import tenantExample from "../../img/Becker.jpg";
 
 export const ApplyToRoom = props => {
 	const { img, title, price, address, city, roomId } = props;
