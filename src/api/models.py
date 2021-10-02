@@ -777,26 +777,26 @@ class SeedData:
 #------------------------
 #  Favorites
 #------------------------
-    def create_seed_favorites(self):
-        self.first_favorites = Favorites(
-            room_id = self.first_room.id,
-            user_id = self.second_user.id
-        )
+    # def create_seed_favorites(self):
+    #     self.first_favorites = Favorites(
+    #         room_id = self.first_room.id,
+    #         user_id = self.second_user.id
+    #     )
         
-        self.second_favorites = Favorites(
-            room_id = self.second_room.id,
-            user_id = self.second_user.id
-        )
+    #     self.second_favorites = Favorites(
+    #         room_id = self.second_room.id,
+    #         user_id = self.second_user.id
+    #     )
         
-        self.third_favorites = Favorites(
-            room_id = self.third_room.id,
-            user_id = self.second_user.id
-        )
+    #     self.third_favorites = Favorites(
+    #         room_id = self.third_room.id,
+    #         user_id = self.second_user.id
+    #     )
         
-        db.session.add(self.first_favorites)
-        db.session.add(self.second_favorites)
-        db.session.add(self.third_favorites)
-        db.session.commit() 
+    #     db.session.add(self.first_favorites)
+    #     db.session.add(self.second_favorites)
+    #     db.session.add(self.third_favorites)
+    #     db.session.commit() 
 
 #------------------------
 #  Tenancy (La relación entre inquilino y habitación)
@@ -1198,7 +1198,7 @@ class SeedData:
         self.create_seed_city()
         self.create_seed_user()
         self.create_seed_room()
-        self.create_seed_favorites() # ---->>> 1 habitación muchos favoritos
+        # self.create_seed_favorites() # ---->>> 1 habitación muchos favoritos
         self.create_seed_tenancy()
         self.create_seed_review()
         self.create_seed_characteristic()
