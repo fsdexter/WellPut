@@ -21,21 +21,16 @@ api = Blueprint('api', __name__)
 
 @api.route('/applyroom', methods=['POST'])
 def get_addapplyromie():
-    # room=Room.query.get_or_404(room_id)
     body_request= request.get_json()
     user=User.query.get(body_request["user"])
     if user:
         user.temporal_current_room=body_request["room_Id"]
         db.session.commit()
-    print(body_request)
-    return "OK", 200
+    return jsonify(body_request), 200
 
 # ----------- Upload Photo User ---------------------------------
 @api.route('/user/<int:user_id>/image', methods=['POST'])
 def handle_upload(user_id):
-    
-    print("SE LLAMÓ A LA FUNCIÓN DE SUBIR FOTO???")
-    
     if 'avatar_url' in request.files:
         result = cloudinary.uploader.upload(request.files['avatar_url'])
         user1 = User.query.get(user_id) 
