@@ -52,10 +52,27 @@ export const Navbar = () => {
 							}
 							onClick={() => {
 								changeElementNavbarActive("profile");
-								history.push(`/profile/${JSON.parse(localStorage.getItem("user")).id}`);
+								history.push(
+									`/profile/${JSON.parse(localStorage.getItem("user")).user?.id ||
+										JSON.parse(localStorage.getItem("user")).id}`
+								);
 							}}>
-							Profile
+							Profile &nbsp;
+							{store.myLocalStore.user.rooms.length
+								? store.myLocalStore.user.rooms.map(room => {
+										if (room.temporal_renter !== null) {
+											return (
+												<i
+													key={room.id}
+													className="fas fa-bell fa-lg text-white notifications-bell"
+													aria-hidden="true"
+												/>
+											);
+										}
+								  })
+								: null}
 						</span>
+
 						<Link to="/announcements">
 							<span
 								className={
@@ -76,7 +93,6 @@ export const Navbar = () => {
 								}
 								onClick={() => {
 									changeElementNavbarActive("favorites");
-									//history.push(`/favorites/${JSON.parse(localStorage.getItem("user")).id}`);
 								}}>
 								Favorites
 							</span>
