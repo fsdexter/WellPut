@@ -11,7 +11,7 @@ import tenantExample from "../../img/Becker.jpg";
 export const NotificationRoomie = props => {
 	const { actions } = useContext(Context);
 	const closeBtn = useRef(null);
-	const [userInterested, setUserInterested] = useState();
+	const [renter, setRenter] = useState();
 
 	const closeModalLogin = () => {
 		closeBtn.current.click();
@@ -45,14 +45,14 @@ export const NotificationRoomie = props => {
 		try {
 			const response = await fetch(`${API_BASE_URL}/api/profile/${userAppliedId}`);
 			const renter = await response.json();
-			setUserInterested(renter);
+			setRenter(renter);
 			localStorage.setItem("renter", JSON.stringify(renter));
 		} catch (error) {
 			return error.message;
 		}
 	};
 
-	console.log("USUARIO INTERESADO : ", userInterested);
+	console.log("renter : ", renter);
 
 	return (
 		<div className="row container text-center d-flex flex-column container-modals">
