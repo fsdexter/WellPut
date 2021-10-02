@@ -23,10 +23,13 @@ api = Blueprint('api', __name__)
 def get_addapplyromie():
     body_request= request.get_json()
     user=User.query.get(body_request["user"])
-    if user:
+    room = Room.query.get(body_request["room_Id"])
+    
+    if user and room:
         user.temporal_current_room=body_request["room_Id"]
+        room.temporal_renter = body_request["user"]
         db.session.commit()
-    return jsonify(body_request), 200
+    return "OK", 200
 
 # ----------- Upload Photo User ---------------------------------
 @api.route('/user/<int:user_id>/image', methods=['POST'])

@@ -117,8 +117,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return error.message;
 				}
 			},
-
-			////////////////////////getuser
 			getUser: async user_id => {
 				const store = getStore();
 
@@ -143,8 +141,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return error.message;
 				}
 			},
-
-			/////////////////////////////////////////edit user
 			editProfile: async (userValues, user_id) => {
 				try {
 					const store = getStore();
@@ -175,7 +171,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			recoverPassword: userValues => {
 				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
 			},
-			//////////////////////////////////////// Apply Room
 			addRoomie: (user, roomId) => {
 				fetch(API_BASE_URL + "/api/applyroom", {
 					method: "POST",
@@ -190,7 +185,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(res => res.json())
 					.then(data => console.log(data, "Apply Romie"));
 			},
-			///////////////////////////////
 			onClickHandeler: e => {
 				const store = getStore();
 				const checker = value => ![e.target.name].some(element => value.includes(element));
