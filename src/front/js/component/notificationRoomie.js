@@ -79,17 +79,17 @@ export const NotificationRoomie = props => {
 										wants to be your roomie
 									</h3>
 								</div>
-								<div className="d-flex justify-content-center">
-									<Link to={`/user-profile/${renter.id}`}>
-										<button
-											className="btn btnYellow mt-4 mb-5 btnYeOwnR"
-											onClick={() => closeModalLogin()}>
-											{renter.gender === "male" ? "Show his profile" : "Show her profile"}
-										</button>
-									</Link>
-								</div>
 								<div className="col-12" id="addOrNot">
-									<div className="text-white">
+									<div className="d-flex justify-content-center">
+										<Link to={`/user-profile/${renter.id}`}>
+											<button
+												className="btn btnYellow mt-4 mb-2 btnYeOwnR"
+												onClick={() => closeModalLogin()}>
+												{renter.gender === "male" ? "Show his profile" : "Show her profile"}
+											</button>
+										</Link>
+									</div>
+									<div className="text-white mt-2">
 										<h5>
 											{renter.gender === "male"
 												? "Add him as a roomie? *"
@@ -113,22 +113,25 @@ export const NotificationRoomie = props => {
 						"You do not have any notification"
 					)}
 				</div>
-				<div className="col-5 mt-4">
-					<div
-						className="d-flex flex-column"
-						style={{
-							backgroundImage: "url(" + roomExample + ")",
-							backgroundSize: "cover",
-							width: "25rem",
-							height: "13rem"
-						}}>
-						<i className="far fa-square fa-2x iconToSelectRoom" onClick={() => selectRoomToRoomie()} />
-						<Link to="/detailedView">
-							<button className="btn btnYellow mb-5 btnYelloRoom" onClick={() => closeModalLogin()}>
-								Show room
-							</button>
-						</Link>
-					</div>
+				<div className="col-5 mt-1">
+					{roomToRent[0] ? (
+						<div
+							className="d-flex flex-column"
+							style={{
+								backgroundImage: "url(" + roomToRent[0].room_url + ")",
+								backgroundSize: "cover",
+								width: "95%",
+								height: "100%"
+							}}>
+							<Link to={`/detailedView/${roomToRent[0].id}`}>
+								<button className="btn btnYellow mb-5 btnYelloRoom" onClick={() => closeModalLogin()}>
+									Show room
+								</button>
+							</Link>
+						</div>
+					) : (
+						"You do not have any notification"
+					)}
 				</div>
 			</div>
 		</div>

@@ -9,7 +9,7 @@ import avatar from "/workspace/WellPut/src/front/img/avatar.png";
 
 export const Profile = () => {
 	const history = useHistory();
-	const { store, actions } = useContext(Context);
+	const { actions } = useContext(Context);
 	let { user_id } = useParams();
 	let userId = JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id;
 	let user = JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user"));
@@ -143,16 +143,28 @@ export const Profile = () => {
 					</Link>
 				</div>
 
-				<div className="col buttonfondblack d-flex justify-content-center">
-					<button
-						type="button"
-						className="navbar-brand mb-0 mr-2 btn btn-navb"
-						data-toggle="modal"
-						data-target="#notificationModal">
-						<i className="fas fa-bell fa-2x text-white btn-options-profile" aria-hidden="true" />
-						<h5 className="textbuttons">Notifications</h5>
-					</button>
-				</div>
+				{user.rooms.length
+					? user.rooms.map(room => {
+							if (room.temporal_renter !== null) {
+								return (
+									<div className="col buttonfondblack d-flex justify-content-center">
+										<button
+											type="button"
+											className="navbar-brand mb-0 mr-2 btn btn-navb"
+											data-toggle="modal"
+											data-target="#notificationModal">
+											<i
+												key={room.id}
+												className="fas fa-bell fa-2x text-white notifications-bell fa-spin"
+												aria-hidden="true"
+											/>
+											<h5 className="textbuttons">Notifications</h5>
+										</button>
+									</div>
+								);
+							}
+					  })
+					: null}
 
 				{/*<!-- Notification Modal -->*/}
 				<div id="notificationModal" className="modal fade" role="dialog">
