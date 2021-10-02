@@ -73,14 +73,14 @@ export const ApplyToRoom = props => {
 						<h2>{price} €</h2>
 						<div className="d-flex justify-content-center">
 							<i
-								className="fas fa-map-marker-alt fa-2x mr-2"
+								className="fas fa-map-marker-alt fa-lg mr-2 mt-1"
 								type="button"
 								data-toggle="tooltip"
 								data-placement="top"
 								title="Address"
 							/>
-							<h2>{address},</h2>
-							<h2>{city}</h2>
+							<h4>{address}, </h4>
+							<h4>{city}</h4>
 						</div>
 					</div>
 				</div>
@@ -117,6 +117,6 @@ ApplyToRoom.propTypes = {
 	price: PropTypes.string,
 	address: PropTypes.string,
 	city: PropTypes.string,
-	roomId: PropTypes.int,
-	userlog: PropTypes.int
+	roomId: PropTypes.number,
+	userlog: PropTypes.number
 };

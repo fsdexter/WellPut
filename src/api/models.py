@@ -739,13 +739,13 @@ class SeedData:
             country = "Spain",
             price = 500,
             deposit = 500,
-            title = "Moder Room",
+            title = "Charming room",
             type_bed = "doubleBed",
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.second_city.id,
             user_id = self.fourth_user.id,
-            room_url = "https://cafeversatil.com/nuestroshijos/wp-content/uploads/2019/11/01-2-768x576.jpg",
+            room_url = "https://www.elmueble.com/medio/2019/12/18/00501615_ec7cc8db_1000x750.jpg",
             active_room = True   
         )
         
