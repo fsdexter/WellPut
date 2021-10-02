@@ -14,15 +14,25 @@ export const Profile = () => {
 	let userId = JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id;
 	let user = JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user"));
 
+	let appliedUser;
+	user.rooms.map(room => (room.temporal_renter = appliedUser));
+
+	const [notificateRenter, setNotificateRenter] = useState(appliedUser);
+	console.log(notificateRenter);
+
 	// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
 	// let haveTemporalRenter = user.rooms.some(room => room.temporal_renter !== null); // es un boolean
 	//const [isNotificate, setIsNotificate] = useState();
 
 	useEffect(() => {
 		actions.getUser(userId);
-		// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
-		// store.user && setIsNotificate(store.user.rooms.some(room => room.temporal_renter !== null));
-	}, []);
+	}); // =============================>>>>>>>>>>>>> HAY QUE ARREGLAR ESTO
+
+	// useEffect(() => {
+	// 	actions.getUser(userId);
+	// 	// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
+	// 	// store.user && setIsNotificate(store.user.rooms.some(room => room.temporal_renter !== null));
+	// }, []);
 
 	// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
 	// useEffect(() => {
