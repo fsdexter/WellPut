@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 
 import "../../styles/notificationRoomie.scss";
 import roomExample from "../../img/roomDetails.png";
-import tenantExample from "../../img/Becker.jpg";
 
 export const NotificationRoomie = props => {
 	const { actions } = useContext(Context);
@@ -32,7 +31,7 @@ export const NotificationRoomie = props => {
 	};
 
 	let roomToRent = props.rooms.filter(room => room.temporal_renter !== null);
-	console.log("HABITACIÓN CON USUARIO INTERESADO", roomToRent);
+	console.log("HABITACIÓN CON USUARIO INTERESADO", roomToRent[0]);
 
 	let userAppliedId;
 	roomToRent.filter(user => (userAppliedId = user.temporal_renter));
@@ -51,8 +50,6 @@ export const NotificationRoomie = props => {
 			return error.message;
 		}
 	};
-
-	console.log("renter : ", renter);
 
 	return (
 		<div className="row container text-center d-flex flex-column container-modals">
@@ -77,7 +74,7 @@ export const NotificationRoomie = props => {
 								<div className="col-12 text-white mb-3">
 									<h3>
 										<strong>
-											{renter.name} {renter.last_name}
+											{renter.name} {renter.last_name} &nbsp;
 										</strong>
 										wants to be your roomie
 									</h3>
@@ -87,18 +84,17 @@ export const NotificationRoomie = props => {
 										<button
 											className="btn btnYellow mt-4 mb-5 btnYeOwnR"
 											onClick={() => closeModalLogin()}>
-											Show her/his profile
+											{renter.gender === "male" ? "Show his profile" : "Show her profile"}
 										</button>
 									</Link>
 								</div>
-								<div className="col-12 text-white mt-5 mb-5">
-									<h5>
-										Select the room where <strong>Jason Becker</strong> will live *
-									</h5>
-								</div>
 								<div className="col-12" id="addOrNot">
 									<div className="text-white">
-										<h5>Add him/her as a roomie? *</h5>
+										<h5>
+											{renter.gender === "male"
+												? "Add him as a roomie? *"
+												: "Add her as a roomie? *"}
+										</h5>
 									</div>
 									<div className="d-flex justify-content-center">
 										<div className="col-12 d-flex flex-column">
