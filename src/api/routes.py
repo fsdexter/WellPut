@@ -410,7 +410,7 @@ def get_addroomie(renter_id, room_id):
         lat = room_to_rent["lat"], 
         lng = room_to_rent["lng"],
         room_url = room_to_rent["room_url"],
-        active_room = room_to_rent["active_room"], 
+        active_room = False if (body_request["isAcept"] == True) else room_to_rent["active_room"], 
         city_id = room_to_rent["city_id"], 
         delete_room = room_to_rent["delete_room"],
         temporal_renter = None, 
