@@ -177,8 +177,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			//////////////////////////////////////// Apply Room
 			addRoomie: (user, roomId) => {
-				console.log("este es el user", user);
-				console.log("este es el room id", roomId);
 				fetch(API_BASE_URL + "/api/applyroom", {
 					method: "POST",
 					headers: {
@@ -191,8 +189,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(res => res.json())
 					.then(data => console.log(data, "Apply Romie"));
-				// console.log("Solicitud de  habitacion generada ", user);
-				// console.log(user);
 			},
 			///////////////////////////////
 			onClickHandeler: e => {

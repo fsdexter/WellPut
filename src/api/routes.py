@@ -313,12 +313,10 @@ def create_announcement():
 @api.route('/tenancy_room_reviews', methods=['POST'])
 def reviewendp():
     body_request = request.get_json()
-    print(body_request)
-    user=User.query.get(body_request["user"])
-    print(user.current_room, body_request["room_id"])
-    already_reviewed=Review.query.filter_by(room_id=body_request["room_id"],tenancy_id=user.id).first()
-    if user.current_room==body_request["room_id"] and not already_reviewed:
-        review=Review(
+    user = User.query.get(body_request["user"])
+    already_reviewed = Review.query.filter_by(room_id=body_request["room_id"],tenancy_id=user.id).first()
+    if user.current_room == body_request["room_id"] and not already_reviewed:
+        review = Review(
             comment=body_request["comment"], 
             rating=body_request["rating"], 
             date=date.today(), 
@@ -359,7 +357,16 @@ def get_reviews_room(room_id):
         tenancy['room'] = room_tenancy        
         tenancies_list.append(tenancy)
         
-    return jsonify(tenancies_list), 200  
+    return jsonify(tenancies_list), 200 
+
+@api.route('/add-roomie/<int:renter_id>', methods=['POST'])
+def get_addroomie():
+    body_request = request.get_json()
+    user = User.query.get(body_request["user"])
+    if user:
+        user.temporal_current_room=body_request["room_Id"]
+        db.session.commit()
+    return jsonify(body_request), 200
     
 
 # -------------------------- SEED -------------------------

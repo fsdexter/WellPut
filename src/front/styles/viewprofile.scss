@@ -78,4 +78,24 @@
 
 .notifications-bell{
     color: #FFDE59!important;
+    // Efecto de la campana 
+    animation-name: mymove;
+    animation-duration: 1500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
+// Efecto de la campana 
+@keyframes mymove {
+    0% { 
+        transform: rotate(0deg); 
+    }
+     33% { 
+        transform: rotate(-75deg); 
+    }
+    66% { 
+        transform: rotate(75deg); 
+    }
+    100% { 
+        transform: rotate(0deg); 
+    }
+  }

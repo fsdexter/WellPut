@@ -16,7 +16,21 @@ export const NotificationRoomie = props => {
 	};
 
 	const aceptRoomie = () => {
-		actions.addRoomie();
+		//actions.addRoomie();
+
+		fetch(API_BASE_URL + "/api/applyroom", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				user: user,
+				room_Id: roomId
+			})
+		})
+			.then(res => res.json())
+			.then(data => console.log(data, "Apply Romie"));
+
 		closeModalLogin();
 	};
 

@@ -154,7 +154,7 @@ export const Profile = () => {
 											data-toggle="modal"
 											data-target="#notificationModal">
 											<i
-												className="fas fa-bell fa-2x text-white notifications-bell fa-spin"
+												className="fas fa-bell fa-2x text-white notifications-bell"
 												aria-hidden="true"
 											/>
 											<h5 className="textbuttons">Notifications</h5>
