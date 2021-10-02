@@ -13,14 +13,11 @@ export const Profile = () => {
 	let { user_id } = useParams();
 
 	useEffect(() => {
-		if (JSON.parse(localStorage.getItem("user"))) {
-			actions.getUser(
-				JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
-			);
-		} else if (JSON.parse(localStorage.getItem("owner"))) {
-			actions.getOwner(JSON.parse(localStorage.getItem("owner")).id);
-		}
-	});
+		actions.getUser(
+			JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		);
+	}, []); // HAY QUE HACER OTRA COSA PARA QUE EL PERFIL DEL USUARIO SE ACTUALICE TRAS EDITARLO, PUES
+	// SI SE DEJA EL useEffect sin el '[]' está llamámdose todo el tiempo , y no creo que sea lo mejor
 
 	function handleSubmit() {
 		history.push(
