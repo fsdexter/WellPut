@@ -264,7 +264,7 @@ class Room (db.Model):
     tenancies = db.relationship("Tenancy", back_populates="room")
     delete_room = db.Column(db.Boolean, default=False)
     temporal_renter = db.Column(db.Integer)
-    courrent_renter = db.Column(db.Integer)  
+    current_renter = db.Column(db.Integer)  
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="rooms")
@@ -304,7 +304,7 @@ class Room (db.Model):
             "active_room":self.active_room,
             "delete_room":self.delete_room,
             "temporal_renter": self.temporal_renter,
-            "courrent_renter": self.courrent_renter
+            "current_renter": self.current_renter
         }
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -691,7 +691,7 @@ class SeedData:
             room_url = "https://media.revistaad.es/photos/60c2294bb4a53607d5b4669f/4:3/w_1568,h_1176,c_limit/231620.jpg",
             active_room = True,
             temporal_renter = self.sixth_user.id,
-            courrent_renter = None
+            current_renter = None
         )
 
         self.second_room = Room( 
@@ -709,7 +709,7 @@ class SeedData:
             room_url = "https://i.pinimg.com/originals/a2/04/d3/a204d395e71329a6769d097575490b7a.jpg",
             active_room = True,
             temporal_renter = None,
-            courrent_renter = None
+            current_renter = None
         )
 
         self.third_room = Room( 
@@ -727,7 +727,7 @@ class SeedData:
             room_url = "https://casaydiseno.com/wp-content/uploads/2016/08/dormitorios-con-encanto-decoracion-pequeno-comodo.jpg",
             active_room = True,
             temporal_renter = None,
-            courrent_renter = None
+            current_renter = None
         )
 
         self.fourth_room = Room( 
@@ -745,7 +745,7 @@ class SeedData:
             room_url = "https://i.pinimg.com/originals/5e/52/d4/5e52d4a5b28b76cbc6a73b5b0f43f42d.jpg",
             active_room = True,
             temporal_renter = None,
-            courrent_renter = None
+            current_renter = None
         )
         
         self.fifth_room = Room( 
@@ -763,7 +763,7 @@ class SeedData:
             room_url = "https://www.hola.com/imagenes/decoracion/20200220161121/iluminacion-habitaciones-juveniles/0-786-452/luz-teens-6a-a.jpg",
             active_room = True,
             temporal_renter = None,
-            courrent_renter = None
+            current_renter = None
         )
         
         self.sixth_room = Room( 
@@ -781,7 +781,7 @@ class SeedData:
             room_url = "https://www.elmueble.com/medio/2019/12/18/00501615_ec7cc8db_1000x750.jpg",
             active_room = True,
             temporal_renter = None,
-            courrent_renter = None 
+            current_renter = None 
         )
         
         self.seventh_room = Room( 
@@ -799,7 +799,7 @@ class SeedData:
             room_url = "https://i.pinimg.com/736x/72/1a/8c/721a8c00c5e682403d13aa15d2168c79.jpg",
             active_room = True,
             temporal_renter = None,
-            courrent_renter = None
+            current_renter = None
         )
 
         db.session.add(self.first_room)

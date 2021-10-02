@@ -17,23 +17,41 @@ export const NotificationRoomie = props => {
 
 	const aceptRoomie = (userId, roomId) => {
 		fetch(`${API_BASE_URL}/api/add-roomie/${userId}/${roomId}`, {
-			method: "POST",
+			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
 				user_id: userId,
-				room_id: roomId
+				room_id: roomId,
+				isAcept: true
 			})
 		})
 			.then(res => res.json())
-			.then(data => console.log(data, "Apply Romie"));
+			.then(data => console.log(data));
+		// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
+		//props.setIsNotificate(false);
 
 		closeModalLogin();
 	};
 
-	const RefuseRoomie = () => {
-		console.log("RECHAZAR AL NUEVO ROOMIE");
+	const RefuseRoomie = (userId, roomId) => {
+		fetch(`${API_BASE_URL}/api/add-roomie/${userId}/${roomId}`, {
+			method: "PATCH",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				user_id: userId,
+				room_id: roomId,
+				isAcept: false
+			})
+		})
+			.then(res => res.json())
+			.then(data => console.log(data));
+
+		// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
+		//props.setIsNotificate(false);
 		closeModalLogin();
 	};
 
@@ -108,7 +126,9 @@ export const NotificationRoomie = props => {
 												onClick={() => aceptRoomie(renter.id, roomToRent[0].id)}>
 												Accept
 											</button>
-											<button className="btn btnRed mt-4" onClick={() => RefuseRoomie()}>
+											<button
+												className="btn btnRed mt-4"
+												onClick={() => RefuseRoomie(renter.id, roomToRent[0].id)}>
 												Refuse
 											</button>
 										</div>
@@ -146,5 +166,6 @@ export const NotificationRoomie = props => {
 };
 
 NotificationRoomie.propTypes = {
-	rooms: PropTypes.array
+	rooms: PropTypes.array,
+	setIsNotificate: PropTypes.func
 };
