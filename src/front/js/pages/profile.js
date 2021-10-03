@@ -37,6 +37,10 @@ export const Profile = () => {
 		getNotification();
 	}, [notificateRenter]);
 
+	// useEffect(() => {
+	// 	actions.getUser(userId);
+	// }, [store.user]);
+
 	function handleSubmit() {
 		history.push(`/edit_profile/${userId}`);
 	}

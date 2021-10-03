@@ -168,36 +168,79 @@ def get_single_room(room_id):
     
     return jsonify(room_seralize), 200
     
+# @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
+# def edit_profile(user_id):
+#     body_request = request.get_json()
+#     user_selected = User.query.get_or_404(user_id)
+#     user_to_edit = user_selected.serialize()
+#     db.session.delete(user_selected)
+#     db.session.commit()
+    
+#     for param in body_request:
+#         user_to_edit[param] = body_request[param]
+   
+#     new_user = User(
+#         avatar_url = user_to_edit["avatar_url"],
+#         birthday = user_to_edit["birthday"],
+#         city_id = user_to_edit["city_id"],
+#         description = user_to_edit["description"],
+#         email = user_to_edit["email"],
+#         gender = user_to_edit["gender"],
+#         occupation = user_to_edit["occupation"],
+#         id = user_to_edit["id"],
+#         last_name = user_to_edit["last_name"],
+#         name = user_to_edit["name"],
+#         password = generate_password_hash(user_to_edit["password"], "sha256"),
+#         phone = user_to_edit["phone"]
+#     )
+    
+#     db.session.add(new_user)
+#     db.session.commit()
+    
+#     for interest in user_to_edit["interests"]:
+#         interest_front = Characteristic.query.filter(Characteristic.name == interest).first()
+#         user_interest = interest_front.serialize()
+        
+#         new_characteritic_user = CharacteristicUser(
+#             user_id = user_to_edit["id"],
+#             characteristic_id = user_interest["id"]
+#         )
+        
+#         db.session.add(new_characteritic_user)
+#         db.session.commit()
+        
+#     for language in user_to_edit["languages"]:
+#         language_front = Language.query.filter(Language.name == language).first()
+#         user_language = language_front.serialize()
+        
+#         new_language_user = SpokenLanguages(
+#             user_id = user_to_edit["id"],
+#             language_id = user_language["id"]
+#         )
+        
+#         db.session.add(new_language_user)
+#         db.session.commit()
+        
+#     return jsonify(user_to_edit), 200
+
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
 def edit_profile(user_id):
     body_request = request.get_json()
-    user_selected = User.query.get_or_404(user_id)
-    user_to_edit = user_selected.serialize()
-    db.session.delete(user_selected)
-    db.session.commit()
-    
-    for param in body_request:
-        user_to_edit[param] = body_request[param]
+    user = User.query.get_or_404(user_id)
+    user_to_edit = user.serialize()
+       
+    if user:        
+        user.birthday = body_request["birthday"]
+        #user.city_id = body_request["city_id"]
+        user.description = body_request["description"]
+        user.email = body_request["email"]
+        user.gender = body_request["gender"]
+        user.occupation = body_request["occupation"]
+        user.last_name = body_request["last_name"]
+        user.name = body_request["name"]
+        user.phone = body_request["phone"]
    
-    new_user = User(
-        avatar_url = user_to_edit["avatar_url"],
-        birthday = user_to_edit["birthday"],
-        city_id = user_to_edit["city_id"],
-        description = user_to_edit["description"],
-        email = user_to_edit["email"],
-        gender = user_to_edit["gender"],
-        occupation = user_to_edit["occupation"],
-        id = user_to_edit["id"],
-        last_name = user_to_edit["last_name"],
-        name = user_to_edit["name"],
-        password = generate_password_hash(user_to_edit["password"], "sha256"),
-        phone = user_to_edit["phone"]
-    )
-    
-    db.session.add(new_user)
-    db.session.commit()
-    
-    for interest in user_to_edit["interests"]:
+    for interest in body_request["interests"]:
         interest_front = Characteristic.query.filter(Characteristic.name == interest).first()
         user_interest = interest_front.serialize()
         
@@ -209,7 +252,7 @@ def edit_profile(user_id):
         db.session.add(new_characteritic_user)
         db.session.commit()
         
-    for language in user_to_edit["languages"]:
+    for language in body_request["languages"]:
         language_front = Language.query.filter(Language.name == language).first()
         user_language = language_front.serialize()
         
@@ -220,8 +263,8 @@ def edit_profile(user_id):
         
         db.session.add(new_language_user)
         db.session.commit()
-        
-    return jsonify(user_to_edit), 200
+                
+    return jsonify(user.serialize()), 200
 
     # -------------------------- TEST -------------------------
 @api.route('/upload', methods=['POST'])
@@ -361,67 +404,6 @@ def get_reviews_room(room_id):
         tenancies_list.append(tenancy)
         
     return jsonify(tenancies_list), 200 
-
-# @api.route('/add-roomie/<int:renter_id>/<int:room_id>', methods=['PATCH'])
-# def get_addroomie(renter_id, room_id):
-#     body_request = request.get_json()
-#     user = User.query.get(body_request["user_id"])
-#     renter = user.serialize()
-    
-#     room = Room.query.get(body_request["room_id"])
-#     room_to_rent = room.serialize()
-        
-#     for param in body_request:
-#         renter[param] = body_request[param]
-    
-#     new_renter = User(
-#         avatar_url = renter["avatar_url"],
-#         birthday = renter["birthday"],
-#         city_id = renter["city_id"],
-#         description = renter["description"],
-#         email = renter["email"],
-#         gender = renter["gender"],
-#         occupation = renter["occupation"],
-#         id = renter["id"],
-#         last_name = renter["last_name"],
-#         name = renter["name"],
-#         password = generate_password_hash(renter["password"], "sha256"),
-#         phone = renter["phone"],
-#         temporal_current_room = None,
-#         current_room = body_request["room_id"] if (body_request["isAcept"] == True) else None
-#     )
-    
-#     db.session.delete(user)
-#     db.session.add(new_renter)
-#     db.session.commit()
-    
-#     for param in body_request:
-#         room_to_rent[param] = body_request[param]
-    
-#     new_rented_room = Room(
-#         id = room_to_rent["id"],
-#         description = room_to_rent["description"],
-#         address = room_to_rent["address"],
-#         country = room_to_rent["country"],
-#         price = room_to_rent["price"],
-#         deposit = room_to_rent["deposit"], 
-#         title =room_to_rent["title"],
-#         type_bed = room_to_rent["type_bed"], 
-#         lat = room_to_rent["lat"], 
-#         lng = room_to_rent["lng"],
-#         room_url = room_to_rent["room_url"],
-#         active_room = False if (body_request["isAcept"] == True) else room_to_rent["active_room"], 
-#         city_id = room_to_rent["city_id"], 
-#         delete_room = room_to_rent["delete_room"],
-#         temporal_renter = None, 
-#         current_renter = body_request["user_id"] if (body_request["isAcept"] == True) else None
-#     )
-    
-#     db.session.delete(room)
-#     db.session.add(new_rented_room)
-#     db.session.commit()
-    
-#     return jsonify({"msg": "Renter accepted" }), 200
     
 @api.route('/add-roomie/<int:renter_id>/<int:room_id>', methods=['POST'])
 def get_addroomie(renter_id, room_id):
