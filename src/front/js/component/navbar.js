@@ -13,12 +13,29 @@ import "../../styles/navbar.scss";
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	const [isActive, setIsActive] = useState(null);
+	const [notification, setNotification] = useState();
 	const history = useHistory();
 	const { user_id } = useParams();
 
 	useEffect(() => {
-		actions.getLocalStore();
+		//actions.getLocalStore();
+		getNotification();
 	}, []);
+
+	useEffect(() => {
+		//actions.getLocalStore();
+		getNotification();
+	}, [notification]);
+
+	const getNotification = () => {
+		actions.getLocalStore();
+		store &&
+			store.myLocalStore.user?.rooms.map(room => {
+				if (room.temporal_renter !== null) {
+					setNotification(room.temporal_renter);
+				}
+			});
+	};
 
 	const goodbye = () => {
 		actions.logOut();
@@ -29,6 +46,30 @@ export const Navbar = () => {
 	const changeElementNavbarActive = element => {
 		if (element) {
 			setIsActive(element);
+		}
+	};
+
+	// To show or hide the notification bell
+	const showNotif = () => {
+		let source;
+
+		if (store.user?.hasOwnProperty("rooms")) {
+			source = store.user;
+		}
+
+		if (store.user?.user?.hasOwnProperty("rooms")) {
+			source = store.user.user;
+		}
+
+		if (source) {
+			return (
+				source.rooms?.length &&
+				source.rooms?.some(room => room.temporal_renter !== null) && (
+					<i className="fas fa-bell fa-lg text-white notifications-bell" aria-hidden="true" />
+				)
+			);
+		} else {
+			return null;
 		}
 	};
 
@@ -52,11 +93,15 @@ export const Navbar = () => {
 							}
 							onClick={() => {
 								changeElementNavbarActive("profile");
-								console.log(JSON.parse(localStorage.getItem("user")));
-								history.push(`/profile/${JSON.parse(localStorage.getItem("user")).id}`);
+								history.push(
+									`/profile/${JSON.parse(localStorage.getItem("user")).user?.id ||
+										JSON.parse(localStorage.getItem("user")).id}`
+								);
 							}}>
-							Profile
+							Profile &nbsp;
+							{showNotif()}
 						</span>
+
 						<Link to="/announcements">
 							<span
 								className={
@@ -77,7 +122,6 @@ export const Navbar = () => {
 								}
 								onClick={() => {
 									changeElementNavbarActive("favorites");
-									//history.push(`/favorites/${JSON.parse(localStorage.getItem("user")).id}`);
 								}}>
 								Favorites
 							</span>

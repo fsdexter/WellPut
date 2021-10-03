@@ -263,6 +263,8 @@ class Room (db.Model):
     reviews = db.relationship("Review", back_populates="room")
     tenancies = db.relationship("Tenancy", back_populates="room")
     delete_room = db.Column(db.Boolean, default=False)
+    temporal_renter = db.Column(db.Integer)
+    current_renter = db.Column(db.Integer)  
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="rooms")
@@ -300,7 +302,9 @@ class Room (db.Model):
             "favorites": list(map(lambda favorite: favorite.serialize(), self.favorites)),
             "reviews": list(map(lambda review: review.serialize(), self.reviews)),
             "active_room":self.active_room,
-            "delete_room":self.delete_room
+            "delete_room":self.delete_room,
+            "temporal_renter": self.temporal_renter,
+            "current_renter": self.current_renter
         }
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -442,6 +446,7 @@ class SeedData:
         self.third_user = None
         self.fourth_user = None
         self.fifth_user = None
+        self.sixth_user = None
         self.first_city = None
         self.second_city = None
         self.third_city = None
@@ -514,6 +519,8 @@ class SeedData:
         self.second_feature = None
         self.third_feature = None
         self.fourth_feature = None
+        self.fifth_featuresRoom = None
+        self.sixth_featuresRoom = None
         self.first_featuresRoom = None
         self.second_featuresRoom = None
         self.third_featuresRoom = None
@@ -641,12 +648,28 @@ class SeedData:
             current_room = None,
             temporal_current_room= None
         )
+        
+        self.sixth_user = User( 
+            email = "joe_user@gmail.com",
+            name = "Joe",
+            last_name = "Becker",
+            password = "1111",
+            birthday = "01/09/1993",
+            phone = "666362986",
+            gender = "male",
+            description = "I am a quiet guy. I like to stay at home reading or watching a good good movie.",
+            avatar_url = "https://los40es00.epimg.net/los40/imagenes/2017/08/31/tecnologia/1504205368_960402_1504205490_noticia_normal.jpg",
+            city_id = self.third_city.id,
+            current_room = None,
+            temporal_current_room= None
+        )
     
         db.session.add(self.first_user)
         db.session.add(self.second_user)
         db.session.add(self.third_user)
         db.session.add(self.fourth_user)
         db.session.add(self.fifth_user)
+        db.session.add(self.sixth_user)
         db.session.commit()
    
 #------------------------
@@ -666,7 +689,9 @@ class SeedData:
             city_id = self.first_city.id,
             user_id = self.first_user.id,
             room_url = "https://media.revistaad.es/photos/60c2294bb4a53607d5b4669f/4:3/w_1568,h_1176,c_limit/231620.jpg",
-            active_room = True
+            active_room = True,
+            temporal_renter = self.sixth_user.id,
+            current_renter = None
         )
 
         self.second_room = Room( 
@@ -682,7 +707,9 @@ class SeedData:
             city_id = self.first_city.id,
             user_id = self.second_user.id,
             room_url = "https://i.pinimg.com/originals/a2/04/d3/a204d395e71329a6769d097575490b7a.jpg",
-            active_room = True
+            active_room = True,
+            temporal_renter = None,
+            current_renter = None
         )
 
         self.third_room = Room( 
@@ -698,7 +725,9 @@ class SeedData:
             city_id = self.first_city.id,
             user_id = self.third_user.id,
             room_url = "https://casaydiseno.com/wp-content/uploads/2016/08/dormitorios-con-encanto-decoracion-pequeno-comodo.jpg",
-            active_room = True
+            active_room = True,
+            temporal_renter = None,
+            current_renter = None
         )
 
         self.fourth_room = Room( 
@@ -714,7 +743,9 @@ class SeedData:
             city_id = self.first_city.id,
             user_id = self.first_user.id,
             room_url = "https://i.pinimg.com/originals/5e/52/d4/5e52d4a5b28b76cbc6a73b5b0f43f42d.jpg",
-            active_room = True
+            active_room = True,
+            temporal_renter = None,
+            current_renter = None
         )
         
         self.fifth_room = Room( 
@@ -730,7 +761,9 @@ class SeedData:
             city_id = self.second_city.id,
             user_id = self.fourth_user.id,
             room_url = "https://www.hola.com/imagenes/decoracion/20200220161121/iluminacion-habitaciones-juveniles/0-786-452/luz-teens-6a-a.jpg",
-            active_room = True
+            active_room = True,
+            temporal_renter = None,
+            current_renter = None
         )
         
         self.sixth_room = Room( 
@@ -739,14 +772,16 @@ class SeedData:
             country = "Spain",
             price = 500,
             deposit = 500,
-            title = "Moder Room",
+            title = "Charming room",
             type_bed = "doubleBed",
             lat = 33.4329,
             lng = -4.642371,
             city_id = self.second_city.id,
             user_id = self.fourth_user.id,
-            room_url = "https://cafeversatil.com/nuestroshijos/wp-content/uploads/2019/11/01-2-768x576.jpg",
-            active_room = True   
+            room_url = "https://www.elmueble.com/medio/2019/12/18/00501615_ec7cc8db_1000x750.jpg",
+            active_room = True,
+            temporal_renter = None,
+            current_renter = None 
         )
         
         self.seventh_room = Room( 
@@ -762,7 +797,9 @@ class SeedData:
             city_id = self.third_city.id,
             user_id = self.fifth_user.id,
             room_url = "https://i.pinimg.com/736x/72/1a/8c/721a8c00c5e682403d13aa15d2168c79.jpg",
-            active_room = True
+            active_room = True,
+            temporal_renter = None,
+            current_renter = None
         )
 
         db.session.add(self.first_room)
@@ -1185,11 +1222,23 @@ class SeedData:
             room_id = self.fourth_room.id,
             feature_id = self.fourth_feature.id
         )
+        
+        self.fifth_featuresRoom = FeaturesRoom(
+            room_id = self.first_room.id,
+            feature_id = self.third_feature.id
+        )
+        
+        self.sixth_featuresRoom = FeaturesRoom(
+            room_id = self.sixth_room.id,
+            feature_id = self.third_feature.id
+        )
 
         db.session.add(self.first_featuresRoom)
         db.session.add(self.second_featuresRoom)
         db.session.add(self.third_featuresRoom)
         db.session.add(self.fourth_featuresRoom)
+        db.session.add(self.fifth_featuresRoom)
+        db.session.add(self.sixth_featuresRoom)
         db.session.commit()          
                                           
        

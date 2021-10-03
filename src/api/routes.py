@@ -21,21 +21,19 @@ api = Blueprint('api', __name__)
 
 @api.route('/applyroom', methods=['POST'])
 def get_addapplyromie():
-    # room=Room.query.get_or_404(room_id)
     body_request= request.get_json()
     user=User.query.get(body_request["user"])
-    if user:
+    room = Room.query.get(body_request["room_Id"])
+    
+    if user and room:
         user.temporal_current_room=body_request["room_Id"]
+        room.temporal_renter = body_request["user"]
         db.session.commit()
-    print(body_request)
-    return "OK", 200
+    return jsonify({"msg": "Apply send" }), 200
 
 # ----------- Upload Photo User ---------------------------------
 @api.route('/user/<int:user_id>/image', methods=['POST'])
 def handle_upload(user_id):
-    
-    print("SE LLAMÓ A LA FUNCIÓN DE SUBIR FOTO???")
-    
     if 'avatar_url' in request.files:
         result = cloudinary.uploader.upload(request.files['avatar_url'])
         user1 = User.query.get(user_id) 
@@ -132,6 +130,16 @@ def get_owner(owner_id):
     owner['city'] = city_user
     return jsonify(owner), 200
 
+@api.route('/user-profile/<int:renter_id>', methods=['GET'])
+def get_renter(renter_id):
+    body = request.get_json()
+    user_selected = User.query.get(renter_id)
+    user = user_selected.serialize()
+    city = City.query.filter(City.id == user_selected.city_id).first()
+    city_user = [city.serialize()]
+    user['city'] = city_user
+    return jsonify(user), 200
+
 @api.route('/rooms', methods=['GET'])
 def get_rooms():
     rooms = Room.query.all()
@@ -160,36 +168,79 @@ def get_single_room(room_id):
     
     return jsonify(room_seralize), 200
     
+# @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
+# def edit_profile(user_id):
+#     body_request = request.get_json()
+#     user_selected = User.query.get_or_404(user_id)
+#     user_to_edit = user_selected.serialize()
+#     db.session.delete(user_selected)
+#     db.session.commit()
+    
+#     for param in body_request:
+#         user_to_edit[param] = body_request[param]
+   
+#     new_user = User(
+#         avatar_url = user_to_edit["avatar_url"],
+#         birthday = user_to_edit["birthday"],
+#         city_id = user_to_edit["city_id"],
+#         description = user_to_edit["description"],
+#         email = user_to_edit["email"],
+#         gender = user_to_edit["gender"],
+#         occupation = user_to_edit["occupation"],
+#         id = user_to_edit["id"],
+#         last_name = user_to_edit["last_name"],
+#         name = user_to_edit["name"],
+#         password = generate_password_hash(user_to_edit["password"], "sha256"),
+#         phone = user_to_edit["phone"]
+#     )
+    
+#     db.session.add(new_user)
+#     db.session.commit()
+    
+#     for interest in user_to_edit["interests"]:
+#         interest_front = Characteristic.query.filter(Characteristic.name == interest).first()
+#         user_interest = interest_front.serialize()
+        
+#         new_characteritic_user = CharacteristicUser(
+#             user_id = user_to_edit["id"],
+#             characteristic_id = user_interest["id"]
+#         )
+        
+#         db.session.add(new_characteritic_user)
+#         db.session.commit()
+        
+#     for language in user_to_edit["languages"]:
+#         language_front = Language.query.filter(Language.name == language).first()
+#         user_language = language_front.serialize()
+        
+#         new_language_user = SpokenLanguages(
+#             user_id = user_to_edit["id"],
+#             language_id = user_language["id"]
+#         )
+        
+#         db.session.add(new_language_user)
+#         db.session.commit()
+        
+#     return jsonify(user_to_edit), 200
+
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
 def edit_profile(user_id):
     body_request = request.get_json()
-    user_selected = User.query.get_or_404(user_id)
-    user_to_edit = user_selected.serialize()
-    db.session.delete(user_selected)
-    db.session.commit()
-    
-    for param in body_request:
-        user_to_edit[param] = body_request[param]
+    user = User.query.get_or_404(user_id)
+    user_to_edit = user.serialize()
+       
+    if user:        
+        user.birthday = body_request["birthday"]
+        #user.city_id = body_request["city_id"]
+        user.description = body_request["description"]
+        user.email = body_request["email"]
+        user.gender = body_request["gender"]
+        user.occupation = body_request["occupation"]
+        user.last_name = body_request["last_name"]
+        user.name = body_request["name"]
+        user.phone = body_request["phone"]
    
-    new_user = User(
-        avatar_url = user_to_edit["avatar_url"],
-        birthday = user_to_edit["birthday"],
-        city_id = user_to_edit["city_id"],
-        description = user_to_edit["description"],
-        email = user_to_edit["email"],
-        gender = user_to_edit["gender"],
-        occupation = user_to_edit["occupation"],
-        id = user_to_edit["id"],
-        last_name = user_to_edit["last_name"],
-        name = user_to_edit["name"],
-        password = generate_password_hash(user_to_edit["password"], "sha256"),
-        phone = user_to_edit["phone"]
-    )
-    
-    db.session.add(new_user)
-    db.session.commit()
-    
-    for interest in user_to_edit["interests"]:
+    for interest in body_request["interests"]:
         interest_front = Characteristic.query.filter(Characteristic.name == interest).first()
         user_interest = interest_front.serialize()
         
@@ -201,7 +252,7 @@ def edit_profile(user_id):
         db.session.add(new_characteritic_user)
         db.session.commit()
         
-    for language in user_to_edit["languages"]:
+    for language in body_request["languages"]:
         language_front = Language.query.filter(Language.name == language).first()
         user_language = language_front.serialize()
         
@@ -212,8 +263,8 @@ def edit_profile(user_id):
         
         db.session.add(new_language_user)
         db.session.commit()
-        
-    return jsonify(user_to_edit), 200
+                
+    return jsonify(user.serialize()), 200
 
     # -------------------------- TEST -------------------------
 @api.route('/upload', methods=['POST'])
@@ -308,12 +359,10 @@ def create_announcement():
 @api.route('/tenancy_room_reviews', methods=['POST'])
 def reviewendp():
     body_request = request.get_json()
-    print(body_request)
-    user=User.query.get(body_request["user"])
-    print(user.current_room, body_request["room_id"])
-    already_reviewed=Review.query.filter_by(room_id=body_request["room_id"],tenancy_id=user.id).first()
-    if user.current_room==body_request["room_id"] and not already_reviewed:
-        review=Review(
+    user = User.query.get(body_request["user"])
+    already_reviewed = Review.query.filter_by(room_id=body_request["room_id"],tenancy_id=user.id).first()
+    if user.current_room == body_request["room_id"] and not already_reviewed:
+        review = Review(
             comment=body_request["comment"], 
             rating=body_request["rating"], 
             date=date.today(), 
@@ -354,8 +403,23 @@ def get_reviews_room(room_id):
         tenancy['room'] = room_tenancy        
         tenancies_list.append(tenancy)
         
-    return jsonify(tenancies_list), 200  
+    return jsonify(tenancies_list), 200 
     
+@api.route('/add-roomie/<int:renter_id>/<int:room_id>', methods=['POST'])
+def get_addroomie(renter_id, room_id):
+    body_request = request.get_json()
+    user = User.query.get(body_request["user_id"])    
+    room = Room.query.get(body_request["room_id"])
+        
+    if user and room:
+        user.temporal_current_room = None
+        user.current_room = body_request["room_id"] if (body_request["isAcept"] == True) else None
+        room.temporal_renter = None
+        room.current_renter = body_request["user_id"] if (body_request["isAcept"] == True) else None
+        room.active_room = False if (body_request["isAcept"] == True) else room.active_room
+        db.session.commit()
+    
+    return jsonify({"renter": user.serialize(), "rented_room": room.serialize() }), 200
 
 # -------------------------- SEED -------------------------
 

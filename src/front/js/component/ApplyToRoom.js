@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { RatingStatic } from "../component/ratingStatic";
 import "../../styles/applyToRoom.scss";
-import roomExample from "../../img/roomDetails.png";
-import tenantExample from "../../img/Becker.jpg";
 
 export const ApplyToRoom = props => {
 	const { img, title, price, address, city, roomId } = props;
@@ -53,7 +51,7 @@ export const ApplyToRoom = props => {
 		}
 	};
 	return (
-		<div className="row container text-center" id="ContainerAplytoRoom">
+		<div className="row container text-center container-modals">
 			<div className="col-11 mt-3">
 				<div className="carousel-caption-details-room-2   col-12  text-white">
 					<h2 className=" mt-3 mb-2">{title}</h2>
@@ -73,14 +71,14 @@ export const ApplyToRoom = props => {
 						<h2>{price} €</h2>
 						<div className="d-flex justify-content-center">
 							<i
-								className="fas fa-map-marker-alt fa-2x mr-2"
+								className="fas fa-map-marker-alt fa-lg mr-2 mt-1"
 								type="button"
 								data-toggle="tooltip"
 								data-placement="top"
 								title="Address"
 							/>
-							<h2>{address},</h2>
-							<h2>{city}</h2>
+							<h4>{address}, </h4>
+							<h4>{city}</h4>
 						</div>
 					</div>
 				</div>
@@ -114,9 +112,9 @@ export const ApplyToRoom = props => {
 ApplyToRoom.propTypes = {
 	img: PropTypes.string,
 	title: PropTypes.string,
-	price: PropTypes.string,
+	price: PropTypes.number,
 	address: PropTypes.string,
 	city: PropTypes.string,
-	roomId: PropTypes.int,
-	userlog: PropTypes.int
+	roomId: PropTypes.number,
+	userlog: PropTypes.number
 };
