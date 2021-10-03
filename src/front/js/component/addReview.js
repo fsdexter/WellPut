@@ -29,7 +29,7 @@ export const AddReview = () => {
 	};
 
 	return (
-		<div className="row container text-center d-flex flex-column" id="loginContainer">
+		<div className="row container text-center d-flex flex-column container-modals">
 			<div
 				className="iconClose mt-3  m-0 p-0 d-flex justify-content-end close"
 				data-dismiss="modal"
@@ -56,7 +56,7 @@ export const AddReview = () => {
 					<div className="col-12">
 						<div className="onCommentStarsReview p-3 d-flex flex-column">
 							<h4 className="text text-white">How many stars do you give this experience? *</h4>
-							<div className="mt-3 mb-2">
+							<div className="mt-3 mb-2 d-flex justify-content-center">
 								<Rating />
 							</div>
 							<button className="btn btnYellow mt-4" onClick={() => reviewSubmit()}>

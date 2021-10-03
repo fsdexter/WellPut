@@ -38,7 +38,7 @@ export const SignUp = () => {
 	};
 
 	return (
-		<div className="row container text-center d-flex justify-content-center" id="myContainer">
+		<div className="row container text-center d-flex justify-content-center container-modals" id="myContainer">
 			<div className="col-3 no-gutters">
 				<div className="col-8 textSignUp">
 					<h4 className="text text-white">SIGN UP IN</h4>

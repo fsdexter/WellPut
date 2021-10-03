@@ -40,7 +40,7 @@ export const Login = () => {
 	};
 
 	return (
-		<div className="row container text-center d-flex justify-content-around" id="loginContainer">
+		<div className="row container text-center d-flex justify-content-around container-modals">
 			<div className="col-5" id="loginImg">
 				<div className="onLoginRoom pl-3 pt-5">
 					<h1 className="text fs-1 myYellowText ml-2 well">WELL</h1>
