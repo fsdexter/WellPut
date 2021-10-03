@@ -434,7 +434,7 @@ def get_addroomie(renter_id, room_id):
         user.current_room = body_request["room_id"] if (body_request["isAcept"] == True) else None
         room.temporal_renter = None
         room.current_renter = body_request["user_id"] if (body_request["isAcept"] == True) else None
-        room.active_room = False if (body_request["isAcept"] == True) else room_to_rent["active_room"]
+        room.active_room = False if (body_request["isAcept"] == True) else room.active_room
         db.session.commit()
     
     return jsonify({"renter": user.serialize(), "rented_room": room.serialize() }), 200
