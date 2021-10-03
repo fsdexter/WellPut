@@ -29,7 +29,7 @@ def get_addapplyromie():
         user.temporal_current_room=body_request["room_Id"]
         room.temporal_renter = body_request["user"]
         db.session.commit()
-    return "OK", 200
+    return jsonify({"msg": "Apply send" }), 200
 
 # ----------- Upload Photo User ---------------------------------
 @api.route('/user/<int:user_id>/image', methods=['POST'])
@@ -362,67 +362,82 @@ def get_reviews_room(room_id):
         
     return jsonify(tenancies_list), 200 
 
+# @api.route('/add-roomie/<int:renter_id>/<int:room_id>', methods=['PATCH'])
+# def get_addroomie(renter_id, room_id):
+#     body_request = request.get_json()
+#     user = User.query.get(body_request["user_id"])
+#     renter = user.serialize()
+    
+#     room = Room.query.get(body_request["room_id"])
+#     room_to_rent = room.serialize()
+        
+#     for param in body_request:
+#         renter[param] = body_request[param]
+    
+#     new_renter = User(
+#         avatar_url = renter["avatar_url"],
+#         birthday = renter["birthday"],
+#         city_id = renter["city_id"],
+#         description = renter["description"],
+#         email = renter["email"],
+#         gender = renter["gender"],
+#         occupation = renter["occupation"],
+#         id = renter["id"],
+#         last_name = renter["last_name"],
+#         name = renter["name"],
+#         password = generate_password_hash(renter["password"], "sha256"),
+#         phone = renter["phone"],
+#         temporal_current_room = None,
+#         current_room = body_request["room_id"] if (body_request["isAcept"] == True) else None
+#     )
+    
+#     db.session.delete(user)
+#     db.session.add(new_renter)
+#     db.session.commit()
+    
+#     for param in body_request:
+#         room_to_rent[param] = body_request[param]
+    
+#     new_rented_room = Room(
+#         id = room_to_rent["id"],
+#         description = room_to_rent["description"],
+#         address = room_to_rent["address"],
+#         country = room_to_rent["country"],
+#         price = room_to_rent["price"],
+#         deposit = room_to_rent["deposit"], 
+#         title =room_to_rent["title"],
+#         type_bed = room_to_rent["type_bed"], 
+#         lat = room_to_rent["lat"], 
+#         lng = room_to_rent["lng"],
+#         room_url = room_to_rent["room_url"],
+#         active_room = False if (body_request["isAcept"] == True) else room_to_rent["active_room"], 
+#         city_id = room_to_rent["city_id"], 
+#         delete_room = room_to_rent["delete_room"],
+#         temporal_renter = None, 
+#         current_renter = body_request["user_id"] if (body_request["isAcept"] == True) else None
+#     )
+    
+#     db.session.delete(room)
+#     db.session.add(new_rented_room)
+#     db.session.commit()
+    
+#     return jsonify({"msg": "Renter accepted" }), 200
+    
 @api.route('/add-roomie/<int:renter_id>/<int:room_id>', methods=['PATCH'])
 def get_addroomie(renter_id, room_id):
     body_request = request.get_json()
-    user = User.query.get(body_request["user_id"])
-    renter = user.serialize()
-    
+    user = User.query.get(body_request["user_id"])    
     room = Room.query.get(body_request["room_id"])
-    room_to_rent = room.serialize()
         
-    for param in body_request:
-        renter[param] = body_request[param]
+    if user and room:
+        user.temporal_current_room = None
+        user.current_room = body_request["room_id"] if (body_request["isAcept"] == True) else None
+        room.temporal_renter = None
+        room.current_renter = body_request["user_id"] if (body_request["isAcept"] == True) else None
+        room.active_room = False if (body_request["isAcept"] == True) else room_to_rent["active_room"]
+        db.session.commit()
     
-    new_renter = User(
-        avatar_url = renter["avatar_url"],
-        birthday = renter["birthday"],
-        city_id = renter["city_id"],
-        description = renter["description"],
-        email = renter["email"],
-        gender = renter["gender"],
-        occupation = renter["occupation"],
-        id = renter["id"],
-        last_name = renter["last_name"],
-        name = renter["name"],
-        password = generate_password_hash(renter["password"], "sha256"),
-        phone = renter["phone"],
-        temporal_current_room = None,
-        current_room = body_request["room_id"] if (body_request["isAcept"] == True) else None
-    )
-    
-    db.session.delete(user)
-    db.session.add(new_renter)
-    db.session.commit()
-    
-    for param in body_request:
-        room_to_rent[param] = body_request[param]
-    
-    new_rented_room = Room(
-        id = room_to_rent["id"],
-        description = room_to_rent["description"],
-        address = room_to_rent["address"],
-        country = room_to_rent["country"],
-        price = room_to_rent["price"],
-        deposit = room_to_rent["deposit"], 
-        title =room_to_rent["title"],
-        type_bed = room_to_rent["type_bed"], 
-        lat = room_to_rent["lat"], 
-        lng = room_to_rent["lng"],
-        room_url = room_to_rent["room_url"],
-        active_room = False if (body_request["isAcept"] == True) else room_to_rent["active_room"], 
-        city_id = room_to_rent["city_id"], 
-        delete_room = room_to_rent["delete_room"],
-        temporal_renter = None, 
-        current_renter = body_request["user_id"] if (body_request["isAcept"] == True) else None
-    )
-    
-    db.session.delete(room)
-    db.session.add(new_rented_room)
-    db.session.commit()
-    
-    return 'Ok', 200
-    
+    return jsonify({"renter": user.serialize(), "rented_room": room.serialize() }), 200
 
 # -------------------------- SEED -------------------------
 
