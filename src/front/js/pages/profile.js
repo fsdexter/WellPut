@@ -37,10 +37,6 @@ export const Profile = () => {
 		getNotification();
 	}, [notificateRenter]);
 
-	// useEffect(() => {
-	// 	actions.getUser(userId);
-	// }, [store.user]);
-
 	function handleSubmit() {
 		history.push(`/edit_profile/${userId}`);
 	}
@@ -89,7 +85,7 @@ export const Profile = () => {
 									<h3>CONTACT</h3>
 									<div className="d-flex ml-4 align-items-center">
 										<i className="far fa-envelope fa-2x yellow-icon"></i>
-										<h5 className="ml-3 align-self-center">{user.email.email}</h5>
+										<h5 className="ml-3 align-self-center">{user.email}</h5>
 									</div>
 								</div>
 								<div className="mt-4">
