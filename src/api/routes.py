@@ -423,7 +423,7 @@ def get_reviews_room(room_id):
     
 #     return jsonify({"msg": "Renter accepted" }), 200
     
-@api.route('/add-roomie/<int:renter_id>/<int:room_id>', methods=['PATCH'])
+@api.route('/add-roomie/<int:renter_id>/<int:room_id>', methods=['POST'])
 def get_addroomie(renter_id, room_id):
     body_request = request.get_json()
     user = User.query.get(body_request["user_id"])    

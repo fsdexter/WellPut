@@ -17,7 +17,7 @@ export const NotificationRoomie = props => {
 
 	const aceptRoomie = (userId, roomId) => {
 		fetch(`${API_BASE_URL}/api/add-roomie/${userId}/${roomId}`, {
-			method: "PATCH",
+			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
@@ -30,14 +30,14 @@ export const NotificationRoomie = props => {
 			.then(res => res.json())
 			.then(data => console.log(data));
 		// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
-		//props.setIsNotificate(false);
+		props.setNotificateRenter(false);
 
 		closeModalLogin();
 	};
 
 	const RefuseRoomie = (userId, roomId) => {
 		fetch(`${API_BASE_URL}/api/add-roomie/${userId}/${roomId}`, {
-			method: "PATCH",
+			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
@@ -51,7 +51,7 @@ export const NotificationRoomie = props => {
 			.then(data => console.log(data));
 
 		// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
-		//props.setIsNotificate(false);
+		props.setNotificateRenter(false);
 		closeModalLogin();
 	};
 
@@ -167,5 +167,5 @@ export const NotificationRoomie = props => {
 
 NotificationRoomie.propTypes = {
 	rooms: PropTypes.array,
-	setIsNotificate: PropTypes.func
+	setNotificateRenter: PropTypes.func
 };
