@@ -11,34 +11,31 @@ export const Profile = () => {
 	const history = useHistory();
 	const { actions, store } = useContext(Context);
 	let { user_id } = useParams();
+	const [notificateRenter, setNotificateRenter] = useState();
+
 	let userId = JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id;
 	let user = JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user"));
 
-	let appliedUser;
-	user.rooms.map(room => (room.temporal_renter = appliedUser));
+	const getNotification = async () => {
+		await actions.getUser(userId);
+		store.user.rooms.map(room => {
+			if (room.temporal_renter !== null) {
+				setNotificateRenter(room.temporal_renter);
+			}
+		});
+	};
 
-	const [notificateRenter, setNotificateRenter] = useState(appliedUser);
-	console.log(notificateRenter);
-
-	// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
-	// let haveTemporalRenter = user.rooms.some(room => room.temporal_renter !== null); // es un boolean
-	//const [isNotificate, setIsNotificate] = useState();
+	// useEffect(() => {
+	// 	actions.getUser(userId);
+	// }); // =============================>>>>>>>>>>>>> HAY QUE ARREGLAR ESTO
 
 	useEffect(() => {
-		actions.getUser(userId);
-	}); // =============================>>>>>>>>>>>>> HAY QUE ARREGLAR ESTO
+		getNotification();
+	}, []);
 
-	// useEffect(() => {
-	// 	actions.getUser(userId);
-	// 	// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
-	// 	// store.user && setIsNotificate(store.user.rooms.some(room => room.temporal_renter !== null));
-	// }, []);
-
-	// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
-	// useEffect(() => {
-	// 	actions.getUser(userId);
-	// 	// setIsNotificate(store.user.rooms.some(room => room.temporal_renter !== null));
-	// }, [isNotificate]);
+	useEffect(() => {
+		getNotification();
+	}, [notificateRenter]);
 
 	function handleSubmit() {
 		history.push(`/edit_profile/${userId}`);
@@ -164,43 +161,32 @@ export const Profile = () => {
 					</Link>
 				</div>
 
-				{user.rooms.length
-					? user.rooms.some(room => room.temporal_renter !== null) && (
-							<div className="col buttonfondblack d-flex justify-content-center">
-								<button
-									type="button"
-									className="navbar-brand mb-0 mr-2 btn btn-navb"
-									data-toggle="modal"
-									data-target="#notificationModal">
-									<i className="fas fa-bell fa-2x text-white notifications-bell" aria-hidden="true" />
-									<h5 className="textbuttons">Notifications</h5>
-								</button>
-							</div>
-					  )
+				{store.user
+					? store.user.rooms?.length
+						? store.user.rooms.some(room => room.temporal_renter !== null) && (
+								<div className="col buttonfondblack d-flex justify-content-center">
+									<button
+										type="button"
+										className="navbar-brand mb-0 mr-2 btn btn-navb"
+										data-toggle="modal"
+										data-target="#notificationModal">
+										<i
+											className="fas fa-bell fa-2x text-white notifications-bell"
+											aria-hidden="true"
+										/>
+										<h5 className="textbuttons">Notifications</h5>
+									</button>
+								</div>
+						  )
+						: null
 					: null}
-
-				{/* {user.rooms.length
-				// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
-					? isNotificate && (
-							<div className="col buttonfondblack d-flex justify-content-center">
-								<button
-									type="button"
-									className="navbar-brand mb-0 mr-2 btn btn-navb"
-									data-toggle="modal"
-									data-target="#notificationModal">
-									<i className="fas fa-bell fa-2x text-white notifications-bell" aria-hidden="true" />
-									<h5 className="textbuttons">Notifications</h5>
-								</button>
-							</div>
-					  )
-					: null} */}
 
 				{/*<!-- Notification Modal -->*/}
 				<div id="notificationModal" className="modal fade" role="dialog">
 					<div className="modal-dialog modal-lg">
 						<div className="modal-content">
-							{/* <NotificationRoomie rooms={user.rooms} setIsNotificate={setIsNotificate} /> */}
-							<NotificationRoomie rooms={user.rooms} />
+							<NotificationRoomie rooms={user.rooms} setNotificateRenter={setNotificateRenter} />
+							{/* <NotificationRoomie rooms={user.rooms} /> */}
 						</div>
 					</div>
 				</div>
