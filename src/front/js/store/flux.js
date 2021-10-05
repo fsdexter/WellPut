@@ -147,10 +147,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const store = getStore();
 
+					let raw = JSON.stringify(Object.assign(userValues, { city: store.city }));
+					console.log(raw);
 					const requestOptions = {
 						method: "PATCH",
 						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify(userValues),
+						body: raw,
 						redirect: "follow"
 					};
 

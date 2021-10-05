@@ -235,15 +235,25 @@ def get_single_room(room_id):
         
 #     return jsonify(user_to_edit), 200
 
+
+#
+##
+###
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
 def edit_profile(user_id):
     body_request = request.get_json()
     user = User.query.get_or_404(user_id)
     user_to_edit = user.serialize()
+    print(body_request)
+    # To get the city id and create city_id inside to the new room
+    city_request = body_request.get("city",  None) 
+    city = City.query.filter(City.name == city_request).first()  
+    city_serialize = city.serialize()
+    city_user_id = city_serialize['id']
        
     if user:        
         user.birthday = body_request["birthday"]
-        #user.city_id = body_request["city_id"]
+        user.city_id = city_user_id
         user.description = body_request["description"]
         user.email = body_request["email"]
         user.gender = body_request["gender"]

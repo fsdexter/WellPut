@@ -7,6 +7,7 @@ import { UserProfileForm } from "../component/uploadprofilepicture";
 import "../../styles/perfiledit.scss";
 import { useParams } from "react-router-dom";
 import { interestsOptions, languageOptions } from "../constants";
+import { CitySelector } from "../component/CitySelector";
 
 export const EditProfile = () => {
 	const history = useHistory();
@@ -126,7 +127,7 @@ export const EditProfile = () => {
 								onChange={inputHandelChange}
 							/>
 						</div>
-
+						<CitySelector />
 						<div className="d-flex justify-content-around mt-3">
 							<h3 className="col-3">Interests * :</h3>
 							<div className="col-6" name="interests">
