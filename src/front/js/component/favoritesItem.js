@@ -5,18 +5,19 @@ import room from "../../img/room.jpg";
 import deleteRoom from "../../img/deleteRoom.png";
 import { RatingStatic } from "./ratingStatic";
 import { RoomiesItem } from "./roomiesItem";
+import PropTypes from "prop-types";
 
 const FavPriceExample = 450;
 const FavTitleExample = "Habitación luminosa frente a Sagrada Familia";
 
-export const FavoritesItem = () => {
+export const FavoritesItem = ({ favorites }) => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="row mt-2 pb-2 border-bottom border-dark">
 			<div className="col-6">
 				<div className="row">
-					<h4 className="ml-2 mt-2 favTitle pl-3">{FavTitleExample}</h4>
+					<h4 className="ml-2 mt-2 favTitle pl-3">{favorites.title}</h4>
 				</div>
 				<div className="row pl-4 pt-3">
 					<RatingStatic />
@@ -26,11 +27,11 @@ export const FavoritesItem = () => {
 				</div>
 			</div>
 			<div className="col-2">
-				<h1 className="favPrice">€{FavPriceExample}</h1>
+				<h1 className="favPrice">€{favorites.price}</h1>
 			</div>
 			<div className="col-3">
 				<div>
-					<img className="favoritesPic" src={room} href="#" />{" "}
+					<img className="favoritesPic" src={favorites.room_url} href="#" />{" "}
 				</div>
 			</div>
 			<div className="col-1">
@@ -42,4 +43,7 @@ export const FavoritesItem = () => {
 			</div>
 		</div>
 	);
+};
+FavoritesItem.propTypes = {
+	favorites: PropTypes.object
 };
