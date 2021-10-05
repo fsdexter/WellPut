@@ -523,6 +523,8 @@ def change_current_room(user_id):
     db.session.commit()
     return jsonify("Change Active user Success")
 
+
+
 @api.route("/change_favorite/<int:id_user>/<int:id_room>", methods=[ "POST"])
 #@jwt_required()
 def change_favorite(id_user, id_room):
@@ -542,4 +544,11 @@ def change_favorite(id_user, id_room):
         db.session.commit()
         return jsonify("Favorite deleted")    
     return jsonify("Error with favorites")
+
+@api.route('/get_favorite/<int:id_user>', methods=['GET'])
+def get_fav(id_user):
+    favorites =Favorites.query.filter_by(user_id = id_user)
+    favorite_rooms = list(map(lambda favorite: Room.query.get(favorite.room_id).serialize(),favorites))
+    return jsonify({"msgFavorite":favorite_rooms}), 200
+
 

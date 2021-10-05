@@ -342,6 +342,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json"
 					}
 				}).then(res => {});
+			},
+			getFavorites: async id_user => {
+				try {
+					const response = await fetch(`${API_BASE_URL}/api/get_favorite/` + id_user);
+					const favList = await response.json();
+
+					setStore({ favorites: favList.msgFavorite });
+				} catch (error) {
+					return error.message;
+				}
 			}
 		}
 	};
