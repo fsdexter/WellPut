@@ -46,6 +46,10 @@ def handle_upload(user_id):
 
 #________________________________________________________________________
 
+
+#
+##
+###
 @api.route('/sign_up', methods=['POST'])
 def sign_up_user():
     body_request = request.get_json()
@@ -54,9 +58,16 @@ def sign_up_user():
     last_name_request = body_request.get("last_name", None)
     password_request = body_request.get("password", None)
     city_request = body_request.get("city",  None) 
-    print(city_request)
+    
+    # To get the city id and create city_id inside to the new room
+    city = City.query.filter(City.name == city_request).first()  
+    city_serialize = city.serialize()
+    city_user_id = city_serialize['id']
+
+
     new_user = User(
-        email = email_request, 
+        email = email_request,
+        city_id = city_user_id, 
         name = name_request,
         last_name = last_name_request, 
         password = generate_password_hash(password_request, "sha256")
