@@ -30,6 +30,18 @@ def get_addapplyromie():
     print(body_request)
     return "OK", 200
 
+# # ----------- Consult current del user para comparar con room id ---------------------------------
+
+# @api.route('/current_user_room', methods=['POST'])
+# def current_user_room():
+   
+#     body_request= request.get_json()
+#     user=User.query.get(body_request["user"])
+#     if user:
+#         user.current_room=body_request["room_Id"]
+#         db.session.commit()
+#     print(body_request)
+#     return "OK", 200
 # ----------- Upload Photo User ---------------------------------
 @api.route('/user/<int:user_id>/image', methods=['POST'])
 def handle_upload(user_id):

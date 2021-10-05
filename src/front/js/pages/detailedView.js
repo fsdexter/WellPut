@@ -17,11 +17,13 @@ import "../../styles/detailedView.scss";
 export const DetailedView = () => {
 	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
+	let user_current = localStorage.current_room;
 	const [details, setDetails] = useState();
 	const [averageRating, setAverageRating] = useState();
-
+	const [current, setCurrent] = useState();
 	useEffect(() => {
 		getDetailsRoom();
+		//	getCurrentroom();
 	}, []);
 
 	const getDetailsRoom = async () => {
@@ -45,6 +47,15 @@ export const DetailedView = () => {
 		}
 	};
 
+	// const getCurrentroom = async () => {
+	// 	try {
+	// 		const response = await fetch(`${API_BASE_URL}/api/current_user_room/${user_id}`);
+	// 		const room = await response.json();
+	// 		setCurrent(room);
+	// 	} catch (error) {
+	// 		return error.message;
+	// 	}
+	// };
 	return details ? (
 		<div className="d-flex flex-column">
 			<div className="carousel-item active">
@@ -64,15 +75,25 @@ export const DetailedView = () => {
 						</div>
 						<div className="starCaroCustom d-flex justify-content-around mb-3">
 							<RatingStatic rating={averageRating} />
-							<button
-								type="button"
-								className="navbar btn  btnapllyroom"
-								data-toggle="modal"
-								data-target="#notificationModal">
-								<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" /> &nbsp;&nbsp;
-								<h4 className="textbuttons"> Apply Room</h4>
-							</button>
-
+							{details.id === user_current ? (
+								<button
+									type="button"
+									className="navbar-brand mb-0 mr-2 btn btn-navb"
+									data-toggle="modal"
+									data-target="#addReviewModal">
+									<i className="far fa-comment-dots fa-2x text-white btn-options-profile"></i>
+									<h5 className="textbuttons">Add review</h5>
+								</button>
+							) : (
+								<button
+									type="button"
+									className="navbar btn  btnapllyroom"
+									data-toggle="modal"
+									data-target="#notificationModal">
+									<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" /> &nbsp;&nbsp;
+									<h4 className="textbuttons"> Apply Room</h4>
+								</button>
+							)}
 							<button
 								className="heartButtonFix ml-5 pr-5 pl-5"
 								data-toggle="tooltip"

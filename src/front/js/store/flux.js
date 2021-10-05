@@ -353,6 +353,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				}).then(res => {});
 			}
+			//////////////////////////////////////////////////////////º
+
+			// getCurrentroom: async user_id => {
+			// 	const store = getStore();
+			// 	try {
+			// 		const response = await fetch(`${API_BASE_URL}/api/current_user_room/${user_id}`);
+			// 		const user = await response.json();
+			// 		setStore({ user: user });
+			// 	} catch (error) {
+			// 		return error.message;
+			// 	}
+			// }
 		}
 	};
 };
