@@ -85,6 +85,9 @@ export const DetailedView = () => {
 				</div>
 			</div>
 
+
+
+
 			<div className="row d-flex flex-column mb-3 mr-0">
 				<div className="col-9 mt-2" id="idescriptionRoomDetail">
 					<div className="d-flex flex-wrap mb-2 mt-2">
