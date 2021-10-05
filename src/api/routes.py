@@ -245,22 +245,13 @@ def edit_profile(user_id):
     user = User.query.get_or_404(user_id)
     user_to_edit = user.serialize()
     print(body_request)
+    
     # To get the city id and create city_id inside to the new room
     city_request = body_request.get("city",  None) 
     city = City.query.filter(City.name == city_request).first()  
     city_serialize = city.serialize()
     city_user_id = city_serialize['id']
        
-    if user:        
-        user.birthday = body_request["birthday"]
-        user.city_id = city_user_id
-        user.description = body_request["description"]
-        user.email = body_request["email"]
-        user.gender = body_request["gender"]
-        user.occupation = body_request["occupation"]
-        user.last_name = body_request["last_name"]
-        user.name = body_request["name"]
-        user.phone = body_request["phone"]
    
     for interest in body_request["interests"]:
         interest_front = Characteristic.query.filter(Characteristic.name == interest).first()
@@ -286,6 +277,19 @@ def edit_profile(user_id):
         db.session.add(new_language_user)
         db.session.commit()
                 
+    if user:        
+        user.birthday = body_request["birthday"]
+        user.city_id = city_user_id
+        user.description = body_request["description"]
+        user.email = body_request["email"]
+        user.gender = body_request["gender"]
+        user.occupation = body_request["occupation"]
+        user.last_name = body_request["last_name"]
+        user.name = body_request["name"]
+        user.phone = body_request["phone"]
+        
+        db.session.commit()
+
     return jsonify(user.serialize()), 200
 
     # -------------------------- TEST -------------------------
