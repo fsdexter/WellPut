@@ -43,10 +43,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			signUp: async userValues => {
 				const store = getStore();
 
+				let raw = JSON.stringify(Object.assign(userValues, { city: store.city }));
+
 				const requestOptions = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(userValues, { city: store.city }),
+					body: raw,
 					redirect: "follow"
 				};
 
