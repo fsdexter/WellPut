@@ -53,7 +53,8 @@ def sign_up_user():
     name_request = body_request.get("name", None)
     last_name_request = body_request.get("last_name", None)
     password_request = body_request.get("password", None)
-    
+    city_request = body_request.get("city",  None) 
+    print(city_request)
     new_user = User(
         email = email_request, 
         name = name_request,

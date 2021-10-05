@@ -46,7 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const requestOptions = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(userValues),
+					body: JSON.stringify(userValues, { city: store.city }),
 					redirect: "follow"
 				};
 

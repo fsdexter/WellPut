@@ -7,6 +7,7 @@ import "../../styles/signUp.scss";
 import room1 from "../../img/room1.png";
 import room2 from "../../img/room2.png";
 import room3 from "../../img/room3.png";
+import { CitySelector } from "./CitySelector";
 
 export const SignUp = () => {
 	const { store, actions } = useContext(Context);
@@ -126,6 +127,7 @@ export const SignUp = () => {
 							required
 						/>
 					</div>
+					<CitySelector />
 					<div>
 						<button type="submit" className="btn btnYellow mt-4">
 							CONTINUE
