@@ -271,6 +271,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			/////////////////////AÑADIR REVIEW /////////////////////////////////////
 			addReview: async formValue => {
 				const store = getStore();
+
+				////la romie de detail debe ser igual a la de current review del user. para que pueda comentar. ya que es su habitacion
 				formValue["room_id"] = JSON.parse(localStorage.getItem("details")).id;
 				formValue["user"] = JSON.parse(localStorage.getItem("user")).id;
 				formValue["rating"] = store.rating;
@@ -343,6 +345,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				}).then(res => {});
 			}
+			//////////////////////////////////////////////////////////º
+
+			// getCurrentroom: async user_id => {
+			// 	const store = getStore();
+			// 	try {
+			// 		const response = await fetch(`${API_BASE_URL}/api/current_user_room/${user_id}`);
+			// 		const user = await response.json();
+			// 		setStore({ user: user });
+			// 	} catch (error) {
+			// 		return error.message;
+			// 	}
+			// }
 		}
 	};
 };
