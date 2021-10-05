@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
-
+import { AddReview } from "../component/addReview";
 import { OwnerResume } from "../component/ownerResume";
 import { ReviewsResume } from "../component/reviewsResumen";
 import { RatingStatic } from "../component/ratingStatic";
@@ -17,13 +17,12 @@ import "../../styles/detailedView.scss";
 export const DetailedView = () => {
 	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
-	let user_current = localStorage.current_room;
+	let userId = JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id;
+	let user = JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user"));
 	const [details, setDetails] = useState();
 	const [averageRating, setAverageRating] = useState();
-	const [current, setCurrent] = useState();
 	useEffect(() => {
 		getDetailsRoom();
-		//	getCurrentroom();
 	}, []);
 
 	const getDetailsRoom = async () => {
@@ -56,6 +55,7 @@ export const DetailedView = () => {
 	// 		return error.message;
 	// 	}
 	// };
+	console.log("este", details);
 	return details ? (
 		<div className="d-flex flex-column">
 			<div className="carousel-item active">
@@ -75,7 +75,7 @@ export const DetailedView = () => {
 						</div>
 						<div className="starCaroCustom d-flex justify-content-around mb-3">
 							<RatingStatic rating={averageRating} />
-							{details.id === user_current ? (
+							{userId === details.current_renter ? (
 								<button
 									type="button"
 									className="navbar-brand mb-0 mr-2 btn btn-navb"
@@ -105,9 +105,6 @@ export const DetailedView = () => {
 					</div>
 				</div>
 			</div>
-
-
-
 
 			<div className="row d-flex flex-column mb-3 mr-0">
 				<div className="col-9 mt-2" id="idescriptionRoomDetail">
@@ -307,6 +304,14 @@ export const DetailedView = () => {
 								city={details.city.map(c => c.name)}
 							/>
 						</div>
+					</div>
+				</div>
+			</div>
+			{/*<!-- add ReviewModal Modal -->*/}
+			<div id="addReviewModal" className="modal fade" role="dialog">
+				<div className="modal-dialog modal-lg">
+					<div className="modal-content">
+						<AddReview room={details} user={user} />
 					</div>
 				</div>
 			</div>

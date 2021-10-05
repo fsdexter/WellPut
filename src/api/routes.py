@@ -371,21 +371,28 @@ def create_announcement():
 @api.route('/tenancy_room_reviews', methods=['POST'])
 def reviewendp():
     body_request = request.get_json()
-    user = User.query.get(body_request["user"])
-    already_reviewed = Review.query.filter_by(room_id=body_request["room_id"],tenancy_id=user.id).first()
-    if user.current_room == body_request["room_id"] and not already_reviewed:
+    room=Room.query.get(body_request["room_id"])
+    room_serializado=room.serialize()
+    tenancy= Tenancy.query.filter_by(room_id=body_request["room_id"]).first()
+    print(tenancy)
+    tenancy_serializado=tenancy.serialize()
+    print(tenancy_serializado)
+   # already_reviewed = Review.query.filter_by(room_id=body_request["room_id"],tenancy_id=tenancy_serializado["id"]).first()
+   
+    if room_serializado["current_renter"] == body_request["reter_id"] :
         review = Review(
             comment=body_request["comment"], 
             rating=body_request["rating"], 
             date=date.today(), 
             room_id=body_request["room_id"], 
-            tenancy_id=body_request["user"])
+            tenancy_id=tenancy_serializado["id"]
+            )
         
         db.session.add(review)
         db.session.commit()
         return jsonify({"review": review.serialize()}), 200
     else:
-        return jsonify("ya comento"),400
+        return jsonify({"msg": "this comment already exists"}),400
 
 @api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) 
 def get_reviews_room(room_id):

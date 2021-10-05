@@ -1,10 +1,10 @@
 import React, { useState, useContext, useRef } from "react";
 import { Context } from "../store/appContext";
 import { Rating } from "../component/rating";
-
+import PropTypes from "prop-types";
 import "../../styles/addReview.scss";
 
-export const AddReview = () => {
+export const AddReview = props => {
 	const { store, actions } = useContext(Context);
 
 	const [formValue, setFormValue] = useState({
@@ -25,7 +25,7 @@ export const AddReview = () => {
 
 	const reviewSubmit = () => {
 		if (JSON.parse(localStorage.getItem("user"))) {
-			actions.addReview(formValue);
+			actions.addReview(formValue, props.room.id, props.user.id);
 			closeModalLogin();
 		} else {
 			alert("You have not logged in, log in to rate this room!");
@@ -72,4 +72,8 @@ export const AddReview = () => {
 			</div>
 		</div>
 	);
+};
+AddReview.propTypes = {
+	room: PropTypes.object,
+	user: PropTypes.object
 };

@@ -269,13 +269,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			/////////////////////AÑADIR REVIEW /////////////////////////////////////
-			addReview: async formValue => {
+			addReview: async (formValue, room_Id, renter_Id) => {
 				const store = getStore();
 
 				////la romie de detail debe ser igual a la de current review del user. para que pueda comentar. ya que es su habitacion
-				formValue["room_id"] = JSON.parse(localStorage.getItem("details")).id;
-				formValue["user"] = JSON.parse(localStorage.getItem("user")).id;
+				//	formValue["room_id"] = JSON.parse(localStorage.getItem("details")).id;
+				//	formValue["user"] = JSON.parse(localStorage.getItem("user")).id;
 				formValue["rating"] = store.rating;
+				formValue["room_id"] = room_Id;
+				formValue["reter_id"] = renter_Id;
 				const postreview = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
@@ -284,7 +286,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews`, postreview);
-					if (response.status >= 300) {
+					if (response.status > 300) {
 						const errorMsg = "Error saving comment";
 						alert("You cannot write a comment for this room!");
 					} else {
