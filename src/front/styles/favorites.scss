@@ -2,7 +2,7 @@
     background: #184F5F;
     width: 100vw;
     height:max-content ;
-    min-height: 85vh;
+ 
 }
 .fvSecondBg{
     margin:10px;
@@ -39,11 +39,20 @@ padding:10px;
     background: #FFDE59;
 }
 .favPrice{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   
     color:black;
 
 }
 .favTitle{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
     color:black;
+}
+
+.myFavorites{
+    height: 100px;
+    margin-left: 65px;
+    margin-top: 30px;
+}
+.rojelio{
+    color:red;
 }

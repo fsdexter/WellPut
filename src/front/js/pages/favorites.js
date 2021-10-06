@@ -16,6 +16,11 @@ export const Favorites = () => {
 
 	return (
 		<div className="container-fluid favoritesBgr ">
+			<div className="row myFavorites">
+				<h3 id="my_rooms_title" className="ml-4">
+					<i className="far rojelio fa-heart fa-1x" /> My Favorites
+				</h3>
+			</div>
 			{store.favorites.length
 				? store.favorites.map(fav => {
 						return <FavoritesItem key={fav.id} favorites={fav} />;
