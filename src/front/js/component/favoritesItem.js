@@ -14,32 +14,28 @@ export const FavoritesItem = ({ favorites }) => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="row mt-2 pb-2 border-bottom border-dark">
-			<div className="col-6">
+		<div className="row favoritesBg my-1">
+			<div className="col-7 fvSecondBg">
 				<div className="row">
 					<h4 className="ml-2 mt-2 favTitle pl-3">{favorites.title}</h4>
 				</div>
-				<div className="row pl-4 pt-3">
-					<RatingStatic />
+				<div className="row">
+					<h4 className="pl-3 ml-2 favPrice">Price: €{favorites.price}</h4>
 				</div>
-				<div className="row pt-4 pl-3">
-					<RoomiesItem />
+				<div className="row">
+					<h4 className="pl-3 ml-2 favPrice">Deposit: €{favorites.deposit}</h4>
+				</div>
+				<div className="row">
+					<h4 className="pl-3 ml-2 favPrice">Address: {favorites.address}</h4>
 				</div>
 			</div>
-			<div className="col-2">
-				<h1 className="favPrice">€{favorites.price}</h1>
-			</div>
-			<div className="col-3">
-				<div>
-					<img className="favoritesPic" src={favorites.room_url} href="#" />{" "}
-				</div>
+			<div className="col-3 picBar">
+				<img className="favoritesPic" src={favorites.room_url} href="#" />{" "}
 			</div>
 			<div className="col-1">
-				<div className="pt-4 pl-3">
-					<button type="button" className="btn btn-outline-warning mt-5 roomsButtons favButton">
-						<img src={deleteRoom} />
-					</button>
-				</div>
+				<button type="button" className="btn btn-outline-warning favButton">
+					<img src={deleteRoom} />
+				</button>
 			</div>
 		</div>
 	);
