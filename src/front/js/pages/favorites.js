@@ -21,11 +21,13 @@ export const Favorites = () => {
 					<i className="far rojelio fa-heart fa-1x" /> My Favorites
 				</h3>
 			</div>
-			{store.favorites.length
-				? store.favorites.map(fav => {
-						return <FavoritesItem key={fav.id} favorites={fav} />;
-				  })
-				: ""}
+			<div className="mb-5">
+				{store.favorites.length
+					? store.favorites.map(fav => {
+							return <FavoritesItem key={fav.id} favorites={fav} />;
+					  })
+					: ""}
+			</div>
 		</div>
 	);
 };
