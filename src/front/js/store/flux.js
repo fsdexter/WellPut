@@ -282,9 +282,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const postreview = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(formValue),
-					redirect: "follow",
-					mode: "no-cors"
+					body: JSON.stringify(formValue)
 				};
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews`, postreview);
