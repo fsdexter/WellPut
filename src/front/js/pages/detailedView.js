@@ -78,12 +78,14 @@ export const DetailedView = () => {
 							{userId === details.current_renter ? (
 								<button
 									type="button"
-									className="navbar-brand mb-0 mr-2 btn btn-navb"
+									className="navbar btn  btnapllyroom"
 									data-toggle="modal"
 									data-target="#addReviewModal">
-									<i className="far fa-comment-dots fa-2x text-white btn-options-profile"></i>
-									<h5 className="textbuttons">Add review</h5>
+									<i className="far fa-comment-dots fa-2x text-white" aria-hidden="true"></i>{" "}
+									&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
 								</button>
+							) : userId === details.owner_id ? (
+								<h4 className="textbuttons">Your Room</h4>
 							) : (
 								<button
 									type="button"
