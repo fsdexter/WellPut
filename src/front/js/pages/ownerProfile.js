@@ -10,7 +10,6 @@ import avatar from "/workspace/WellPut/src/front/img/avatar.png";
 export const OwnerProfile = () => {
 	let { owner_id } = useParams();
 	const [owner, setOwner] = useState();
-
 	useEffect(() => {
 		getOwner();
 	}, []);
@@ -122,7 +121,7 @@ export const OwnerProfile = () => {
 						<h5 className="textbuttons">Delete Romie</h5>
 					</button>
 				</div>
-				<div className="col buttonfondblack d-flex justify-content-center">
+				{/* <div className="col buttonfondblack d-flex justify-content-center">
 					<button
 						type="button"
 						className="navbar-brand mb-0 mr-2 btn btn-navb"
@@ -131,15 +130,15 @@ export const OwnerProfile = () => {
 						<i className="far fa-comment-dots fa-2x text-white btn-options-profile"></i>
 						<h5 className="textbuttons">Add review</h5>
 					</button>
-				</div>
+				</div> */}
 				{/*<!-- add ReviewModal Modal -->*/}
-				<div id="addReviewModal" className="modal fade" role="dialog">
+				{/* <div id="addReviewModal" className="modal fade" role="dialog">
 					<div className="modal-dialog modal-lg">
 						<div className="modal-content">
 							<AddReview />
 						</div>
 					</div>
-				</div>
+				</div> */}
 
 				{/*<!-- notification Modal -->*/}
 				{/* <div id="notificationModal" className="modal fade" role="dialog">

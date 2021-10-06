@@ -278,11 +278,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				formValue["rating"] = store.rating;
 				formValue["room_id"] = room_Id;
 				formValue["reter_id"] = renter_Id;
+				console.log(formValue);
 				const postreview = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(formValue),
-					redirect: "follow"
+					redirect: "follow",
+					mode: "no-cors"
 				};
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews`, postreview);

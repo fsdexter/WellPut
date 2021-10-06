@@ -55,7 +55,7 @@ export const DetailedView = () => {
 	// 		return error.message;
 	// 	}
 	// };
-	console.log("este", details);
+
 	return details ? (
 		<div className="d-flex flex-column">
 			<div className="carousel-item active">

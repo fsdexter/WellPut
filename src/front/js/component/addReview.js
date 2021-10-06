@@ -24,7 +24,8 @@ export const AddReview = props => {
 	///////////////////////
 
 	const reviewSubmit = () => {
-		if (JSON.parse(localStorage.getItem("user"))) {
+		if (JSON.parse(localStorage.getItem("user")) && props.room) {
+			console.log(props.room, props.user);
 			actions.addReview(formValue, props.room.id, props.user.id);
 			closeModalLogin();
 		} else {
