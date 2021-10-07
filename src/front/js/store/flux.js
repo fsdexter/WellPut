@@ -343,6 +343,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				}).then(res => {});
 			},
+			///////////////////////////////////////Favorite Button///////////////
+			setFavButton: id => {
+				fetch(API_BASE_URL + "/api/change_fav_button/" + id, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}).then(res => {
+					if (res.ok) {
+						getActions().getRooms();
+					}
+				});
+			},
 			getFavorites: async id_user => {
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/get_favorite/` + id_user);

@@ -501,6 +501,13 @@ def change_active_room(id):
     db.session.commit()
     return jsonify("Change Active Room Success")
 
+@api.route("/change_fav_button/<int:id>", methods=[ "PUT"])
+def change_fav_button(id):
+    room = Room.query.get(id)
+    room.is_favorite = not room.is_favorite
+    db.session.commit()
+    return jsonify("Fav Button Changed")
+
 @api.route("/change_delete_room/<int:id>", methods=[ "PUT"])
 #@jwt_required()
 def change_delete_room(id):
