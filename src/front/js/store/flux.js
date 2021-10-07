@@ -177,9 +177,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						user: user,
 						room_Id: roomId
 					})
-				})
-					.then(res => res.json())
-					//.then(data => console.log(data, "Apply Romie"));
+				}).then(res => res.json());
+				//.then(data => console.log(data, "Apply Romie"));
 			},
 			onClickHandeler: e => {
 				const store = getStore();
@@ -239,9 +238,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify(room)
-				})
-					.then(res => res.json())
-					//.then(data => console.log(data, "response postNewAnnouncement"));
+				}).then(res => res.json());
+				//.then(data => console.log(data, "response postNewAnnouncement"));
 			},
 			getTenancies: async room_id => {
 				try {

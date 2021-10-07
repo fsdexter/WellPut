@@ -109,7 +109,7 @@ export const NewAnnouncement = () => {
 			.then(resp => resp.json())
 			.then(data => {
 				setRoomData(prevState => ({ ...prevState, room_url: data.url }));
-			})
+			});
 	};
 
 	return (
