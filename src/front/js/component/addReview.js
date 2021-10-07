@@ -6,10 +6,22 @@ import "../../styles/addReview.scss";
 
 export const AddReview = props => {
 	const { store, actions } = useContext(Context);
-
+	//const [details, setDetails] = useState();
 	const [formValue, setFormValue] = useState({
 		comment: ""
 	});
+	//////
+	// useEffect(() => {
+	// 	getDetailsRoom();
+	// }, []);
+	// const getDetailsRoom = async () => {
+	// 	try {
+	// 		const response = await fetch(`${API_BASE_URL}/api/detailed_room/${room_id}`);
+	// 		const room = await response.json();
+	// 		setDetails(room);
+	// 	} catch (error) {
+	// 		return error.message;
+	// 	}};
 	/////////////
 	const inputHandelChange = e => {
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
@@ -34,7 +46,16 @@ export const AddReview = props => {
 	};
 
 	return (
-		<div className="row container text-center d-flex flex-column container-modals">
+		<div
+			className="row container text-center d-flex flex-column container-modals"
+			style={{
+				//background: ${props => `url(${props.room.room_url}) no-repeat top center`};
+				//background: url(${props => props.room.room_url}); pasar imagen en fondo
+				backgroundSize: "cover",
+				width: "50rem",
+				height: "30rem",
+				marginLeft: "7rem"
+			}}>
 			<div
 				className="iconClose mt-3  m-0 p-0 d-flex justify-content-end close"
 				data-dismiss="modal"
