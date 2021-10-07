@@ -1,6 +1,4 @@
-import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Context } from "../store/appContext";
+import React, { useState } from "react";
 
 // Backend URL
 import { API_BASE_URL } from "../constants";
@@ -9,13 +7,11 @@ import perfil from "../../img/fotodeperfil.png";
 export const UserProfileForm = () => {
 	const [files, setFiles] = useState(null);
 	const [avatar_url, setAvatarUrl] = useState(null);
-	const { store, actions } = useContext(Context);
 
 	const uploadImage = () => {
 		//evt.preventDefault();
 
 		// we are about to send this to the backend.
-		console.log("This are the files", files);
 		let body = new FormData();
 		body.append("avatar_url", files[0]);
 		const options = {
@@ -28,7 +24,6 @@ export const UserProfileForm = () => {
 		fetch(`${API_BASE_URL}/api/user/${currentUserId}/image`, options)
 			.then(resp => resp.json())
 			.then(data => {
-				console.log("DATA DE LA IMAGEN DEL USUARIO ---->>> ", data);
 				alert("Imagen cargada con exito");
 				setAvatarUrl(data.avatar_url);
 

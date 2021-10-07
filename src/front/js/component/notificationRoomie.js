@@ -28,7 +28,7 @@ export const NotificationRoomie = props => {
 			})
 		})
 			.then(res => res.json())
-			.then(data => console.log(data));
+			//.then(data => console.log(data));
 		// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
 		props.setNotificateRenter(false);
 
@@ -48,7 +48,7 @@ export const NotificationRoomie = props => {
 			})
 		})
 			.then(res => res.json())
-			.then(data => console.log(data));
+			//.then(data => console.log(data));
 
 		// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
 		props.setNotificateRenter(false);

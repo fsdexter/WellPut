@@ -165,7 +165,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			recoverPassword: userValues => {
-				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
+				//console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
 			},
 			addRoomie: (user, roomId) => {
 				fetch(API_BASE_URL + "/api/applyroom", {
@@ -179,7 +179,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				})
 					.then(res => res.json())
-					.then(data => console.log(data, "Apply Romie"));
+					//.then(data => console.log(data, "Apply Romie"));
 			},
 			onClickHandeler: e => {
 				const store = getStore();
@@ -229,12 +229,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(res => res.json())
 					.then(data => {
-						console.log(data, "response serach_room");
 						setStore({ roomsSearch: data });
 					});
 			},
 			postNewAnnouncement: room => {
-				console.log(room);
 				fetch(API_BASE_URL + "/api/new_announcement", {
 					method: "POST",
 					headers: {
@@ -243,7 +241,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(room)
 				})
 					.then(res => res.json())
-					.then(data => console.log(data, "response postNewAnnouncement"));
+					//.then(data => console.log(data, "response postNewAnnouncement"));
 			},
 			getTenancies: async room_id => {
 				try {

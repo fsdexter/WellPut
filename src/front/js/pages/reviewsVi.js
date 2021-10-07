@@ -1,16 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Context } from "../store/appContext";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 
 import "../../styles/reviewsVi.scss";
 
 export const Reviews = () => {
-	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
 	const [room, setRoom] = useState();
-	console.log("room_id en comentarios : ", room_id);
 
 	useEffect(() => {
 		getDetailsRoom();

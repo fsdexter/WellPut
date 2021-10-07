@@ -13,7 +13,6 @@ export const AddReview = () => {
 	/////////////
 	const inputHandelChange = e => {
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
-		console.log(formValue);
 	};
 	////////////////////////////////////////
 	const closeBtn = useRef(null);
