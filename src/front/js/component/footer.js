@@ -19,16 +19,16 @@ export const Footer = () => (
 
 			<div className="row d-flex justify-content-around footer-adress">
 				<p className="d-flex justify-content-around">
-					<i className="far fa-envelope fa-lg mr-3" /> <p>genesisfniv@gmail.com</p>
+					<i className="far fa-envelope fa-lg mr-3 mt-1" /> <span>genesisfniv@gmail.com</span>
 				</p>
 				<p className="d-flex justify-content-around">
-					<i className="fas fa-map-marker-alt fa-lg mr-3" /> <p>Edison 3, 28006, Madrid</p>
+					<i className="fas fa-map-marker-alt fa-lg mr-3" /> <span>Edison 3, 28006, Madrid</span>
 				</p>
 			</div>
 		</div>
 
-		<div className="col-5 mt-4">
-			<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "700px", height: "320px" }} zoom={10} />
+		<div className="col-5 mt-5">
+			<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "600px", height: "220px" }} zoom={10} />
 		</div>
 	</div>
 );
