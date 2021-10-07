@@ -80,7 +80,6 @@ export const Login = () => {
 							className="col-12 inputSinLog"
 							type="email"
 							name="email"
-							id="email"
 							placeholder="Email"
 							onChange={inputHandelChange}
 							required
