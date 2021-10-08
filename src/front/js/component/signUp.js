@@ -19,7 +19,8 @@ export const SignUp = () => {
 		last_name: "",
 		email: "",
 		password: "",
-		repeatPassword: ""
+		repeatPassword: "",
+		city: ""
 	});
 
 	const inputHandelChange = e => {
@@ -117,7 +118,7 @@ export const SignUp = () => {
 							required
 						/>
 					</div>
-					<div className="form-grup row mt-2 mb-5">
+					<div className="form-grup row mt-2 mb-4">
 						<input
 							className="col-12 inputSinLog"
 							type="password"
@@ -127,7 +128,17 @@ export const SignUp = () => {
 							required
 						/>
 					</div>
-					<CitySelector />
+					<div className="form-grup row mt-2 mb-4">
+						<input
+							className="col-12 inputSinLog"
+							type="text"
+							name="city"
+							id="city"
+							placeholder="city"
+							onChange={inputHandelChange}
+							required
+						/>
+					</div>
 					<div>
 						<button type="submit" className="btn btnYellow mt-4">
 							CONTINUE
