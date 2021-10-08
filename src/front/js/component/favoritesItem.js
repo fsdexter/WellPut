@@ -9,7 +9,9 @@ import PropTypes from "prop-types";
 
 const FavPriceExample = 450;
 const FavTitleExample = "Habitación luminosa frente a Sagrada Familia";
-
+let id_user = JSON.parse(localStorage.getItem("user"))
+	? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+	: null;
 export const FavoritesItem = ({ favorites }) => {
 	const { store, actions } = useContext(Context);
 
@@ -33,7 +35,13 @@ export const FavoritesItem = ({ favorites }) => {
 				<img className="favoritesPic" src={favorites.room_url} href="#" />{" "}
 			</div>
 			<div className="col-1">
-				<button type="button" className="btn btn-outline-warning favButton">
+				<button
+					type="button"
+					className="btn btn-outline-warning favButton"
+					onClick={() => {
+						actions.setFavorites(id_user, favorites.id);
+						actions.setFavButton(favorites.id);
+					}}>
 					<img src={deleteRoom} />
 				</button>
 			</div>
@@ -42,4 +50,7 @@ export const FavoritesItem = ({ favorites }) => {
 };
 FavoritesItem.propTypes = {
 	favorites: PropTypes.object
+};
+FavoritesItem.propTypes = {
+	room: PropTypes.object
 };
