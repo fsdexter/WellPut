@@ -10,7 +10,6 @@ export const Reviews = () => {
 	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
 	const [room, setRoom] = useState();
-	console.log("room_id en comentarios : ", room_id);
 
 	useEffect(() => {
 		getDetailsRoom();

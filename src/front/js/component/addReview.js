@@ -6,26 +6,13 @@ import "../../styles/addReview.scss";
 
 export const AddReview = props => {
 	const { store, actions } = useContext(Context);
-	//const [details, setDetails] = useState();
+
 	const [formValue, setFormValue] = useState({
 		comment: ""
 	});
-	//////
-	// useEffect(() => {
-	// 	getDetailsRoom();
-	// }, []);
-	// const getDetailsRoom = async () => {
-	// 	try {
-	// 		const response = await fetch(`${API_BASE_URL}/api/detailed_room/${room_id}`);
-	// 		const room = await response.json();
-	// 		setDetails(room);
-	// 	} catch (error) {
-	// 		return error.message;
-	// 	}};
 	/////////////
 	const inputHandelChange = e => {
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
-		console.log(formValue);
 	};
 	////////////////////////////////////////
 	const closeBtn = useRef(null);
@@ -37,7 +24,6 @@ export const AddReview = props => {
 
 	const reviewSubmit = () => {
 		if (JSON.parse(localStorage.getItem("user")) && props.room) {
-			console.log(props.room, props.user);
 			actions.addReview(formValue, props.room.id, props.user.id);
 			closeModalLogin();
 		} else {
@@ -59,13 +45,10 @@ export const AddReview = props => {
 						className="col-12 mt-1  m-0 p-0 d-flex justify-content-around"
 						style={{
 							backgroundImage: "url(" + props.room.room_url + ")",
-							//background: ${props => `url(${props.room.room_url}) no-repeat top center`};
-							//background: url(${props => props.room.room_url}); pasar imagen en fondo y mover boton
 							backgroundSize: "contain",
 							width: "50rem",
 							height: "30rem",
 							marginLeft: "7rem"
-							//backgroundRepeat: no - repeat
 						}}>
 						<div className="onCommentStarsReview p-3 d-flex flex-column">
 							<h3 className="text-comment text-white  ">Tell us your experience living in this room :</h3>

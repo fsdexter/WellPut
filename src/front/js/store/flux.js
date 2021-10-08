@@ -161,16 +161,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const newStore = await response.json();
 						setStore({ user: newStore });
 						localStorage.setItem("user", JSON.stringify(store.user));
-
-						console.log("USUARIO EDITADO ---- ", user);
 					}
 				} catch (error) {
 					return error.message;
 				}
 			},
-			recoverPassword: userValues => {
-				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
-			},
+			recoverPassword: userValues => {},
 			addRoomie: (user, roomId) => {
 				fetch(API_BASE_URL + "/api/applyroom", {
 					method: "POST",
@@ -271,14 +267,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			/////////////////////AÑADIR REVIEW /////////////////////////////////////
 			addReview: async (formValue, room_Id, renter_Id) => {
 				const store = getStore();
-
-				////la romie de detail debe ser igual a la de current review del user. para que pueda comentar. ya que es su habitacion
-				//	formValue["room_id"] = JSON.parse(localStorage.getItem("details")).id;
-				//	formValue["user"] = JSON.parse(localStorage.getItem("user")).id;
 				formValue["rating"] = store.rating;
 				formValue["room_id"] = room_Id;
 				formValue["reter_id"] = renter_Id;
-				console.log(formValue);
 				const postreview = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
@@ -347,18 +338,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				}).then(res => {});
 			}
-			//////////////////////////////////////////////////////////º
-
-			// getCurrentroom: async user_id => {
-			// 	const store = getStore();
-			// 	try {
-			// 		const response = await fetch(`${API_BASE_URL}/api/current_user_room/${user_id}`);
-			// 		const user = await response.json();
-			// 		setStore({ user: user });
-			// 	} catch (error) {
-			// 		return error.message;
-			// 	}
-			// }
 		}
 	};
 };
