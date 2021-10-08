@@ -1,19 +1,14 @@
 #containerAddReview{
-    height: 38vh;
+    height: 50vh;
 }
-#roomIMReview{
-    background: url("../img/roomDetails.png") border-box no-repeat;
-    background-size:cover;
-    width: 70%;
-    height: 100%;
-}
+
 
 .onIMReview{
     width:100%;
     height: 100%;
-    background:rgba(0, 0, 0, 0.582);
+    background:rgba(0, 0, 0, 0.582); 
+    padding-left: 5%;
     
-    padding-left: 15%;
 }
 
 .commentReview{

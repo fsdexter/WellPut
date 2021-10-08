@@ -46,16 +46,7 @@ export const AddReview = props => {
 	};
 
 	return (
-		<div
-			className="row container text-center d-flex flex-column container-modals"
-			style={{
-				//background: ${props => `url(${props.room.room_url}) no-repeat top center`};
-				//background: url(${props => props.room.room_url}); pasar imagen en fondo
-				backgroundSize: "cover",
-				width: "50rem",
-				height: "30rem",
-				marginLeft: "7rem"
-			}}>
+		<div className="row container text-center d-flex flex-column container-modals">
 			<div
 				className="iconClose mt-3  m-0 p-0 d-flex justify-content-end close"
 				data-dismiss="modal"
@@ -64,7 +55,18 @@ export const AddReview = props => {
 			</div>
 			<div className="d-flex flex-column mt-4">
 				<div className="row d-flex justify-content-around mb-4 m-2" id="containerAddReview">
-					<div className="col-12" id="roomIMReview">
+					<div
+						className="col-12 mt-1  m-0 p-0 d-flex justify-content-around"
+						style={{
+							backgroundImage: "url(" + props.room.room_url + ")",
+							//background: ${props => `url(${props.room.room_url}) no-repeat top center`};
+							//background: url(${props => props.room.room_url}); pasar imagen en fondo y mover boton
+							backgroundSize: "contain",
+							width: "50rem",
+							height: "30rem",
+							marginLeft: "7rem"
+							//backgroundRepeat: no - repeat
+						}}>
 						<div className="onCommentStarsReview p-3 d-flex flex-column">
 							<h3 className="text-comment text-white  ">Tell us your experience living in this room :</h3>
 
