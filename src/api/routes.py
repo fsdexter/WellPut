@@ -410,13 +410,15 @@ def get_addroomie(renter_id, room_id):
     body_request = request.get_json()
     user = User.query.get(body_request["user_id"])    
     room = Room.query.get(body_request["room_id"])
-        
+    print(body_request,user.serialize(),room.serialize())    
     if user and room:
-        user.temporal_current_room = None
-        user.current_room = body_request["room_id"] if (body_request["isAcept"] == True) else None
+        user.temporal_current_room = None  
         room.temporal_renter = None
-        room.current_renter = body_request["user_id"] if (body_request["isAcept"] == True) else None
-        room.active_room = False if (body_request["isAcept"] == True) else room.active_room
+        if body_request["isAcept"] == True:
+            room.active_room = False
+            user.current_room = body_request["room_id"]
+            room.current_renter = body_request["user_id"]
+        # room.active_room = False if (body_request["isAcept"] == True) else room.active_room
         db.session.commit()
     
     return jsonify({"renter": user.serialize(), "rented_room": room.serialize() }), 200
