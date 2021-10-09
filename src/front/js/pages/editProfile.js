@@ -7,6 +7,7 @@ import { UserProfileForm } from "../component/uploadprofilepicture";
 import "../../styles/perfiledit.scss";
 import { useParams } from "react-router-dom";
 import { interestsOptions, languageOptions } from "../constants";
+import { CitySelector } from "../component/CitySelector";
 
 export const EditProfile = () => {
 	const history = useHistory();
@@ -17,6 +18,7 @@ export const EditProfile = () => {
 	const [formValue, setFormValue] = useState({
 		name: userParse.name ? userParse.name : "",
 		last_name: userParse.last_name ? userParse.last_name : "",
+		city: userParse.city ? userParse.city : "",
 		email: userParse.email ? userParse.email : "",
 		interests: userParse.interests ? userParse.interests : "",
 		languages: userParse.languages ? userParse.languages : "",
@@ -94,6 +96,11 @@ export const EditProfile = () => {
 						</div>
 
 						<div className="d-flex justify-content-around mt-3">
+							<h3 className="col-3">City * :</h3>
+							<input value={formValue.city} className="col-6" name="city" onChange={inputHandelChange} />
+						</div>
+
+						<div className="d-flex justify-content-around mt-3">
 							<h3 className="col-3">Email * :</h3>
 							<input
 								value={formValue.email}
@@ -126,7 +133,6 @@ export const EditProfile = () => {
 								onChange={inputHandelChange}
 							/>
 						</div>
-
 						<div className="d-flex justify-content-around mt-3">
 							<h3 className="col-3">Interests * :</h3>
 							<div className="col-6" name="interests">
