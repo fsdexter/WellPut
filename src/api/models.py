@@ -264,7 +264,9 @@ class Room (db.Model):
     tenancies = db.relationship("Tenancy", back_populates="room")
     delete_room = db.Column(db.Boolean, default=False)
     temporal_renter = db.Column(db.Integer)
-    current_renter = db.Column(db.Integer)  
+    current_renter = db.Column(db.Integer) 
+    is_favorite = db.Column(db.Boolean, default=False)
+     
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="rooms")
@@ -304,7 +306,8 @@ class Room (db.Model):
             "active_room":self.active_room,
             "delete_room":self.delete_room,
             "temporal_renter": self.temporal_renter,
-            "current_renter": self.current_renter
+            "current_renter": self.current_renter,
+            "is_favorite":self.is_favorite
         }
         
 #------------------------------------------------------------------------------------------------------------------------------

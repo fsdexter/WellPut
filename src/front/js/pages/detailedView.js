@@ -1,6 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 
@@ -15,7 +13,6 @@ import doubleBed from "../../img/doubleBlack.png";
 import "../../styles/detailedView.scss";
 
 export const DetailedView = () => {
-	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
 	const [details, setDetails] = useState();
 	const [averageRating, setAverageRating] = useState();
