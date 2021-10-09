@@ -17,18 +17,22 @@ export const FavoritesItem = ({ favorites, makeFavorites, getFavorites }) => {
 	return (
 		<div className="row favoritesBg my-1">
 			<div className="col-7 fvSecondBg">
-				<div className="row border border-warning">
+				<div className="row mt-1">
 					<div className="favTitle">
-						<h4 className="ml-2 mt-2  pl-3 ">{favorites.title}</h4>
+						<h3 className="ml-2 mt-2  pl-3 ">{favorites.title}</h3>
 					</div>
 				</div>
-				<div className="row ">
-					<h4 className="pl-3 ml-2 favPrice ">Price: €{favorites.price}</h4>
-					<h4 className="pl-3 ml-2 favPrice">Deposit: €{favorites.deposit}</h4>
+				<div className="row mt-3">
+					<h4 className="pl-3 ml-2 favPrice ">
+						<i className="fas fa-tag awePrice"></i> Price: €{favorites.price}
+					</h4>
+					<h4 className="pl-3 ml-2 favPrice">
+						<i className="fas fa-tags awePrice"></i> Deposit: €{favorites.deposit}
+					</h4>
 				</div>
 
-				<div className="row">
-					<h4 className="pl-3 ml-2 favPrice">
+				<div className="row mt-3">
+					<h4 className="pl-3 ml-2 favPrice ">
 						<i className="fas fa-map-marker-alt rojelio"></i> Address: {favorites.address}
 					</h4>
 				</div>
