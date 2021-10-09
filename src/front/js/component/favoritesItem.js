@@ -12,7 +12,7 @@ const FavTitleExample = "Habitación luminosa frente a Sagrada Familia";
 let id_user = JSON.parse(localStorage.getItem("user"))
 	? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
 	: null;
-export const FavoritesItem = ({ favorites }) => {
+export const FavoritesItem = ({ favorites, makeFavorites, getFavorites }) => {
 	const { store, actions } = useContext(Context);
 
 	return (
@@ -39,7 +39,8 @@ export const FavoritesItem = ({ favorites }) => {
 					type="button"
 					className="btn btn-outline-warning favButton"
 					onClick={() => {
-						actions.setFavorites(id_user, favorites.id);
+						makeFavorites(id_user, favorites.id);
+						getFavorites(id_user);
 						actions.setFavButton(favorites.id);
 					}}>
 					<img src={deleteRoom} />
@@ -49,8 +50,8 @@ export const FavoritesItem = ({ favorites }) => {
 	);
 };
 FavoritesItem.propTypes = {
-	favorites: PropTypes.object
-};
-FavoritesItem.propTypes = {
-	room: PropTypes.object
+	favorites: PropTypes.object,
+	room: PropTypes.object,
+	makeFavorites: PropTypes.func,
+	getFavorites: PropTypes.func
 };
