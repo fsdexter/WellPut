@@ -161,16 +161,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const newStore = await response.json();
 						setStore({ user: newStore });
 						localStorage.setItem("user", JSON.stringify(store.user));
-
-						console.log("USUARIO EDITADO ---- ", user);
 					}
 				} catch (error) {
 					return error.message;
 				}
 			},
-			recoverPassword: userValues => {
-				console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
-			},
+			recoverPassword: userValues => {},
 			addRoomie: (user, roomId) => {
 				fetch(API_BASE_URL + "/api/applyroom", {
 					method: "POST",
@@ -269,20 +265,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			/////////////////////AÑADIR REVIEW /////////////////////////////////////
-			addReview: async formValue => {
+			addReview: async (formValue, room_Id, renter_Id) => {
 				const store = getStore();
-				formValue["room_id"] = JSON.parse(localStorage.getItem("details")).id;
-				formValue["user"] = JSON.parse(localStorage.getItem("user")).id;
 				formValue["rating"] = store.rating;
+				formValue["room_id"] = room_Id;
+				formValue["reter_id"] = renter_Id;
 				const postreview = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(formValue),
-					redirect: "follow"
+					body: JSON.stringify(formValue)
 				};
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews`, postreview);
-					if (response.status >= 300) {
+					if (response.status > 300) {
 						const errorMsg = "Error saving comment";
 						alert("You cannot write a comment for this room!");
 					} else {

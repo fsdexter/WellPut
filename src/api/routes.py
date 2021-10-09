@@ -31,6 +31,18 @@ def get_addapplyromie():
         db.session.commit()
     return jsonify({"msg": "Apply send" }), 200
 
+# # ----------- Consult current del user para comparar con room id ---------------------------------
+
+# @api.route('/current_user_room', methods=['POST'])
+# def current_user_room():
+   
+#     body_request= request.get_json()
+#     user=User.query.get(body_request["user"])
+#     if user:
+#         user.current_room=body_request["room_Id"]
+#         db.session.commit()
+#     print(body_request)
+#     return "OK", 200
 # ----------- Upload Photo User ---------------------------------
 @api.route('/user/<int:user_id>/image', methods=['POST'])
 def handle_upload(user_id):
@@ -385,21 +397,32 @@ def create_announcement():
 @api.route('/tenancy_room_reviews', methods=['POST'])
 def reviewendp():
     body_request = request.get_json()
-    user = User.query.get(body_request["user"])
-    already_reviewed = Review.query.filter_by(room_id=body_request["room_id"],tenancy_id=user.id).first()
-    if user.current_room == body_request["room_id"] and not already_reviewed:
+    room=Room.query.get(body_request["room_id"])
+    room_serializado=room.serialize()
+    tenancy= Tenancy.query.filter_by(room_id=body_request["room_id"]).first()
+    tenancy_serializado=tenancy.serialize()
+    renter= User.query.filter_by(id=body_request["reter_id"]).first()
+    renter_serializado=renter.serialize()
+    already_reviewed = Review.query.filter_by(room_id=room_serializado["id"],tenancy_id=tenancy_serializado["id"], renter_id=renter_serializado["id"]).first()
+    print(already_reviewed)
+    if already_reviewed is not None:
+        return jsonify({"msg": "this comment already exists"}),400
+
+    if room_serializado["current_renter"] == body_request["reter_id"] :
         review = Review(
             comment=body_request["comment"], 
             rating=body_request["rating"], 
             date=date.today(), 
-            room_id=body_request["room_id"], 
-            tenancy_id=body_request["user"])
+            room_id=room_serializado["id"], 
+            tenancy_id=tenancy_serializado["id"],
+            renter_id=renter_serializado["id"]
+            )
         
         db.session.add(review)
         db.session.commit()
         return jsonify({"review": review.serialize()}), 200
     else:
-        return jsonify("ya comento"),400
+        return jsonify({"msg": "You cannot comment on this room"}),400
 
 @api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) 
 def get_reviews_room(room_id):

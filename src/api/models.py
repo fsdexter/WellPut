@@ -29,7 +29,7 @@ class User(db.Model):
     
     tenancies = db.relationship("Tenancy", back_populates="user")
     rooms = db.relationship("Room", back_populates="user")
-    
+    reviews = db.relationship("Review", back_populates="renter")
     language = db.relationship("Language", secondary="spoken_languages")
     characteristic = db.relationship("Characteristic", secondary="characteristic_user", lazy='subquery')
     favorites = db.relationship("Favorites", back_populates="user")
@@ -226,9 +226,11 @@ class Review(db.Model):
     date = db.Column(db.Date)
     room_id=db.Column(db.Integer, db.ForeignKey('room.id'))
     room = db.relationship("Room", back_populates="reviews")
+    renter_id=db.Column(db.Integer, db.ForeignKey('user.id'))
 
     tenancy_id = db.Column(db.Integer, db.ForeignKey('tenancy.id'))
     tenancy = db.relationship("Tenancy", back_populates="reviews")
+    renter = db.relationship("User", back_populates="reviews")
 
     def __repr__(self):
         return '<Review %r>' % self.id
