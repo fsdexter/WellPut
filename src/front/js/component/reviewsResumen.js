@@ -50,11 +50,13 @@ export const ReviewsResume = props => {
 						{props.userId === props.details.current_renter ? (
 							<button
 								type="button"
-								className="navbar btn  btnapllyroom"
+								className="navbar btn btnapllyroom"
 								data-toggle="modal"
 								data-target="#addReviewModal">
-								<i className="far fa-comment-dots fa-2x text-white" aria-hidden="true"></i> &nbsp;&nbsp;{" "}
-								<h4 className="textbuttons"> Add Review</h4>
+								<i
+									className="fas fa-plus-square fa-2x text-white change-icon-color"
+									aria-hidden="true"></i>{" "}
+								&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
 							</button>
 						) : null}
 					</div>

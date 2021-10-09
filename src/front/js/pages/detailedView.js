@@ -75,16 +75,6 @@ export const DetailedView = () => {
 						</div>
 						<div className="starCaroCustom d-flex justify-content-around mb-3">
 							<RatingStatic rating={averageRating} />
-							{userId === details.current_renter ? null : (
-								<button
-									type="button"
-									className="navbar btn btnapllyroom"
-									data-toggle="modal"
-									data-target="#notificationModal">
-									<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" /> &nbsp;&nbsp;
-									<h4 className="textbuttons"> Apply Room</h4>
-								</button>
-							)}
 							<button
 								className="heartButtonFix ml-5 pr-5 pl-5"
 								data-toggle="tooltip"
@@ -92,6 +82,17 @@ export const DetailedView = () => {
 								title="Add Favorite">
 								<i className="far fa-heart fa-2x" />
 							</button>
+							{userId === details.current_renter ? null : (
+								<button
+									type="button"
+									className="navbar btn btnapllyroom "
+									data-toggle="modal"
+									data-target="#notificationModal">
+									<i className="fa fa-plus fa-2x text-white change-icon-color" aria-hidden="true" />{" "}
+									&nbsp;&nbsp;
+									<h4 className="textbuttons "> Apply Room</h4>
+								</button>
+							)}
 						</div>
 					</div>
 				</div>
