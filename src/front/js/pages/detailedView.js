@@ -46,16 +46,6 @@ export const DetailedView = () => {
 		}
 	};
 
-	// const getCurrentroom = async () => {
-	// 	try {
-	// 		const response = await fetch(`${API_BASE_URL}/api/current_user_room/${user_id}`);
-	// 		const room = await response.json();
-	// 		setCurrent(room);
-	// 	} catch (error) {
-	// 		return error.message;
-	// 	}
-	// };
-
 	return details ? (
 		<div className="d-flex flex-column">
 			<div className="carousel-item active">
@@ -68,28 +58,27 @@ export const DetailedView = () => {
 					}
 				/>
 				<div className="carousel-caption carousel-caption-details-room">
-					<h4 className="title-detail-room mt-3">{details.title} </h4>
+					{userId === details.current_renter ? (
+						<di className="title-detail-room-renter mt-3 d-flex justify-content-center">
+							<di className="ml-5">
+								<h4 className="mt-3 ml-5">{details.title} </h4>
+							</di>
+
+							<h5 className="text-your-room">YOUR ROOM </h5>
+						</di>
+					) : (
+						<h4 className="title-detail-room mt-3">{details.title} </h4>
+					)}
 					<div className="row rowCustom d-flex justify-content-center">
 						<div className="caroPriceCustom mb-3">
 							<h2>{details.price} €</h2>
 						</div>
 						<div className="starCaroCustom d-flex justify-content-around mb-3">
 							<RatingStatic rating={averageRating} />
-							{userId === details.current_renter ? (
+							{userId === details.current_renter ? null : (
 								<button
 									type="button"
-									className="navbar btn  btnapllyroom"
-									data-toggle="modal"
-									data-target="#addReviewModal">
-									<i className="far fa-comment-dots fa-2x text-white" aria-hidden="true"></i>{" "}
-									&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
-								</button>
-							) : userId === details.owner_id ? (
-								<h4 className="textbuttons">Your Room</h4>
-							) : (
-								<button
-									type="button"
-									className="navbar btn  btnapllyroom"
+									className="navbar btn btnapllyroom"
 									data-toggle="modal"
 									data-target="#notificationModal">
 									<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" /> &nbsp;&nbsp;
@@ -290,7 +279,14 @@ export const DetailedView = () => {
 						</div>
 					</div>
 					<div className="col-6 reviesRes">
-						<ReviewsResume reviews={details.reviews} roomId={details.id} tenancies={details.tenancies} />
+						<ReviewsResume
+							reviews={details.reviews}
+							roomId={details.id}
+							tenancies={details.tenancies}
+							userId={userId}
+							details={details}
+							user={user}
+						/>
 					</div>
 				</div>
 				{/*<!-- notification Modal -->*/}

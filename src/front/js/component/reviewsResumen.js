@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
+import { AddReview } from "../component/addReview";
+
 import "../../styles/detailedView.scss";
 
 export const ReviewsResume = props => {
@@ -44,8 +46,28 @@ export const ReviewsResume = props => {
 								<button className="btn btnYellow mt-1 mb-3 btnYeOwnR2">Read more</button>
 							</Link>
 						</div>
+
+						{props.userId === props.details.current_renter ? (
+							<button
+								type="button"
+								className="navbar btn  btnapllyroom"
+								data-toggle="modal"
+								data-target="#addReviewModal">
+								<i className="far fa-comment-dots fa-2x text-white" aria-hidden="true"></i> &nbsp;&nbsp;{" "}
+								<h4 className="textbuttons"> Add Review</h4>
+							</button>
+						) : null}
 					</div>
 				) : null}
+			</div>
+
+			{/*<!-- add ReviewModal Modal -->*/}
+			<div id="addReviewModal" className="modal fade" role="dialog">
+				<div className="modal-dialog modal-lg">
+					<div className="modal-content">
+						<AddReview room={props.details} user={props.user} />
+					</div>
+				</div>
 			</div>
 		</div>
 	);
@@ -54,5 +76,8 @@ export const ReviewsResume = props => {
 ReviewsResume.propTypes = {
 	reviews: PropTypes.array,
 	roomId: PropTypes.number,
-	tenancies: PropTypes.array
+	tenancies: PropTypes.array,
+	userId: PropTypes.number,
+	details: PropTypes.object,
+	user: PropTypes.object
 };
