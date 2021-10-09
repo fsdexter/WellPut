@@ -17,6 +17,13 @@ import cloudinary.uploader
 
 api = Blueprint('api', __name__)
 
+# ----------- desvincular tenant de la room ---------------------------------
+
+# recibe id room
+#Room.query.get(id) 
+#room.active_room=true 
+#room.current_renter=null
+
 # ----------- aplication ---------------------------------
 
 @api.route('/applyroom', methods=['POST'])
@@ -499,6 +506,8 @@ def search_room():
 @api.route("/change_active_room/<int:id>", methods=[ "PUT"])
 def change_active_room(id):
     room = Room.query.get(id)
+    if room.current_renter!=None:
+        room.current_renter=None
     room.active_room = not room.active_room
     db.session.commit()
     return jsonify("Change Active Room Success")

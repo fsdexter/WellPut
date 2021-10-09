@@ -281,7 +281,8 @@ class Room (db.Model):
         return '<Room %r>' % self.title
 
     def serialize(self):
-        if current_renter:
+        current_renter_details=""
+        if self.current_renter:
             current_renter_details=User.query.get(self.current_renter).serialize()
         
         return {
@@ -308,7 +309,7 @@ class Room (db.Model):
             "delete_room":self.delete_room,
             "temporal_renter": self.temporal_renter,
             "current_renter": self.current_renter,
-            "current_renter_details": User.query.get(self.current_renter).serialize()
+            "current_renter_details": current_renter_details
         }
         
 #------------------------------------------------------------------------------------------------------------------------------
