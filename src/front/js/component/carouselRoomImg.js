@@ -51,9 +51,12 @@ export const CarouselRoomImg = props => {
 										data-toggle="tooltip"
 										data-placement="top"
 										title="Add Favorite"
-										onClick={() => {
+										onClick={ev => {
 											actions.setFavorites(id_user, props.room.id);
 											actions.setFavButton(props.room.id);
+											ev.preventDefault();
+											ev.stopPropagation();
+											ev.nativeEvent.stopImmediatePropagation();
 										}}>
 										<i
 											className={
