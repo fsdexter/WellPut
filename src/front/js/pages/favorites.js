@@ -5,7 +5,7 @@ import { FavoritesItem } from "../component/favoritesItem";
 import { API_BASE_URL } from "../constants";
 
 export const Favorites = () => {
-	const { store, actions } = useContext(Context);
+	const { store } = useContext(Context);
 	const [favorites, setFavorites] = useState([]);
 	// To can update the favorites after to delete one
 	const [favoritesRooms, setFavoritesRooms] = useState([]);

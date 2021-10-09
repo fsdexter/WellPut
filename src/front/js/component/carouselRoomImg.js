@@ -7,7 +7,7 @@ import "../../styles/carouselRoomImg.scss";
 import { RatingStatic } from "./ratingStatic";
 
 export const CarouselRoomImg = props => {
-	const { store, actions } = useContext(Context);
+	const { actions } = useContext(Context);
 	let room_reviews = props.room.reviews.map(review => review.rating);
 	let id_user = JSON.parse(localStorage.getItem("user"))
 		? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id

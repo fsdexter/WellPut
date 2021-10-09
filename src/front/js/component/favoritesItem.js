@@ -7,11 +7,10 @@ import { RatingStatic } from "./ratingStatic";
 import { RoomiesItem } from "./roomiesItem";
 import PropTypes from "prop-types";
 
-const FavPriceExample = 450;
-const FavTitleExample = "Habitación luminosa frente a Sagrada Familia";
 let id_user = JSON.parse(localStorage.getItem("user"))
 	? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
 	: null;
+
 export const FavoritesItem = ({ favorites, makeFavorites, getFavorites }) => {
 	const { store, actions } = useContext(Context);
 
@@ -32,7 +31,14 @@ export const FavoritesItem = ({ favorites, makeFavorites, getFavorites }) => {
 				</div>
 			</div>
 			<div className="col-3 picBar">
-				<img className="favoritesPic" src={favorites.room_url} href="#" />{" "}
+				<img
+					className="favoritesPic"
+					src={
+						favorites.room_url
+							? favorites.room_url
+							: "https://img.freepik.com/vector-gratis/plantilla-fondo-interior-dormitorio-dibujos-animados-acogedora-habitacion-moderna-luz-manana_33099-171.jpg?size=626&ext=jpg"
+					}
+				/>
 			</div>
 			<div className="col-1">
 				<button
