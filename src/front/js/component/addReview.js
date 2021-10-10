@@ -32,28 +32,21 @@ export const AddReview = props => {
 	};
 
 	return (
-		<div className="row container text-center d-flex flex-column container-modals">
-			<div
-				className="iconClose mt-3  m-0 p-0 d-flex justify-content-end close"
-				data-dismiss="modal"
-				ref={closeBtn}>
-				<i className="far fa-window-close text-white fa-lg" />
-			</div>
-			<div className="row d-flex justify-content-around mb-4 m-2" id="containerAddReview">
+		<div className="row container text-center d-flex container-modals2">
+			<div className="row d-flex mb-4 m-2" id="containerAddReview">
 				<div
-					className="col-12 mt-1  m-0 p-0 d-flex justify-content-around"
+					className=" d-flex justify-content-around"
 					style={{
 						backgroundImage: "url(" + props.room.room_url + ")",
 						backgroundSize: "95% 80%",
 
 						height: "40rem",
-						marginLeft: "7rem",
+						marginLeft: "200px",
 						backgroundRepeat: "no-repeat",
 						backgroundPosition: "center"
 					}}>
 					<div className="row justify-content-center onCommentStarsReview" id="containerAddReview">
 						<h3 className="text-comment text-white  ">Tell us your experience living in this room :</h3>
-
 						<textarea
 							className="onCommentStarsReview commentReview "
 							placeholder="Write here..."
@@ -63,17 +56,18 @@ export const AddReview = props => {
 					</div>
 				</div>
 			</div>
+			<div className="iconClose mt-3 ml-4 d-flex justify-content-end close" data-dismiss="modal" ref={closeBtn}>
+				<i className="far fa-window-close text-white fa-lg" />
+			</div>
 			<div className="row d-flex justify-content-center mt-0">
-				<div className="col-12">
-					<div className="onCommentStarsReview p-1 d-flex flex-column">
-						<h4 className="text text-white">How many stars do you give this experience? *</h4>
-						<div className="mt-3 mb-2 d-flex justify-content-center">
-							<Rating />
-						</div>
-						<button className="btn btnYellow mt-4" onClick={() => reviewSubmit()}>
-							Publish
-						</button>
+				<div className="onCommentStarsReview2 p-1 d-flex flex-column">
+					<h4 className="text text-white">How many stars do you give this experience? *</h4>
+					<div className="mt-3 mb-2 d-flex justify-content-center">
+						<Rating />
 					</div>
+					<button className="btn btnYellow mt-4" onClick={() => reviewSubmit()}>
+						Publish
+					</button>
 				</div>
 			</div>
 		</div>
