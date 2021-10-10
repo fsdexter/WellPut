@@ -13,8 +13,6 @@ export const ReviewsResume = props => {
 	let { room_id } = useParams();
 	const twoFirstReviews = props.tenancies && ([props.tenancies[0]] || [props.tenancies[0], props.tenancies[1]]);
 
-	console.log(twoFirstReviews);
-
 	return (
 		<div className="text-center mb-1" id="reviwsRC">
 			<div className="border border-white mt-2 mb-4 white-border-min-heigth">
