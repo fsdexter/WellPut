@@ -10,17 +10,14 @@ export const AddReview = props => {
 	const [formValue, setFormValue] = useState({
 		comment: ""
 	});
-	/////////////
 	const inputHandelChange = e => {
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
 	};
-	////////////////////////////////////////
 	const closeBtn = useRef(null);
 
 	const closeModalLogin = () => {
 		closeBtn.current.click();
 	};
-	///////////////////////
 
 	const reviewSubmit = () => {
 		if (JSON.parse(localStorage.getItem("user")) && props.room) {
