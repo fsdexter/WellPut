@@ -12,6 +12,7 @@ import bedSofa from "../../img/bedsofaBlack.png";
 import doubleBed from "../../img/doubleBlack.png";
 
 import "../../styles/detailedView.scss";
+import "../../styles/carouselRoomImg.scss";
 
 export const DetailedView = props => {
 	const { store, actions } = useContext(Context);
@@ -90,7 +91,11 @@ export const DetailedView = props => {
 									actions.setFavorites(id_user, details.id);
 									actions.setFavButton(details.id);
 								}}>
-								<i className="far fa-heart fa-2x" />
+								<i
+									className={
+										details.is_favorite ? "fas fa-heart fa-2x corRed" : "far fa-heart fa-2x "
+									}
+								/>
 							</button>
 							{store.user?.id === details.current_renter ? null : (
 								<button
@@ -193,6 +198,7 @@ export const DetailedView = props => {
 									details.expense.map(exp => {
 										return (
 											<div key={exp.id}>
+												{console.log(exp)}
 												{exp.name === "wifi" ? (
 													<i
 														className="fas fa-wifi fa-2x mr-3"
