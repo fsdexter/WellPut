@@ -45,7 +45,6 @@ export const AddReview = props => {
 					style={{
 						backgroundImage: "url(" + props.room.room_url + ")",
 						backgroundSize: "95% 80%",
-
 						height: "40rem",
 						marginLeft: "7rem",
 						backgroundRepeat: "no-repeat",
