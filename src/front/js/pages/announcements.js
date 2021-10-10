@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/announcements.scss";
 import my_rooms from "../../img/my_rooms.png";
@@ -6,7 +6,7 @@ import { MyRoomsItemActive } from "../component/myRoomsItem";
 import { Link } from "react-router-dom";
 
 export const Announcements = () => {
-	const { store, actions } = useContext(Context);
+	const { store } = useContext(Context);
 
 	let user_rooms = store.rooms.filter(
 		room =>

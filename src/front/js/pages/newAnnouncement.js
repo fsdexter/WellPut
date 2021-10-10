@@ -1,19 +1,17 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/newAnnouncement.scss";
-import MyMap from "../component/mapEngine";
-import { FilterExp } from "../component/filterExp";
+import MapBox from "../component/MapBox";
 import doubleBlack from "../../img/doubleBlack.png";
 import bedsofaBlack from "../../img/bedsofaBlack.png";
-import addPic from "../../img/addPic.png";
 import { useHistory } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 export const NewAnnouncement = () => {
 	const [files, setFiles] = useState(null);
 
-	const { store, actions } = useContext(Context);
-	const [city, setCity] = useState();
-	const [center, setCenter] = useState({ lat: 40.416775, lng: -3.70379 });
+	const { actions } = useContext(Context);
+	const [city, setCity] = useState("");
+	const [address, setAddress] = useState("");
 	const history = useHistory();
 	const [move, setMove] = useState("");
 	const [roomData, setRoomData] = useState({
@@ -70,33 +68,6 @@ export const NewAnnouncement = () => {
 		}
 	};
 
-	const handleCity = e => {
-		//setCity(e.target.value);
-		if (city != undefined) {
-			if (city.toLowerCase().trim() === "madri") {
-				setCenter({ lat: 40.416775, lng: -3.70379 });
-				setCity(e.target.value);
-			} else if (city.toLowerCase() === "barcelon") {
-				setCenter({ lat: 41.385063, lng: 2.173404 });
-				setCity(e.target.value);
-			} else if (city.toLowerCase() === "malag") {
-				setCenter({ lat: 36.721275, lng: -4.421399 });
-				setCity(e.target.value);
-			} else if (city.toLowerCase().trim() === "valenci") {
-				setCenter({ lat: 39.47024, lng: -0.375 });
-				setCity(e.target.value);
-			} else {
-				setCenter({ lat: 40.416775, lng: -3.70379 });
-				setCity(e.target.value);
-			}
-		}
-	};
-
-	const sendCity = e => {
-		handleRoomData(e);
-		handleCity(e);
-	};
-
 	const uploadImage = evt => {
 		evt.preventDefault();
 		let body = new FormData();
@@ -110,6 +81,19 @@ export const NewAnnouncement = () => {
 			.then(data => {
 				setRoomData(prevState => ({ ...prevState, room_url: data.url }));
 			});
+	};
+
+	const handleMap = dataCity => {
+		const address = dataCity?.text_es || "";
+		const city =
+			dataCity.context.filter(field => field.id.includes("region"))[0]?.text_es.replace("Provincia de ", "") ||
+			"";
+
+		setRoomData(prevState => ({
+			...prevState,
+			city,
+			address
+		}));
 	};
 
 	return (
@@ -161,30 +145,13 @@ export const NewAnnouncement = () => {
 					id="locationTab"
 					role="tabpanel"
 					aria-labelledby="locationTab-tab">
-					<div className="row pl-5 mb-4">
-						<div className="col-2 pt-4 fontInput mt-2">
-							<p className="pl-4">City </p>
-							<p className="pl-4">Address</p>
-						</div>
-						<div className="col-6 pt-2 mt-2">
-							<input
-								type="text"
-								className="form-control roundShape mt-3"
-								name="city"
-								onChange={sendCity}
-							/>
-							<input
-								type="text"
-								className="form-control roundShape mt-3"
-								name="address"
-								onChange={handleRoomData}
-							/>
-						</div>
-						<div className="col-2 pt-3 fontInput" />
-						<div className="col-3" />
-					</div>
+            
 					<div className="col-7 map-nuew-room">
-						<MyMap center={center} style={{ width: "500px", height: "350px" }} zoom={10} />
+						<h4 style={{ height: "30px" }}>
+							{roomData.address && roomData.city ? `${roomData.address}, ${roomData.city}` : null}
+						</h4>
+						<hr />
+						<MapBox height={350} handleResult={handleMap} />
 					</div>
 					<div className="row">
 						<div className="col-10" />

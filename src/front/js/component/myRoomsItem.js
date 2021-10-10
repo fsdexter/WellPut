@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 
 export const MyRoomsItemActive = props => {
-	const { store, actions } = useContext(Context);
+	const { actions } = useContext(Context);
 	return (
 		<div className="row">
 			<div className="third_part mx-auto mt-3 mb-2">
@@ -23,7 +23,15 @@ export const MyRoomsItemActive = props => {
 					</div>
 					<div className="col-3 roomItemBar">
 						<Link to={`/detailedView/${props.room.id}`}>
-							<img className="roomItemPic" src={props.room.room_url} href="#" />
+							<img
+								className="roomItemPic"
+								src={
+									props.room.room_url
+										? props.room.room_url
+										: "https://img.freepik.com/vector-gratis/plantilla-fondo-interior-dormitorio-dibujos-animados-acogedora-habitacion-moderna-luz-manana_33099-171.jpg?size=626&ext=jpg"
+								}
+								href="#"
+							/>
 						</Link>
 					</div>
 

@@ -17,12 +17,6 @@ import cloudinary.uploader
 
 api = Blueprint('api', __name__)
 
-# ----------- desvincular tenant de la room ---------------------------------
-
-# recibe id room
-#Room.query.get(id) 
-#room.active_room=true 
-#room.current_renter=null
 
 # ----------- aplication ---------------------------------
 
@@ -38,18 +32,6 @@ def get_addapplyromie():
         db.session.commit()
     return jsonify({"msg": "Apply send" }), 200
 
-# # ----------- Consult current del user para comparar con room id ---------------------------------
-
-# @api.route('/current_user_room', methods=['POST'])
-# def current_user_room():
-   
-#     body_request= request.get_json()
-#     user=User.query.get(body_request["user"])
-#     if user:
-#         user.current_room=body_request["room_Id"]
-#         db.session.commit()
-#     print(body_request)
-#     return "OK", 200
 # ----------- Upload Photo User ---------------------------------
 @api.route('/user/<int:user_id>/image', methods=['POST'])
 def handle_upload(user_id):
@@ -63,12 +45,7 @@ def handle_upload(user_id):
     else:
         raise APIException('Missing profile_image on the FormData')
 
-#________________________________________________________________________
 
-
-#
-##
-###
 @api.route('/sign_up', methods=['POST'])
 def sign_up_user():
     body_request = request.get_json()
@@ -208,14 +185,13 @@ def edit_profile(user_id):
     body_request = request.get_json()
     user = User.query.get_or_404(user_id)
     user_to_edit = user.serialize()
-    print(body_request)
     
     # To get the city id and create city_id inside to the new user
     city_request = body_request.get("city",  None) 
+        
     city = City.query.filter(City.name == city_request).first()  
     city_serialize = city.serialize()
-    city_user_id = city_serialize['id']
-       
+  
    
     for interest in body_request["interests"]:
         interest_front = Characteristic.query.filter(Characteristic.name == interest).first()
@@ -243,7 +219,7 @@ def edit_profile(user_id):
                 
     if user:        
         user.birthday = body_request["birthday"]
-        user.city_id = city_user_id
+        user.city_id = city_serialize['id']
         user.description = body_request["description"]
         user.email = body_request["email"]
         user.gender = body_request["gender"]

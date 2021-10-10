@@ -18,10 +18,10 @@ export const EditProfile = () => {
 	const [formValue, setFormValue] = useState({
 		name: userParse.name ? userParse.name : "",
 		last_name: userParse.last_name ? userParse.last_name : "",
-		city: userParse.city ? userParse.city : "",
+		city: userParse.city ? userParse.city.map(cit => cit.name) : "",
 		email: userParse.email ? userParse.email : "",
-		interests: userParse.interests ? userParse.interests : "",
-		languages: userParse.languages ? userParse.languages : "",
+		interests: userParse.characteristic ? userParse.characteristic.map(inte => inte.name) : "",
+		languages: userParse.language ? userParse.language.map(idiom => idiom.name) : "",
 		phone: userParse.phone ? userParse.phone : null,
 		birthday: userParse.birthday ? userParse.birthday : "",
 		gender: userParse.gender ? userParse.gender : "",
@@ -126,7 +126,6 @@ export const EditProfile = () => {
 							<h3 className="col-3">Birthday :</h3>
 							<input
 								value={formValue.birthday}
-								// type="date"
 								type="text"
 								className="col-6"
 								name="birthday"
@@ -216,7 +215,9 @@ export const EditProfile = () => {
 					</div>
 				</div>
 
-				<div className="row d-flex justify-content-center detalleIMG mt-5 pb-5">
+				<div
+					className="col-10 row d-flex justify-content-center detalleIMG mt-5 pb-5"
+					id="new-description-user">
 					<label className="textoeditusu">Tell us about you :</label>
 					<textarea
 						className="form-control col-11"
@@ -226,7 +227,7 @@ export const EditProfile = () => {
 						onChange={inputHandelChange}
 					/>
 
-					<button type="submit" className="col-11 btn btn-warning mt-3 pt-3 pb-3" id="btnSubmitEditarPerfil">
+					<button type="submit" className="col-11 btn  mt-3 pt-3 pb-3 btnSubmitEditarPerfil">
 						Save
 					</button>
 				</div>

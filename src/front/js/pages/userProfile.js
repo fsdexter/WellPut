@@ -26,7 +26,7 @@ export const UserProfile = () => {
 
 	return (
 		<div className="picturefond col-12 d-flex justify-content-center text-white">
-			<div className="container col-11 detallefondblack">
+			<div className="container col-10 detallefondblack">
 				{renter ? (
 					<>
 						<div className="row" key={renter.id}>
@@ -37,7 +37,7 @@ export const UserProfile = () => {
 							/>
 
 							<div className="col-8 text-white">
-								<div className="row">
+								<div className="row ml-4">
 									<h1 className="textwhhite ml-5">
 										{renter.name} {renter.last_name}
 									</h1>
@@ -103,32 +103,6 @@ export const UserProfile = () => {
 					</div>
 				)}
 			</div>
-			{/* <div className="col-1" id="containerOptionsProfile">
-				<div className="col buttonfondblack d-flex justify-content-center">
-					<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb" data-target="#addReviewModal">
-						<i className="fas fa-user-times fa-2x text-white btn-options-profile"></i>
-						<h5 className="textbuttons">Delete Romie</h5>
-					</button>
-				</div>
-				<div className="col buttonfondblack d-flex justify-content-center">
-					<button
-						type="button"
-						className="navbar-brand mb-0 mr-2 btn btn-navb"
-						data-toggle="modal"
-						data-target="#addReviewModal">
-						<i className="far fa-comment-dots fa-2x text-white btn-options-profile"></i>
-						<h5 className="textbuttons">Add review</h5>
-					</button>
-				</div>
-				<!-- add ReviewModal Modal -->
-				<div id="addReviewModal" className="modal fade" role="dialog">
-					<div className="modal-dialog modal-lg">
-						<div className="modal-content">
-							<AddReview />
-						</div>
-					</div>
-				</div>
-			</div> */}
 		</div>
 	);
 };

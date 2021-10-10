@@ -1,12 +1,4 @@
-//.detalle{
-//    background-color:rgba(0, 0, 0, 0.295);
-    //margin: 1%;
-    //padding: 3% 2%;
-//}
-//.form-group{margin: 3%;}
-// .form-groupedit{
-//     margin: 8%;
-// }
+
 .inputeditusu{
     width: 420px;
     padding: 15px;
@@ -56,6 +48,22 @@
 
 
 .btnSubmitEditarPerfil{
-    font-size: large;
+    background-color: #FFDE59;
+    color: #4C4535;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding: .5rem 2rem;
 }
+
+.btnSubmitEditarPerfil:hover{
+    background-color: #ffde5900;
+    color: white;
+    border-color: #FFDE59;
+}
+
+#new-description-user{
+    margin-left: 10rem;
+}
+
 
