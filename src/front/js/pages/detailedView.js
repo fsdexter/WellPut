@@ -14,8 +14,12 @@ import "../../styles/detailedView.scss";
 
 export const DetailedView = () => {
 	let { room_id } = useParams();
-	let userId = JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id;
-	let user = JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user"));
+	let userId = JSON.parse(localStorage.getItem("user"))
+		? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		: null;
+	let user = JSON.parse(localStorage.getItem("user"))
+		? JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user"))
+		: null;
 	const [details, setDetails] = useState();
 	const [averageRating, setAverageRating] = useState();
 	useEffect(() => {

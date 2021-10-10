@@ -313,7 +313,7 @@ class Room (db.Model):
             "delete_room":self.delete_room,
             "temporal_renter": self.temporal_renter,
             "current_renter": self.current_renter,
-            "current_renter_details": current_renter_details
+            "current_renter_details": current_renter_details,
             "is_favorite":self.is_favorite
         }
         
