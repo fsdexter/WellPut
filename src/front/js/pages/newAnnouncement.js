@@ -244,9 +244,6 @@ export const NewAnnouncement = () => {
 										onChange={handleRoomData}
 									/>
 								</div>
-								{/*	<div className="col-3 mb-2">
-									<input type="text" className="form-control" placeholder="Max." />
-								</div>*/}
 							</div>
 							<div className="row ">
 								<div className="col-4">
@@ -260,9 +257,6 @@ export const NewAnnouncement = () => {
 										onChange={handleRoomData}
 									/>
 								</div>
-								{/*<div className="col-3 mb-2">
-									<input type="text" className="form-control" placeholder="Max." />
-							</div>*/}
 							</div>
 						</div>
 						<div className="col">
@@ -485,8 +479,7 @@ export const NewAnnouncement = () => {
 
 				<div className="tab-pane fade" id="picsTab" role="tabpanel" aria-labelledby="picsTab-tab">
 					<div className="row">
-						{/* -------------------------------------------------------------------						 */}
-						{/* acá empiezo a meter mano */}
+						{/* Upload Image Beggins */}
 						<div className="col-8 fixNewBtn text-center">
 							<div className="mx-auto card addPic mb-5"></div>
 							<form onSubmit={uploadImage}>
@@ -508,64 +501,7 @@ export const NewAnnouncement = () => {
 								Upload room
 							</button>
 						</div>
-						{/* acá termino de meter mano */}
-						{/* -------------------------------------------------------------------	
-						{/* <div className="col-3 text-center">
-							{" "}
-							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
-								<img className="card-img-top" src="..." alt="" />
-							</div>
-							<div className="card-body">
-								<a href="#" className="btn btn-primary">
-									Upload image
-								</a>
-							</div>
-						</div> */}
-
-						{/* <div className="col-3 text-center">
-							{" "}
-							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
-								<img className="card-img-top" src="..." alt="" />
-							</div>
-							<div className="card-body">
-								<a href="#" className="btn btn-primary">
-									Upload image
-								</a>
-							</div>
-						</div> */}
-						{/* <div className="col-3 text-center">
-							{" "}
-							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
-								<img className="card-img-top" src="..." alt="" />
-							</div>
-							<div className="card-body">
-								<a href="#" className="btn btn-primary">
-									Upload image
-								</a>
-							</div>
-						</div> */}
-						{/* <div className="col-3 text-center">
-							{" "}
-							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
-								<img className="card-img-top" src="..." alt="" />
-							</div>
-							<div className="card-body">
-								<a href="#" className="btn btn-primary">
-									Upload image
-								</a>
-							</div>
-						</div> */}
-						{/* <div className="col-3 text-center">
-							{" "}
-							<div className="card mt-5 mx-auto addPic" style={{ width: "14rem", height: "14rem" }}>
-								<img className="card-img-top" src="..." alt="" />
-							</div>
-							<div className="card-body">
-								<a href="#" className="btn btn-primary">
-									Upload image
-								</a>
-							</div>
-						</div> */}
+						{/* Upload Image Ends*/}
 					</div>
 					<br />
 					<div className="row">
@@ -573,9 +509,6 @@ export const NewAnnouncement = () => {
 						<div className="col-4"></div>
 					</div>
 				</div>
-				{/*<div className="tab-pane fade" id="previewTab" role="tabpanel" aria-labelledby="previewTab-tab">
-					4
-				</div>*/}
 			</div>
 		</div>
 	);
