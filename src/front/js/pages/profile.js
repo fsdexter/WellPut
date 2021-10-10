@@ -18,7 +18,7 @@ export const Profile = () => {
 
 	const getNotification = async () => {
 		await actions.getUser(userId);
-		store.user.rooms.map(room => {
+		store.user?.rooms.map(room => {
 			if (room.temporal_renter !== null) {
 				setNotificateRenter(room.temporal_renter);
 			}

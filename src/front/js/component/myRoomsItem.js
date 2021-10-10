@@ -13,7 +13,7 @@ export const MyRoomsItemActive = props => {
 		<div className="row">
 			<div className="third_part mx-auto mt-3 mb-2">
 				<div className="row pl-3 pr-3">
-					<div className="col-7 mt-4">
+					<div className={props.room.current_renter_details.avatar_url ? "col-5 mt-4" : "col-7 mt-4"}>
 						<div className="ml-2 mb-4">
 							<h5 className="fontRoom">{props.room.title}</h5>
 						</div>
@@ -26,33 +26,40 @@ export const MyRoomsItemActive = props => {
 							<img className="roomItemPic" src={props.room.room_url} href="#" />
 						</Link>
 					</div>
-					<div className="col-1 d-flex justify-content-center btn-icons-annonc">
-						<div className="d-flex flex-column">
-							<button
-								type="button"
-								className="btn btn-outline-warning roomsButtons mt-4 "
-								alt="click to set room inactive"
-								data-toggle="tooltip"
-								data-placement="top"
-								title="Deactivate/Activate"
-								onClick={() => {
-									actions.setRoomActive(props.room.id);
-								}}>
-								<img src={props.room.active_room ? closeEye : openEye} className="closedEye" />
-							</button>
 
-							<button
-								type="button"
-								className="btn btn-outline-warning mt-5 roomsButtons"
-								data-toggle="tooltip"
-								data-placement="top"
-								title="Delete"
-								onClick={() => {
-									actions.setRoomDelete(props.room.id);
-								}}>
-								<img src={deleteRoom} />
-							</button>
+					{props.room.current_renter_details.avatar_url ? (
+						<div className="col-3 roomItemBar">
+							<img className="roomItemPic" src={props.room.current_renter_details.avatar_url} href="#" />
 						</div>
+					) : (
+						""
+					)}
+
+					<div className="col d-flex flex-column btn-icons-annonc">
+						<button
+							type="button"
+							className="btn btn-outline-warning roomsButtons mt-4 mx-auto"
+							alt="click to set room inactive"
+							data-toggle="tooltip"
+							data-placement="top"
+							title="Deactivate/Activate"
+							onClick={() => {
+								actions.setRoomActive(props.room.id);
+							}}>
+							<img src={props.room.active_room ? closeEye : openEye} className="closedEye" />
+						</button>
+
+						<button
+							type="button"
+							className="btn btn-outline-warning mt-5 roomsButtons mx-auto"
+							data-toggle="tooltip"
+							data-placement="top"
+							title="Delete"
+							onClick={() => {
+								actions.setRoomDelete(props.room.id);
+							}}>
+							<img src={deleteRoom} />
+						</button>
 					</div>
 				</div>
 			</div>

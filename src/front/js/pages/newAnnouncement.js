@@ -109,8 +109,7 @@ export const NewAnnouncement = () => {
 			.then(resp => resp.json())
 			.then(data => {
 				setRoomData(prevState => ({ ...prevState, room_url: data.url }));
-			})
-			.catch(error => console.log("errorrr", error));
+			});
 	};
 
 	return (
@@ -513,9 +512,6 @@ export const NewAnnouncement = () => {
 								data-toggle="tab"
 								href="#previewTab"
 								onClick={() => {
-									console.log(4, "roomData : ", roomData);
-
-									console.log("roomData owner_id : ", roomData.owner_id);
 									actions.postNewAnnouncement(roomData);
 									history.push(`/`);
 								}}>

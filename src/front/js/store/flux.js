@@ -65,8 +65,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			login: async userValues => {
-				const store = getStore();
-
 				const requestOptions = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
@@ -166,7 +164,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return error.message;
 				}
 			},
-			recoverPassword: userValues => {},
+			recoverPassword: userValues => {
+				//console.log("métod UPDATE para modificar la contraseña. DATOS NUEVOS : ", userValues);
+			},
 			addRoomie: (user, roomId) => {
 				fetch(API_BASE_URL + "/api/applyroom", {
 					method: "POST",
@@ -177,9 +177,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						user: user,
 						room_Id: roomId
 					})
-				})
-					.then(res => res.json())
-					.then(data => console.log(data, "Apply Romie"));
+				}).then(res => res.json());
+				//.then(data => console.log(data, "Apply Romie"));
 			},
 			onClickHandeler: e => {
 				const store = getStore();
@@ -196,24 +195,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			setRating: s => {
-				const store = getStore();
 				setStore({ rating: s });
 			},
 
 			setBedType: b => {
-				const store = getStore();
 				setStore({ bedType: b });
 			},
 			setMoney: e => {
-				const store = getStore();
 				setStore({ money: e });
 			},
 			setCity: c => {
-				const store = getStore();
 				setStore({ city: c });
 			},
 			setInterests: i => {
-				const store = getStore();
 				setStore({ interests: i });
 			},
 			searchRoom: () => {
@@ -234,25 +228,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(res => res.json())
 					.then(data => {
-						console.log(data, "response serach_room");
-						// TIENES QUE METER LA DATA DE LA BUSQUEDAD, QUE ES EL RESULTADO DEL SEARCH EN UNA VARIABLE PARA PODER PINTARLA EN EL HOME
 						setStore({ roomsSearch: data });
 					});
 			},
-			//////////////////////////////////////////
 			postNewAnnouncement: room => {
-				console.log(room);
 				fetch(API_BASE_URL + "/api/new_announcement", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify(room)
-				})
-					.then(res => res.json())
-					.then(data => console.log(data, "response postNewAnnouncement"));
+				}).then(res => res.json());
+				//.then(data => console.log(data, "response postNewAnnouncement"));
 			},
-			///////////////////////////////////get Tenancy
 			getTenancies: async room_id => {
 				try {
 					const response = await fetch(`${API_BASE_URL}/api/tenancy_room_reviews/${room_id}`);
@@ -290,8 +278,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return errorMsg.message;
 				}
 			},
-
-			////////////////////////Habitación de mis anuncios activa o inactiva//////////////////////////////////º
 			setRoomActive: id => {
 				fetch(API_BASE_URL + "/api/change_active_room/" + id, {
 					method: "PUT",
@@ -304,7 +290,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			},
-			////////////////////////Eliminar habitación de mis anuncios//////////////////////////////////º
 			setRoomDelete: id => {
 				fetch(API_BASE_URL + "/api/change_delete_room/" + id, {
 					method: "PUT",
@@ -317,8 +302,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			},
-			//////////////////////////////////////////////////////////º
-
 			getDetailsRoom: async room_id => {
 				const store = getStore();
 

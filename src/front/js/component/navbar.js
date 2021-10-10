@@ -63,7 +63,7 @@ export const Navbar = () => {
 
 		if (source) {
 			return (
-				source.rooms?.length &&
+				source.rooms?.length > 0 &&
 				source.rooms?.some(room => room.temporal_renter !== null) && (
 					<i className="fas fa-bell fa-lg text-white notifications-bell" aria-hidden="true" />
 				)

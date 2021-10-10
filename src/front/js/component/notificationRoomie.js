@@ -26,9 +26,8 @@ export const NotificationRoomie = props => {
 				room_id: roomId,
 				isAcept: true
 			})
-		})
-			.then(res => res.json())
-			.then(data => console.log(data));
+		}).then(res => res.json());
+		//.then(data => console.log(data));
 		// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
 		props.setNotificateRenter(false);
 
@@ -46,9 +45,8 @@ export const NotificationRoomie = props => {
 				room_id: roomId,
 				isAcept: false
 			})
-		})
-			.then(res => res.json())
-			.then(data => console.log(data));
+		}).then(res => res.json());
+		//.then(data => console.log(data));
 
 		// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
 		props.setNotificateRenter(false);

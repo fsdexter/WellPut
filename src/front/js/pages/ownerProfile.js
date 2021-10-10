@@ -25,6 +25,10 @@ export const OwnerProfile = () => {
 		}
 	};
 
+	const deleteRoomie = () => {
+		console.log("SE ELIMINÓ EL USUARIO SELECCIONADA COMO INQUILINO DE LA HABITACIÓN XXX ");
+	};
+
 	return (
 		<div className="picturefond col-12 d-flex justify-content-center text-white">
 			<div className="container col-10 detallefondblack">
@@ -105,18 +109,12 @@ export const OwnerProfile = () => {
 				)}
 			</div>
 			<div className="col-1" id="containerOptionsProfile">
-				{/* <div className="col buttonfondblack d-flex justify-content-center">
+				<div className="col buttonfondblack d-flex justify-content-center">
 					<button
 						type="button"
 						className="navbar-brand mb-0 mr-2 btn btn-navb"
-						data-toggle="modal"
-						data-target="#notificationModal">
-						<i className="fa fa-user-plus fa-2x text-white btn-options-profile" aria-hidden="true" />
-						<h5 className="textbuttons">Notifications</h5>
-					</button>
-				</div> */}
-				<div className="col buttonfondblack d-flex justify-content-center">
-					<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb" data-target="#addReviewModal">
+						data-target="#addReviewModal"
+						onClick={() => deleteRoomie()}>
 						<i className="fas fa-user-times fa-2x text-white btn-options-profile"></i>
 						<h5 className="textbuttons">Delete Romie</h5>
 					</button>
@@ -138,6 +136,7 @@ export const OwnerProfile = () => {
 							<AddReview />
 						</div>
 					</div>
+				</div>
 				</div> */}
 
 				{/*<!-- notification Modal -->*/}
