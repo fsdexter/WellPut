@@ -97,7 +97,7 @@ export const DetailedView = props => {
 									}
 								/>
 							</button>
-							{store.user?.id === details.current_renter ? null : (
+							{store.user?.id === details.current_renter || store.user?.id === details.owner_id ? null : (
 								<button
 									type="button"
 									className="navbar btn btnapllyroom "

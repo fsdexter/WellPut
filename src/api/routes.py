@@ -329,12 +329,15 @@ def reviewendp():
     tenancy_serializado=tenancy.serialize()
     renter= User.query.filter_by(id=body_request["reter_id"]).first()
     renter_serializado=renter.serialize()
-    already_reviewed = Review.query.filter_by(room_id=room_serializado["id"],tenancy_id=tenancy_serializado["id"], renter_id=renter_serializado["id"]).first()
+    #already_reviewed = Review.query.filter_by(room_id=room_serializado["id"],tenancy_id=tenancy_serializado["id"], renter_id=renter_serializado["id"]).first()
+    already_reviewed = Tenancy.query.filter_by(room_id=room_serializado["id"], user_id=renter_serializado["id"]).first()
     
     if already_reviewed is not None:
         return jsonify({"msg": "this comment already exists"}),400
+    
+    print(already_reviewed)
 
-    if room_serializado["current_renter"] == body_request["reter_id"] :
+    if room_serializado["current_renter"] == body_request["reter_id"] and  already_reviewed is None:
         
         new_tenacy = Tenancy(
             # When the renter write a new comment, is ned to create a new tenacy
