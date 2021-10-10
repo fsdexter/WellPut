@@ -198,7 +198,6 @@ export const DetailedView = props => {
 									details.expense.map(exp => {
 										return (
 											<div key={exp.id}>
-												{console.log(exp)}
 												{exp.name === "wifi" ? (
 													<i
 														className="fas fa-wifi fa-2x mr-3"
