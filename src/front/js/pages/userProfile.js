@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 
 import "../../styles/viewprofile.scss";
-import avatar from "/workspace/WellPut/src/front/img/avatar.png";
+import avatar from "../../img/avatar.png";
 
 export const UserProfile = () => {
 	let { renter_id } = useParams();

@@ -5,7 +5,7 @@ import { API_BASE_URL } from "../constants";
 import { AddReview } from "../component/addReview";
 import { Notifications } from "../component/notifications";
 import "../../styles/viewprofile.scss";
-import avatar from "/workspace/WellPut/src/front/img/avatar.png";
+import avatar from "../../img/avatar.png";
 
 export const OwnerProfile = () => {
 	let { owner_id } = useParams();
