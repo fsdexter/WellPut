@@ -5,7 +5,7 @@ import { API_BASE_URL } from "../constants";
 import { AddReview } from "../component/addReview";
 import { Notifications } from "../component/notifications";
 import "../../styles/viewprofile.scss";
-import avatar from "src/front/img/avatar.png";
+import avatarUser from "src/front/img/avatar.png";
 
 export const OwnerProfile = () => {
 	let { owner_id } = useParams();
@@ -33,7 +33,7 @@ export const OwnerProfile = () => {
 						<div className="row" key={owner.id}>
 							<img
 								className="col-4 card-img-top roundShape avatar-profile"
-								src={owner.avatar_url ? owner.avatar_url : avatar}
+								src={owner.avatar_url ? owner.avatar_url : avatarUser}
 								alt="Card image cap"
 							/>
 

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { NotificationRoomie } from "../component/notificationRoomie";
 
 import "../../styles/viewprofile.scss";
-import avatar from "src/front/img/avatar.png";
+import avatarUser from "src/front/img/avatar.png";
 
 export const Profile = () => {
 	const history = useHistory();
@@ -52,7 +52,7 @@ export const Profile = () => {
 						<div className="row" key={userId}>
 							<img
 								className="col-4 card-img-top roundShape avatar-profile"
-								src={user.avatar_url ? user.avatar_url : avatar}
+								src={user.avatar_url ? user.avatar_url : avatarUser}
 								alt="Card image cap"
 							/>
 

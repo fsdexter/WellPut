@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 
 import "../../styles/viewprofile.scss";
-import avatar from "src/front/img/avatar.png";
+import avatarUser from "src/front/img/avatar.png";
 
 export const UserProfile = () => {
 	let { renter_id } = useParams();
@@ -32,7 +32,7 @@ export const UserProfile = () => {
 						<div className="row" key={renter.id}>
 							<img
 								className="col-4 card-img-top roundShape avatar-profile"
-								src={renter.avatar_url ? renter.avatar_url : avatar}
+								src={renter.avatar_url ? renter.avatar_url : avatarUser}
 								alt="Card image cap"
 							/>
 
