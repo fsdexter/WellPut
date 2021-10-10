@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { NotificationRoomie } from "../component/notificationRoomie";
 
 import "../../styles/viewprofile.scss";
-import avatar from "../../img/avatar.png";
+// import avatar from "../../img/avatar.png";
 
 export const Profile = () => {
 	const history = useHistory();
