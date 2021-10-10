@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -9,12 +9,9 @@ import { AddReview } from "../component/addReview";
 import "../../styles/detailedView.scss";
 
 export const ReviewsResume = props => {
-	const { store, actions } = useContext(Context);
+	const { store } = useContext(Context);
 	let { room_id } = useParams();
 	const twoFirstReviews = props.tenancies && [props.tenancies[0], props.tenancies[1]];
-	let userId = JSON.parse(localStorage.getItem("user"))
-		? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
-		: null;
 
 	return (
 		<div className="text-center mb-1" id="reviwsRC">
@@ -65,13 +62,13 @@ export const ReviewsResume = props => {
 						<div className="col-12 d-flex flex-column">
 							<button
 								type="button"
-								className="navbar btn btnapllyroom ml-5 d-flex justify-content-center"
+								className="navbar btn + ml-5 d-flex justify-content-center"
 								data-toggle="modal"
 								data-target="#addReviewModal">
 								<i
 									className="fas fa-plus-square fa-2x text-white change-icon-color"
-									aria-hidden="true"></i>{" "}
-								&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
+									aria-hidden="true"></i>
+								<h4 className="textbuttons">&nbsp;&nbsp; Add Review</h4>
 							</button>
 						</div>
 					</div>
