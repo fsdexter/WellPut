@@ -83,6 +83,13 @@ color: black;
     border-width: 1px;
 }
 
-::-webkit-scrollbar-thumb{
+
+.rooms-box{
+    overflow-y:scroll;
+    height: 88rem;
+}
+
+
+.rooms-box::-webkit-scrollbar-thumb {
     background: #FFDE59;
 }
