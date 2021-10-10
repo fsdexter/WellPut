@@ -180,84 +180,29 @@ def get_rooms():
 def get_single_room(room_id):
     room_selected = Room.query.get(room_id)
     room_seralize = room_selected.serialize()
-    reviews_room = room_selected.reviews
+    reviews_room = room_selected.reviews    
     reviews_list = []
     
     for review in reviews_room:
-        tenancy_review = review.tenancy
+        review_serialize = review.serialize()        
+        tenancy_review = review.tenancy 
+        user = User.query.filter(User.id == review_serialize["renter_id"]).first()
         
-        user = User.query.filter(User.id == tenancy_review.user_id).first()
         user_tenancy = [user.serialize()]
-        tenancy_review_serialize = tenancy_review.serialize()
-        tenancy_review_serialize['user'] = user_tenancy        
-        reviews_list.append(tenancy_review_serialize)
+        review_serialize['renter'] = user_tenancy
+            
+        if tenancy_review is not None:
+            tenancy_review_serialize = tenancy_review.serialize()    
+            tenancy_review_serialize['renter'] = user_tenancy
+            reviews_list.append(tenancy_review_serialize)      
     
     city = City.query.filter(City.id == room_selected.city_id).first()
     city_room = [city.serialize()]
     room_seralize['city'] = city_room
-    room_seralize['tenancies'] = reviews_list #Realmente se sacan las tenancies, la relación entre usuario, comentario y habitación
+    room_seralize['tenancies'] = reviews_list 
     
     return jsonify(room_seralize), 200
-    
-# @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
-# def edit_profile(user_id):
-#     body_request = request.get_json()
-#     user_selected = User.query.get_or_404(user_id)
-#     user_to_edit = user_selected.serialize()
-#     db.session.delete(user_selected)
-#     db.session.commit()
-    
-#     for param in body_request:
-#         user_to_edit[param] = body_request[param]
-   
-#     new_user = User(
-#         avatar_url = user_to_edit["avatar_url"],
-#         birthday = user_to_edit["birthday"],
-#         city_id = user_to_edit["city_id"],
-#         description = user_to_edit["description"],
-#         email = user_to_edit["email"],
-#         gender = user_to_edit["gender"],
-#         occupation = user_to_edit["occupation"],
-#         id = user_to_edit["id"],
-#         last_name = user_to_edit["last_name"],
-#         name = user_to_edit["name"],
-#         password = generate_password_hash(user_to_edit["password"], "sha256"),
-#         phone = user_to_edit["phone"]
-#     )
-    
-#     db.session.add(new_user)
-#     db.session.commit()
-    
-#     for interest in user_to_edit["interests"]:
-#         interest_front = Characteristic.query.filter(Characteristic.name == interest).first()
-#         user_interest = interest_front.serialize()
-        
-#         new_characteritic_user = CharacteristicUser(
-#             user_id = user_to_edit["id"],
-#             characteristic_id = user_interest["id"]
-#         )
-        
-#         db.session.add(new_characteritic_user)
-#         db.session.commit()
-        
-#     for language in user_to_edit["languages"]:
-#         language_front = Language.query.filter(Language.name == language).first()
-#         user_language = language_front.serialize()
-        
-#         new_language_user = SpokenLanguages(
-#             user_id = user_to_edit["id"],
-#             language_id = user_language["id"]
-#         )
-        
-#         db.session.add(new_language_user)
-#         db.session.commit()
-        
-#     return jsonify(user_to_edit), 200
 
-
-#
-##
-###
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
 def edit_profile(user_id):
     body_request = request.get_json()
@@ -265,7 +210,7 @@ def edit_profile(user_id):
     user_to_edit = user.serialize()
     print(body_request)
     
-    # To get the city id and create city_id inside to the new room
+    # To get the city id and create city_id inside to the new user
     city_request = body_request.get("city",  None) 
     city = City.query.filter(City.name == city_request).first()  
     city_serialize = city.serialize()
@@ -411,22 +356,34 @@ def reviewendp():
     renter= User.query.filter_by(id=body_request["reter_id"]).first()
     renter_serializado=renter.serialize()
     already_reviewed = Review.query.filter_by(room_id=room_serializado["id"],tenancy_id=tenancy_serializado["id"], renter_id=renter_serializado["id"]).first()
-    print(already_reviewed)
+    
     if already_reviewed is not None:
         return jsonify({"msg": "this comment already exists"}),400
 
     if room_serializado["current_renter"] == body_request["reter_id"] :
+        
+        new_tenacy = Tenancy(
+            # When the renter write a new comment, is ned to create a new tenacy
+            room_id = room_serializado["id"]
+        )
+        
+        db.session.add(new_tenacy)
+        db.session.commit()
+        
+        new_tenancy_serialize = new_tenacy.serialize()
+        
         review = Review(
             comment=body_request["comment"], 
             rating=body_request["rating"], 
             date=date.today(), 
             room_id=room_serializado["id"], 
-            tenancy_id=tenancy_serializado["id"],
+            tenancy_id=new_tenancy_serialize["id"],
             renter_id=renter_serializado["id"]
             )
         
         db.session.add(review)
         db.session.commit()
+        
         return jsonify({"review": review.serialize()}), 200
     else:
         return jsonify({"msg": "You cannot comment on this room"}),400
@@ -435,7 +392,7 @@ def reviewendp():
 def get_reviews_room(room_id):
     tenancies_room_selected = Tenancy.query.filter(Tenancy.room_id == room_id).all()
     tenancies_list = []
-    
+        
     for tenancy_room_selected in tenancies_room_selected:
         
         tenancy_reviews = tenancy_room_selected.reviews

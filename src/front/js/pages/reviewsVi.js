@@ -6,7 +6,7 @@ import "../../styles/reviewsVi.scss";
 
 export const Reviews = () => {
 	let { room_id } = useParams();
-	const [room, setRoom] = useState();
+	const [room, setRoom] = useState({});
 
 	useEffect(() => {
 		getDetailsRoom();
@@ -18,9 +18,12 @@ export const Reviews = () => {
 			const roomData = await response.json();
 			setRoom(roomData);
 		} catch (error) {
+			setRoom({});
 			return error.message;
 		}
 	};
+
+	console.log("ROOOOMMM --- ", room?.tenancies);
 
 	return (
 		<>
@@ -35,14 +38,14 @@ export const Reviews = () => {
 						height: "100%"
 					}}>
 					<div className="container col-10 text-white pt-4 mb-3 mt-3" id="bxReviews">
-						{room.tenancies.length
-							? room.tenancies.map(tenancy => {
+						{room.tenancies?.length > 0
+							? room.tenancies?.map(tenancy => {
 									return (
 										<div key={tenancy.id}>
 											<div
 												className="col-10 mt-5 d-flex justify-content-around my-3"
 												id="commentsContainer">
-												{tenancy.user.map(renter => {
+												{tenancy.renter.map(renter => {
 													return (
 														<img
 															key={renter.id}
@@ -55,7 +58,7 @@ export const Reviews = () => {
 												{tenancy.reviews.map(review => {
 													return (
 														<div key={review.id} className="col-9 d-flex flex-column">
-															{tenancy.user.map(renter => {
+															{tenancy.renter.map(renter => {
 																return (
 																	<h5 key={renter.id} className="mb-3 userNameReviws">
 																		{renter.name}
@@ -64,7 +67,7 @@ export const Reviews = () => {
 															})}
 
 															<h3>{review.comment}</h3>
-															<p className="mt-2">{review.date}</p>
+															<p className="mt-2">{review.date.substring(0, 16)}</p>
 														</div>
 													);
 												})}

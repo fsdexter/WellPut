@@ -26,7 +26,7 @@ export const ReviewsResume = props => {
 							<div key={tenancy.id} className="row mt-3 d-flex justify-content-around">
 								<div className="col-10 reviResContainer ">
 									<div className="d-flex">
-										<img src={tenancy.user[0].avatar_url} className="rewImgRe" />
+										<img src={tenancy.renter[0].avatar_url} className="rewImgRe" />
 										<div className="ml-2">
 											<p className="text-left ml-2 text-white">{tenancy.reviews[0].comment}</p>
 										</div>
