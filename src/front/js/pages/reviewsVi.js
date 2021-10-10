@@ -23,8 +23,6 @@ export const Reviews = () => {
 		}
 	};
 
-	console.log("ROOOOMMM --- ", room?.tenancies);
-
 	return (
 		<>
 			{room ? (
