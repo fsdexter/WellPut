@@ -42,13 +42,13 @@ export const OwnerProfile = () => {
 							/>
 
 							<div className="col-8 text-white">
-								<div className="row">
+								<div className="row ml-4">
 									<h1 className="textwhhite ml-5">
 										{owner.name} {owner.last_name}
 									</h1>
 								</div>
 
-								<div className="col-12 detallefondblack  " id="presentationUser">
+								<div className="col-11 detallefondblack  " id="presentationUser">
 									{owner.city
 										? owner.city.map(city => {
 												return (
@@ -108,8 +108,8 @@ export const OwnerProfile = () => {
 					</div>
 				)}
 			</div>
-			<div className="col-1" id="containerOptionsProfile">
-				{/* <div className="col buttonfondblack d-flex justify-content-center">
+			{/* <div className="col-1" id="containerOptionsProfile"> */}
+			{/* <div className="col buttonfondblack d-flex justify-content-center">
 					<button
 						type="button"
 						className="navbar-brand mb-0 mr-2 btn btn-navb"
@@ -119,8 +119,8 @@ export const OwnerProfile = () => {
 						<h5 className="textbuttons">Add review</h5>
 					</button>
 				</div> */}
-				{/*<!-- add ReviewModal Modal -->*/}
-				{/* <div id="addReviewModal" className="modal fade" role="dialog">
+			{/*<!-- add ReviewModal Modal -->*/}
+			{/* <div id="addReviewModal" className="modal fade" role="dialog">
 					<div className="modal-dialog modal-lg">
 						<div className="modal-content">
 							<AddReview />
@@ -129,15 +129,15 @@ export const OwnerProfile = () => {
 				</div>
 				</div> */}
 
-				{/*<!-- notification Modal -->*/}
-				{/* <div id="notificationModal" className="modal fade" role="dialog">
+			{/*<!-- notification Modal -->*/}
+			{/* <div id="notificationModal" className="modal fade" role="dialog">
 					<div className="modal-dialog modal-lg">
 						<div className="modal-content">
 							<Notifications />
 						</div>
 					</div>
 				</div> */}
-			</div>
+			{/* </div> */}
 		</div>
 	);
 };
