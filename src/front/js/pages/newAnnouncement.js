@@ -86,8 +86,10 @@ export const NewAnnouncement = () => {
 	const handleMap = dataCity => {
 		const address = dataCity?.text_es || "";
 		const city =
-			dataCity.context.filter(field => field.id.includes("region"))[0]?.text_es.replace("Provincia de ", "") ||
-			"";
+			dataCity.context
+				.filter(field => field.id.includes("region"))[0]
+				?.text_es.replace("Provincia de ", "")
+				.replace("provincia de ", "") || "";
 
 		setRoomData(prevState => ({
 			...prevState,

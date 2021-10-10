@@ -30,7 +30,7 @@ export const UserProfileForm = () => {
 	return (
 		<div className="d-flex flex-column">
 			<img src={perfil} className="card-img-top roundShape imgperfil" alt="Card image cap" />
-			{avatar_url && <h2>You Have {unreadMessages.length} unread Messages .</h2>}
+			{avatar_url}
 			<input type="file" onChange={e => setFiles(e.target.files)} />
 			<button className="btn btn-warning mt-3" onClick={() => uploadImage()}>
 				Upload
