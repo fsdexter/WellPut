@@ -63,13 +63,13 @@ export const DetailedView = () => {
 				/>
 				<div className="carousel-caption carousel-caption-details-room">
 					{store.user?.id === details.current_renter ? (
-						<di className="title-detail-room-renter mt-3 d-flex justify-content-center">
-							<di className="ml-5">
+						<div className="title-detail-room-renter mt-3 d-flex justify-content-center">
+							<div className="ml-5">
 								<h4 className="mt-3 ml-5">{details.title} </h4>
-							</di>
+							</div>
 
 							<h5 className="text-your-room">YOUR ROOM </h5>
-						</di>
+						</div>
 					) : (
 						<h4 className="title-detail-room mt-3">{details.title} </h4>
 					)}
