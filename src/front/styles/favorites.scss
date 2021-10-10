@@ -1,28 +1,59 @@
-.favoritesBg{
+.favoritesBgr{
     background: #184F5F;
-    width: 60%;
+    width: 100vw;
     height:max-content ;
+ 
 }
+.fvSecondBg{
+    margin:10px;
+    background: white;
+}
+
+
+.favoritesBg{
+    background: #BCC7C1;
+    width: 60%;
+    margin: auto;
+    height: 200px;
+    
+}
+.picBar{
+height: 200px;
+padding:10px;
+}
+
 .favoritesPic{
-    max-width: 450px;
-    max-height: 200px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
 }
 .favButton{
     border: black;
+    margin-left: 40px;
+    margin-top:70px;
 }
 .favButton:hover{
     border-color: #FFDE59;
     background: #FFDE59;
 }
 .favPrice{
-    font-family: 'Red Hat Display', sans-serif;
-    font-size: xx-large;
-    color:white;
-    padding-top: 50%;
-    padding-left: 50%;
+   
+    color:black;
+
 }
 .favTitle{
-    font-family: 'Red Hat Display', sans-serif;
-    font-size: x-larlargege;
-    color:white;
+    
+    color:black;
+}
+
+.myFavorites{
+    height: 100px;
+    margin-left: 65px;
+    margin-top: 25px;
+    margin-bottom:25px;
+}
+.rojelio{
+    color:red;
 }

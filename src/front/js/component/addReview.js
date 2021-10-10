@@ -1,10 +1,10 @@
 import React, { useState, useContext, useRef } from "react";
 import { Context } from "../store/appContext";
 import { Rating } from "../component/rating";
-
+import PropTypes from "prop-types";
 import "../../styles/addReview.scss";
 
-export const AddReview = () => {
+export const AddReview = props => {
 	const { store, actions } = useContext(Context);
 
 	const [formValue, setFormValue] = useState({
@@ -20,11 +20,15 @@ export const AddReview = () => {
 	const closeModalLogin = () => {
 		closeBtn.current.click();
 	};
-	///////////////////////ç
+	///////////////////////
 
 	const reviewSubmit = () => {
-		actions.addReview(formValue);
-		closeModalLogin();
+		if (JSON.parse(localStorage.getItem("user")) && props.room) {
+			actions.addReview(formValue, props.room.id, props.user.id);
+			closeModalLogin();
+		} else {
+			alert("You have not logged in, log in to rate this room!");
+		}
 	};
 
 	return (
@@ -37,7 +41,15 @@ export const AddReview = () => {
 			</div>
 			<div className="d-flex flex-column mt-4">
 				<div className="row d-flex justify-content-around mb-4 m-2" id="containerAddReview">
-					<div className="col-12" id="roomIMReview">
+					<div
+						className="col-12 mt-1  m-0 p-0 d-flex justify-content-around"
+						style={{
+							backgroundImage: "url(" + props.room.room_url + ")",
+							backgroundSize: "contain",
+							width: "50rem",
+							height: "30rem",
+							marginLeft: "7rem"
+						}}>
 						<div className="onCommentStarsReview p-3 d-flex flex-column">
 							<h3 className="text-comment text-white  ">Tell us your experience living in this room :</h3>
 
@@ -67,4 +79,8 @@ export const AddReview = () => {
 			</div>
 		</div>
 	);
+};
+AddReview.propTypes = {
+	room: PropTypes.object,
+	user: PropTypes.object
 };

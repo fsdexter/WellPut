@@ -38,6 +38,18 @@ def get_addapplyromie():
         db.session.commit()
     return jsonify({"msg": "Apply send" }), 200
 
+# # ----------- Consult current del user para comparar con room id ---------------------------------
+
+# @api.route('/current_user_room', methods=['POST'])
+# def current_user_room():
+   
+#     body_request= request.get_json()
+#     user=User.query.get(body_request["user"])
+#     if user:
+#         user.current_room=body_request["room_Id"]
+#         db.session.commit()
+#     print(body_request)
+#     return "OK", 200
 # ----------- Upload Photo User ---------------------------------
 @api.route('/user/<int:user_id>/image', methods=['POST'])
 def handle_upload(user_id):
@@ -53,6 +65,10 @@ def handle_upload(user_id):
 
 #________________________________________________________________________
 
+
+#
+##
+###
 @api.route('/sign_up', methods=['POST'])
 def sign_up_user():
     body_request = request.get_json()
@@ -60,9 +76,17 @@ def sign_up_user():
     name_request = body_request.get("name", None)
     last_name_request = body_request.get("last_name", None)
     password_request = body_request.get("password", None)
+    city_request = body_request.get("city",  None) 
     
+    # To get the city id and create city_id inside to the new room
+    city = City.query.filter(City.name == city_request).first()  
+    city_serialize = city.serialize()
+    city_user_id = city_serialize['id']
+
+
     new_user = User(
-        email = email_request, 
+        email = email_request,
+        city_id = city_user_id, 
         name = name_request,
         last_name = last_name_request, 
         password = generate_password_hash(password_request, "sha256")
@@ -230,22 +254,23 @@ def get_single_room(room_id):
         
 #     return jsonify(user_to_edit), 200
 
+
+#
+##
+###
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
 def edit_profile(user_id):
     body_request = request.get_json()
     user = User.query.get_or_404(user_id)
     user_to_edit = user.serialize()
+    print(body_request)
+    
+    # To get the city id and create city_id inside to the new room
+    city_request = body_request.get("city",  None) 
+    city = City.query.filter(City.name == city_request).first()  
+    city_serialize = city.serialize()
+    city_user_id = city_serialize['id']
        
-    if user:        
-        user.birthday = body_request["birthday"]
-        #user.city_id = body_request["city_id"]
-        user.description = body_request["description"]
-        user.email = body_request["email"]
-        user.gender = body_request["gender"]
-        user.occupation = body_request["occupation"]
-        user.last_name = body_request["last_name"]
-        user.name = body_request["name"]
-        user.phone = body_request["phone"]
    
     for interest in body_request["interests"]:
         interest_front = Characteristic.query.filter(Characteristic.name == interest).first()
@@ -271,6 +296,19 @@ def edit_profile(user_id):
         db.session.add(new_language_user)
         db.session.commit()
                 
+    if user:        
+        user.birthday = body_request["birthday"]
+        user.city_id = city_user_id
+        user.description = body_request["description"]
+        user.email = body_request["email"]
+        user.gender = body_request["gender"]
+        user.occupation = body_request["occupation"]
+        user.last_name = body_request["last_name"]
+        user.name = body_request["name"]
+        user.phone = body_request["phone"]
+        
+        db.session.commit()
+
     return jsonify(user.serialize()), 200
 
     # -------------------------- TEST -------------------------
@@ -366,21 +404,32 @@ def create_announcement():
 @api.route('/tenancy_room_reviews', methods=['POST'])
 def reviewendp():
     body_request = request.get_json()
-    user = User.query.get(body_request["user"])
-    already_reviewed = Review.query.filter_by(room_id=body_request["room_id"],tenancy_id=user.id).first()
-    if user.current_room == body_request["room_id"] and not already_reviewed:
+    room=Room.query.get(body_request["room_id"])
+    room_serializado=room.serialize()
+    tenancy= Tenancy.query.filter_by(room_id=body_request["room_id"]).first()
+    tenancy_serializado=tenancy.serialize()
+    renter= User.query.filter_by(id=body_request["reter_id"]).first()
+    renter_serializado=renter.serialize()
+    already_reviewed = Review.query.filter_by(room_id=room_serializado["id"],tenancy_id=tenancy_serializado["id"], renter_id=renter_serializado["id"]).first()
+    print(already_reviewed)
+    if already_reviewed is not None:
+        return jsonify({"msg": "this comment already exists"}),400
+
+    if room_serializado["current_renter"] == body_request["reter_id"] :
         review = Review(
             comment=body_request["comment"], 
             rating=body_request["rating"], 
             date=date.today(), 
-            room_id=body_request["room_id"], 
-            tenancy_id=body_request["user"])
+            room_id=room_serializado["id"], 
+            tenancy_id=tenancy_serializado["id"],
+            renter_id=renter_serializado["id"]
+            )
         
         db.session.add(review)
         db.session.commit()
         return jsonify({"review": review.serialize()}), 200
     else:
-        return jsonify("ya comento"),400
+        return jsonify({"msg": "You cannot comment on this room"}),400
 
 @api.route('/tenancy_room_reviews/<int:room_id>', methods=['GET']) 
 def get_reviews_room(room_id):
@@ -512,6 +561,13 @@ def change_active_room(id):
     db.session.commit()
     return jsonify("Change Active Room Success")
 
+@api.route("/change_fav_button/<int:id>", methods=[ "PUT"])
+def change_fav_button(id):
+    room = Room.query.get(id)
+    room.is_favorite = not room.is_favorite
+    db.session.commit()
+    return jsonify("Fav Button Changed")
+
 @api.route("/change_delete_room/<int:id>", methods=[ "PUT"])
 #@jwt_required()
 def change_delete_room(id):
@@ -534,6 +590,8 @@ def change_current_room(user_id):
     db.session.commit()
     return jsonify("Change Active user Success")
 
+
+
 @api.route("/change_favorite/<int:id_user>/<int:id_room>", methods=[ "POST"])
 #@jwt_required()
 def change_favorite(id_user, id_room):
@@ -553,4 +611,11 @@ def change_favorite(id_user, id_room):
         db.session.commit()
         return jsonify("Favorite deleted")    
     return jsonify("Error with favorites")
+
+@api.route('/get_favorite/<int:id_user>', methods=['GET'])
+def get_fav(id_user):
+    favorites =Favorites.query.filter_by(user_id = id_user)
+    favorite_rooms = list(map(lambda favorite: Room.query.get(favorite.room_id).serialize(),favorites))
+    return jsonify({"msgFavorite":favorite_rooms}), 200
+
 

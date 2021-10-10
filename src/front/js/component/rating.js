@@ -12,7 +12,9 @@ export function Rating(props) {
 					return (
 						<div
 							key={i}
-							className={store.rating < i + 1 ? "far fa-star fa-2x" : "fas fa-star fa-2x"}
+							className={
+								store.rating < i + 1 ? "far fa-star fa-2x unchecked" : "fas fa-star fa-2x checked"
+							}
 							onClick={() => {
 								let s = i + 1;
 								if (s == store.rating) {

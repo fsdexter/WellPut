@@ -7,6 +7,7 @@ import "../../styles/signUp.scss";
 import room1 from "../../img/room1.png";
 import room2 from "../../img/room2.png";
 import room3 from "../../img/room3.png";
+import { CitySelector } from "./CitySelector";
 
 export const SignUp = () => {
 	const { store, actions } = useContext(Context);
@@ -18,7 +19,8 @@ export const SignUp = () => {
 		last_name: "",
 		email: "",
 		password: "",
-		repeatPassword: ""
+		repeatPassword: "",
+		city: ""
 	});
 
 	const inputHandelChange = e => {
@@ -115,12 +117,23 @@ export const SignUp = () => {
 							required
 						/>
 					</div>
-					<div className="form-grup row mt-2 mb-5">
+					<div className="form-grup row mt-2 mb-4">
 						<input
 							className="col-12 inputSinLog"
 							type="password"
 							name="repeatPassword"
 							placeholder="Repeat Password"
+							onChange={inputHandelChange}
+							required
+						/>
+					</div>
+					<div className="form-grup row mt-2 mb-4">
+						<input
+							className="col-12 inputSinLog"
+							type="text"
+							name="city"
+							id="city"
+							placeholder="city"
 							onChange={inputHandelChange}
 							required
 						/>

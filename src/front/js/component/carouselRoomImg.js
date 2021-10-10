@@ -7,7 +7,7 @@ import "../../styles/carouselRoomImg.scss";
 import { RatingStatic } from "./ratingStatic";
 
 export const CarouselRoomImg = props => {
-	const { store, actions } = useContext(Context);
+	const { actions } = useContext(Context);
 	let room_reviews = props.room.reviews.map(review => review.rating);
 	let id_user = JSON.parse(localStorage.getItem("user"))
 		? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
@@ -53,8 +53,15 @@ export const CarouselRoomImg = props => {
 										title="Add Favorite"
 										onClick={() => {
 											actions.setFavorites(id_user, props.room.id);
+											actions.setFavButton(props.room.id);
 										}}>
-										<i className="far fa-heart fa-2x" />
+										<i
+											className={
+												props.room.is_favorite
+													? "fas fa-heart fa-2x corRed"
+													: "far fa-heart fa-2x "
+											}
+										/>
 									</button>
 								</div>
 							</div>

@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
-
+import { AddReview } from "../component/addReview";
 import { OwnerResume } from "../component/ownerResume";
 import { ReviewsResume } from "../component/reviewsResumen";
 import { RatingStatic } from "../component/ratingStatic";
@@ -15,11 +13,11 @@ import doubleBed from "../../img/doubleBlack.png";
 import "../../styles/detailedView.scss";
 
 export const DetailedView = () => {
-	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
+	let userId = JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id;
+	let user = JSON.parse(localStorage.getItem("user")).user || JSON.parse(localStorage.getItem("user"));
 	const [details, setDetails] = useState();
 	const [averageRating, setAverageRating] = useState();
-
 	useEffect(() => {
 		getDetailsRoom();
 	}, []);
@@ -57,7 +55,17 @@ export const DetailedView = () => {
 					}
 				/>
 				<div className="carousel-caption carousel-caption-details-room">
-					<h4 className="title-detail-room mt-3">{details.title} </h4>
+					{userId === details.current_renter ? (
+						<di className="title-detail-room-renter mt-3 d-flex justify-content-center">
+							<di className="ml-5">
+								<h4 className="mt-3 ml-5">{details.title} </h4>
+							</di>
+
+							<h5 className="text-your-room">YOUR ROOM </h5>
+						</di>
+					) : (
+						<h4 className="title-detail-room mt-3">{details.title} </h4>
+					)}
 					<div className="row rowCustom d-flex justify-content-center">
 						<div className="caroPriceCustom mb-3">
 							<h2>{details.price} €</h2>
@@ -65,21 +73,23 @@ export const DetailedView = () => {
 						<div className="starCaroCustom d-flex justify-content-around mb-3">
 							<RatingStatic rating={averageRating} />
 							<button
-								type="button"
-								className="navbar btn  btnapllyroom"
-								data-toggle="modal"
-								data-target="#notificationModal">
-								<i className="fa fa-user-plus fa-2x text-white" aria-hidden="true" /> &nbsp;&nbsp;
-								<h4 className="textbuttons"> Apply Room</h4>
-							</button>
-
-							<button
 								className="heartButtonFix ml-5 pr-5 pl-5"
 								data-toggle="tooltip"
 								data-placement="top"
 								title="Add Favorite">
 								<i className="far fa-heart fa-2x" />
 							</button>
+							{userId === details.current_renter ? null : (
+								<button
+									type="button"
+									className="navbar btn btnapllyroom "
+									data-toggle="modal"
+									data-target="#notificationModal">
+									<i className="fa fa-plus fa-2x text-white change-icon-color" aria-hidden="true" />{" "}
+									&nbsp;&nbsp;
+									<h4 className="textbuttons "> Apply Room</h4>
+								</button>
+							)}
 						</div>
 					</div>
 				</div>
@@ -267,7 +277,14 @@ export const DetailedView = () => {
 						</div>
 					</div>
 					<div className="col-6 reviesRes">
-						<ReviewsResume reviews={details.reviews} roomId={details.id} tenancies={details.tenancies} />
+						<ReviewsResume
+							reviews={details.reviews}
+							roomId={details.id}
+							tenancies={details.tenancies}
+							userId={userId}
+							details={details}
+							user={user}
+						/>
 					</div>
 				</div>
 				{/*<!-- notification Modal -->*/}
@@ -283,6 +300,14 @@ export const DetailedView = () => {
 								city={details.city.map(c => c.name)}
 							/>
 						</div>
+					</div>
+				</div>
+			</div>
+			{/*<!-- add ReviewModal Modal -->*/}
+			<div id="addReviewModal" className="modal fade" role="dialog">
+				<div className="modal-dialog modal-lg">
+					<div className="modal-content">
+						<AddReview room={details} user={user} />
 					</div>
 				</div>
 			</div>

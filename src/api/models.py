@@ -29,7 +29,7 @@ class User(db.Model):
     
     tenancies = db.relationship("Tenancy", back_populates="user")
     rooms = db.relationship("Room", back_populates="user")
-    
+    reviews = db.relationship("Review", back_populates="renter")
     language = db.relationship("Language", secondary="spoken_languages")
     characteristic = db.relationship("Characteristic", secondary="characteristic_user", lazy='subquery')
     favorites = db.relationship("Favorites", back_populates="user")
@@ -226,9 +226,11 @@ class Review(db.Model):
     date = db.Column(db.Date)
     room_id=db.Column(db.Integer, db.ForeignKey('room.id'))
     room = db.relationship("Room", back_populates="reviews")
+    renter_id=db.Column(db.Integer, db.ForeignKey('user.id'))
 
     tenancy_id = db.Column(db.Integer, db.ForeignKey('tenancy.id'))
     tenancy = db.relationship("Tenancy", back_populates="reviews")
+    renter = db.relationship("User", back_populates="reviews")
 
     def __repr__(self):
         return '<Review %r>' % self.id
@@ -264,7 +266,9 @@ class Room (db.Model):
     tenancies = db.relationship("Tenancy", back_populates="room")
     delete_room = db.Column(db.Boolean, default=False)
     temporal_renter = db.Column(db.Integer)
-    current_renter = db.Column(db.Integer)  
+    current_renter = db.Column(db.Integer) 
+    is_favorite = db.Column(db.Boolean, default=False)
+     
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="rooms")
@@ -310,6 +314,7 @@ class Room (db.Model):
             "temporal_renter": self.temporal_renter,
             "current_renter": self.current_renter,
             "current_renter_details": current_renter_details
+            "is_favorite":self.is_favorite
         }
         
 #------------------------------------------------------------------------------------------------------------------------------
@@ -819,26 +824,26 @@ class SeedData:
 #------------------------
 #  Favorites
 #------------------------
-    def create_seed_favorites(self):
-        self.first_favorites = Favorites(
-            room_id = self.first_room.id,
-            user_id = self.second_user.id
-        )
+    # def create_seed_favorites(self):
+    #     self.first_favorites = Favorites(
+    #         room_id = self.first_room.id,
+    #         user_id = self.second_user.id
+    #     )
         
-        self.second_favorites = Favorites(
-            room_id = self.second_room.id,
-            user_id = self.second_user.id
-        )
+    #     self.second_favorites = Favorites(
+    #         room_id = self.second_room.id,
+    #         user_id = self.second_user.id
+    #     )
         
-        self.third_favorites = Favorites(
-            room_id = self.third_room.id,
-            user_id = self.second_user.id
-        )
+    #     self.third_favorites = Favorites(
+    #         room_id = self.third_room.id,
+    #         user_id = self.second_user.id
+    #     )
         
-        db.session.add(self.first_favorites)
-        db.session.add(self.second_favorites)
-        db.session.add(self.third_favorites)
-        db.session.commit() 
+    #     db.session.add(self.first_favorites)
+    #     db.session.add(self.second_favorites)
+    #     db.session.add(self.third_favorites)
+    #     db.session.commit() 
 
 #------------------------
 #  Tenancy (La relación entre inquilino y habitación)
@@ -1252,7 +1257,7 @@ class SeedData:
         self.create_seed_city()
         self.create_seed_user()
         self.create_seed_room()
-        self.create_seed_favorites() # ---->>> 1 habitación muchos favoritos
+        # self.create_seed_favorites() # ---->>> 1 habitación muchos favoritos
         self.create_seed_tenancy()
         self.create_seed_review()
         self.create_seed_characteristic()
