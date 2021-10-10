@@ -177,7 +177,7 @@ def get_single_room(room_id):
     city_room = [city.serialize()]
     room_seralize['city'] = city_room
     room_seralize['tenancies'] = reviews_list 
-    
+    print(room_seralize)
     return jsonify(room_seralize), 200
 
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
@@ -261,7 +261,7 @@ def create_announcement():
     type_bed_request = body_request.get("type_bed", None)
     room_url_request = body_request.get("room_url", None)
     owner_id_request = body_request.get("owner_id", None)
-    
+    print(body_request, "hola amiguitos")
     # To get the city id and create city_id inside to the new room
     city = City.query.filter(City.name == city_request).first()  
     city_serialize = city.serialize()
