@@ -85,6 +85,8 @@
 		"react-awesome-slider": "^4.1.0",
 		"react-dom": "^16.14.0",
 		"react-google-maps": "^9.4.5",
+		"react-map-gl": "^6.1.17",
+		"react-map-gl-geocoder": "^2.2.0",
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^5.2.0",
 		"react-select": "^4.3.1"
