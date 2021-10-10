@@ -154,21 +154,6 @@ export const NewAnnouncement = () => {
 						<h5>Pictures</h5>
 					</a>
 				</li>
-				{/*
-				<li className="nav-item">
-					<a
-						className={move == "preview" ? "nav-link active noLink" : "nav-link noLink"}
-						onClick={() => setMove("preview")}
-						id="previewTab-tab"
-						data-toggle="tab"
-						href="#previewTab"
-						role="tab"
-						aria-controls="previewTab"
-						aria-selected="false">
-						<h5>Preview</h5>
-					</a>
-				</li>
-				*/}
 			</ul>
 			<div className="tab-content" id="myTabContent">
 				<div
@@ -177,12 +162,17 @@ export const NewAnnouncement = () => {
 					role="tabpanel"
 					aria-labelledby="locationTab-tab">
 					<div className="row pl-5 mb-4">
-						<div className="col-2 pt-5 fontInput">
+						<div className="col-2 pt-4 fontInput mt-2">
 							<p className="pl-4">City </p>
 							<p className="pl-4">Address</p>
 						</div>
-						<div className="col-6 pt-3">
-							<input type="text" className="form-control roundShape" name="city" onChange={sendCity} />
+						<div className="col-6 pt-2 mt-2">
+							<input
+								type="text"
+								className="form-control roundShape mt-3"
+								name="city"
+								onChange={sendCity}
+							/>
 							<input
 								type="text"
 								className="form-control roundShape mt-3"
