@@ -119,7 +119,7 @@ export const Profile = () => {
 					</div>
 				)}
 			</div>
-			<div className="col-1" id="containerOptionsProfile">
+			<div className="col-1 containerOptionsProfile">
 				<div className="col buttonfondblack  d-flex justify-content-center">
 					<button
 						type="button"
@@ -148,7 +148,7 @@ export const Profile = () => {
 					</div>
 				) : null}
 
-				<div className="col buttonfondblack  d-flex justify-content-center">
+				<div className="col buttonfondblack d-flex justify-content-center">
 					<Link to="/announcements">
 						<button type="button" className="navbar-brand mb-0 mr-2 btn btn-navb">
 							<i className="fa fa-bed fa-2x text-white btn-options-profile" aria-hidden="true" />
