@@ -8,16 +8,10 @@ import PropTypes from "prop-types";
 const MAPBOX_TOKEN =
 	"pk.eyJ1IjoiZ2FicmllbC1iZWxtb250ZSIsImEiOiJja3VsNWpsbzExams0MndteWFtaXFyYTNuIn0.cwdMajhwGbPnMX88npC9NA";
 
-const defaultCoords = {
-	latitude: 40.41,
-	longitude: -3.7,
-	zoom: 9
-}; // Madrid
-
-export default function MapBox({ height, isGeolocation, handleResult }) {
+export default function MapBox({ height, initCoords, isGeolocation, handleResult }) {
 	const mapRef = useRef();
 
-	const [viewport, setViewport] = useState(defaultCoords);
+	const [viewport, setViewport] = useState(initCoords);
 
 	const handleViewportChange = useCallback(newViewport => setViewport(newViewport), []);
 
@@ -53,10 +47,16 @@ export default function MapBox({ height, isGeolocation, handleResult }) {
 MapBox.propTypes = {
 	height: PropTypes.number,
 	isGeolocation: PropTypes.bool,
-	handleResult: PropTypes.func
+	handleResult: PropTypes.func,
+	initCoords: PropTypes.object
 };
 
 MapBox.defaultProps = {
 	height: 250,
-	isGeolocation: true
+	isGeolocation: true,
+	initCoords: {
+		latitude: 40.41,
+		longitude: -3.7,
+		zoom: 9
+	} // Madrid
 };
