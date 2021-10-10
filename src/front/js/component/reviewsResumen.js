@@ -11,6 +11,7 @@ import "../../styles/detailedView.scss";
 export const ReviewsResume = props => {
 	const { store } = useContext(Context);
 	let { room_id } = useParams();
+	const firstReviews = props.tenancies && [props.tenancies[0]];
 	const twoFirstReviews = props.tenancies && [props.tenancies[0], props.tenancies[1]];
 
 	return (
@@ -20,7 +21,7 @@ export const ReviewsResume = props => {
 					<h5 className="col-12 text-white">Some reviews about this room</h5>
 				</div>
 
-				{props.tenancies.length ? (
+				{/* {props.tenancies.length ? (
 					twoFirstReviews.map(tenancy => {
 						return (
 							<div key={tenancy.id} className="row mt-3 d-flex justify-content-around">
@@ -35,6 +36,40 @@ export const ReviewsResume = props => {
 							</div>
 						);
 					})
+				) : (
+					<p className="text-white mt-5">This room has no reviews yet</p>
+				)} */}
+
+				{props.tenancies.length ? (
+					twoFirstReviews ? (
+						twoFirstReviews.map(tenancy => {
+							return (
+								<div key={tenancy.id} className="row mt-3 d-flex justify-content-around">
+									<div className="col-10 reviResContainer ">
+										<div className="d-flex">
+											<img src={tenancy.renter[0].avatar_url} className="rewImgRe" />
+											<div className="ml-2">
+												<p className="text-left ml-2 text-white">
+													{tenancy.reviews[0].comment}
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							);
+						})
+					) : firstReviews ? (
+						<div className="row mt-3 d-flex justify-content-around">
+							<div className="col-10 reviResContainer ">
+								<div className="d-flex">
+									<img src={firstReviews.renter[0].avatar_url} className="rewImgRe" />
+									<div className="ml-2">
+										<p className="text-left ml-2 text-white">{firstReviews.reviews[0].comment}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					) : null
 				) : (
 					<p className="text-white mt-5">This room has no reviews yet</p>
 				)}

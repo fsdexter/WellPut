@@ -352,6 +352,7 @@ def reviewendp():
     room=Room.query.get(body_request["room_id"])
     room_serializado=room.serialize()
     tenancy= Tenancy.query.filter_by(room_id=body_request["room_id"]).first()
+    
     tenancy_serializado=tenancy.serialize()
     renter= User.query.filter_by(id=body_request["reter_id"]).first()
     renter_serializado=renter.serialize()
