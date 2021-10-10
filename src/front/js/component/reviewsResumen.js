@@ -12,6 +12,9 @@ export const ReviewsResume = props => {
 	const { store, actions } = useContext(Context);
 	let { room_id } = useParams();
 	const twoFirstReviews = props.tenancies && [props.tenancies[0], props.tenancies[1]];
+	let userId = JSON.parse(localStorage.getItem("user"))
+		? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		: null;
 
 	return (
 		<div className="text-center mb-1" id="reviwsRC">
@@ -39,47 +42,7 @@ export const ReviewsResume = props => {
 					<p className="text-white mt-5">This room has no reviews yet</p>
 				)}
 
-				{/* {props.tenancies.length ? (
-					<div className="row text-center mt-3">
-						<div className="col-12 d-flex flex-column">
-							{props.userId === props.details.current_renter ? (
-								<button
-									type="button"
-									className="navbar btn btnapllyroom ml-5 d-flex justify-content-center"
-									data-toggle="modal"
-									data-target="#addReviewModal">
-									<i
-										className="fas fa-plus-square fa-2x text-white change-icon-color"
-										aria-hidden="true"></i>{" "}
-									&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
-								</button>
-							) : null}
-
-							<Link to={`/reviews/${room_id}`}>
-								<button className="btn btnYellow mt-1 mb-3 btnYeOwnR2">Read more</button>
-							</Link>
-						</div>
-					</div>
-				) : null}
-
-				{props.userId === props.details.current_renter ? (
-					<div className="row text-center mt-5">
-						<div className="col-12 d-flex flex-column">
-							<button
-								type="button"
-								className="navbar btn btnapllyroom ml-5 d-flex justify-content-center"
-								data-toggle="modal"
-								data-target="#addReviewModal">
-								<i
-									className="fas fa-plus-square fa-2x text-white change-icon-color"
-									aria-hidden="true"></i>{" "}
-								&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
-							</button>
-						</div>
-					</div>
-				) : null} */}
-
-				{props.userId === props.details.current_renter && props.tenancies.length ? (
+				{store.user?.id === props.details.current_renter && props.tenancies.length ? (
 					<div className="row text-center mt-3">
 						<div className="col-12 d-flex flex-column">
 							<button
@@ -97,7 +60,7 @@ export const ReviewsResume = props => {
 							</Link>
 						</div>
 					</div>
-				) : props.userId === props.details.current_renter && props.tenancies.length === 0 ? (
+				) : store.user?.id === props.details.current_renter && props.tenancies.length === 0 ? (
 					<div className="row text-center mt-3">
 						<div className="col-12 d-flex flex-column">
 							<button
@@ -112,7 +75,7 @@ export const ReviewsResume = props => {
 							</button>
 						</div>
 					</div>
-				) : props.userId != props.details.current_renter && props.tenancies.length ? (
+				) : (store.user?.id != props.details.current_renter || store.user == null) && props.tenancies.length ? (
 					<div className="row text-center mt-3">
 						<div className="col-12 d-flex flex-column">
 							<Link to={`/reviews/${room_id}`}>

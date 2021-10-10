@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 import { AddReview } from "../component/addReview";
@@ -6,6 +6,7 @@ import { OwnerResume } from "../component/ownerResume";
 import { ReviewsResume } from "../component/reviewsResumen";
 import { RatingStatic } from "../component/ratingStatic";
 import { ApplyToRoom } from "../component/ApplyToRoom";
+import { Context } from "../store/appContext";
 
 import bedSofa from "../../img/bedsofaBlack.png";
 import doubleBed from "../../img/doubleBlack.png";
@@ -13,6 +14,8 @@ import doubleBed from "../../img/doubleBlack.png";
 import "../../styles/detailedView.scss";
 
 export const DetailedView = () => {
+	const { store, actions } = useContext(Context);
+
 	let { room_id } = useParams();
 	let userId = JSON.parse(localStorage.getItem("user"))
 		? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
@@ -59,7 +62,7 @@ export const DetailedView = () => {
 					}
 				/>
 				<div className="carousel-caption carousel-caption-details-room">
-					{userId === details.current_renter ? (
+					{store.user?.id === details.current_renter ? (
 						<di className="title-detail-room-renter mt-3 d-flex justify-content-center">
 							<di className="ml-5">
 								<h4 className="mt-3 ml-5">{details.title} </h4>
@@ -83,7 +86,7 @@ export const DetailedView = () => {
 								title="Add Favorite">
 								<i className="far fa-heart fa-2x" />
 							</button>
-							{userId === details.current_renter ? null : (
+							{store.user?.id === details.current_renter ? null : (
 								<button
 									type="button"
 									className="navbar btn btnapllyroom "
