@@ -89,7 +89,7 @@ export const DetailedView = () => {
 									className="navbar btn btnapllyroom "
 									data-toggle="modal"
 									data-target="#notificationModal">
-									<i className="fa fa-plus fa-2x text-white change-icon-color" aria-hidden="true" />{" "}
+									<i className="fa fa-plus fa-2x text-white change-icon-color" aria-hidden="true" />
 									&nbsp;&nbsp;
 									<h4 className="textbuttons "> Apply Room</h4>
 								</button>

@@ -48,7 +48,7 @@ export const OwnerProfile = () => {
 									</h1>
 								</div>
 
-								<div className="col-12 detallefondblack " id="presentationUser">
+								<div className="col-12 detallefondblack  " id="presentationUser">
 									{owner.city
 										? owner.city.map(city => {
 												return (
@@ -109,16 +109,6 @@ export const OwnerProfile = () => {
 				)}
 			</div>
 			<div className="col-1" id="containerOptionsProfile">
-				<div className="col buttonfondblack d-flex justify-content-center">
-					<button
-						type="button"
-						className="navbar-brand mb-0 mr-2 btn btn-navb"
-						data-target="#addReviewModal"
-						onClick={() => deleteRoomie()}>
-						<i className="fas fa-user-times fa-2x text-white btn-options-profile"></i>
-						<h5 className="textbuttons">Delete Romie</h5>
-					</button>
-				</div>
 				{/* <div className="col buttonfondblack d-flex justify-content-center">
 					<button
 						type="button"
