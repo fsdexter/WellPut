@@ -46,7 +46,11 @@ export const MyRoomsItemActive = props => {
 							onClick={() => {
 								actions.setRoomActive(props.room.id);
 							}}>
-							<img src={props.room.active_room ? closeEye : openEye} className="closedEye" />
+							{props.room.current_renter_details.avatar_url ? (
+								<i className="fa fa-user-times fa-2x" aria-hidden="true"></i>
+							) : (
+								<img src={props.room.active_room ? closeEye : openEye} className="closedEye" />
+							)}
 						</button>
 
 						<button

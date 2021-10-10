@@ -39,41 +39,40 @@ export const AddReview = props => {
 				ref={closeBtn}>
 				<i className="far fa-window-close text-white fa-lg" />
 			</div>
-			<div className="d-flex flex-column mt-4">
-				<div className="row d-flex justify-content-around mb-4 m-2" id="containerAddReview">
-					<div
-						className="col-12 mt-1  m-0 p-0 d-flex justify-content-around"
-						style={{
-							backgroundImage: "url(" + props.room.room_url + ")",
-							backgroundSize: "contain",
-							width: "50rem",
-							height: "30rem",
-							marginLeft: "7rem"
-						}}>
-						<div className="onCommentStarsReview p-3 d-flex flex-column">
-							<h3 className="text-comment text-white  ">Tell us your experience living in this room :</h3>
+			<div className="row d-flex justify-content-around mb-4 m-2" id="containerAddReview">
+				<div
+					className="col-12 mt-1  m-0 p-0 d-flex justify-content-around"
+					style={{
+						backgroundImage: "url(" + props.room.room_url + ")",
+						backgroundSize: "95% 80%",
 
-							<textarea
-								className="onCommentStarsReview p-3 d-flex flex-column commentReview"
-								placeholder="Write here..."
-								onChange={inputHandelChange}
-								name="comment"
-							/>
-						</div>
+						height: "40rem",
+						marginLeft: "7rem",
+						backgroundRepeat: "no-repeat",
+						backgroundPosition: "center"
+					}}>
+					<div className="row justify-content-center onCommentStarsReview" id="containerAddReview">
+						<h3 className="text-comment text-white  ">Tell us your experience living in this room :</h3>
+
+						<textarea
+							className="onCommentStarsReview commentReview "
+							placeholder="Write here..."
+							onChange={inputHandelChange}
+							name="comment"
+						/>
 					</div>
 				</div>
-
-				<div className="row d-flex justify-content-center mt-3">
-					<div className="col-12">
-						<div className="onCommentStarsReview p-3 d-flex flex-column">
-							<h4 className="text text-white">How many stars do you give this experience? *</h4>
-							<div className="mt-3 mb-2 d-flex justify-content-center">
-								<Rating />
-							</div>
-							<button className="btn btnYellow mt-4" onClick={() => reviewSubmit()}>
-								Publish
-							</button>
+			</div>
+			<div className="row d-flex justify-content-center mt-0">
+				<div className="col-12">
+					<div className="onCommentStarsReview p-1 d-flex flex-column">
+						<h4 className="text text-white">How many stars do you give this experience? *</h4>
+						<div className="mt-3 mb-2 d-flex justify-content-center">
+							<Rating />
 						</div>
+						<button className="btn btnYellow mt-4" onClick={() => reviewSubmit()}>
+							Publish
+						</button>
 					</div>
 				</div>
 			</div>
