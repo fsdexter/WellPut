@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -9,9 +9,11 @@ import { AddReview } from "../component/addReview";
 import "../../styles/detailedView.scss";
 
 export const ReviewsResume = props => {
-	const { store, actions } = useContext(Context);
+	const { store } = useContext(Context);
 	let { room_id } = useParams();
-	const twoFirstReviews = props.tenancies && [props.tenancies[0], props.tenancies[1]];
+	const twoFirstReviews = props.tenancies && ([props.tenancies[0]] || [props.tenancies[0], props.tenancies[1]]);
+
+	console.log(twoFirstReviews);
 
 	return (
 		<div className="text-center mb-1" id="reviwsRC">
@@ -26,7 +28,7 @@ export const ReviewsResume = props => {
 							<div key={tenancy.id} className="row mt-3 d-flex justify-content-around">
 								<div className="col-10 reviResContainer ">
 									<div className="d-flex">
-										<img src={tenancy.user[0].avatar_url} className="rewImgRe" />
+										<img src={tenancy.renter[0].avatar_url} className="rewImgRe" />
 										<div className="ml-2">
 											<p className="text-left ml-2 text-white">{tenancy.reviews[0].comment}</p>
 										</div>
@@ -39,47 +41,7 @@ export const ReviewsResume = props => {
 					<p className="text-white mt-5">This room has no reviews yet</p>
 				)}
 
-				{/* {props.tenancies.length ? (
-					<div className="row text-center mt-3">
-						<div className="col-12 d-flex flex-column">
-							{props.userId === props.details.current_renter ? (
-								<button
-									type="button"
-									className="navbar btn btnapllyroom ml-5 d-flex justify-content-center"
-									data-toggle="modal"
-									data-target="#addReviewModal">
-									<i
-										className="fas fa-plus-square fa-2x text-white change-icon-color"
-										aria-hidden="true"></i>{" "}
-									&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
-								</button>
-							) : null}
-
-							<Link to={`/reviews/${room_id}`}>
-								<button className="btn btnYellow mt-1 mb-3 btnYeOwnR2">Read more</button>
-							</Link>
-						</div>
-					</div>
-				) : null}
-
-				{props.userId === props.details.current_renter ? (
-					<div className="row text-center mt-5">
-						<div className="col-12 d-flex flex-column">
-							<button
-								type="button"
-								className="navbar btn btnapllyroom ml-5 d-flex justify-content-center"
-								data-toggle="modal"
-								data-target="#addReviewModal">
-								<i
-									className="fas fa-plus-square fa-2x text-white change-icon-color"
-									aria-hidden="true"></i>{" "}
-								&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
-							</button>
-						</div>
-					</div>
-				) : null} */}
-
-				{props.userId === props.details.current_renter && props.tenancies.length ? (
+				{store.user?.id === props.details.current_renter && props.tenancies.length ? (
 					<div className="row text-center mt-3">
 						<div className="col-12 d-flex flex-column">
 							<button
@@ -97,22 +59,22 @@ export const ReviewsResume = props => {
 							</Link>
 						</div>
 					</div>
-				) : props.userId === props.details.current_renter && props.tenancies.length === 0 ? (
+				) : store.user?.id === props.details.current_renter && props.tenancies.length === 0 ? (
 					<div className="row text-center mt-3">
 						<div className="col-12 d-flex flex-column">
 							<button
 								type="button"
-								className="navbar btn btnapllyroom ml-5 d-flex justify-content-center"
+								className="navbar btn + ml-5 d-flex justify-content-center"
 								data-toggle="modal"
 								data-target="#addReviewModal">
 								<i
 									className="fas fa-plus-square fa-2x text-white change-icon-color"
-									aria-hidden="true"></i>{" "}
-								&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
+									aria-hidden="true"></i>
+								<h4 className="textbuttons">&nbsp;&nbsp; Add Review</h4>
 							</button>
 						</div>
 					</div>
-				) : props.userId != props.details.current_renter && props.tenancies.length ? (
+				) : (store.user?.id != props.details.current_renter || store.user == null) && props.tenancies.length ? (
 					<div className="row text-center mt-3">
 						<div className="col-12 d-flex flex-column">
 							<Link to={`/reviews/${room_id}`}>

@@ -9,18 +9,18 @@ export const ApplyToRoom = props => {
 	const { img, title, price, address, city, roomId } = props;
 	const { actions } = useContext(Context);
 	const closeBtn = useRef(null);
-	//////////////////////////////////////
 	const [averageRating, setAverageRating] = useState();
+
 	useEffect(() => {
 		getDetailsRoom();
 	}, []);
+
 	const getDetailsRoom = async () => {
 		try {
 			const response = await fetch(`${API_BASE_URL}/api/detailed_room/${room_id}`);
 			const room = await response.json();
 			setDetails(room);
 
-			// Calcular la media de los ratings
 			let room_reviews = room.reviews.map(review => review.rating);
 			setAverageRating(
 				Math.round(
@@ -34,11 +34,11 @@ export const ApplyToRoom = props => {
 			return error.message;
 		}
 	};
-	//////////////////////////////////////
 
 	const closeModalLogin = () => {
 		closeBtn.current.click();
 	};
+
 	const aceptRoomie = props => {
 		if (JSON.parse(localStorage.getItem("user"))) {
 			actions.addRoomie(
@@ -50,6 +50,7 @@ export const ApplyToRoom = props => {
 			alert("You are not logged, please login to can apply at this room!");
 		}
 	};
+
 	return (
 		<div className="row container text-center container-modals">
 			<div className="col-11 mt-3">
@@ -114,7 +115,7 @@ ApplyToRoom.propTypes = {
 	title: PropTypes.string,
 	price: PropTypes.number,
 	address: PropTypes.string,
-	city: PropTypes.string,
+	city: PropTypes.array,
 	roomId: PropTypes.number,
 	userlog: PropTypes.number
 };
