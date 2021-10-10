@@ -18,10 +18,10 @@ export const EditProfile = () => {
 	const [formValue, setFormValue] = useState({
 		name: userParse.name ? userParse.name : "",
 		last_name: userParse.last_name ? userParse.last_name : "",
-		city: userParse.city ? userParse.city : "",
+		city: userParse.city ? userParse.city.map(cit => cit.name) : "",
 		email: userParse.email ? userParse.email : "",
-		interests: userParse.interests ? userParse.interests : "",
-		languages: userParse.languages ? userParse.languages : "",
+		interests: userParse.characteristic ? userParse.characteristic.map(inte => inte.name) : "",
+		languages: userParse.language ? userParse.language.map(idiom => idiom.name) : "",
 		phone: userParse.phone ? userParse.phone : null,
 		birthday: userParse.birthday ? userParse.birthday : "",
 		gender: userParse.gender ? userParse.gender : "",
