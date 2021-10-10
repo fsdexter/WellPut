@@ -123,7 +123,7 @@ export const Home = () => {
 						Apply filters
 					</button>
 				</div>
-				<div className="col-6 ml-5 mt-5">
+				<div className="col-6 ml-5 mt-5 rooms-box">
 					<div id="carouselOne" className="carousel slide" data-ride="carousel" data-interval="false">
 						{store.roomsSearch.length ? (
 							store.roomsSearch.map(room => {

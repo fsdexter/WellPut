@@ -26,7 +26,7 @@ export const UserProfile = () => {
 
 	return (
 		<div className="picturefond col-12 d-flex justify-content-center text-white">
-			<div className="container col-11 detallefondblack">
+			<div className="container col-10 detallefondblack">
 				{renter ? (
 					<>
 						<div className="row" key={renter.id}>
@@ -37,7 +37,7 @@ export const UserProfile = () => {
 							/>
 
 							<div className="col-8 text-white">
-								<div className="row">
+								<div className="row ml-4">
 									<h1 className="textwhhite ml-5">
 										{renter.name} {renter.last_name}
 									</h1>
