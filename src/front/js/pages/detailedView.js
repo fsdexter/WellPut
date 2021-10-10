@@ -82,18 +82,16 @@ export const DetailedView = props => {
 						<div className="starCaroCustom d-flex justify-content-around mb-3">
 							<RatingStatic rating={averageRating} />
 							<button
-								className={
-									details.is_favorite
-										? "fas fa-heart fa-2x corRed ml-5 pr-5 pl-5 "
-										: "far fa-heart fa-2x ml-5 pr-5 pl-5 "
-								}
+								className="heartButtonFix ml-5 pr-5 pl-5"
 								data-toggle="tooltip"
 								data-placement="top"
 								title="Add Favorite"
 								onClick={ev => {
 									actions.setFavorites(id_user, details.id);
 									actions.setFavButton(details.id);
-								}}></button>
+								}}>
+								<i className="far fa-heart fa-2x" />
+							</button>
 							{store.user?.id === details.current_renter ? null : (
 								<button
 									type="button"
