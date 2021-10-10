@@ -9,8 +9,6 @@ export const UserProfileForm = () => {
 	const [avatar_url, setAvatarUrl] = useState(null);
 
 	const uploadImage = () => {
-		//evt.preventDefault();
-
 		// we are about to send this to the backend.
 		let body = new FormData();
 		body.append("avatar_url", files[0]);
@@ -24,12 +22,10 @@ export const UserProfileForm = () => {
 		fetch(`${API_BASE_URL}/api/user/${currentUserId}/image`, options)
 			.then(resp => resp.json())
 			.then(data => {
-				alert("Imagen cargada con exito");
+				alert("Imagen updated succesfully");
 				setAvatarUrl(data.avatar_url);
-
-				//history.push(`/edit_profile/${JSON.parse(localStorage.getItem("user")).user.id}`);
 			})
-			.catch(error => console.error("ERRORRRRRR!!!", error));
+			.catch(error => error);
 	};
 	return (
 		<div className="d-flex flex-column">
