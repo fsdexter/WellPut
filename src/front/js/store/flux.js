@@ -30,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				keys.forEach(paramName => {
 					// "loglevel:webpack-dev-server" es una propiedad del LocalStorage, si se deja, revienta todo
-					if (paramName !== "loglevel:webpack-dev-server") {
+					if (paramName !== "loglevel:webpack-dev-server" && !paramName.includes("mapbox")) {
 						const paramValue = JSON.parse(localStorage.getItem(paramName));
 						tmpStore[paramName] = paramValue;
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MyMap from "./mapEngine";
+import MapBox from "../component/MapBox";
 import "../../styles/footer.scss";
 
 export const Footer = () => (
@@ -27,8 +27,8 @@ export const Footer = () => (
 			</div>
 		</div>
 
-		<div className="col-5 mt-5">
-			<MyMap center={{ lat: 40.416775, lng: -3.70379 }} style={{ width: "600px", height: "220px" }} zoom={10} />
+		<div className="col-4 mt-5">
+			<MapBox height={220} isGeolocation={false} />
 		</div>
 	</div>
 );
