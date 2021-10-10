@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 
 import "../../styles/home.scss";
@@ -13,6 +13,7 @@ import { Footer } from "../component/footer";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	let active_rooms = store.rooms?.filter(room => room.active_room === true && room.delete_room === false);
 
 	useEffect(() => {
 		actions.getRooms();
@@ -22,7 +23,7 @@ export const Home = () => {
 		actions.getRooms();
 	}, [store.rooms.length]);
 
-	let active_rooms = store.rooms?.filter(room => room.active_room === true && room.delete_room === false);
+	const handleChangeRoomsByCity = dataCity => actions.setCity(dataCity.text_es);
 
 	return (
 		<div className="container-fluid" id="myContainerHome">
@@ -45,7 +46,7 @@ export const Home = () => {
 				<div className="col-md-4 pl-5 mt-5 mr-3 pr-5 mb-4 bg-secondary text-white filter">
 					<h1 className="mt-5 texto_yellow">Search a room</h1>
 					<br />
-					<MapBox height={300} />
+					<MapBox height={300} handleResult={handleChangeRoomsByCity} />
 					<br />
 					<div>
 						<PriceInput />

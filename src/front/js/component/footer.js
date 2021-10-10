@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import MapBox from "../component/MapBox";
 import "../../styles/footer.scss";
+import React from "react";
+import MapBox from "../component/MapBox";
 
 export const Footer = () => (
 	<div className="row divfooter mt-5 text-white mr-0">
