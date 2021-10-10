@@ -39,7 +39,7 @@ export const ReviewsResume = props => {
 					<p className="text-white mt-5">This room has no reviews yet</p>
 				)}
 
-				{props.tenancies.length ? (
+				{/* {props.tenancies.length ? (
 					<div className="row text-center mt-3">
 						<div className="col-12 d-flex flex-column">
 							{props.userId === props.details.current_renter ? (
@@ -75,6 +75,49 @@ export const ReviewsResume = props => {
 									aria-hidden="true"></i>{" "}
 								&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
 							</button>
+						</div>
+					</div>
+				) : null} */}
+
+				{props.userId === props.details.current_renter && props.tenancies.length ? (
+					<div className="row text-center mt-3">
+						<div className="col-12 d-flex flex-column">
+							<button
+								type="button"
+								className="navbar btn btnapllyroom ml-5 d-flex justify-content-center"
+								data-toggle="modal"
+								data-target="#addReviewModal">
+								<i
+									className="fas fa-plus-square fa-2x text-white change-icon-color"
+									aria-hidden="true"></i>{" "}
+								&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
+							</button>
+							<Link to={`/reviews/${room_id}`}>
+								<button className="btn btnYellow mt-1 mb-3 btnYeOwnR2">Read more</button>
+							</Link>
+						</div>
+					</div>
+				) : props.userId === props.details.current_renter && props.tenancies.length === 0 ? (
+					<div className="row text-center mt-3">
+						<div className="col-12 d-flex flex-column">
+							<button
+								type="button"
+								className="navbar btn btnapllyroom ml-5 d-flex justify-content-center"
+								data-toggle="modal"
+								data-target="#addReviewModal">
+								<i
+									className="fas fa-plus-square fa-2x text-white change-icon-color"
+									aria-hidden="true"></i>{" "}
+								&nbsp;&nbsp; <h4 className="textbuttons"> Add Review</h4>
+							</button>
+						</div>
+					</div>
+				) : props.userId != props.details.current_renter && props.tenancies.length ? (
+					<div className="row text-center mt-3">
+						<div className="col-12 d-flex flex-column">
+							<Link to={`/reviews/${room_id}`}>
+								<button className="btn btnYellow mt-1 mb-3 btnYeOwnR2">Read more</button>
+							</Link>
 						</div>
 					</div>
 				) : null}
