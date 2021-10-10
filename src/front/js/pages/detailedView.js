@@ -7,15 +7,17 @@ import { ReviewsResume } from "../component/reviewsResumen";
 import { RatingStatic } from "../component/ratingStatic";
 import { ApplyToRoom } from "../component/ApplyToRoom";
 import { Context } from "../store/appContext";
-
+import PropTypes from "prop-types";
 import bedSofa from "../../img/bedsofaBlack.png";
 import doubleBed from "../../img/doubleBlack.png";
 
 import "../../styles/detailedView.scss";
 
-export const DetailedView = () => {
+export const DetailedView = props => {
 	const { store, actions } = useContext(Context);
-
+	let id_user = JSON.parse(localStorage.getItem("user"))
+		? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
+		: null;
 	let { room_id } = useParams();
 	let userId = JSON.parse(localStorage.getItem("user"))
 		? JSON.parse(localStorage.getItem("user")).user?.id || JSON.parse(localStorage.getItem("user")).id
@@ -80,12 +82,18 @@ export const DetailedView = () => {
 						<div className="starCaroCustom d-flex justify-content-around mb-3">
 							<RatingStatic rating={averageRating} />
 							<button
-								className="heartButtonFix ml-5 pr-5 pl-5"
+								className={
+									details.is_favorite
+										? "fas fa-heart fa-2x corRed ml-5 pr-5 pl-5 "
+										: "far fa-heart fa-2x ml-5 pr-5 pl-5 "
+								}
 								data-toggle="tooltip"
 								data-placement="top"
-								title="Add Favorite">
-								<i className="far fa-heart fa-2x" />
-							</button>
+								title="Add Favorite"
+								onClick={ev => {
+									actions.setFavorites(id_user, details.id);
+									actions.setFavButton(details.id);
+								}}></button>
 							{store.user?.id === details.current_renter ? null : (
 								<button
 									type="button"
@@ -324,4 +332,8 @@ export const DetailedView = () => {
 			<i className="fas fa-spinner fa-pulse fa-6x" />
 		</div>
 	);
+};
+
+DetailedView.propTypes = {
+	room: PropTypes.object
 };
