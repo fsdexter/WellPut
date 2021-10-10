@@ -97,7 +97,7 @@ export const DetailedView = props => {
 									}
 								/>
 							</button>
-							{store.user?.id === details.current_renter ? null : (
+							{store.user?.id === details.current_renter || store.user?.id === details.owner_id ? null : (
 								<button
 									type="button"
 									className="navbar btn btnapllyroom "
@@ -198,7 +198,6 @@ export const DetailedView = props => {
 									details.expense.map(exp => {
 										return (
 											<div key={exp.id}>
-												{console.log(exp)}
 												{exp.name === "wifi" ? (
 													<i
 														className="fas fa-wifi fa-2x mr-3"

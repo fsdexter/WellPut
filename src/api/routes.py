@@ -177,7 +177,6 @@ def get_single_room(room_id):
     city_room = [city.serialize()]
     room_seralize['city'] = city_room
     room_seralize['tenancies'] = reviews_list 
-    print(room_seralize)
     return jsonify(room_seralize), 200
 
 @api.route('/edit_profile/<int:user_id>', methods=['PATCH']) 
@@ -236,7 +235,6 @@ def edit_profile(user_id):
 @api.route('/upload', methods=['POST'])
 def handle_pic ():
         result = cloudinary.uploader.upload(request.files["profile_image"])
-        print(result["url"])
         return jsonify({"url":result["url"]} ), 200
     # -------------------------- TEST -------------------------
 
@@ -261,7 +259,6 @@ def create_announcement():
     type_bed_request = body_request.get("type_bed", None)
     room_url_request = body_request.get("room_url", None)
     owner_id_request = body_request.get("owner_id", None)
-    print(body_request, "hola amiguitos")
     # To get the city id and create city_id inside to the new room
     city = City.query.filter(City.name == city_request).first()  
     city_serialize = city.serialize()
@@ -332,12 +329,15 @@ def reviewendp():
     tenancy_serializado=tenancy.serialize()
     renter= User.query.filter_by(id=body_request["reter_id"]).first()
     renter_serializado=renter.serialize()
-    already_reviewed = Review.query.filter_by(room_id=room_serializado["id"],tenancy_id=tenancy_serializado["id"], renter_id=renter_serializado["id"]).first()
+    #already_reviewed = Review.query.filter_by(room_id=room_serializado["id"],tenancy_id=tenancy_serializado["id"], renter_id=renter_serializado["id"]).first()
+    already_reviewed = Tenancy.query.filter_by(room_id=room_serializado["id"], user_id=renter_serializado["id"]).first()
     
     if already_reviewed is not None:
         return jsonify({"msg": "this comment already exists"}),400
+    
+    print(already_reviewed)
 
-    if room_serializado["current_renter"] == body_request["reter_id"] :
+    if room_serializado["current_renter"] == body_request["reter_id"] and  already_reviewed is None:
         
         new_tenacy = Tenancy(
             # When the renter write a new comment, is ned to create a new tenacy
@@ -400,7 +400,6 @@ def get_addroomie(renter_id, room_id):
     body_request = request.get_json()
     user = User.query.get(body_request["user_id"])    
     room = Room.query.get(body_request["room_id"])
-    print(body_request,user.serialize(),room.serialize())    
     if user and room:
         user.temporal_current_room = None  
         room.temporal_renter = None
@@ -483,7 +482,6 @@ def search_room():
                       
     search_filter_5 = search_filter_2 + search_filter_3 + search_filter_4
     response = list(map(lambda room: room.serialize(),search_filter_5))
-    print("response",len(response))
     return jsonify(response),200
 
 @api.route("/change_active_room/<int:id>", methods=[ "PUT"])
@@ -532,9 +530,7 @@ def change_favorite(id_user, id_room):
     #identity = get_jwt_identity()
     user = User.query.get(id_user)#current_user(get_jwt_identity())
     room = Room.query.get(id_room)
-    print(user.id, room.id)
     already_favorite  = Favorites.query.filter_by(user_id = user.id, room_id = room.id).first()
-    print(already_favorite)
     if not already_favorite: 
         favorite = Favorites(user_id = user.id, room_id = room.id)
         db.session.add(favorite)

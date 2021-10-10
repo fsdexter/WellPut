@@ -30,6 +30,10 @@ export const Profile = () => {
 	}, []);
 
 	useEffect(() => {
+		actions.getUser(userId);
+	}, [user.avatar_url]);
+
+	useEffect(() => {
 		getNotification();
 	}, [notificateRenter]);
 

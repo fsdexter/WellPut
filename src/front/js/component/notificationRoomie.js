@@ -27,8 +27,6 @@ export const NotificationRoomie = props => {
 				isAcept: true
 			})
 		}).then(res => res.json());
-		//.then(data => console.log(data));
-		// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
 		props.setNotificateRenter(false);
 
 		closeModalLogin();
@@ -46,7 +44,6 @@ export const NotificationRoomie = props => {
 				isAcept: false
 			})
 		}).then(res => res.json());
-		//.then(data => console.log(data));
 
 		// ********* INTO DE QUITAR LA CAMPANITA SIN RECARGAR LA PÁGINA **********
 		props.setNotificateRenter(false);
@@ -88,6 +85,7 @@ export const NotificationRoomie = props => {
 							style={{
 								backgroundImage: "url(" + renter.avatar_url + ")",
 								backgroundSize: "cover",
+								backgroundRepeat: "no-repeat",
 								width: "100%",
 								height: "100%"
 							}}>
