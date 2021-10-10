@@ -86,8 +86,10 @@ export const NewAnnouncement = () => {
 	const handleMap = dataCity => {
 		const address = dataCity?.text_es || "";
 		const city =
-			dataCity.context.filter(field => field.id.includes("region"))[0]?.text_es.replace("Provincia de ", "") ||
-			"";
+			dataCity.context
+				.filter(field => field.id.includes("region"))[0]
+				?.text_es.replace("Provincia de ", "")
+				.replace("provincia de ", "") || "";
 
 		setRoomData(prevState => ({
 			...prevState,
@@ -145,7 +147,6 @@ export const NewAnnouncement = () => {
 					id="locationTab"
 					role="tabpanel"
 					aria-labelledby="locationTab-tab">
-            
 					<div className="col-7 map-nuew-room">
 						<h4 style={{ height: "30px" }}>
 							{roomData.address && roomData.city ? `${roomData.address}, ${roomData.city}` : null}
