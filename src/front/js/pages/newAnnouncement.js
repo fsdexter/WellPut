@@ -145,7 +145,6 @@ export const NewAnnouncement = () => {
 					id="locationTab"
 					role="tabpanel"
 					aria-labelledby="locationTab-tab">
-            
 					<div className="col-7 map-nuew-room">
 						<h4 style={{ height: "30px" }}>
 							{roomData.address && roomData.city ? `${roomData.address}, ${roomData.city}` : null}
