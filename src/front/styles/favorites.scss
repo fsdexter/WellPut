@@ -2,11 +2,11 @@
     background: #184F5F;
     width: 100vw;
     height:max-content ;
- 
+    font-family:Arial, Helvetica, sans-serif;
 }
 .fvSecondBg{
     margin:10px;
-    background: white;
+    background: #dae0dd;;
 }
 
 
@@ -29,6 +29,11 @@ padding:10px;
     overflow: hidden;
     position: relative;
 }
+
+.awePrice{
+    color: #184F5F;
+}
+
 .favButton{
     border: black;
     margin-left: 40px;
@@ -44,7 +49,8 @@ padding:10px;
 
 }
 .favTitle{
-    
+    border-width: 1px;
+    border-color: #FFDE59;
     color:black;
 }
 
