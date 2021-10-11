@@ -52,6 +52,7 @@ export const AddReview = props => {
 					placeholder="Write here..."
 					onChange={inputHandelChange}
 					name="comment"
+					style={{ padding: "1rem" }}
 				/>
 			</div>
 			<div
@@ -64,7 +65,7 @@ export const AddReview = props => {
 					padding: "1rem 0 1.5rem 0"
 				}}>
 				<h4 className="text text-white">How many stars do you give this experience? *</h4>
-				<div style={{ cursor: "pointer" }}>
+				<div style={{ cursor: "pointer", padding: "1rem 0" }}>
 					<Rating />
 				</div>
 				<button className="btn btnYellow mt-4 px-5" onClick={() => reviewSubmit()}>
