@@ -31,7 +31,11 @@ export const UserProfile = () => {
 						<div className="row" key={renter.id}>
 							<img
 								className="col-4 card-img-top roundShape avatar-profile"
-								src={renter.avatar_url ? renter.avatar_url : "https://st4.depositphotos.com/27867620/30472/v/600/depositphotos_304728180-stock-illustration-male-avatar-web-icon.jpg"}
+								src={
+									renter.avatar_url
+										? renter.avatar_url
+										: "https://st4.depositphotos.com/27867620/30472/v/600/depositphotos_304728180-stock-illustration-male-avatar-web-icon.jpg"
+								}
 								alt="Card image cap"
 							/>
 
