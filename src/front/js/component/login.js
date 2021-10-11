@@ -96,9 +96,9 @@ export const Login = () => {
 						/>
 					</div>
 
-					<div type="button" data-toggle="modal" data-target="#RecoverPasswordModal" id="recovPass">
+					{/* <div type="button" data-toggle="modal" data-target="#RecoverPasswordModal" id="recovPass">
 						<p className="recoverPass">Recover password</p>
-					</div>
+					</div> */}
 
 					<button type="submit" className="btn btnYellow mt-4">
 						LOGIN
