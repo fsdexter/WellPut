@@ -83,13 +83,20 @@ color: black;
     border-width: 1px;
 }
 
-
 .rooms-box{
-    overflow-y:scroll;
-    height: 88rem;
-}
+    overflow-y: scroll;
+    max-height: 88rem;
 
+    &::-webkit-scrollbar {
+        width: 6px;
+      }
 
-.rooms-box::-webkit-scrollbar-thumb {
-    background: #FFDE59;
+    &::-webkit-scrollbar-thumb {
+        background-color: #FFDE59;
+        border-radius: 6px;
+        
+        &:hover {
+            background-color: #fdcb05;
+        }
+    }
 }
