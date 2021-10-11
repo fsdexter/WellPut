@@ -24,7 +24,15 @@ export const OwnerResume = props => {
 	return owner ? (
 		<div className="d-flex flex-column">
 			<div className="row d-flex justify-content-end">
-				<img src={owner.avatar_url} className="col-10" id="ownerIMG" />
+				<img
+					src={
+						owner.avatar_url
+							? owner.avatar_url
+							: "https://st4.depositphotos.com/27867620/30472/v/600/depositphotos_304728180-stock-illustration-male-avatar-web-icon.jpg"
+					}
+					className="col-10"
+					id="ownerIMG"
+				/>
 			</div>
 			<div className="row d-flex justify-content-end">
 				<div className="col-10 d-flex flex-column p-1 mt-2 ownRes ">
