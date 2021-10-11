@@ -83,7 +83,11 @@ export const NotificationRoomie = props => {
 						<div
 							className="d-flex flex-column text-center"
 							style={{
-								backgroundImage: "url(" + renter.avatar_url + ")",
+								backgroundImage: `url(${
+									renter.avatar_url
+										? renter.avatar_url
+										: "https://st4.depositphotos.com/27867620/30472/v/600/depositphotos_304728180-stock-illustration-male-avatar-web-icon.jpg"
+								})`,
 								backgroundSize: "cover",
 								backgroundRepeat: "no-repeat",
 								width: "100%",
