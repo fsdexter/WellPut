@@ -36,8 +36,8 @@ export const AddReview = props => {
 				<div className="col">
 					<h3 className="text-comment text-white p-3 mb-0">Tell us your experience living in this room</h3>
 				</div>
-				<div className="col-1">
-					<i className="far fa-window-close text-white fa-lg mt-3" data-dismiss="modal" ref={closeBtn} />
+				<div className="col-1" data-dismiss="modal" ref={closeBtn} style={{ cursor: "pointer" }}>
+					<i className="far fa-window-close text-white fa-lg mt-3" />
 				</div>
 			</div>
 
