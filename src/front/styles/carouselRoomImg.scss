@@ -38,9 +38,11 @@ font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans 
 .maybeWorks{
     background:rgba(0, 0, 0, 0.63);
     height: 60px;
-   //width: 50rem;
     text-align: auto;
-    padding: 20px;
+    padding: 20px 0 20px 20px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .starCaro{
     margin-top: 210px;
