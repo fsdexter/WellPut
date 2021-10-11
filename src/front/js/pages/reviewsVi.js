@@ -47,7 +47,11 @@ export const Reviews = () => {
 													return (
 														<img
 															key={renter.id}
-															src={renter.avatar_url}
+															src={
+																renter.avatar_url
+																	? renter.avatar_url
+																	: "https://st4.depositphotos.com/27867620/30472/v/600/depositphotos_304728180-stock-illustration-male-avatar-web-icon.jpg"
+															}
 															className="col-2 imgAvatarUserRev"
 														/>
 													);
