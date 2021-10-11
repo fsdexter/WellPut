@@ -86,7 +86,7 @@ export const ReviewsResume = props => {
 			{/*<!-- add ReviewModal Modal -->*/}
 			<div id="addReviewModal" className="modal fade" role="dialog">
 				<div className="modal-dialog modal-lg">
-					<div className="modal-content">
+					<div className="modal-content mt-5">
 						<AddReview room={props.details} user={props.user} />
 					</div>
 				</div>

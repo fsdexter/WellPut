@@ -10,17 +10,16 @@ export const AddReview = props => {
 	const [formValue, setFormValue] = useState({
 		comment: ""
 	});
-	/////////////
+
 	const inputHandelChange = e => {
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
 	};
-	////////////////////////////////////////
+
 	const closeBtn = useRef(null);
 
 	const closeModalLogin = () => {
 		closeBtn.current.click();
 	};
-	///////////////////////
 
 	const reviewSubmit = () => {
 		if (JSON.parse(localStorage.getItem("user")) && props.room) {
@@ -32,47 +31,50 @@ export const AddReview = props => {
 	};
 
 	return (
-		<div className="row container text-center d-flex container-modals2">
-			<div className="row d-flex mb-4 m-2" id="containerAddReview">
-				<div
-					className=" d-flex justify-content-around"
-					style={{
-						backgroundImage: "url(" + props.room.room_url + ")",
-						backgroundSize: "95% 80%",
+		<div style={{ backgroundColor: "#184F5F" }}>
+			<div className="row">
+				<div className="col">
+					<h3 className="text-comment text-white p-3 mb-0">Tell us your experience living in this room</h3>
+				</div>
+				<div className="col-1">
+					<i className="far fa-window-close text-white fa-lg mt-3" data-dismiss="modal" ref={closeBtn} />
+				</div>
+			</div>
 
-						height: "40rem",
-						marginLeft: "200px",
-						backgroundRepeat: "no-repeat",
-						backgroundPosition: "center"
-					}}>
-					<div className="row justify-content-center onCommentStarsReview" id="containerAddReview">
-						<h3 className="text-comment text-white  ">Tell us your experience living in this room :</h3>
-						<textarea
-							className="onCommentStarsReview commentReview "
-							placeholder="Write here..."
-							onChange={inputHandelChange}
-							name="comment"
-						/>
-					</div>
-				</div>
+			<div
+				style={{
+					backgroundImage: "url(" + props.room.room_url + ")",
+					backgroundRepeat: "no-repeat",
+					backgroundPosition: "center"
+				}}>
+				<textarea
+					className="onCommentStarsReview "
+					placeholder="Write here..."
+					onChange={inputHandelChange}
+					name="comment"
+				/>
 			</div>
-			<div className="iconClose mt-3 ml-4 d-flex justify-content-end close" data-dismiss="modal" ref={closeBtn}>
-				<i className="far fa-window-close text-white fa-lg" />
-			</div>
-			<div className="row d-flex justify-content-center mt-0">
-				<div className="onCommentStarsReview2 p-1 d-flex flex-column">
-					<h4 className="text text-white">How many stars do you give this experience? *</h4>
-					<div className="mt-3 mb-2 d-flex justify-content-center">
-						<Rating />
-					</div>
-					<button className="btn btnYellow mt-4" onClick={() => reviewSubmit()}>
-						Publish
-					</button>
+			<div
+				style={{
+					backgroundColor: "#184F5F",
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
+					padding: "1rem 0 1.5rem 0"
+				}}>
+				<h4 className="text text-white">How many stars do you give this experience? *</h4>
+				<div style={{ cursor: "pointer" }}>
+					<Rating />
 				</div>
+				<button className="btn btnYellow mt-4 px-5" onClick={() => reviewSubmit()}>
+					Publish
+				</button>
 			</div>
 		</div>
 	);
 };
+
 AddReview.propTypes = {
 	room: PropTypes.object,
 	user: PropTypes.object
