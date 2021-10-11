@@ -25,16 +25,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			getLocalStore: () => {
-				const keys = Object.keys(localStorage);
 				const tmpStore = {};
+				// "loglevel:webpack-dev-server" es una propiedad del LocalStorage, si se deja, revienta todo
+				const blackList = ["loglevel", "mapbox"];
+				const blackRegex = new RegExp(`${blackList.join("|")}`);
 
-				keys.forEach(paramName => {
-					// "loglevel:webpack-dev-server" es una propiedad del LocalStorage, si se deja, revienta todo
-					if (paramName !== "loglevel:webpack-dev-server" && !paramName.includes("mapbox")) {
-						const paramValue = JSON.parse(localStorage.getItem(paramName));
-						tmpStore[paramName] = paramValue;
+				Object.keys(localStorage).forEach(paramName => {
+					if (!blackRegex.test(paramName)) {
+						const paramValue = JSON.parse(localStorage.getItem(paramName)) || "";
 
 						if (paramValue) {
+							tmpStore[paramName] = paramValue;
 							setStore({ myLocalStore: tmpStore });
 						}
 					}
